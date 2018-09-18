@@ -10,5 +10,13 @@
         android:layout_height="match_parent"
         android:text="Hello World!"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_max="wrap"
+        app:layout_constraintWidth_max="wrap"
+        tools:layout_editor_absoluteX="299dp" />
 
 </android.support.constraint.ConstraintLayout>
