@@ -16,7 +16,7 @@
         android:text="+"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_max="wrap"
-        app:layout_constraintWidth_max="wrap"
-        tools:layout_editor_absoluteX="299dp" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_max="wrap" />
 
 </android.support.constraint.ConstraintLayout>
