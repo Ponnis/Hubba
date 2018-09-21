@@ -22,4 +22,11 @@ public class ExampleUnitTest {
         StreakAchievement streakAchievement = new StreakAchievement("You have achieved this habit 10 days in a row!");
         assertNotNull(streakAchievement);
     }
+
+    @Test
+    public void testUpStreak() {
+        Habit habit = new Habit("test");
+        habit.setDone(habit);
+        assertTrue(habit.getStreak(habit) == 1);
+    }
 }
