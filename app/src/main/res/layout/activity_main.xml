@@ -11,12 +11,32 @@
         android:text="Hello World!"/>
 
     <Button
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:layout_marginRight="148dp"
         android:text="+"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_max="wrap"
+
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_max="wrap" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingBottom="253dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintHeight_max="wrap"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_max="wrap"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.constraint.ConstraintLayout>
