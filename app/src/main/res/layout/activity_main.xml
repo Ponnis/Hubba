@@ -4,19 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivityController">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Hello World!"/>
 
-    <Button
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingBottom="253dp"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintHeight_max="wrap"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintWidth_max="wrap" />
+        app:layout_constraintWidth_max="wrap"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.constraint.ConstraintLayout>
