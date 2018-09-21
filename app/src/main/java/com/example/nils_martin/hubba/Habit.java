@@ -16,6 +16,10 @@ public class Habit {
 
     public Habit(String title){
         this.title = title;
+        this.streak = 0;
+        this.isDone = false;
+        this.isActive = true;
+        this.enableNofitications = false;
     }
 
     public int getGoalDays(Habit habit){
@@ -28,6 +32,10 @@ public class Habit {
 
     public void setDone(Habit habit){
         habit.isDone = !habit.isDone;
+        upStreak(this);
+    }
+
+    public void upStreak(Habit habit){
         if(habit.isDone){
             habit.streak++;
         }
@@ -37,7 +45,11 @@ public class Habit {
         habit.isActive = !habit.isActive;
     }
 
-    private void setNotifications(Habit habit){
+    public void setNotifications(Habit habit){
         habit.enableNofitications = !habit.enableNofitications;
+    }
+
+    public int getStreak(Habit habit){
+        return habit.streak;
     }
 }
