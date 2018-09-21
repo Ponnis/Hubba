@@ -2,9 +2,9 @@ package com.example.nils_martin.hubba;
 
 import android.widget.ImageView;
 
-public class numOfHabitsAchievement extends Achievement{
+public class NumOfHabitsAchievement extends Achievement{
 
-    numOfHabitsAchievement(String title){
+    NumOfHabitsAchievement(String title){
         super(title);
     }
 

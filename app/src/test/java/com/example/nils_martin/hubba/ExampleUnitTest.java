@@ -4,14 +4,22 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void testCreateHabit() {
+        Habit habit = new Habit("Drink Water");
+        assertNotNull(habit);
+    }
+
+    @Test
+    public void testCreateUser(){
+        User user = new User();
+        assertNotNull(user);
+    }
+
+    @Test
+    public void testCreateStreakAchievement(){
+        StreakAchievement streakAchievement = new StreakAchievement("You have achieved this habit 10 days in a row!");
+        assertNotNull(streakAchievement);
     }
 }
