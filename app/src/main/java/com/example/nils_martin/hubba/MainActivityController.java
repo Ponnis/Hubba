@@ -5,9 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,15 +16,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     public FloatingActionButton addBtn;
     public void init() {
         addBtn = findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddHabit.class);
+                Intent intent = new Intent(MainActivityController.this, AddHabitController.class);
                 startActivity(intent);
             }
         });
