@@ -8,19 +8,15 @@ public abstract class Achievement {
     private Boolean isAchieved = false;
     private ImageView achievementImage;
 
-    Achievement(){
-
+    Achievement(String title){
+        this.title = title;
     }
 
     public void setAchieved(Boolean achieved) {
         isAchieved = achieved;
     }
 
-    public Boolean getAchieved() {
-        return isAchieved;
-    }
-
     public void assessAchievement(){
-
+        
     }
 }

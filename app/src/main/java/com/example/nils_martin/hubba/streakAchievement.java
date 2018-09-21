@@ -1,9 +1,11 @@
 package com.example.nils_martin.hubba;
 
+import android.widget.ImageView;
+
 public class streakAchievement extends Achievement {
 
-    streakAchievement(){
-
+    streakAchievement(String title){
+        super(title);
     }
 
     @Override
