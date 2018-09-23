@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class AddHabitController extends AppCompatActivity {
+    Button saveBtn;
+    Button undoBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,9 +16,7 @@ public class AddHabitController extends AppCompatActivity {
         setContentView(R.layout.activity_add_habit);
         init();
     }
-
-    Button saveBtn, undoBtn;
-
+    
     public void init() {
         saveBtn = findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
