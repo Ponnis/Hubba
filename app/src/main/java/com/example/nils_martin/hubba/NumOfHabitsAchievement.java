@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 public class NumOfHabitsAchievement extends Achievement{
 
-    NumOfHabitsAchievement(String title){
+    public NumOfHabitsAchievement(String title){
         super(title);
     }
 

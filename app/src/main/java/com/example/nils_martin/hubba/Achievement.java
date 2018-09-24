@@ -8,7 +8,7 @@ public abstract class Achievement {
     private Boolean isAchieved = false;
     private ImageView achievementImage;
 
-    Achievement(String title){
+    public Achievement(String title){
         this.title = title;
     }
 

@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 public class StreakAchievement extends Achievement {
 
-    StreakAchievement(String title){
+    public StreakAchievement(String title){
         super(title);
     }
 
