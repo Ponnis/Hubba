@@ -33,8 +33,9 @@ public class AddHabitController extends AppCompatActivity {
         undoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddHabitController.this, MainActivityController.class);
-                startActivity(intent);
+                // Intent intent = new Intent(AddHabitController.this, MainActivityController.class);
+                // startActivity(intent);
+                finish(); // This closes the current page and goes back to previous instead of opening the previous as a new page.
             }
         });
     }
