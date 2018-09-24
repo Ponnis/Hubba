@@ -38,9 +38,6 @@ import android.widget.EditText;
     private void addUser(){
         User user = new User(NewUsername.getText().toString(), NewEmail.getText().toString(), NewPassword.getText().toString());
         LoginView.userList.add(user);
-        for (User user1 : LoginView.userList){
-            System.out.println(user1.name + " " + user1.password);
-        }
         finish();
     }
 
