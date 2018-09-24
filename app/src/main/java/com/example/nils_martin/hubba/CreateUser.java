@@ -20,25 +20,27 @@ import android.widget.EditText;
         setContentView(R.layout.create_user);
 
         NewUsername = (EditText)findViewById(R.id.txtNewUsername);
-        NewPassword  =(EditText)findViewById(R.id.txtPassword);
+        NewPassword  =(EditText)findViewById(R.id.txtNewPassword);
         NewEmail = (EditText)findViewById(R.id.txtNewEmail);
         CreateNewUser = (Button)findViewById(R.id.btnCreateNewUser);
 
         CreateNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(NewUsername.getText().toString().isEmpty() && NewEmail.getText().toString().isEmpty()
-                        && NewPassword.getText().toString().isEmpty()){
-                    return;
+                if(!NewUsername.getText().toString().isEmpty() && !NewEmail.getText().toString().isEmpty()
+                        && !NewPassword.getText().toString().isEmpty()){
+                    addUser();
                 }
-                addUser();
             }
         });
     }
 
     private void addUser(){
         User user = new User(NewUsername.getText().toString(), NewEmail.getText().toString(), NewPassword.getText().toString());
-        Login.userList.add(user);
+        LoginView.userList.add(user);
+        for (User user1 : LoginView.userList){
+            System.out.println(user1.name + " " + user1.password);
+        }
         finish();
     }
 

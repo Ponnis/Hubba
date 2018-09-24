@@ -2,9 +2,9 @@ package com.example.nils_martin.hubba;
 
 public class User {
 
-    private String name;
-    private String email;
-    private String password;
+    String name;
+    String email;
+    String password;
 
     public User (String name,String email,String password){
         this.name = name;
