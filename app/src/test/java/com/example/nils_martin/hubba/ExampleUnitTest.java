@@ -13,7 +13,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testCreateUser(){
-        User user = new User();
+        User user = new User("Bert","bert@bert.bert","1234bert");
         assertNotNull(user);
     }
 
@@ -28,5 +28,10 @@ public class ExampleUnitTest {
         Habit habit = new Habit("test");
         habit.setDone(habit);
         assertTrue(habit.getStreak(habit) == 1);
+    }
+    @Test
+    public void testNewUserButton(){
+    LoginView loginView = new LoginView();
+    assertTrue(LoginView.userList.isEmpty());
     }
 }
