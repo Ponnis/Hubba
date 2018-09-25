@@ -53,8 +53,8 @@ public class LoginView extends AppCompatActivity{
 
     private void checkLoginAcceptance(){
         for(User user: userList){
-            if(user.name.equals(Username.getText().toString())){
-                if(user.password.equals(Password.getText().toString())){
+            if(user.getName().equals(Username.getText().toString())){
+                if(user.getPassword().equals(Password.getText().toString())){
                     Intent intent = new Intent(LoginView.this, MainActivityController.class);
                     startActivity(intent);
                 }
