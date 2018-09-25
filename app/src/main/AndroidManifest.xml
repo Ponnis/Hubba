@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginView">
+        <activity android:name=".CalenderController">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,9 +19,7 @@
         <activity android:name=".AddHabitController" />
         <activity android:name=".MainActivityController" />
         <activity android:name=".CreateUser" />
-        <activity
-            android:name=".CalenderController"
-            android:label="@string/title_activity_calender"></activity>
+        <activity android:name=".LoginView"/>
     </application>
 
 </manifest>
