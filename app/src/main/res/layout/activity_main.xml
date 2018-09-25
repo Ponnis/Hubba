@@ -23,8 +23,8 @@
         app:layout_constraintWidth_max="wrap"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <ScrollView
-        android:id="@+id/morningScrollView"
+    <ListView
+        android:id="@+id/morningListView"
         android:layout_width="365dp"
         android:layout_height="90dp"
         android:layout_marginEnd="8dp"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-    </ScrollView>
+    </ListView>
 
     <TextView
         android:id="@+id/middayTextView"
@@ -53,10 +53,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/morningScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/morningListView" />
 
-    <ScrollView
-        android:id="@+id/middayScrollView"
+    <ListView
+        android:id="@+id/middayListView"
         android:layout_width="366dp"
         android:layout_height="78dp"
         android:layout_marginEnd="8dp"
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-    </ScrollView>
+    </ListView>
 
     <TextView
         android:id="@+id/eveningTextView"
@@ -85,10 +85,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/middayScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/middayListView" />
 
-    <ScrollView
-        android:id="@+id/eveningScrollView"
+    <ListView
+        android:id="@+id/eveningListView"
         android:layout_width="364dp"
         android:layout_height="85dp"
         android:layout_marginEnd="8dp"
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-    </ScrollView>
+    </ListView>
 
     <TextView
         android:id="@+id/doneTextView"
@@ -118,10 +118,11 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eveningScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/eveningListView" />
     tools:layout_editor_absoluteY="448dp" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/doneListView"
         android:layout_width="368dp"
         android:layout_height="73dp"
         android:layout_marginEnd="8dp"
@@ -135,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-    </ScrollView>
+    </ListView>
 
     <TextView
         android:id="@+id/morningTextView"
