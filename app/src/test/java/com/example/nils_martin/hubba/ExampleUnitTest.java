@@ -13,7 +13,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testCreateUser(){
-        User user = new User("Bert","bert@bert.bert","1234bert");
+        User user = new User("Åke", "Åke@gmail.com","Ninja1337");
         assertNotNull(user);
     }
 
