@@ -11,6 +11,5 @@ public class NumOfHabitsAchievement extends Achievement{
     @Override
     public void assessAchievement(){
 
-
     }
 }
