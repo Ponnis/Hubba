@@ -4,20 +4,34 @@ import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.app.Activity;
 import android.widget.CalendarView;
+import android.widget.EditText;
+
 
 public class CalenderController extends Activity {
+
+    CalendarView cV;
+    EditText hej;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-        cV = findViewById(R.id.calendarView);
-        cV.setFirstDayOfWeek(2);
-
+        init();
     }
 
-    CalendarView cV;
 
 
+    void init() {
+        cV = findViewById(R.id.calendarView);
+        cV.setFirstDayOfWeek(2);
+        hej = findViewById(R.id.dateText);
 
+        cV.getDate();
+        cV.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
+                hej.setText("Date: " + i2 + " / " + i1 + " / " + i);
+            }
+        });
+    }
 }
