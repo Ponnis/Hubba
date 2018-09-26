@@ -2,48 +2,68 @@ package com.example.nils_martin.hubba;
 
 import android.os.Bundle;
 import android.app.Activity;
-<<<<<<< HEAD
-=======
 import android.widget.CalendarView;
 import android.widget.EditText;
->>>>>>> parent of 4ca27b4... right month is showed
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CalenderController extends Activity {
 
-<<<<<<< HEAD
-    CalendarModel calendarModel;
-=======
-    CalendarView cV;
-    EditText hej;
->>>>>>> parent of 4ca27b4... right month is showed
+
+    EditText dateText;
+    CalendarView calendarView;
+    List<FakeHabit> fake = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-<<<<<<< HEAD
-        calendarModel.init();
-    }
+        calendarView = (CalendarView) findViewById(R.id.calendarView);
+        dateText = findViewById(R.id.dateText);
 
-=======
         init();
     }
 
-
-
     void init() {
-        cV = findViewById(R.id.calendarView);
-        cV.setFirstDayOfWeek(2);
-        hej = findViewById(R.id.dateText);
-
-        cV.getDate();
-        cV.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        makeAList();
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
-                hej.setText("Date: " + i2 + " / " + i1 + " / " + i);
+            public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
+                dateText.setText("Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
+
+                for(int i = 0; i<fake.size(); i++) {
+                    if(fake.get(i).dag == dayOfMonth) {
+                        Toast.makeText(getApplicationContext(), "Selected Date:\n" + "Day = " + fake.get(i).name + "\n" + "Month = " + month + "\n" + "Year = " + year, Toast.LENGTH_LONG).show();
+
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Selected Date:\n" + "Day = " + "test" + "\n" + "Month = " + month + "\n" + "Year = " + year, Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
     }
->>>>>>> parent of 4ca27b4... right month is showed
+
+
+    void makeAList () {
+        fake.add(new FakeHabit("Katt", 4));
+        fake.add(new FakeHabit("Kamel", 7));
+    }
+
+
+
+
+}
+
+class FakeHabit {
+    String name;
+    int dag;
+
+    FakeHabit (String name, int dag) {
+        this.name = name;
+        this.dag = dag;
+    }
 }
