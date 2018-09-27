@@ -53,6 +53,43 @@ public class CalenderController extends Activity {
         });
     }
 
+/*
+    void makeHabitRecurring(Habit habit){
+        switch (habit.getFrequency) {
+            case eachday {
+                addDays(1);
+                break;
+            } case each2day {
+                addDays(2);
+                break;
+            } case each3days {
+                addDays(3);
+                break;
+            } case each4days{
+                addDays(4);
+                break;
+            } case each5days{
+                addDays(5);
+                break;
+            } case each6days{
+                addDays(6);
+                break;
+            } case eachweek{
+                addDays(7);
+                break;
+            }break;
+        }
+    }
+
+    void addDays(int interval){
+        int times = 5;
+        int date = calendarView.getDate();
+        for(int i=0; i<times; i++){
+            addTextInCalendar(date);
+            date += interval;
+        }
+    } */
+
 
     void makeAList () {
         fake.add(new FakeHabit("Träning", 7, "12:00"));
