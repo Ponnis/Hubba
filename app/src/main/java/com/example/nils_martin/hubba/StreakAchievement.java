@@ -4,6 +4,8 @@ import android.widget.ImageView;
 
 public class StreakAchievement extends Achievement {
 
+    static AchievementType achievementType = AchievementType.StreakAchievement;
+
     StreakAchievement(String title){
         super(title);
     }
