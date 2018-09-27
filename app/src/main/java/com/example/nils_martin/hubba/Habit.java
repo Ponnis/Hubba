@@ -13,6 +13,7 @@ public class Habit {
     private boolean isActive;
     private boolean enableNofitications;
     private ImageView image;
+    private State STATE;
 
     public Habit(String title){
         this.title = title;
@@ -20,6 +21,12 @@ public class Habit {
         this.isDone = false;
         this.isActive = true;
         this.enableNofitications = false;
+    }
+
+    public enum State{
+        MORNING,
+        MIDDAY,
+        EVENING
     }
 
     public int getGoalDays(Habit habit){
@@ -53,5 +60,13 @@ public class Habit {
         return habit.streak;
     }
 
+    public void setTitle(String string){title = string;}
+
     public String getTitle(Habit habit) {return habit.title;}
+
+    public void setSTATE(State state){
+        this.STATE = state;
+    }
+
+    public State getSTATE (){return STATE;}
 }

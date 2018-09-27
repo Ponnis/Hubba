@@ -9,15 +9,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivityController extends AppCompatActivity {
 
-    private ListView morningListView ;
-    private ArrayAdapter<String> listAdapter ;
+    private ListView morningListView;
+    private ListView middayListView;
+    private ListView eveningListView;
+    private ArrayAdapter<String> listMorningAdapter;
+    private ArrayAdapter<String> listMiddayAdapter;
+    private ArrayAdapter<String> listEveningAdapter;
     public static List<Habit> habits = new ArrayList<>();
-    private List<String> habitString = new ArrayList<>();
+    private List<String> habitMorningString = new ArrayList<>();
+    private List<String> habitMiddayString = new ArrayList<>();
+    private List<String> habitEveningString = new ArrayList<>();
+    public FloatingActionButton addBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,33 +32,12 @@ public class MainActivityController extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
-
-        // Find the ListView resource.
-        morningListView = (ListView) findViewById( R.id.morningListView );
-
-        // Create and populate a List of planet names.
-        // String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-        //         "Jupiter", "Saturn", "Uranus", "Neptune"};
-        // ArrayList<String> planetList = new ArrayList<String>();
-        // planetList.addAll( Arrays.asList(planets) );
-
-        // Create ArrayAdapter using the planet list.
-        for (Habit habit: habits){
-            habitString.clear();
-            habitString.add(habit.getTitle(habit));
-        }
-
-        listAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitString);
-
-        // Set the ArrayAdapter as the ListView's adapter.
-        morningListView.setAdapter( listAdapter );
-
-
     }
 
-
-    public FloatingActionButton addBtn;
     public void init() {
+        morningListView = (ListView) findViewById( R.id.morningListView );
+        middayListView = (ListView) findViewById( R.id.middayListView );
+        eveningListView = (ListView) findViewById( R.id.eveningListView );
         addBtn = findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +46,31 @@ public class MainActivityController extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        updateView();
+    }
+
+    public void updateView (){
+        for (Habit habit: habits){
+            if (habit.getSTATE() == Habit.State.MORNING){
+                habitMorningString.add(habit.getTitle(habit));
+            }
+            else if (habit.getSTATE() == Habit.State.MIDDAY){
+                habitMiddayString.add(habit.getTitle(habit));
+            }
+            else if (habit.getSTATE() == Habit.State.EVENING){
+                habitEveningString.add(habit.getTitle(habit));
+            }
+        }
+
+        listMorningAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitMorningString);
+        listMiddayAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitMiddayString);
+        listEveningAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitEveningString);
+
+        morningListView.setAdapter( listMorningAdapter );
+        middayListView.setAdapter(listMiddayAdapter);
+        eveningListView.setAdapter(listEveningAdapter);
+
+
     }
 
 
