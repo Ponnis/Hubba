@@ -10,9 +10,9 @@ import android.widget.EditText;
 
 public class AddHabitController extends AppCompatActivity {
 
-    EditText habitInput = (EditText) findViewById(R.id.habitInput);
-    Button saveBtn = (Button) findViewById(R.id.saveBtn);
-    Button undoBtn = (Button) findViewById(R.id.undoBtn);
+    EditText habit;
+    Button saveBtn;
+    Button undoBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +22,20 @@ public class AddHabitController extends AppCompatActivity {
     }
 
     public void init() {
-
+        habit = (EditText) findViewById(R.id.habitInput);
+        saveBtn = (Button) findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Habit createdHabit = new Habit(habitInput.getText().toString());
+                Habit createdHabit = new Habit(habit.getText().toString());
                 MainActivityController.habits.add(createdHabit);
 
                 finish();
             }
         });
 
+        undoBtn = (Button) findViewById(R.id.undoBtn);
         undoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
