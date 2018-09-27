@@ -52,4 +52,6 @@ public class Habit {
     public int getStreak(Habit habit){
         return habit.streak;
     }
+
+    public String getTitle(Habit habit) {return habit.title;}
 }

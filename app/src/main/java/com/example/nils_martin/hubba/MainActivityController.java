@@ -10,11 +10,14 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainActivityController extends AppCompatActivity {
 
     private ListView morningListView ;
     private ArrayAdapter<String> listAdapter ;
+    public static List<Habit> habits = new ArrayList<>();
+    private List<String> habitString = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +30,18 @@ public class MainActivityController extends AppCompatActivity {
         morningListView = (ListView) findViewById( R.id.morningListView );
 
         // Create and populate a List of planet names.
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll( Arrays.asList(planets) );
+        // String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
+        //         "Jupiter", "Saturn", "Uranus", "Neptune"};
+        // ArrayList<String> planetList = new ArrayList<String>();
+        // planetList.addAll( Arrays.asList(planets) );
 
         // Create ArrayAdapter using the planet list.
-        listAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, planetList);
+        for (Habit habit: habits){
+            habitString.clear();
+            habitString.add(habit.getTitle(habit));
+        }
+
+        listAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitString);
 
         // Set the ArrayAdapter as the ListView's adapter.
         morningListView.setAdapter( listAdapter );

@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class AddHabitController extends AppCompatActivity {
-    Button saveBtn;
-    Button undoBtn;
-    TextInputLayout habitInput;
+
+    EditText habitInput = (EditText) findViewById(R.id.habitInput);
+    Button saveBtn = (Button) findViewById(R.id.saveBtn);
+    Button undoBtn = (Button) findViewById(R.id.undoBtn);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,22 +22,22 @@ public class AddHabitController extends AppCompatActivity {
     }
 
     public void init() {
-        saveBtn = findViewById(R.id.saveBtn);
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddHabitController.this, MainActivityController.class);
-                startActivity(intent);
+
+                Habit createdHabit = new Habit(habitInput.getText().toString());
+                MainActivityController.habits.add(createdHabit);
+
+                finish();
             }
         });
 
-        undoBtn = findViewById(R.id.undoBtn);
         undoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent intent = new Intent(AddHabitController.this, MainActivityController.class);
-                // startActivity(intent);
-                finish(); // This closes the current page and goes back to previous instead of opening the previous as a new page.
+                finish();
             }
         });
     }
