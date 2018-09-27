@@ -10,6 +10,10 @@ public abstract class Achievement {
     private ImageView achievementImage;
     private String imagePath;
 
+    Achievement(String title){
+        this.title = title;
+    }
+
     Achievement(String title, String imagePath){
         this.title = title;
         this.imagePath = imagePath;
