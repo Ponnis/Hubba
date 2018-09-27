@@ -38,27 +38,23 @@ public class CalenderController extends Activity {
                 dateText.setText("Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
                 stringBuilder.setLength(0);
                 for(int i = 0; i<fake.size(); i++) {
-                    if(stringBuilder.length() != 0 && fake.get(i).date == dayOfMonth) {     //If you have more than one activity on the same day,
-                        stringBuilder.append("\n" + fake.get(i).name);
-                    }
-                    else if(fake.get(i).date == dayOfMonth) {            //If you have a activity, this will show as a toast
-                        stringBuilder.append(fake.get(i).name);
-                        // Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
-               //         break;
-                    }
-                    else {          //Show a toast even if you don't have a activity.
-                 //       Toast.makeText(getApplicationContext(), fake.get(i).date + "Selected Date:\n" + "Day = " + "test" + "\n" + "Month = " + (month+1) + "\n" + "Year = " + year, Toast.LENGTH_LONG).show();
+                    if(fake.get(i).date == dayOfMonth) {
+                        if (stringBuilder.length() != 0) {          //If you have more than one activity on the same day,
+                            stringBuilder.append("\n" + fake.get(i).name);
+                        }
+                        else {
+                            stringBuilder.append(fake.get(i).name);
+                        }
                     }
                 }
-                Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();    //If you have a activity at the day, this will show as a toast
             }
         });
     }
 
 
     void makeAList () {
-        fake.add(new FakeHabit("Aktivitet", 7));
+        fake.add(new FakeHabit("Träning", 7));
         fake.add(new FakeHabit("Lunch", 4));
         fake.add(new FakeHabit("Bio", 21));
         fake.add(new FakeHabit("Hundvakt", 21));
