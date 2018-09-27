@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -12,8 +13,7 @@ import java.util.List;
 
 public class CalenderController extends Activity {
 
-
-    EditText dateText;
+    TextView dateText, aktivitetTxtV;
     CalendarView calendarView;
     List<FakeHabit> fake = new ArrayList<>();
 
@@ -23,6 +23,7 @@ public class CalenderController extends Activity {
         setContentView(R.layout.activity_calender);
         calendarView = findViewById(R.id.calendarView);
         dateText = findViewById(R.id.dateText);
+        aktivitetTxtV = findViewById(R.id.aktivitetTxtV);
 
         init();
     }
@@ -31,12 +32,12 @@ public class CalenderController extends Activity {
 
     void init() {
         makeAList();
-        stringBuilder.append("");
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
                 dateText.setText("Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
                 stringBuilder.setLength(0);
+                stringBuilder.append("Aktiviteter:");
                 for(int i = 0; i<fake.size(); i++) {
                     if(fake.get(i).date == dayOfMonth) {
                         if (stringBuilder.length() != 0) {          //If you have more than one activity on the same day,
@@ -47,7 +48,7 @@ public class CalenderController extends Activity {
                         }
                     }
                 }
-                Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();    //If you have a activity at the day, this will show as a toast
+                aktivitetTxtV.setText(stringBuilder.toString());    //If you have a activity at the day, this will show as a text under the calendar
             }
         });
     }
