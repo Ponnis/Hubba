@@ -2,7 +2,9 @@ package com.example.nils_martin.hubba;
 
 import android.widget.ImageView;
 
-public class Habit {
+import java.util.Observable;
+
+public class Habit extends Observable {
 
     private String title;
     private String timestamp;
