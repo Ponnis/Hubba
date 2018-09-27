@@ -21,7 +21,7 @@ public class CalenderController extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
+        calendarView = findViewById(R.id.calendarView);
         dateText = findViewById(R.id.dateText);
 
         init();
@@ -35,12 +35,12 @@ public class CalenderController extends Activity {
                 dateText.setText("Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
 
                 for(int i = 0; i<fake.size(); i++) {
-                    if(fake.get(i).dag == dayOfMonth) {
-                        Toast.makeText(getApplicationContext(), "Selected Date:\n" + "Day = " + fake.get(i).name + "\n" + "Month = " + month + "\n" + "Year = " + year, Toast.LENGTH_LONG).show();
-
+                    if(fake.get(i).date == dayOfMonth) {            //If you have a activity, this will show as a toast
+                       Toast.makeText(getApplicationContext(), fake.get(i).name, Toast.LENGTH_LONG).show();
+                        break;
                     }
-                    else {
-                        Toast.makeText(getApplicationContext(), "Selected Date:\n" + "Day = " + "test" + "\n" + "Month = " + month + "\n" + "Year = " + year, Toast.LENGTH_LONG).show();
+                    else {          //Show a toast even if you don't have a activity.
+                 //       Toast.makeText(getApplicationContext(), fake.get(i).date + "Selected Date:\n" + "Day = " + "test" + "\n" + "Month = " + (month+1) + "\n" + "Year = " + year, Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -49,21 +49,20 @@ public class CalenderController extends Activity {
 
 
     void makeAList () {
-        fake.add(new FakeHabit("Katt", 4));
-        fake.add(new FakeHabit("Kamel", 7));
+        fake.add(new FakeHabit("Aktivitet", 7));
+        fake.add(new FakeHabit("Lunch", 4));
+        fake.add(new FakeHabit("Bio", 21));
     }
-
-
-
-
 }
+
+
 
 class FakeHabit {
     String name;
-    int dag;
+    int date;
 
-    FakeHabit (String name, int dag) {
+    FakeHabit (String name, int date) {
         this.name = name;
-        this.dag = dag;
+        this.date = date;
     }
 }
