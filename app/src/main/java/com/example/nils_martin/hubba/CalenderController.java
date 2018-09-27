@@ -27,22 +27,31 @@ public class CalenderController extends Activity {
         init();
     }
 
+    StringBuilder stringBuilder = new StringBuilder();
+
     void init() {
         makeAList();
+        stringBuilder.append("");
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
                 dateText.setText("Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
-
+                stringBuilder.setLength(0);
                 for(int i = 0; i<fake.size(); i++) {
-                    if(fake.get(i).date == dayOfMonth) {            //If you have a activity, this will show as a toast
-                       Toast.makeText(getApplicationContext(), fake.get(i).name, Toast.LENGTH_LONG).show();
-                        break;
+                    if(stringBuilder.length() != 0 && fake.get(i).date == dayOfMonth) {     //If you have more than one activity on the same day,
+                        stringBuilder.append("\n" + fake.get(i).name);
+                    }
+                    else if(fake.get(i).date == dayOfMonth) {            //If you have a activity, this will show as a toast
+                        stringBuilder.append(fake.get(i).name);
+                        // Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
+               //         break;
                     }
                     else {          //Show a toast even if you don't have a activity.
                  //       Toast.makeText(getApplicationContext(), fake.get(i).date + "Selected Date:\n" + "Day = " + "test" + "\n" + "Month = " + (month+1) + "\n" + "Year = " + year, Toast.LENGTH_LONG).show();
                     }
                 }
+                Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
+
             }
         });
     }
@@ -52,6 +61,7 @@ public class CalenderController extends Activity {
         fake.add(new FakeHabit("Aktivitet", 7));
         fake.add(new FakeHabit("Lunch", 4));
         fake.add(new FakeHabit("Bio", 21));
+        fake.add(new FakeHabit("Hundvakt", 21));
     }
 }
 
