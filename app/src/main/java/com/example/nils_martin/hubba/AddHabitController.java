@@ -10,6 +10,7 @@ import android.widget.EditText;
 public class AddHabitController extends AppCompatActivity {
 
 
+
     EditText habitName;
     Button save;
     Button cancel;
@@ -26,7 +27,6 @@ public class AddHabitController extends AppCompatActivity {
     }
 
     public void init() {
-
         habitName = (EditText) findViewById(R.id.habitInput);
         save = (Button) findViewById(R.id.saveBtn);
         cancel = (Button) findViewById(R.id.cancelBtn);
@@ -51,7 +51,9 @@ public class AddHabitController extends AppCompatActivity {
             }
         });
 
+
         morning.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 createdHabit.setSTATE(Habit.State.MORNING);
