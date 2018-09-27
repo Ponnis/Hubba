@@ -2,7 +2,10 @@ package com.example.nils_martin.hubba;
 
 import android.widget.ImageView;
 
-public class Habit {
+import java.util.Observable;
+
+public class Habit extends Observable {
+
 
     private String title;
     private String timestamp;
@@ -28,21 +31,30 @@ public class Habit {
 
     public void setGoalDays(Habit habit, int days){
         habit.goalDays = days;
+        observeTest();
     }
 
     public void setDone(Habit habit){
         habit.isDone = !habit.isDone;
         upStreak(this);
+
     }
 
     public void upStreak(Habit habit){
         if(habit.isDone){
             habit.streak++;
         }
+        observeTest();
     }
 
+    private void observeTest (){
+        if(this.hasChanged()){
+            notifyObservers();
+        }
+    }
     public void setActive(Habit habit){
         habit.isActive = !habit.isActive;
+        observeTest();
     }
 
     public void setNotifications(Habit habit){

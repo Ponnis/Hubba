@@ -6,7 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class MainActivityController extends AppCompatActivity {
+import java.util.Observable;
+import java.util.Observer;
+
+public class MainActivityController extends AppCompatActivity implements Observer {
+    //TODO
+    User user = new User("åke","åke","åke");
+    //Ska få en user av login, ändras senare
 
 
 
@@ -30,5 +36,11 @@ public class MainActivityController extends AppCompatActivity {
         });
     }
 
+    //TODO
+    @Override
+    public void update(Observable o, Object arg) {
+        for (Object habit : user.getHabits()){
 
+        }
+    }
 }
