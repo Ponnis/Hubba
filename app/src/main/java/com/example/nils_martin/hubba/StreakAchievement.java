@@ -4,14 +4,14 @@ import android.widget.ImageView;
 
 public class StreakAchievement extends Achievement {
 
-    StreakAchievement(String title){
+    StreakAchievement(String title) {
         super(title);
+        AchievementType achievementType = AchievementType.StreakAchievement;
     }
 
-    @Override
-    public void assessAchievement(){
+    StreakAchievement(String title, String pathToImage) {
+        super(title, pathToImage);
 
+        AchievementType achievementType = AchievementType.StreakAchievement;
     }
-
-
 }
