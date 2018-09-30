@@ -24,14 +24,17 @@ public class CalendarController extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-        calendarView = findViewById(R.id.calendarView);
-        dateText = findViewById(R.id.dateText);
-        activityTxtV = findViewById(R.id.activityTxtV);
-
+        initFindView();
         init();
     }
 
     StringBuilder stringBuilder = new StringBuilder();
+
+    void initFindView () {
+        calendarView = findViewById(R.id.calendarView);
+        dateText = findViewById(R.id.dateText);
+        activityTxtV = findViewById(R.id.activityTxtV);
+    }
 
     void init() {
         makeAList();
@@ -55,10 +58,6 @@ public class CalendarController extends Activity {
                 activityTxtV.setText(stringBuilder.toString());    //If you have a activity at the day, this will show as a text under the calendar
             }
         });
-    }
-
-    void funktion () {
-        habitsList.get(0).getTitle(habitsList.get(0));
     }
 
 /*
