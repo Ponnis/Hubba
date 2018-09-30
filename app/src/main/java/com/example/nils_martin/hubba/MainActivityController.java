@@ -126,13 +126,8 @@ public class MainActivityController extends AppCompatActivity {
         for (Habit habit: habits){
             if(list.get(position).equals(habit.getTitle(habit))){
                 setOpenHabit(habit);
-                System.out.println(openHabit.getTitle(openHabit));
             }
         }
-    }
-
-    public Habit getOpenHabit(){
-        return this.openHabit;
     }
 
     private void setOpenHabit(Habit habit){
