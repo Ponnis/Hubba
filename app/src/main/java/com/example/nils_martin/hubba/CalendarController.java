@@ -1,9 +1,12 @@
 package com.example.nils_martin.hubba;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ public class CalendarController extends Activity {
 
     TextView dateText, activityTxtV;
     CalendarView calendarView;
+    ImageButton backBtn;
     List<FakeHabit> fake = new ArrayList<>();
     List<Habit> habitsList = MainActivityController.habits;
 
@@ -34,10 +38,20 @@ public class CalendarController extends Activity {
         calendarView = findViewById(R.id.calendarView);
         dateText = findViewById(R.id.dateText);
         activityTxtV = findViewById(R.id.activityTxtV);
+        backBtn = findViewById(R.id.backBtn);
     }
 
     void init() {
         makeAList();
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CalendarController.this, MainActivityController.class);
+                startActivity(intent);
+            }
+        });
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
