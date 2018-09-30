@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class MainActivityController extends AppCompatActivity {
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
     public FloatingActionButton addBtn;
+    private ImageButton calendarBtn;
 
 
     @Override
@@ -38,11 +40,19 @@ public class MainActivityController extends AppCompatActivity {
         morningListView = (ListView) findViewById( R.id.morningListView );
         middayListView = (ListView) findViewById( R.id.middayListView );
         eveningListView = (ListView) findViewById( R.id.eveningListView );
+        calendarBtn = findViewById(R.id.calendarBtn);
         addBtn = findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivityController.this, AddHabitController.class);
+                startActivity(intent);
+            }
+        });
+        calendarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivityController.this, CalenderController.class);
                 startActivity(intent);
             }
         });
