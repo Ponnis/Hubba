@@ -52,7 +52,7 @@ public class MainActivityController extends AppCompatActivity {
         calendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivityController.this, CalenderController.class);
+                Intent intent = new Intent(MainActivityController.this, CalendarController.class);
                 startActivity(intent);
             }
         });

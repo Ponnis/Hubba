@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CalenderController extends Activity {
+public class CalendarController extends Activity {
 
     TextView dateText, activityTxtV;
     CalendarView calendarView;
