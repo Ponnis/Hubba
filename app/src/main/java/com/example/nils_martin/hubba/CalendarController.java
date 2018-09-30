@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.CalendarView;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,18 +53,13 @@ public class CalendarController extends Activity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
-                dateText.setText(habitsList.get(0).getSTATE() +"Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
+                dateText.setText("Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
                 stringBuilder.setLength(0);
                 stringBuilder.append("Habits:");
-                for(int i = 0; i<habitsList.size(); i++) {      //fake.size(); i++) {
+                for(int i = 0; i<habitsList.size(); i++) {
                     if(fake.get(i).date == dayOfMonth) {
-                        if (stringBuilder.length() != 0) {          //If you have more than one activity on the same day,
-                            stringBuilder.append("\n" + fake.get(i).time + "\b" + (habitsList.get(i).getTitle(habitsList.get(i))));
-                            stringBuilder.append(" (" + habitsList.get(i).getSTATE() + ")");
-                        }
-                        else {
-                            stringBuilder.append(habitsList.get(i).getTitle(habitsList.get(i)));
-                        }
+                        stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
+                        stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
                     }
                 }
                 activityTxtV.setText(stringBuilder.toString());    //If you have a activity at the day, this will show as a text under the calendar
