@@ -16,6 +16,9 @@ public class CalenderController extends Activity {
     TextView dateText, activityTxtV;
     CalendarView calendarView;
     List<FakeHabit> fake = new ArrayList<>();
+    List<Habit> habitsList = MainActivityController.habits;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +38,27 @@ public class CalenderController extends Activity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
-                dateText.setText("Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
+                dateText.setText(habitsList.get(0).getSTATE() +"Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
                 stringBuilder.setLength(0);
                 stringBuilder.append("Habits:");
-                for(int i = 0; i<fake.size(); i++) {
+                for(int i = 0; i<habitsList.size(); i++) {      //fake.size(); i++) {
                     if(fake.get(i).date == dayOfMonth) {
                         if (stringBuilder.length() != 0) {          //If you have more than one activity on the same day,
-                            stringBuilder.append("\n" + fake.get(i).time + "\b" + fake.get(i).name);
+                            stringBuilder.append("\n" + fake.get(i).time + "\b" + (habitsList.get(i).getTitle(habitsList.get(i))));
+                            stringBuilder.append(" (" + habitsList.get(i).getSTATE() + ")");
                         }
                         else {
-                            stringBuilder.append(fake.get(i).name);
+                            stringBuilder.append(habitsList.get(i).getTitle(habitsList.get(i)));
                         }
                     }
                 }
                 activityTxtV.setText(stringBuilder.toString());    //If you have a activity at the day, this will show as a text under the calendar
             }
         });
+    }
+
+    void funktion () {
+        habitsList.get(0).getTitle(habitsList.get(0));
     }
 
 /*
