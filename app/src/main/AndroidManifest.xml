@@ -19,9 +19,6 @@
         </activity>
         <activity android:name=".AddHabitController" />
         <activity android:name=".CreateUser" />
-        <activity
-            android:name=".mainActivityDrawer"
-            android:label="@string/title_activity_main_drawer"></activity>
     </application>
 
 </manifest>
