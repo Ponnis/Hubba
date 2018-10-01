@@ -58,6 +58,8 @@ public class Habit extends Observable {
         habit.enableNofitications = !habit.enableNofitications;
     }
 
+    public Habit getHabit(){return this;}
+
     public int getStreak(Habit habit){
         return habit.streak;
     }
