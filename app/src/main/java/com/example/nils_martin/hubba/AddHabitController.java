@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class AddHabitController extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class AddHabitController extends AppCompatActivity {
     Button midday;
     Button evening;
     Habit createdHabit;
+    private CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,13 @@ public class AddHabitController extends AppCompatActivity {
         morning = (Button) findViewById(R.id.morningBtn);
         midday  = (Button) findViewById(R.id.middayBtn);
         evening = (Button) findViewById(R.id.eveningBtn);
+        monCxb = findViewById(R.id.monCbx);
+        tueCxb = findViewById(R.id.tueCbx);
+        wedCxb = findViewById(R.id.wedCbx);
+        thuCxb = findViewById(R.id.thuCbx);
+        friCxb = findViewById(R.id.friCbx);
+        satCxb = findViewById(R.id.satCbx);
+        sunCxb = findViewById(R.id.sunCbx);
 
         createdHabit = new Habit("");
         save.setOnClickListener(new View.OnClickListener() {
