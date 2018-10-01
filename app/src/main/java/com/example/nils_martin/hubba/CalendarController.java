@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/* Calendar class not finish, waiting for more functionality of a habit */
 public class CalendarController extends Activity {
 
     TextView dateText, activityTxtV;
