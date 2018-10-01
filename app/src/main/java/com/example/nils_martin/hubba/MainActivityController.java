@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ public class MainActivityController extends AppCompatActivity {
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
     public FloatingActionButton addBtn;
+    private ImageButton calendarBtn;
+    public static Habit openHabit = new Habit("");
 
 
     @Override
@@ -31,14 +35,64 @@ public class MainActivityController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init();
+        initView();
+        initList();
     }
 
-    public void init() {
+
+
+
+    private void initList(){
+        ArrayAdapter<String> morningListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,habitMorningString);
+        ArrayAdapter<String> middayListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,habitMiddayString);
+        ArrayAdapter<String> eveningListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,habitEveningString);
+        morningListView.setAdapter(morningListAdapter);
+        middayListView.setAdapter(middayListAdapter);
+        eveningListView.setAdapter(eveningListAdapter);
+
+
+        morningListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                findOpenHabit(position, habitMorningString);
+
+                Intent intent = new Intent(MainActivityController.this, HabitView.class);
+                startActivity(intent);
+
+            }
+        });
+
+        middayListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                findOpenHabit(position, habitMiddayString);
+
+                Intent intent = new Intent(MainActivityController.this, HabitView.class);
+                startActivity(intent);
+            }
+        });
+
+        eveningListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                findOpenHabit(position, habitEveningString);
+
+                Intent intent = new Intent(MainActivityController.this, HabitView.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+
+    private void initView() {
         morningListView = (ListView) findViewById( R.id.morningListView );
         middayListView = (ListView) findViewById( R.id.middayListView );
         eveningListView = (ListView) findViewById( R.id.eveningListView );
+        calendarBtn = findViewById(R.id.calendarBtn);
         addBtn = findViewById(R.id.addBtn);
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,10 +100,17 @@ public class MainActivityController extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        calendarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivityController.this, CalendarController.class);
+                startActivity(intent);
+            }
+        });
         updateView();
     }
 
-    public void updateView (){
+    private void updateView (){
         for (Habit habit: habits){
             if (habit.getSTATE() == Habit.State.MORNING){
                 habitMorningString.add(habit.getTitle(habit));
@@ -69,9 +130,22 @@ public class MainActivityController extends AppCompatActivity {
         morningListView.setAdapter( listMorningAdapter );
         middayListView.setAdapter(listMiddayAdapter);
         eveningListView.setAdapter(listEveningAdapter);
-
-
     }
 
+    private void findOpenHabit (int position, List list){
+        for (Habit habit: habits){
+            if(list.get(position).equals(habit.getTitle(habit))){
+                setOpenHabit(habit);
+            }
+        }
+    }
 
+    private void setOpenHabit(Habit habit){
+        this.openHabit = habit;
+    }
 }
+
+
+
+
+
