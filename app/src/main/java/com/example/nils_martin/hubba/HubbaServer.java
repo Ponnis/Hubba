@@ -3,6 +3,7 @@ package com.example.nils_martin.hubba;
 import java.util.ArrayList;
 
 public class HubbaServer {
+    //TODO make singleton
     //A server to serve as a mock up for a remote server to hold all the users and control them
     private ArrayList<User> users = new ArrayList<>();
 
@@ -15,5 +16,8 @@ public class HubbaServer {
       }
         }
         return users.get(index);
+    }
+    public ArrayList<User> getUsers(){
+        return users;
     }
 }

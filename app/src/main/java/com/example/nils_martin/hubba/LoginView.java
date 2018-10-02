@@ -61,4 +61,7 @@ public class LoginView extends AppCompatActivity{
             }
         }
     }
+    public EditText getUsername(){
+        return Username;
+    }
 }
