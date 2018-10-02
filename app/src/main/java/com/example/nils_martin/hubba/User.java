@@ -11,6 +11,8 @@ public class User implements Observer{
     private String password;
     private List<Habit> habits;
     private List<Achievement> achievements;
+    private boolean allowNotifications;
+    private boolean soundOn;
 
     public User (String name,String email,String password){
         this.name = name;
