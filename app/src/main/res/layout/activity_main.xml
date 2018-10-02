@@ -51,7 +51,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/morningTextView" />
 
-
     <TextView
         android:id="@+id/middayTextView"
         android:layout_width="wrap_content"
@@ -134,5 +133,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/doneTextView" />
+
+    <ImageButton
+        android:id="@+id/calendarBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        android:contentDescription="Calendar" />
 
 </android.support.constraint.ConstraintLayout>
