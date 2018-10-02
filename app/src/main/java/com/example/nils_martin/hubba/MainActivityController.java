@@ -27,6 +27,7 @@ public class MainActivityController extends AppCompatActivity {
     private List<String> habitEveningString = new ArrayList<>();
     public FloatingActionButton addBtn;
     private ImageButton calendarBtn;
+    private ImageButton menuButton;
     public static Habit openHabit = new Habit("");
 
 
