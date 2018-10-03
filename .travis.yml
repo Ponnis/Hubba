@@ -10,13 +10,12 @@ jdk: oraclejdk8
    components:
      - tools
      - platform-tools
-     - tools
 
      # The BuildTools version used by your project
      - build-tools-26.0.2
 
      # The SDK version used to compile your project
-     - $ANDROID_TARGET
+     - android-26
 
  before_install:
   - chmod +x gradlew

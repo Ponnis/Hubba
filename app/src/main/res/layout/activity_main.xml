@@ -7,20 +7,11 @@
     tools:context=".MainActivityController">
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
             <TextView
                 android:id="@+id/morningTextView"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
@@ -35,7 +26,7 @@
             <ListView
                 android:id="@+id/morningListView"
                 android:layout_width="395dp"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -47,9 +38,9 @@
 
             <TextView
                 android:id="@+id/middayTextView"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -66,7 +57,7 @@
             <ListView
                 android:id="@+id/middayListView"
                 android:layout_width="395dp"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -78,14 +69,14 @@
 
             <TextView
                 android:id="@+id/eveningTextView"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
                 android:text="Evening"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +86,7 @@
             <ListView
                 android:id="@+id/eveningListView"
                 android:layout_width="395dp"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -108,11 +99,12 @@
 
             <TextView
                 android:id="@+id/doneTextView"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Done"
@@ -124,7 +116,7 @@
             <ListView
                 android:id="@+id/doneListView"
                 android:layout_width="395dp"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -134,11 +126,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/doneTextView" />
 
-
-
-
-        </LinearLayout>
-    </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addBtn"
