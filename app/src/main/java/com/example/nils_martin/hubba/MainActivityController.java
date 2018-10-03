@@ -91,6 +91,7 @@ public class MainActivityController extends AppCompatActivity {
         morningListView = (ListView) findViewById( R.id.morningListView );
         middayListView = (ListView) findViewById( R.id.middayListView );
         eveningListView = (ListView) findViewById( R.id.eveningListView );
+        menuButton = findViewById((R.id.menuBtn));
         calendarBtn = findViewById(R.id.calendarBtn);
         addBtn = findViewById(R.id.addBtn);
 
@@ -105,6 +106,13 @@ public class MainActivityController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivityController.this, CalendarController.class);
+                startActivity(intent);
+            }
+        });
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivityController.this, MenuController.class);
                 startActivity(intent);
             }
         });
