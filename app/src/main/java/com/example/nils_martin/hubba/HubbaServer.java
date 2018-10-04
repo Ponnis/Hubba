@@ -37,4 +37,7 @@ public class HubbaServer {
     public void setUsers(ArrayList<User>users){
         this.users = users;
     }
+    public void addUser(User user){
+    users.add(user);
+    }
 }

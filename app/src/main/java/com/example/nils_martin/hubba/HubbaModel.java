@@ -7,4 +7,5 @@ public class HubbaModel {
     LoginView loginView = new LoginView();
     EditText currentUserName = loginView.getUsername();
     User currentUser = hubbaServer.getUser(currentUserName.toString());
+
 }
