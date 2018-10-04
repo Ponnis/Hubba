@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MenuController extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class MenuController extends AppCompatActivity {
     TextView groupsTextView;
     TextView helpTextView;
     Button logOutButton;
+    ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class MenuController extends AppCompatActivity {
     }
 
     private void initFindView(){
+        backButton = findViewById(R.id.backButton);
         profileTextView = findViewById(R.id.profileTextView);
         settingsTextView = findViewById(R.id.settingsTextView);
         habitsTextView = findViewById(R.id.habitsTextView);
@@ -34,6 +37,12 @@ public class MenuController extends AppCompatActivity {
     }
 
     private void init(){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

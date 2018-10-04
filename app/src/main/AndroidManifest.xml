@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".CalendarController"/>
-        <activity android:name="MainActivityController">
+        <activity android:name=".MainActivityController">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
