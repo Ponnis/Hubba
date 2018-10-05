@@ -19,11 +19,14 @@ public class MainActivityController extends AppCompatActivity {
     private LinearLayout morningLinearLayout;
     private LinearLayout middayLinearLayout;
     private LinearLayout eveningLinearLayout;
+    private LinearLayout nightLinearLayout;
     private LinearLayout doneLinearLayout;
     public static List<Habit> habits = new ArrayList<>();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
+    private List<String> habitNightString = new ArrayList<>();
+    private List<String> habitDoneString = new ArrayList<>();
     public FloatingActionButton addBtn;
     private ImageButton calendarBtn;
     public static Habit openHabit = new Habit("");
@@ -45,7 +48,7 @@ public class MainActivityController extends AppCompatActivity {
 
 
     private void initList(){
-
+        // TODO: 2018-10-05 Implement on click listener for the LinearLayouts that fetch position
         /*
         morningLinearLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -85,7 +88,10 @@ public class MainActivityController extends AppCompatActivity {
         morningLinearLayout = (LinearLayout) findViewById( R.id.morningList);
         middayLinearLayout = (LinearLayout) findViewById( R.id.middayList);
         eveningLinearLayout = (LinearLayout) findViewById( R.id.eveningList);
+        nightLinearLayout = (LinearLayout) findViewById(R.id.NightList);
         doneLinearLayout = (LinearLayout) findViewById(R.id.doneList);
+
+
         calendarBtn = findViewById(R.id.calendarBtn);
         addBtn = findViewById(R.id.addBtn);
 
@@ -114,33 +120,28 @@ public class MainActivityController extends AppCompatActivity {
         clearLayout(morningLinearLayout);
         clearLayout(middayLinearLayout);
         clearLayout(eveningLinearLayout);
-        for (Habit habit: habits){
-            if (habit.getSTATE() == Habit.State.MORNING){
-                habitMorningString.add(habit.getTitle(habit));
-            }
-            else if (habit.getSTATE() == Habit.State.MIDDAY){
-                habitMiddayString.add(habit.getTitle(habit));
-            }
-            else if (habit.getSTATE() == Habit.State.EVENING){
-                habitEveningString.add(habit.getTitle(habit));
-            }
+        clearLayout(nightLinearLayout);
+        clearLayout(doneLinearLayout);
 
+        for (Habit habit: habits){
+            switch (habit.getSTATE()){
+                case MORNING:
+                    habitMorningString.add(habit.getTitle(habit));
+                case MIDDAY:
+                    habitMiddayString.add(habit.getTitle(habit));
+                case EVENING:
+                    habitEveningString.add(habit.getTitle(habit));
+                    // TODO: 2018-10-05 Add case night/done when they're implemented in habit
+            }
         }
         populate(habitMorningString,morningLinearLayout);
         populate(habitMiddayString, middayLinearLayout);
         populate(habitEveningString, eveningLinearLayout);
-
-        /*
-        listMorningAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitMorningString);
-        listMiddayAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitMiddayString);
-        listEveningAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitEveningString);
-
-        morningLinearLayout.setAdapter( listMorningAdapter );
-        middayLinearLayout.setAdapter(listMiddayAdapter);
-        eveningLinearLayout.setAdapter(listEveningAdapter);
-        */
+        // TODO: 2018-10-05 populate nightLinearLayout and doneLinearLayout when habit have implemented night/done states
+        // and the switch above have implemented the new cases.
     }
 
+    //Clearing all Views from the LinearLayout.
     private void clearLayout(LinearLayout layout) {
         layout.removeAllViews();
     }
