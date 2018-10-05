@@ -15,10 +15,12 @@ public class LoginView extends AppCompatActivity{
     private EditText Password;
     private Button NewUser;
     private Button Login;
-    static List<User> userList = HubbaServer.getInstance().getUsers();
+    //Temporär lösning!! Skall inte känna till modellen. Vart ska den annars få användarna från?
+    static List<User> userList = HubbaModel.getUsers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(savedInstanceState !=null){}
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         //Should be in controller?

@@ -40,8 +40,6 @@ public class MainActivityController extends AppCompatActivity {
     }
 
 
-
-
     private void initList(){
         ArrayAdapter<String> morningListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,habitMorningString);
         ArrayAdapter<String> middayListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,habitMiddayString);
