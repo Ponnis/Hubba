@@ -41,7 +41,7 @@ public class ExampleUnitTest {
     }
     @Test
     public void testClearingOfLinearLayout(){
-        
+
 
     }
 }

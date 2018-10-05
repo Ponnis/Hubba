@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageButton;
@@ -125,10 +124,11 @@ public class MainActivityController extends AppCompatActivity {
             else if (habit.getSTATE() == Habit.State.EVENING){
                 habitEveningString.add(habit.getTitle(habit));
             }
-            populate(habitMorningString,morningLinearLayout);
-            populate(habitMiddayString, middayLinearLayout);
-            populate(habitEveningString, eveningLinearLayout);
+
         }
+        populate(habitMorningString,morningLinearLayout);
+        populate(habitMiddayString, middayLinearLayout);
+        populate(habitEveningString, eveningLinearLayout);
 
         /*
         listMorningAdapter = new ArrayAdapter<String>(this, R.layout.habit_layout, habitMorningString);
