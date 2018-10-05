@@ -127,10 +127,13 @@ public class MainActivityController extends AppCompatActivity {
             switch (habit.getSTATE()){
                 case MORNING:
                     habitMorningString.add(habit.getTitle(habit));
+                    break;
                 case MIDDAY:
                     habitMiddayString.add(habit.getTitle(habit));
+                    break;
                 case EVENING:
                     habitEveningString.add(habit.getTitle(habit));
+                    break;
                     // TODO: 2018-10-05 Add case night/done when they're implemented in habit
             }
         }
