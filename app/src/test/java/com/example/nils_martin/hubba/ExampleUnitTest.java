@@ -1,6 +1,11 @@
 package com.example.nils_martin.hubba;
 
+import android.widget.LinearLayout;
+
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -33,5 +38,10 @@ public class ExampleUnitTest {
     public void testNewUserButton(){
     LoginView loginView = new LoginView();
     assertTrue(LoginView.userList.isEmpty());
+    }
+    @Test
+    public void testClearingOfLinearLayout(){
+        
+
     }
 }

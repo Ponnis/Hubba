@@ -112,9 +112,9 @@ public class MainActivityController extends AppCompatActivity {
     and then populates the Linearlayouts with corresponding habits.
     */
     private void updateLists (){
-        clearList(habitMorningString);
-        clearList(habitMiddayString);
-        clearList(habitEveningString);
+        clearLayout(morningLinearLayout);
+        clearLayout(middayLinearLayout);
+        clearLayout(eveningLinearLayout);
         for (Habit habit: habits){
             if (habit.getSTATE() == Habit.State.MORNING){
                 habitMorningString.add(habit.getTitle(habit));
@@ -141,9 +141,10 @@ public class MainActivityController extends AppCompatActivity {
         */
     }
 
-    private void clearList(List<String> list) {
-        list.clear();
+    private void clearLayout(LinearLayout layout) {
+        layout.removeAllViews();
     }
+
 
     //Loops thru given list of strings and call for addItem with that string and given Linearlayout.
     private void populate(List<String> inputList, LinearLayout linearLayout){
