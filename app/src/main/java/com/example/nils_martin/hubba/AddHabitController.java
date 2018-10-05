@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,8 @@ public class AddHabitController extends AppCompatActivity {
     Button save, cancel, morning, midday, evening, daily, weekly, monthly;
     Habit createdHabit;
     private CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
+    TextView numberOfDaysTxtV;
+    Spinner numberOfDaysSpr;
     List<CheckBox> checkBoxList = new ArrayList<>();
 
     @Override
@@ -47,6 +51,8 @@ public class AddHabitController extends AppCompatActivity {
         friCxb = findViewById(R.id.friCbx);
         satCxb = findViewById(R.id.satCbx);
         sunCxb = findViewById(R.id.sunCbx);
+        numberOfDaysTxtV = findViewById(R.id.numTxtV);
+        numberOfDaysSpr = findViewById(R.id.numSpr);
     }
 
     public void update() {
@@ -94,7 +100,7 @@ public class AddHabitController extends AppCompatActivity {
         daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                day();
             }
         });
 
@@ -111,10 +117,21 @@ public class AddHabitController extends AppCompatActivity {
                 month();
             }
         });
-
-
     }
+
+    private void day () {
+        numberOfDaysTxtV.setVisibility(View.VISIBLE);
+        numberOfDaysSpr.setVisibility(View.VISIBLE);
+
+        for(int i = 0; i < checkBoxList.size(); i++) {
+            checkBoxList.get(i).setVisibility(View.VISIBLE);
+        }
+    }
+
     private void week () {
+        numberOfDaysTxtV.setVisibility(View.INVISIBLE);
+        numberOfDaysSpr.setVisibility(View.INVISIBLE);
+
         for(int i = 0; i < checkBoxList.size(); i++) {
             checkBoxList.get(i).setVisibility(View.INVISIBLE);
         }
@@ -122,6 +139,9 @@ public class AddHabitController extends AppCompatActivity {
 
 
     private void month () {
+        numberOfDaysTxtV.setVisibility(View.INVISIBLE);
+        numberOfDaysSpr.setVisibility(View.INVISIBLE);
+
         for(int i = 0; i < checkBoxList.size(); i++) {
             checkBoxList.get(i).setVisibility(View.INVISIBLE);
         }
