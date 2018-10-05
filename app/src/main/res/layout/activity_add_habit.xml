@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/dailyButton"
+        android:id="@+id/dailyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/weeklyButton"
+        android:id="@+id/weeklyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/monthlyButton"
+        android:id="@+id/monthlyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
 
     <Button
         android:id="@+id/middayBtn"
@@ -130,7 +130,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/morningBtn"
-        app:layout_constraintTop_toBottomOf="@+id/weeklyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
 
     <Button
         android:id="@+id/eveningBtn"
@@ -145,7 +145,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toEndOf="@+id/middayBtn"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
 
     <Button
         android:id="@+id/nightBtn"
@@ -160,7 +160,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.971"
         app:layout_constraintStart_toEndOf="@+id/middayBtn"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
 
     <Switch
         android:id="@+id/remainderSwitch"
@@ -187,7 +187,7 @@
         android:text="Number of day/week:"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyButton"
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
         tools:ignore="MissingConstraints" />
 
     <Spinner
@@ -198,7 +198,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/numTxtV"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyButton"
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
         tools:ignore="MissingConstraints" />
 
     <CheckBox
@@ -210,7 +210,7 @@
         android:layout_marginTop="48dp"
         android:text="Monday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
 
     <CheckBox
         android:id="@+id/tueCbx"
@@ -221,7 +221,7 @@
         android:layout_marginTop="48dp"
         android:text="Tuesday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weeklyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
 
     <CheckBox
         android:id="@+id/wedCbx"
@@ -232,7 +232,7 @@
         android:layout_marginTop="48dp"
         android:text="Wednesday"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
 
 
     <CheckBox
@@ -244,7 +244,7 @@
         android:layout_marginTop="80dp"
         android:text="Thursday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
 
 
     <CheckBox
@@ -256,7 +256,7 @@
         android:layout_marginTop="80dp"
         android:text="Friday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weeklyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
 
     <CheckBox
         android:id="@+id/satCbx"
@@ -267,7 +267,7 @@
         android:layout_marginTop="80dp"
         android:text="Saturday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
 
 
     <CheckBox
@@ -279,7 +279,7 @@
         android:layout_marginTop="80dp"
         android:text="Sunday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
 
     <View
         android:id="@+id/divider"

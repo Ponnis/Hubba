@@ -13,11 +13,7 @@ public class AddHabitController extends AppCompatActivity {
 
 
     EditText habitName;
-    Button save;
-    Button cancel;
-    Button morning;
-    Button midday;
-    Button evening;
+    Button save, cancel, morning, midday, evening, daily, weekly, monthly;
     Habit createdHabit;
     private CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
 
@@ -29,12 +25,15 @@ public class AddHabitController extends AppCompatActivity {
     }
 
     public void init() {
-        habitName = (EditText) findViewById(R.id.habitInput);
-        save = (Button) findViewById(R.id.saveBtn);
-        cancel = (Button) findViewById(R.id.cancelBtn);
-        morning = (Button) findViewById(R.id.morningBtn);
-        midday  = (Button) findViewById(R.id.middayBtn);
-        evening = (Button) findViewById(R.id.eveningBtn);
+        habitName = findViewById(R.id.habitInput);
+        save = findViewById(R.id.saveBtn);
+        cancel = findViewById(R.id.cancelBtn);
+        morning = findViewById(R.id.morningBtn);
+        midday  = findViewById(R.id.middayBtn);
+        evening = findViewById(R.id.eveningBtn);
+        daily = findViewById(R.id.dailyBtn);
+        weekly = findViewById(R.id.weeklyBtn);
+        monthly = findViewById(R.id.monthlyBtn);
         monCxb = findViewById(R.id.monCbx);
         tueCxb = findViewById(R.id.tueCbx);
         wedCxb = findViewById(R.id.wedCbx);
@@ -83,8 +82,8 @@ public class AddHabitController extends AppCompatActivity {
             }
         });
 
-
     }
+
 
     private void endActivity(){
         finish();
