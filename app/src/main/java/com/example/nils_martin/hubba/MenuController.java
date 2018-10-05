@@ -6,14 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class MenuController extends AppCompatActivity {
-    TextView profileTextView;
-    TextView settingsTextView;
-    TextView habitsTextView;
-    TextView groupsTextView;
-    TextView helpTextView;
+    Button profileButton;
+    Button settingsButton;
+    Button habitsButton;
+    Button groupsButton;
+    Button helpButton;
     Button logOutButton;
     ImageButton backButton;
 
@@ -21,32 +20,56 @@ public class MenuController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_xml);
-        initFindView();
         init();
     }
 
-    private void initFindView(){
+    private void init(){
+        initFindByView();
+        initOnClickListeners();
+    }
+
+    private void initFindByView(){
         backButton = findViewById(R.id.backButton);
-        profileTextView = findViewById(R.id.profileTextView);
-        settingsTextView = findViewById(R.id.settingsTextView);
-        habitsTextView = findViewById(R.id.habitsTextView);
-        groupsTextView = findViewById(R.id.groupsTextView);
-        helpTextView = findViewById(R.id.helpTextView);
+        profileButton = findViewById(R.id.profileBtn);
+        settingsButton = findViewById(R.id.settingsBtn);
+        habitsButton = findViewById(R.id.habitsBtn);
+        groupsButton = findViewById(R.id.groupsBtn);
+        helpButton = findViewById(R.id.helpBtn);
         logOutButton = findViewById(R.id.logOutButton);
 
     }
 
-    private void init(){
+    private void initOnClickListeners(){
+        backButtonOnClick();
+        logOutButtonOnClick();
+        settingsButtonOnClick();
+
+    }
+
+    private void backButtonOnClick(){
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+    }
+
+    private void logOutButtonOnClick(){
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuController.this, LoginView.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void settingsButtonOnClick(){
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuController.this, Settings.class);
                 startActivity(intent);
             }
         });
