@@ -188,7 +188,8 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:visibility="invisible"/>
 
     <Spinner
         android:id="@+id/numSpr"
@@ -199,7 +200,8 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/numTxtV"
         app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:visibility="invisible"/>
 
     <CheckBox
         android:id="@+id/monCbx"
@@ -210,7 +212,8 @@
         android:layout_marginTop="48dp"
         android:text="Monday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
+        android:visibility="invisible"/>
 
     <CheckBox
         android:id="@+id/tueCbx"
@@ -221,7 +224,8 @@
         android:layout_marginTop="48dp"
         android:text="Tuesday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn"
+        android:visibility="invisible"/>
 
     <CheckBox
         android:id="@+id/wedCbx"
@@ -232,7 +236,8 @@
         android:layout_marginTop="48dp"
         android:text="Wednesday"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
+        android:visibility="invisible"/>
 
 
     <CheckBox
@@ -244,7 +249,8 @@
         android:layout_marginTop="80dp"
         android:text="Thursday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
+        android:visibility="invisible"/>
 
 
     <CheckBox
@@ -256,7 +262,8 @@
         android:layout_marginTop="80dp"
         android:text="Friday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn"
+        android:visibility="invisible"/>
 
     <CheckBox
         android:id="@+id/satCbx"
@@ -267,7 +274,8 @@
         android:layout_marginTop="80dp"
         android:text="Saturday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
+        android:visibility="invisible"/>
 
 
     <CheckBox
@@ -279,7 +287,8 @@
         android:layout_marginTop="80dp"
         android:text="Sunday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
+        android:visibility="invisible"/>
 
     <View
         android:id="@+id/divider"
