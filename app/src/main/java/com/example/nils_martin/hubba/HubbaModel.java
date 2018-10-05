@@ -3,13 +3,15 @@ package com.example.nils_martin.hubba;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 public class HubbaModel {
     private static ArrayList<User> users = new ArrayList<>();
     HubbaServer hubbaServer = HubbaServer.getInstance();
-    LoginView loginView = new LoginView();
-    EditText currentUserName = loginView.getUsername();
-    User currentUser = getUser(currentUserName.toString());
+    static LoginView loginView = new LoginView();
+   static EditText currentUserName = loginView.getUsername();
+    private static User currentUser = getUser(currentUserName.toString());
+
 
 
     public static User getUser(String userName){
@@ -21,6 +23,7 @@ public class HubbaModel {
         }
         return users.get(index);
     }
+    public static User getCurrentUser(){return currentUser;}
     public static ArrayList<User> getUsers(){
         return users;
     }

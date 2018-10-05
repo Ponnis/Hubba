@@ -40,6 +40,8 @@ public class User implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-
+        if(arg!=null){
+            achievements.add((Achievement) arg);
+        }
     }
 }

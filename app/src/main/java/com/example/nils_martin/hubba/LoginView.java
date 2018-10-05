@@ -48,6 +48,11 @@ public class LoginView extends AppCompatActivity{
         });
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
     private void newUserButton (){
         Intent intent = new Intent(LoginView.this, CreateUser.class);
         startActivity(intent);

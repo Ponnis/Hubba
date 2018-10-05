@@ -2,7 +2,9 @@ package com.example.nils_martin.hubba;
 
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 public class Habit extends Observable {
 
@@ -17,12 +19,16 @@ public class Habit extends Observable {
     private ImageView image;
     private State STATE;
 
+    private ArrayList<Observer> observers = new ArrayList<>();
+
+
     public Habit(String title){
         this.title = title;
         this.streak = 0;
         this.isDone = false;
         this.isActive = true;
         this.enableNofitications = false;
+        this.observers = observers;
     }
 
     public enum State{
@@ -39,6 +45,15 @@ public class Habit extends Observable {
         habit.goalDays = days;
     }
 
+    public void notifyAllObservers(){
+        StreakAchievement streakAchievement = null;
+        for (Observer observer : observers){
+            if (streak%10==0){
+                streakAchievement = new StreakAchievement(streak+"days!");
+            }
+            observer.update(this,streakAchievement);
+        }
+    }
     public void setDone(Habit habit){
         habit.isDone = !habit.isDone;
         upStreak(this);
