@@ -34,7 +34,7 @@ import android.widget.EditText;
 
     private void addUser(){
         User user = new User(NewUsername.getText().toString(), NewEmail.getText().toString(), NewPassword.getText().toString());
-        LoginView.userList.add(user);
+        HubbaServer.getInstance().addUser(user);
         finish();
     }
 }

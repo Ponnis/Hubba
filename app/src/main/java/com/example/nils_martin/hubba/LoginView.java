@@ -15,13 +15,13 @@ public class LoginView extends AppCompatActivity{
     private EditText Password;
     private Button NewUser;
     private Button Login;
-    static List<User> userList = new ArrayList<>();
+    static List<User> userList = HubbaServer.getInstance().getUsers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        //Should be in controller?
         if (userList.size() == 0){
             userList.add(new User("admin", "testemail@gmail.com", "1234"));
         }
@@ -50,7 +50,7 @@ public class LoginView extends AppCompatActivity{
         Intent intent = new Intent(LoginView.this, CreateUser.class);
         startActivity(intent);
     }
-
+    //Should also be in controller?
     private void checkLoginAcceptance(){
         for(User user: userList){
             if(user.getName().equals(Username.getText().toString())){
@@ -62,6 +62,6 @@ public class LoginView extends AppCompatActivity{
         }
     }
     public EditText getUsername(){
-        return Username;
+return Username;
     }
 }

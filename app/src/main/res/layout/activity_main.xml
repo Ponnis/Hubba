@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
     tools:context=".MainActivityController">
 
+    <ImageButton
+        android:id="@+id/calendarBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:contentDescription="Calendar" />
 
             <TextView
                 android:id="@+id/morningTextView"
@@ -136,21 +146,146 @@
         android:clickable="true"
         android:focusable="true"
         android:paddingBottom="253dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:backgroundTint="@color/Grey"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_max="wrap"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_max="wrap"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <ImageButton
-        android:id="@+id/calendarBtn"
-        android:layout_width="55dp"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar"
-        android:contentDescription="Calendar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarBtn"
+        android:layout_marginTop="25dp"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="Morning"
+                android:textColor="@color/FontColor"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="128dp"
+                tools:layout_editor_absoluteY="51dp" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/elite_gradient" />
+
+            <LinearLayout
+                android:id="@+id/morningList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="Midday"
+                android:textColor="@color/FontColor"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="137dp"
+                tools:layout_editor_absoluteY="185dp" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/elite_gradient" />
+
+            <LinearLayout
+                android:id="@+id/middayList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="Evening"
+                android:textColor="@color/FontColor"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="137dp"
+                tools:layout_editor_absoluteY="309dp" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/elite_gradient" />
+
+            <LinearLayout
+                android:id="@+id/eveningList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="Night"
+                android:textColor="@color/FontColor"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="148dp"
+                tools:layout_editor_absoluteY="448dp" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/elite_gradient" />
+
+            <LinearLayout
+                android:id="@+id/NightList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="Done"
+                android:textColor="@color/FontColor"
+                android:textSize="24sp"
+                tools:layout_editor_absoluteX="148dp"
+                tools:layout_editor_absoluteY="448dp" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/elite_gradient" />
+
+            <LinearLayout
+                android:id="@+id/doneList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" />
+
+
+        </LinearLayout>
+    </ScrollView>
+>>>>>>> master
 
     <ImageButton
         android:id="@+id/menuBtn"

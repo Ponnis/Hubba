@@ -1,6 +1,11 @@
 package com.example.nils_martin.hubba;
 
+import android.widget.LinearLayout;
+
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
