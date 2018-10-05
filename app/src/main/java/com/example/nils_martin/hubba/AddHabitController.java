@@ -120,20 +120,20 @@ public class AddHabitController extends AppCompatActivity {
     }
 
     private void day () {
-        numberOfDaysTxtV.setVisibility(View.VISIBLE);
-        numberOfDaysSpr.setVisibility(View.VISIBLE);
-
-        for(int i = 0; i < checkBoxList.size(); i++) {
-            checkBoxList.get(i).setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void week () {
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
 
         for(int i = 0; i < checkBoxList.size(); i++) {
             checkBoxList.get(i).setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void week () {
+        numberOfDaysTxtV.setVisibility(View.VISIBLE);
+        numberOfDaysSpr.setVisibility(View.VISIBLE);
+
+        for(int i = 0; i < checkBoxList.size(); i++) {
+            checkBoxList.get(i).setVisibility(View.VISIBLE);
         }
     }
 

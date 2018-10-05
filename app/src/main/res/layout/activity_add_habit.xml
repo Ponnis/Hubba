@@ -357,5 +357,42 @@
         app:layout_constraintStart_toEndOf="@+id/hourSpr"
         app:layout_constraintTop_toBottomOf="@+id/remainderSwitch" />
 
+    <CheckBox
+        android:id="@+id/earlyMonthCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="1:a-10:e"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
+
+    <CheckBox
+        android:id="@+id/middleMonthCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:text="11:e-20:e"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
+
+    <CheckBox
+        android:id="@+id/lateMonthCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="290dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="40dp"
+        android:text="21:a +"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
+
+
 
 </android.support.constraint.ConstraintLayout>
