@@ -16,21 +16,25 @@ import java.util.List;
 public class AddHabitController extends AppCompatActivity {
 
 
-
-    EditText habitName;
-    Button save, cancel, morning, midday, evening, daily, weekly, monthly;
-    Habit createdHabit;
+    private EditText habitName;
+    private Button save, cancel, morning, midday, evening, daily, weekly, monthly;
+    private Habit createdHabit;
     private CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
-    TextView numberOfDaysTxtV;
-    Spinner numberOfDaysSpr;
-    List<CheckBox> checkBoxList = new ArrayList<>();
+    private CheckBox earlyMonthCbx, middleMonthCbx, lateMonthCbx;
+    private TextView numberOfDaysTxtV;
+    private Spinner numberOfDaysSpr;
+    private List<CheckBox> cbxDayList = new ArrayList<>();
+    private List<CheckBox> cbxMonthList = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
         init();
-        makeAListOfCheckboxes();
+        makeAListOfDayCbx();
+        makeAListOfMonthCbx();
         update();
     }
 
@@ -53,6 +57,9 @@ public class AddHabitController extends AppCompatActivity {
         sunCxb = findViewById(R.id.sunCbx);
         numberOfDaysTxtV = findViewById(R.id.numTxtV);
         numberOfDaysSpr = findViewById(R.id.numSpr);
+        earlyMonthCbx = findViewById(R.id.earlyMonthCbx);
+        middleMonthCbx = findViewById(R.id.middleMonthCbx);
+        lateMonthCbx = findViewById(R.id.lateMonthCbx);
     }
 
     public void update() {
@@ -100,64 +107,80 @@ public class AddHabitController extends AppCompatActivity {
         daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                day();
+                dayVisible();
             }
         });
 
         weekly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                week();
+                weekVisible();
             }
         });
 
         monthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                month();
+                monthVisible();
             }
         });
     }
 
-    private void day () {
+    private void dayVisible() {           //Set everything to invisible
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
 
-        for(int i = 0; i < checkBoxList.size(); i++) {
-            checkBoxList.get(i).setVisibility(View.INVISIBLE);
+        for(int i = 0; i < cbxDayList.size(); i++) {
+            cbxDayList.get(i).setVisibility(View.INVISIBLE);
         }
+
+        for (int i = 0; i< cbxMonthList.size(); i++) {
+            cbxMonthList.get(i).setVisibility(View.INVISIBLE);
+        }
+
+
     }
 
-    private void week () {
+    private void weekVisible () {          //Set the month-checkboxes to invisible and the week attribute to visible
         numberOfDaysTxtV.setVisibility(View.VISIBLE);
         numberOfDaysSpr.setVisibility(View.VISIBLE);
 
-        for(int i = 0; i < checkBoxList.size(); i++) {
-            checkBoxList.get(i).setVisibility(View.VISIBLE);
+        for(int i = 0; i < cbxDayList.size(); i++) {
+            cbxDayList.get(i).setVisibility(View.VISIBLE);
+        }
+
+        for (int i = 0; i< cbxMonthList.size(); i++) {
+            cbxMonthList.get(i).setVisibility(View.INVISIBLE);
         }
     }
 
-
-    private void month () {
+    private void monthVisible () {         //Set the week attribute to invisible and the month-checkboxes to visible
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
 
-        for(int i = 0; i < checkBoxList.size(); i++) {
-            checkBoxList.get(i).setVisibility(View.INVISIBLE);
+        for(int i = 0; i < cbxDayList.size(); i++) {
+            cbxDayList.get(i).setVisibility(View.INVISIBLE);
+        }
+
+        for (int i = 0; i< cbxMonthList.size(); i++) {
+            cbxMonthList.get(i).setVisibility(View.VISIBLE);
         }
     }
 
+    private void makeAListOfDayCbx() {
+        cbxDayList.add(monCxb);
+        cbxDayList.add(tueCxb);
+        cbxDayList.add(wedCxb);
+        cbxDayList.add(thuCxb);
+        cbxDayList.add(friCxb);
+        cbxDayList.add(satCxb);
+        cbxDayList.add(sunCxb);
+    }
 
-
-
-    private void makeAListOfCheckboxes () {
-        checkBoxList.add(monCxb);
-        checkBoxList.add(tueCxb);
-        checkBoxList.add(wedCxb);
-        checkBoxList.add(thuCxb);
-        checkBoxList.add(friCxb);
-        checkBoxList.add(satCxb);
-        checkBoxList.add(sunCxb);
+    private void makeAListOfMonthCbx () {
+        cbxMonthList.add(earlyMonthCbx);
+        cbxMonthList.add(middleMonthCbx);
+        cbxMonthList.add(lateMonthCbx);
     }
 
     private void endActivity(){

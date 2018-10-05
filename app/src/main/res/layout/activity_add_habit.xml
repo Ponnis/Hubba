@@ -366,7 +366,8 @@
         android:layout_marginTop="40dp"
         android:text="1:a-10:e"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
+        android:visibility="invisible"/>
 
     <CheckBox
         android:id="@+id/middleMonthCbx"
@@ -380,7 +381,8 @@
         android:text="11:e-20:e"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn"
+        android:visibility="invisible"/>
 
     <CheckBox
         android:id="@+id/lateMonthCbx"
@@ -391,7 +393,8 @@
         android:layout_marginTop="40dp"
         android:text="21:a +"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
+        android:visibility="invisible"/>
 
 
 
