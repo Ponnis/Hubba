@@ -7,7 +7,14 @@
     android:background="@color/BackgroundColor"
     tools:context=".MainActivityController">
 
-
+    <ImageButton
+        android:id="@+id/calendarBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+        android:contentDescription="Calendar" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addBtn"

@@ -5,8 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class AddHabitController extends AppCompatActivity {
+
+
+
+    EditText habitName;
+    Button save;
+    Button cancel;
+    Button morning;
+    Button midday;
+    Button evening;
+    Habit createdHabit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,25 +26,60 @@ public class AddHabitController extends AppCompatActivity {
         init();
     }
 
-    Button saveBtn, undoBtn;
-
     public void init() {
-        saveBtn = findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        habitName = (EditText) findViewById(R.id.habitInput);
+        save = (Button) findViewById(R.id.saveBtn);
+        cancel = (Button) findViewById(R.id.cancelBtn);
+        morning = (Button) findViewById(R.id.morningBtn);
+        midday  = (Button) findViewById(R.id.middayBtn);
+        evening = (Button) findViewById(R.id.eveningBtn);
+
+        createdHabit = new Habit("");
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddHabitController.this, MainActivityController.class);
-                startActivity(intent);
+                createdHabit.setTitle(habitName.getText().toString());
+                MainActivityController.habits.add(createdHabit);
+                endActivity();
             }
         });
 
-        undoBtn = findViewById(R.id.undoBtn);
-        undoBtn.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddHabitController.this, MainActivityController.class);
-                startActivity(intent);
+                endActivity();
             }
         });
+
+
+        morning.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                createdHabit.setSTATE(Habit.State.MORNING);
+            }
+        });
+
+        midday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createdHabit.setSTATE(Habit.State.MIDDAY);
+            }
+        });
+
+        evening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createdHabit.setSTATE(Habit.State.EVENING);
+            }
+        });
+
+
+    }
+
+    private void endActivity(){
+        finish();
+        Intent intent = new Intent(AddHabitController.this, MainActivityController.class);
+        startActivity(intent);
     }
 }
