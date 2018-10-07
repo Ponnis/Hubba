@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-public class Settings extends AppCompatActivity {
+public class SettingsVM extends AppCompatActivity {
     //we have to get the active user from the main class " Hubba ".
     //will control all the users settings.
 

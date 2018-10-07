@@ -17,6 +17,16 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:contentDescription="Calendar" />
 
+    <ImageButton
+        android:id="@+id/menuBtn"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_drawer"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:contentDescription="Menu"/>
+
             <TextView
                 android:id="@+id/morningTextView"
                 android:layout_width="wrap_content"
@@ -285,15 +295,7 @@
 
         </LinearLayout>
     </ScrollView>
->>>>>>> master
 
-    <ImageButton
-        android:id="@+id/menuBtn"
-        android:layout_width="55dp"
-        android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_drawer"
-        android:contentDescription="Menu"/>
+
 
 </android.support.constraint.ConstraintLayout>

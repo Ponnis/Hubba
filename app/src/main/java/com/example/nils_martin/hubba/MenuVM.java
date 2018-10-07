@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class MenuController extends AppCompatActivity {
+public class MenuVM extends AppCompatActivity {
     Button profileButton;
     Button settingsButton;
     Button habitsButton;
@@ -19,7 +19,7 @@ public class MenuController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_xml);
+        setContentView(R.layout.activity_menu);
         init();
     }
 
@@ -41,8 +41,9 @@ public class MenuController extends AppCompatActivity {
 
     private void initOnClickListeners(){
         backButtonOnClick();
-        logOutButtonOnClick();
+        profileButtonOnClick();
         settingsButtonOnClick();
+        logOutButtonOnClick();
 
     }
 
@@ -55,11 +56,11 @@ public class MenuController extends AppCompatActivity {
         });
     }
 
-    private void logOutButtonOnClick(){
-        logOutButton.setOnClickListener(new View.OnClickListener() {
+    private void profileButtonOnClick(){
+        profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuController.this, LoginView.class);
+                Intent intent = new Intent(MenuVM.this, ProfileVM.class);
                 startActivity(intent);
             }
         });
@@ -69,7 +70,17 @@ public class MenuController extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuController.this, Settings.class);
+                Intent intent = new Intent(MenuVM.this, SettingsVM.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void logOutButtonOnClick(){
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuVM.this, LoginView.class);
                 startActivity(intent);
             }
         });

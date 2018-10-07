@@ -22,8 +22,9 @@
         <activity android:name=".AddHabitController" />
         <activity android:name=".CreateUser" />
         <activity android:name=".HabitView"/>
-        <activity android:name=".MenuController"/>
-        <activity android:name=".Settings"/>
+        <activity android:name=".MenuVM"/>
+        <activity android:name=".SettingsVM"/>
+        <activity android:name=".ProfileVM"/>
     </application>
 
 
