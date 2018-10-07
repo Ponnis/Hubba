@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class AddHabitController extends AppCompatActivity {
     private CheckBox earlyMonthCbx, middleMonthCbx, lateMonthCbx;
     private TextView numberOfDaysTxtV;
     private Spinner numberOfDaysSpr;
+    private Switch remainderSwitch;
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
 
@@ -60,6 +62,7 @@ public class AddHabitController extends AppCompatActivity {
         earlyMonthCbx = findViewById(R.id.earlyMonthCbx);
         middleMonthCbx = findViewById(R.id.middleMonthCbx);
         lateMonthCbx = findViewById(R.id.lateMonthCbx);
+        remainderSwitch = findViewById(R.id.remainderSwitch);
     }
 
     public void update() {
@@ -124,6 +127,8 @@ public class AddHabitController extends AppCompatActivity {
                 monthVisible();
             }
         });
+
+      
     }
 
     private void dayVisible() {           //Set everything to invisible
