@@ -22,8 +22,8 @@ public class AddHabitController extends AppCompatActivity {
     private Habit createdHabit;
     private CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
     private CheckBox earlyMonthCbx, middleMonthCbx, lateMonthCbx;
-    private TextView numberOfDaysTxtV;
-    private Spinner numberOfDaysSpr;
+    private TextView numberOfDaysTxtV, colontxtV, timeTxtV;
+    private Spinner numberOfDaysSpr, hourSpr, minSpr;
     private Switch remainderSwitch;
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
@@ -57,11 +57,15 @@ public class AddHabitController extends AppCompatActivity {
         friCxb = findViewById(R.id.friCbx);
         satCxb = findViewById(R.id.satCbx);
         sunCxb = findViewById(R.id.sunCbx);
-        numberOfDaysTxtV = findViewById(R.id.numTxtV);
-        numberOfDaysSpr = findViewById(R.id.numSpr);
         earlyMonthCbx = findViewById(R.id.earlyMonthCbx);
         middleMonthCbx = findViewById(R.id.middleMonthCbx);
         lateMonthCbx = findViewById(R.id.lateMonthCbx);
+        numberOfDaysTxtV = findViewById(R.id.numTxtV);
+        timeTxtV = findViewById(R.id.timeTxtV);
+        colontxtV = findViewById(R.id.colontxtV);
+        numberOfDaysSpr = findViewById(R.id.numSpr);
+        hourSpr = findViewById(R.id.hourSpr);
+        minSpr = findViewById(R.id.minSpr);
         remainderSwitch = findViewById(R.id.remainderSwitch);
     }
 
@@ -128,7 +132,23 @@ public class AddHabitController extends AppCompatActivity {
             }
         });
 
-      
+        remainderSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(remainderSwitch.isChecked()) {
+                    hourSpr.setVisibility(View.VISIBLE);
+                    minSpr.setVisibility(View.VISIBLE);
+                    timeTxtV.setVisibility(View.VISIBLE);
+                    colontxtV.setVisibility(View.VISIBLE);
+                }
+                else {
+                    hourSpr.setVisibility(View.INVISIBLE);
+                    minSpr.setVisibility(View.INVISIBLE);
+                    timeTxtV.setVisibility(View.INVISIBLE);
+                    colontxtV.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
     private void dayVisible() {           //Set everything to invisible
