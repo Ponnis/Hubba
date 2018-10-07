@@ -3,6 +3,7 @@ package com.example.nils_martin.hubba;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,6 +28,7 @@ public class AddHabitController extends AppCompatActivity {
     private Switch remainderSwitch;
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
+    List<CheckBox> calendarDaysList = new ArrayList<>();
 
 
 
@@ -76,6 +78,7 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createdHabit.setTitle(habitName.getText().toString());
+                makeCalendarDaysList();
                 MainActivityController.habits.add(createdHabit);
                 endActivity();
             }
@@ -206,6 +209,17 @@ public class AddHabitController extends AppCompatActivity {
         cbxMonthList.add(earlyMonthCbx);
         cbxMonthList.add(middleMonthCbx);
         cbxMonthList.add(lateMonthCbx);
+    }
+
+    private void makeCalendarDaysList () {
+
+        for (int i = 0; i < cbxDayList.size(); i++) {
+            if (cbxDayList.get(i).isChecked()) {
+                calendarDaysList.add(cbxDayList.get(i));
+            } else if (!cbxDayList.get(i).isChecked() && calendarDaysList.contains(cbxDayList.get(i))) {
+                calendarDaysList.remove(cbxDayList.get(i));
+            }
+        }
     }
 
     private void endActivity(){
