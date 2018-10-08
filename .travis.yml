@@ -1,9 +1,10 @@
+  on_success: never
+  on_failure: always
+
 before_install:
   - yes | sdkmanager "platforms;android-28"
 
 language: android
-
-jdk: oraclejdk8
 
 android:
   components:
