@@ -6,6 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="?attr/homeAsUpIndicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="181dp"
@@ -42,50 +51,57 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/profileTextView"
-                android:layout_width="wrap_content"
+            <Button
+
+                android:id="@+id/profileBtn"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="Profile"
-                android:textSize="30sp"
-                tools:layout_editor_absoluteX="69dp"
-                tools:layout_editor_absoluteY="134dp" />
+                android:backgroundTint="#ffffff"
+                android:textAllCaps="false"
+                android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/settingsTextView"
+            <Button
+                android:id="@+id/settingsBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="Settings"
-                android:textSize="30sp"
-                tools:layout_editor_absoluteX="69dp"
-                tools:layout_editor_absoluteY="134dp" />
+                android:backgroundTint="#ffffff"
+                android:textAllCaps="false"
+                android:textSize="24sp"/>
 
-            <TextView
-                android:id="@+id/habitsTextView"
+            <Button
+                android:id="@+id/habitsBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="Habits"
-                android:textSize="30sp"
-                tools:layout_editor_absoluteX="69dp"
-                tools:layout_editor_absoluteY="134dp" />
+                android:backgroundTint="#ffffff"
+                android:textAllCaps="false"
+                android:textSize="24sp"/>
 
-            <TextView
-                android:id="@+id/groupsTextView"
+            <Button
+                android:id="@+id/groupsBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="Groups"
-                android:textSize="30sp"
-                tools:layout_editor_absoluteX="69dp"
-                tools:layout_editor_absoluteY="134dp" />
+                android:backgroundTint="#ffffff"
+                android:textAllCaps="false"
+                android:textSize="24sp"/>
 
-            <TextView
-                android:id="@+id/helpTextView"
+            <Button
+                android:id="@+id/helpBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:text="Help"
-                android:textSize="30sp"
-                tools:layout_editor_absoluteX="69dp"
-                tools:layout_editor_absoluteY="134dp" />
+                android:backgroundTint="#ffffff"
+                android:textAllCaps="false"
+                android:textSize="24sp"/>
+
         </LinearLayout>
     </ScrollView>
 
