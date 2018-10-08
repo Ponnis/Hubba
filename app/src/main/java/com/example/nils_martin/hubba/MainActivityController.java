@@ -134,14 +134,19 @@ public class MainActivityController extends AppCompatActivity {
                 case EVENING:
                     habitEveningString.add(habit.getTitle(habit));
                     break;
-                    // TODO: 2018-10-05 Add case night/done when they're implemented in habit
+                case NIGHT:
+                    habitNightString.add(habit.getTitle(habit));
+                    break;
+                case DONE:
+                    habitDoneString.add(habit.getTitle(habit));
+                    break;
             }
         }
         populate(habitMorningString,morningLinearLayout);
         populate(habitMiddayString, middayLinearLayout);
         populate(habitEveningString, eveningLinearLayout);
-        // TODO: 2018-10-05 populate nightLinearLayout and doneLinearLayout when habit have implemented night/done states
-        // and the switch above have implemented the new cases.
+        populate(habitNightString,nightLinearLayout);
+        populate(habitDoneString,doneLinearLayout);
     }
 
     //Clearing all Views from the LinearLayout.
