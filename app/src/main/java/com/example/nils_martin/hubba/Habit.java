@@ -28,7 +28,9 @@ public class Habit extends Observable {
     public enum State{
         MORNING,
         MIDDAY,
-        EVENING
+        EVENING,
+        NIGHT,
+        DONE
     }
 
     public int getGoalDays(Habit habit){

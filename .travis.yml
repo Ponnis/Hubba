@@ -1,5 +1,5 @@
-  on_success: never
-  on_failure: always
+on_success: never
+on_failure: always
 
 before_install:
   - yes | sdkmanager "platforms;android-28"

@@ -39,4 +39,5 @@ public class ExampleUnitTest {
     LoginView loginView = new LoginView();
     assertTrue(LoginView.userList.isEmpty());
     }
+
 }
