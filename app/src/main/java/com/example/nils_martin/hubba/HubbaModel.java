@@ -5,7 +5,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 public class HubbaModel {
-    private static ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
     LoginView loginView = new LoginView();
     EditText currentUserName = loginView.getUsername();
     User currentUser = getUser(currentUserName.toString());
@@ -19,7 +19,7 @@ public class HubbaModel {
         }
         return users.get(index);
     }
-    public ArrayList<User> getUsers(){
+    public static ArrayList<User> getUsers(){
         return users;
     }
 
@@ -27,7 +27,7 @@ public class HubbaModel {
     public void setUsers(ArrayList<User>users){
         this.users = users;
     }
-    public void addUser(User user){
+    public static void addUser(User user){
         users.add(user);
     }
 }
