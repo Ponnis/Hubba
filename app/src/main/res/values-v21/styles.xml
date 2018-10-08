@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Elite" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColorPrimary">@color/FontColor</item>
+        <item name="android:colorAccent">@color/design_default_color_primary</item>
+        <item name="colorAccent">@color/FontColor</item>
+    </style>
+</resources>
