@@ -19,7 +19,7 @@ public class MenuVM extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.menu);
         init();
     }
 
@@ -39,10 +39,14 @@ public class MenuVM extends AppCompatActivity {
 
     }
 
+    // Calls methods that set what actions the buttons have on click.
     private void initOnClickListeners(){
         backButtonOnClick();
         profileButtonOnClick();
         settingsButtonOnClick();
+        habitsButtonOnClick();
+        groupsButtonOnClick();
+        // helpButtonOnClick();
         logOutButtonOnClick();
 
     }
@@ -75,6 +79,36 @@ public class MenuVM extends AppCompatActivity {
             }
         });
     }
+
+    private void habitsButtonOnClick(){
+        habitsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuVM.this, MenuHabitsVM.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void groupsButtonOnClick(){
+        groupsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuVM.this, MenuGroupsVM.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    /* private void helpButtonOnClick(){
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuVM.this, HelpVM.class);
+                startActivity(intent);
+            }
+        });
+    }*/
 
     private void logOutButtonOnClick(){
         logOutButton.setOnClickListener(new View.OnClickListener() {

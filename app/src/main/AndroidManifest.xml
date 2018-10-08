@@ -25,6 +25,8 @@
         <activity android:name=".MenuVM"/>
         <activity android:name=".SettingsVM"/>
         <activity android:name=".ProfileVM"/>
+        <activity android:name=".MenuGroupsVM"/>
+        <activity android:name=".MenuHabitsVM"/>
     </application>
 
 

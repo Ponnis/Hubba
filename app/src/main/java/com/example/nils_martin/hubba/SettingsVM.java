@@ -7,7 +7,7 @@ import android.widget.Switch;
 
 public class SettingsVM extends AppCompatActivity {
     //we have to get the active user from the main class " Hubba ".
-    //will control all the users settings.
+    //will control all the users menu_settings.
 
     Switch notificationSwitch;
     Spinner themeSpinner;
@@ -16,7 +16,7 @@ public class SettingsVM extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.menu_settings);
         init();
     }
 
