@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /* Calendar class not finish, waiting for more functionality of a habit */
@@ -19,28 +20,26 @@ public class CalendarController extends Activity {
     ImageButton backBtn;
     List<FakeHabit> fake = new ArrayList<>();
     List<Habit> habitsList = MainActivityController.habits;
-
-
+    Calendar cal = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-        initFindView();
         init();
+        Update();
     }
 
     StringBuilder stringBuilder = new StringBuilder();
 
-    void initFindView () {
+    void init() {
         calendarView = findViewById(R.id.calendarView);
         dateText = findViewById(R.id.dateText);
         activityTxtV = findViewById(R.id.activityTxtV);
         backBtn = findViewById(R.id.backBtn);
     }
 
-    void init() {
-        makeAList();
+    void Update() {
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,11 +52,12 @@ public class CalendarController extends Activity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
-                dateText.setText("Date: " + dayOfMonth + " / " + (month+1) + " / " + year);
                 stringBuilder.setLength(0);
                 stringBuilder.append("Habits:");
-                for(int i = 0; i<habitsList.size(); i++) {
-                    if(fake.get(i).date == dayOfMonth) {
+                cal.set(year, month, dayOfMonth); //Set
+                cal.get(Calendar.DAY_OF_WEEK);
+                for (int i = 0; i < habitsList.size(); i++) {
+                    if(habitsList.get(i).getDayToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {
                         stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
                         stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
                     }
@@ -66,6 +66,8 @@ public class CalendarController extends Activity {
             }
         });
     }
+
+
 
 /*
     void makeHabitRecurring(Habit habit){
@@ -112,7 +114,25 @@ public class CalendarController extends Activity {
         fake.add(new FakeHabit("Hundvakt", 21, "09:05"));
     }
 }
+  /*     if (veckodagar.contains(habitsList.get(i).getDayToDo().get(j))) {
+                            stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
+                            stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
+                        }*/
 
+
+
+
+
+              /*  for (int i = 0; i < habitsList.size(); i++) {
+                    dagarPaLista = habitsList.get(i).getDayToDo();
+                    for (int j = 0; j <habitsList.get(i).getDayToDo().size(); j++) {
+
+                        if (day == habitsList.get(i).getDayToDo().get(j)) {
+                            stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
+                            stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
+                        }
+                    }
+                }*/
 
 
 class FakeHabit {

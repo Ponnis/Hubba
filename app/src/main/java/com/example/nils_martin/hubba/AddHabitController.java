@@ -21,14 +21,14 @@ public class AddHabitController extends AppCompatActivity {
     private EditText habitName;
     private Button save, cancel, morning, midday, evening, daily, weekly, monthly;
     private Habit createdHabit;
-    private CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
+    CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
     private CheckBox earlyMonthCbx, middleMonthCbx, lateMonthCbx;
     private TextView numberOfDaysTxtV, colontxtV, timeTxtV;
     private Spinner numberOfDaysSpr, hourSpr, minSpr;
     private Switch remainderSwitch;
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
-    List<CheckBox> calendarDaysList = new ArrayList<>();
+    List<Integer> calendarDaysList = new ArrayList<>();
 
 
 
@@ -73,12 +73,13 @@ public class AddHabitController extends AppCompatActivity {
 
     public void update() {
 
-        createdHabit = new Habit("");
+        createdHabit = new Habit("", calendarDaysList);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createdHabit.setTitle(habitName.getText().toString());
                 makeCalendarDaysList();
+                createdHabit.setTitle(habitName.getText().toString());
+                createdHabit.setDayToDo(calendarDaysList);
                 MainActivityController.habits.add(createdHabit);
                 endActivity();
             }
@@ -153,8 +154,8 @@ public class AddHabitController extends AppCompatActivity {
             }
         });
     }
-
-    private void dayVisible() {           //Set everything to invisible
+    //Set everything to invisible
+    private void dayVisible() {
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
 
@@ -169,7 +170,8 @@ public class AddHabitController extends AppCompatActivity {
 
     }
 
-    private void weekVisible () {          //Set the month-checkboxes to invisible and the week attribute to visible
+    //Set the month-checkboxes to invisible and the week attribute to visible
+    private void weekVisible () {
         numberOfDaysTxtV.setVisibility(View.VISIBLE);
         numberOfDaysSpr.setVisibility(View.VISIBLE);
 
@@ -182,7 +184,8 @@ public class AddHabitController extends AppCompatActivity {
         }
     }
 
-    private void monthVisible () {         //Set the week attribute to invisible and the month-checkboxes to visible
+    //Set the week attribute to invisible and the month-checkboxes to visible
+    private void monthVisible () {
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
 
@@ -196,13 +199,13 @@ public class AddHabitController extends AppCompatActivity {
     }
 
     private void makeAListOfDayCbx() {
+        cbxDayList.add(sunCxb);
         cbxDayList.add(monCxb);
         cbxDayList.add(tueCxb);
         cbxDayList.add(wedCxb);
         cbxDayList.add(thuCxb);
         cbxDayList.add(friCxb);
         cbxDayList.add(satCxb);
-        cbxDayList.add(sunCxb);
     }
 
     private void makeAListOfMonthCbx () {
@@ -211,14 +214,13 @@ public class AddHabitController extends AppCompatActivity {
         cbxMonthList.add(lateMonthCbx);
     }
 
+    //Making a list of the week days
     private void makeCalendarDaysList () {
-
+        
         for (int i = 0; i < cbxDayList.size(); i++) {
-            if (cbxDayList.get(i).isChecked()) {
-                calendarDaysList.add(cbxDayList.get(i));
-            } else if (!cbxDayList.get(i).isChecked() && calendarDaysList.contains(cbxDayList.get(i))) {
-                calendarDaysList.remove(cbxDayList.get(i));
-            }
+           if(cbxDayList.get(i).isChecked()) {
+               calendarDaysList.add(i+1);
+           }
         }
     }
 
