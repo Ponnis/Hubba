@@ -1,7 +1,9 @@
-<android.support.constraint.ConstraintLayout    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/habit_list_item"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    tools:context=".HabitListItem">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,6 +14,8 @@
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/FontColor"
+        android:clickable="true"
+        android:onClick="onClick"
         tools:padding="10dp"
         tools:text="Fisk" />
 </android.support.constraint.ConstraintLayout>
