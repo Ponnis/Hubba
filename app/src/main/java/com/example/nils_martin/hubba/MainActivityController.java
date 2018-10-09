@@ -86,6 +86,7 @@ public class MainActivityController extends AppCompatActivity {
         });*/
     }
 
+    //Called from HabitListItem
     public void onClick(View view){
         temp = morningLinearLayout.getOrientation() -1;
         findSelectedHabit(temp, habitMorningString);
