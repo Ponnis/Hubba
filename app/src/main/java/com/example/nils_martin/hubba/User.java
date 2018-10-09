@@ -37,17 +37,9 @@ public class User implements Observer{
     public String getPassword() {
         return password;
     }
-//TODO test the update method
+
     @Override
     public void update(Observable o, Object arg) {
-        for (Habit habit : habits){
-            if(habit.getStreak(habit)%10==0){
-                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement,habit.getStreak(habit)+" Days!"));
-            }
-            if (habits.size()%10==0){
-                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement,habits.size()+" Habits!"));
-            }
-        }
-    }
 
+    }
 }
