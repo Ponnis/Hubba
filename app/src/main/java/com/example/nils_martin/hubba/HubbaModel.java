@@ -22,6 +22,7 @@ public class HubbaModel {
     public static ArrayList<User> getUsers(){
         return users;
     }
+    public User getCurrentUser(){return this.currentUser;}
 
 
     public void setUsers(ArrayList<User>users){
