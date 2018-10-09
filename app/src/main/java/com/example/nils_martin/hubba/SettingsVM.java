@@ -25,6 +25,7 @@ public class SettingsVM extends AppCompatActivity {
     }
 
     private void initFindByView(){
+        
         notificationSwitch = (Switch) findViewById(R.id.notificationSwitch);
         themeSpinner = (Spinner) findViewById(R.id.themeSpinner);
         moodSpinner = (Spinner) findViewById(R.id.moodSpinner);
