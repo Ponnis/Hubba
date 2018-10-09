@@ -29,7 +29,8 @@ public class MainActivityController extends AppCompatActivity {
     private List<String> habitDoneString = new ArrayList<>();
     public FloatingActionButton addBtn;
     private ImageButton calendarBtn;
-    public static Habit openHabit = new Habit("");
+    public static Habit selectedHabit = new Habit("");
+    private int temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +50,13 @@ public class MainActivityController extends AppCompatActivity {
 
     private void initList(){
         // TODO: 2018-10-05 Implement on click listener for the LinearLayouts that fetch position
+
         /*
         morningLinearLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                findOpenHabit(position, habitMorningString);
+                findSelectedHabit(position, habitMorningString);
 
                 Intent intent = new Intent(MainActivityController.this, HabitView.class);
                 startActivity(intent);
@@ -65,7 +67,7 @@ public class MainActivityController extends AppCompatActivity {
         middayLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // findOpenHabit(pos, habitEveningString);
+               // findSelectedHabit(pos, habitEveningString);
 
                 Intent intent = new Intent(MainActivityController.this, HabitView.class);
                 startActivity(intent);
@@ -76,13 +78,23 @@ public class MainActivityController extends AppCompatActivity {
         eveningLinearLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                findOpenHabit(position, habitEveningString);
+                findSelectedHabit(position, habitEveningString);
 
                 Intent intent = new Intent(MainActivityController.this, HabitView.class);
                 startActivity(intent);
             }
         });*/
     }
+
+    //Called from HabitListItem
+    public void onClick(View view){
+        temp = morningLinearLayout.getOrientation() -1;
+        findSelectedHabit(temp, habitMorningString);
+
+        Intent intent = new Intent(MainActivityController.this, HabitView.class);
+        startActivity(intent);
+    }
+
     //Instantiates the different views and buttons on the MainPage.
     private void initView() {
         morningLinearLayout = (LinearLayout) findViewById( R.id.morningList);
@@ -156,24 +168,24 @@ public class MainActivityController extends AppCompatActivity {
             addItem(string,linearLayout);
         }
     }
-    //A method that puts String s in an constraint layout habbit_list_item and put's that inside of the chosen Linearlayout.
+    //A method that puts String s in an constraint layout habit_list_item and put's that inside of the chosen Linearlayout.
     private void addItem(String s, LinearLayout linearLayout) {
-        ConstraintLayout consLayout = (ConstraintLayout) View.inflate(this, R.layout.habbit_list_item, null);
-        TextView textview = (TextView) consLayout.getViewById(R.id.habbit_list_item);
+        ConstraintLayout consLayout = (ConstraintLayout) View.inflate(this, R.layout.habit_list_item, null);
+        TextView textview = (TextView) consLayout.getViewById(R.id.habitListItemTextView);
         textview.setText(s);
         linearLayout.addView(consLayout);
     }
 
-    private void findOpenHabit (int position, List list){
+    private void findSelectedHabit(int position, List list){
         for (Habit habit: habits){
             if(list.get(position).equals(habit.getTitle(habit))){
-                setOpenHabit(habit);
+                setSelectedHabit(habit);
             }
         }
     }
 
-    private void setOpenHabit(Habit habit){
-        this.openHabit = habit;
+    private void setSelectedHabit(Habit habit){
+        this.selectedHabit = habit;
     }
 
     }

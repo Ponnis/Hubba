@@ -216,7 +216,7 @@ public class AddHabitController extends AppCompatActivity {
 
     //Making a list of the week days
     private void makeCalendarDaysList () {
-        
+
         for (int i = 0; i < cbxDayList.size(); i++) {
            if(cbxDayList.get(i).isChecked()) {
                calendarDaysList.add(i+1);
