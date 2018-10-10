@@ -73,4 +73,10 @@ public class Habit extends Observable {
     }
 
     public State getSTATE (){return STATE;}
+
+    public void setFrequency(Frequency frequency){ this.frequency = frequency; }
+
+    public Frequency getFrequency(Habit habit) {return habit.frequency;}
+
+
 }

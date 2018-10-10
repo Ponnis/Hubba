@@ -18,6 +18,9 @@ public class AddHabitController extends AppCompatActivity {
     Button midday;
     Button evening;
     Habit createdHabit;
+    Button daily;
+    Button weekly;
+    Button monthly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,9 @@ public class AddHabitController extends AppCompatActivity {
         morning = (Button) findViewById(R.id.morningBtn);
         midday  = (Button) findViewById(R.id.middayBtn);
         evening = (Button) findViewById(R.id.eveningBtn);
+        daily = findViewById(R.id.dailyButton);
+        weekly = findViewById(R.id.weeklyButton);
+        monthly = findViewById(R.id.monthlyButton);
 
         createdHabit = new Habit("");
         save.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +77,27 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createdHabit.setSTATE(Habit.State.EVENING);
+            }
+        });
+
+        daily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createdHabit.setFrequency(Frequency.DAILY);
+            }
+        });
+
+        weekly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createdHabit.setFrequency(Frequency.WEEKLY);
+            }
+        });
+
+        monthly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createdHabit.setFrequency(Frequency.MONTHLY);
             }
         });
 
