@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/dailyButton"
+        android:id="@+id/dailyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/weeklyButton"
+        android:id="@+id/weeklyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/monthlyButton"
+        android:id="@+id/monthlyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
@@ -110,12 +110,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="164dp"
         android:text="Morning"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn" />
 
     <Button
         android:id="@+id/middayBtn"
@@ -125,12 +125,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="164dp"
         android:text="Midday"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/morningBtn"
-        app:layout_constraintTop_toBottomOf="@+id/weeklyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
 
     <Button
         android:id="@+id/eveningBtn"
@@ -140,12 +140,255 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="164dp"
         android:text="Evening"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toEndOf="@+id/middayBtn"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
+
+    <Button
+        android:id="@+id/nightBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="164dp"
+        android:text="Night"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.971"
+        app:layout_constraintStart_toEndOf="@+id/middayBtn"
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn" />
+
+    <Switch
+        android:id="@+id/remainderSwitch"
+        android:layout_width="355dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="44dp"
+        android:text="Reminder?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/middayBtn"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/numTxtV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="21dp"
+        android:text="Number of day/week:"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
+        tools:ignore="MissingConstraints"
+        android:visibility="invisible"/>
+
+    <Spinner
+        android:id="@+id/numSpr"
+        android:layout_width="135dp"
+        android:layout_height="31dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/numTxtV"
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
+        tools:ignore="MissingConstraints"
+        android:visibility="invisible"
+        android:entries="@array/days_arrays"/>
+
+    <CheckBox
+        android:id="@+id/monCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="48dp"
+        android:text="Monday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
+        android:visibility="invisible"/>
+
+    <CheckBox
+        android:id="@+id/tueCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="160dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="48dp"
+        android:text="Tuesday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn"
+        android:visibility="invisible"/>
+
+    <CheckBox
+        android:id="@+id/wedCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginTop="48dp"
+        android:text="Wednesday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
+        android:visibility="invisible"/>
+
+
+    <CheckBox
+        android:id="@+id/thuCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:text="Thursday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
+        android:visibility="invisible"/>
+
+
+    <CheckBox
+        android:id="@+id/friCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="80dp"
+        android:text="Friday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn"
+        android:visibility="invisible"/>
+
+    <CheckBox
+        android:id="@+id/satCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="210dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="80dp"
+        android:text="Saturday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
+        android:visibility="invisible"/>
+
+
+    <CheckBox
+        android:id="@+id/sunCbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="310dp"
+        android:layout_marginStart="310dp"
+        android:layout_marginTop="80dp"
+        android:text="Sunday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/monthTxtV"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:text="I want to do this on the                              every month"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn"
+        android:visibility="invisible"/>
+
+    <Spinner
+        android:id="@+id/monthSpr"
+        android:layout_width="85dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="60dp"
+        android:entries="@array/date_array"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn"
+        android:visibility="invisible"/>
+
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="395dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thuCbx" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="395dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="128dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thuCbx" />
+
+    <TextView
+        android:id="@+id/timeTxtV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="15dp"
+        android:text="Time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/remainderSwitch"
+        android:visibility="invisible"/>
+
+    <Spinner
+        android:id="@+id/hourSpr"
+        android:layout_width="120dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/timeTxtV"
+        app:layout_constraintTop_toBottomOf="@+id/remainderSwitch"
+        android:entries="@array/hours_array"
+        android:visibility="invisible"/>
+
+    <Spinner
+        android:id="@+id/minSpr"
+        android:layout_width="120dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/hourSpr"
+        app:layout_constraintTop_toBottomOf="@+id/remainderSwitch"
+        android:entries="@array/min_array"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/colontxtV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="20dp"
+        android:text=":"
+        app:layout_constraintEnd_toStartOf="@+id/minSpr"
+        app:layout_constraintStart_toEndOf="@+id/hourSpr"
+        app:layout_constraintTop_toBottomOf="@+id/remainderSwitch"
+        android:visibility="invisible"/>
 
 
 </android.support.constraint.ConstraintLayout>
