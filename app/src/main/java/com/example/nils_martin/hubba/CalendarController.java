@@ -18,7 +18,6 @@ public class CalendarController extends Activity {
     TextView dateText, activityTxtV;
     CalendarView calendarView;
     ImageButton backBtn;
-    List<FakeHabit> fake = new ArrayList<>();
     List<Habit> habitsList = MainActivityController.habits;
     Calendar cal = Calendar.getInstance();
 
@@ -57,7 +56,7 @@ public class CalendarController extends Activity {
                 cal.set(year, month, dayOfMonth); //Set
                 cal.get(Calendar.DAY_OF_WEEK);
                 for (int i = 0; i < habitsList.size(); i++) {
-                    if(habitsList.get(i).getDayToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {
+                    if (habitsList.get(i).getDayToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {
                         stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
                         stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
                     }
@@ -65,84 +64,5 @@ public class CalendarController extends Activity {
                 activityTxtV.setText(stringBuilder.toString());    //If you have a activity at the day, this will show as a text under the calendar
             }
         });
-    }
-
-
-
-/*
-    void makeHabitRecurring(Habit habit){
-        switch (habit.getFrequency) {
-            case eachday {
-                addDays(1);
-                break;
-            } case each2day {
-                addDays(2);
-                break;
-            } case each3days {
-                addDays(3);
-                break;
-            } case each4days{
-                addDays(4);
-                break;
-            } case each5days{
-                addDays(5);
-                break;
-            } case each6days{
-                addDays(6);
-                break;
-            } case eachweek{
-                addDays(7);
-                break;
-            }break;
-        }
-    }
-
-    void addDays(int interval){
-        int times = 5;
-        int date = calendarView.getDate();
-        for(int i=0; i<times; i++){
-            addTextInCalendar(date);
-            date += interval;
-        }
-    } */
-
-
-    void makeAList () {
-        fake.add(new FakeHabit("Träning", 7, "12:00"));
-        fake.add(new FakeHabit("Lunch", 4, "14:25"));
-        fake.add(new FakeHabit("Bio", 21, "16:30"));
-        fake.add(new FakeHabit("Hundvakt", 21, "09:05"));
-    }
-}
-  /*     if (veckodagar.contains(habitsList.get(i).getDayToDo().get(j))) {
-                            stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
-                            stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
-                        }*/
-
-
-
-
-
-              /*  for (int i = 0; i < habitsList.size(); i++) {
-                    dagarPaLista = habitsList.get(i).getDayToDo();
-                    for (int j = 0; j <habitsList.get(i).getDayToDo().size(); j++) {
-
-                        if (day == habitsList.get(i).getDayToDo().get(j)) {
-                            stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
-                            stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
-                        }
-                    }
-                }*/
-
-
-class FakeHabit {
-    String name;
-    int date;
-    String time;
-
-    FakeHabit (String name, int date, String time) {
-        this.name = name;
-        this.date = date;
-        this.time = time;
     }
 }
