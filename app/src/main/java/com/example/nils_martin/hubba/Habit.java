@@ -8,6 +8,7 @@ import java.util.Observer;
 
 public class Habit extends Observable {
 
+    private HubbaModel model = HubbaModel.getInstance();
     private String title;
     private String timestamp;
     private int streak;
@@ -52,7 +53,7 @@ public class Habit extends Observable {
     public void notifyObservers(){
         for (Observer observer:observers){
             //Let's be honest, probably a code smell
-            observer.update(this,new HubbaModel().currentUser);
+            observer.update(this, model.currentUser);
         }
     }
 

@@ -5,10 +5,20 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 public class HubbaModel {
+    private static HubbaModel instance = null;
     private static ArrayList<User> users = new ArrayList<>();
-    LoginView loginView = new LoginView();
-    EditText currentUserName = loginView.getUsername();
-    User currentUser = getUser(currentUserName.toString());
+    static User currentUser;
+
+    public static HubbaModel getInstance(){
+        if(instance == null){
+            instance = new HubbaModel();
+        }
+        return instance;
+    }
+
+    private HubbaModel(){
+
+    }
 
     public User getUser(String userName){
         int index = 0;
@@ -23,6 +33,8 @@ public class HubbaModel {
         return users;
     }
     public User getCurrentUser(){return this.currentUser;}
+
+    public void setCurrentUser(User user){currentUser = user;}
 
 
     public void setUsers(ArrayList<User>users){
