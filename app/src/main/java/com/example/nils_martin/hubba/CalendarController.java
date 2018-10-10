@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/* Calendar class not finish, waiting for more functionality of a habit */
 public class CalendarController extends Activity {
 
     TextView dateText, activityTxtV;
@@ -53,10 +52,9 @@ public class CalendarController extends Activity {
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
                 stringBuilder.setLength(0);
                 stringBuilder.append("Habits:");
-                cal.set(year, month, dayOfMonth); //Set
-                cal.get(Calendar.DAY_OF_WEEK);
+                cal.set(year, month, dayOfMonth); //Take in the date from the listener and set it as "current date"
                 for (int i = 0; i < habitsList.size(); i++) {
-                    if (habitsList.get(i).getDayToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {
+                    if (habitsList.get(i).getDayToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {       //If the "current date"-day is the same as any day in the habitlist do this
                         stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
                         stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
                     }

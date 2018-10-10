@@ -22,14 +22,12 @@ public class AddHabitController extends AppCompatActivity {
     private Button save, cancel, morning, midday, evening, daily, weekly, monthly;
     private Habit createdHabit;
     CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
-    private CheckBox earlyMonthCbx, middleMonthCbx, lateMonthCbx;
-    private TextView numberOfDaysTxtV, colontxtV, timeTxtV;
-    private Spinner numberOfDaysSpr, hourSpr, minSpr;
+    private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV;
+    private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
     private Switch remainderSwitch;
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
-
 
 
     @Override
@@ -38,7 +36,6 @@ public class AddHabitController extends AppCompatActivity {
         setContentView(R.layout.activity_add_habit);
         init();
         makeAListOfDayCbx();
-        makeAListOfMonthCbx();
         update();
     }
 
@@ -59,15 +56,14 @@ public class AddHabitController extends AppCompatActivity {
         friCxb = findViewById(R.id.friCbx);
         satCxb = findViewById(R.id.satCbx);
         sunCxb = findViewById(R.id.sunCbx);
-        earlyMonthCbx = findViewById(R.id.earlyMonthCbx);
-        middleMonthCbx = findViewById(R.id.middleMonthCbx);
-        lateMonthCbx = findViewById(R.id.lateMonthCbx);
         numberOfDaysTxtV = findViewById(R.id.numTxtV);
         timeTxtV = findViewById(R.id.timeTxtV);
         colontxtV = findViewById(R.id.colontxtV);
+        monthTxtV = findViewById(R.id.monthTxtV);
         numberOfDaysSpr = findViewById(R.id.numSpr);
         hourSpr = findViewById(R.id.hourSpr);
         minSpr = findViewById(R.id.minSpr);
+        monthSpr = findViewById(R.id.monthSpr);
         remainderSwitch = findViewById(R.id.remainderSwitch);
     }
 
@@ -162,6 +158,8 @@ public class AddHabitController extends AppCompatActivity {
     private void dayVisible() {
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
+        monthTxtV.setVisibility(View.INVISIBLE);
+        monthSpr.setVisibility(View.INVISIBLE);
 
         for(int i = 0; i < cbxDayList.size(); i++) {
             cbxDayList.get(i).setVisibility(View.INVISIBLE);
@@ -170,21 +168,17 @@ public class AddHabitController extends AppCompatActivity {
         for (int i = 0; i< cbxMonthList.size(); i++) {
             cbxMonthList.get(i).setVisibility(View.INVISIBLE);
         }
-
-
     }
 
     //Set the month-checkboxes to invisible and the week attribute to visible
     private void weekVisible () {
         numberOfDaysTxtV.setVisibility(View.VISIBLE);
         numberOfDaysSpr.setVisibility(View.VISIBLE);
+        monthSpr.setVisibility(View.INVISIBLE);
+        monthTxtV.setVisibility(View.INVISIBLE);
 
         for(int i = 0; i < cbxDayList.size(); i++) {
             cbxDayList.get(i).setVisibility(View.VISIBLE);
-        }
-
-        for (int i = 0; i< cbxMonthList.size(); i++) {
-            cbxMonthList.get(i).setVisibility(View.INVISIBLE);
         }
     }
 
@@ -192,13 +186,11 @@ public class AddHabitController extends AppCompatActivity {
     private void monthVisible () {
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
+        monthTxtV.setVisibility(View.VISIBLE);
+        monthSpr.setVisibility(View.VISIBLE);
 
         for(int i = 0; i < cbxDayList.size(); i++) {
             cbxDayList.get(i).setVisibility(View.INVISIBLE);
-        }
-
-        for (int i = 0; i< cbxMonthList.size(); i++) {
-            cbxMonthList.get(i).setVisibility(View.VISIBLE);
         }
     }
 
@@ -210,12 +202,6 @@ public class AddHabitController extends AppCompatActivity {
         cbxDayList.add(thuCxb);
         cbxDayList.add(friCxb);
         cbxDayList.add(satCxb);
-    }
-
-    private void makeAListOfMonthCbx () {
-        cbxMonthList.add(earlyMonthCbx);
-        cbxMonthList.add(middleMonthCbx);
-        cbxMonthList.add(lateMonthCbx);
     }
 
     //Making a list of the week days
