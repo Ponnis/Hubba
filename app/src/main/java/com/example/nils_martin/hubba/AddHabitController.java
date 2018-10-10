@@ -31,7 +31,7 @@ public class AddHabitController extends AppCompatActivity {
     List<Integer> calendarDaysList = new ArrayList<>();
 
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -221,10 +221,20 @@ public class AddHabitController extends AppCompatActivity {
     //Making a list of the week days
     private void makeCalendarDaysList () {
 
-        for (int i = 0; i < cbxDayList.size(); i++) {
-           if(cbxDayList.get(i).isChecked()) {
-               calendarDaysList.add(i+1);
-           }
+        //Put every day in a list, when the frequency is dayly
+        if(createdHabit.getFrequency() == Frequency.DAILY) {
+            for (int i = 0; i < 7; i++) {
+                calendarDaysList.add(i+1);
+            }
+        }
+
+        //Put the day that is click, when the frequency is weekly
+        if(createdHabit.getFrequency() == Frequency.WEEKLY) {
+            for (int i = 0; i < cbxDayList.size(); i++) {
+                if (cbxDayList.get(i).isChecked()) {
+                    calendarDaysList.add(i + 1);
+                }
+            }
         }
     }
 
