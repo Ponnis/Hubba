@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginView extends AppCompatActivity{
+    HubbaModel model = HubbaModel.getInstance();
     private EditText Username;
     private EditText Password;
     private Button NewUser;
@@ -57,6 +58,7 @@ public class LoginView extends AppCompatActivity{
                 if(user.getPassword().equals(Password.getText().toString())){
                     Intent intent = new Intent(LoginView.this, MainActivityController.class);
                     startActivity(intent);
+                    model.setCurrentUser(user);
                 }
             }
         }
