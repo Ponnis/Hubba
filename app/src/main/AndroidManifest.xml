@@ -28,4 +28,5 @@
         <activity android:name=".MenuHabitsVM"/>
     </application>
 
+
 </manifest>

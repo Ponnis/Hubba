@@ -55,7 +55,6 @@ public class Habit extends Observable {
             //Let's be honest, probably a code smell
             observer.update(this, model.getCurrentUser());
         }
-
     }
 
     public void upStreak(Habit habit){

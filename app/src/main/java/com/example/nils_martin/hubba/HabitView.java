@@ -1,7 +1,9 @@
 package com.example.nils_martin.hubba;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,7 +26,7 @@ public class HabitView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habit_view);
 
-        habit = MainActivityController.selectedHabit;
+        habit = MainActivityController.openHabit;
         initFindView();
         init(habit);
     }

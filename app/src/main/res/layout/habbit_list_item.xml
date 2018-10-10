@@ -1,21 +1,17 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/habit_list_item"
+<android.support.constraint.ConstraintLayout    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/habbit_list_layout"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    tools:context=".HabitListItem">
+    android:layout_width="match_parent">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/habitListItemTextView"
+        android:id="@+id/habbit_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/FontColor"
-        android:clickable="true"
-        android:onClick="onClick"
         tools:padding="10dp"
         tools:text="Fisk" />
 </android.support.constraint.ConstraintLayout>
