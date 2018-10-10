@@ -53,7 +53,7 @@ public class Habit extends Observable {
     public void notifyObservers(){
         for (Observer observer:observers){
             //Let's be honest, probably a code smell
-            observer.update(this, model.getCurrentUser());
+            observer.update(this, model.currentUser);
         }
     }
 
