@@ -103,7 +103,7 @@ public class Habit extends Observable {
         this.dayToDo = dayToDo;
     }
 
-    public List<Integer> getDayToDo () {
+    public List<Integer> getDaysToDo() {
         return dayToDo;
     }
 

@@ -69,14 +69,14 @@ public class CalendarController extends Activity {
 
 
     public void monthStringBuilder(int i, int dayOfMonth) {
-        if (habitsList.get(i).getDayToDo().contains(dayOfMonth)) {
+        if (habitsList.get(i).getDaysToDo().contains(dayOfMonth)) {
             stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
             stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
         }
     }
 
     private void dayAndWeekStringBuilder(int i) {
-        if (habitsList.get(i).getDayToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {       //If the "current date"-day is the same as any day in the habitlist do this
+        if (habitsList.get(i).getDaysToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {       //If the "current date"-day is the same as any day in the habitlist do this
             stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
             stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
             }
