@@ -5,9 +5,11 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 public class Habit extends Observable {
 
+    private HubbaModel model = HubbaModel.getInstance();
     private String title;
     private String timestamp;
     private int streak;
@@ -19,6 +21,8 @@ public class Habit extends Observable {
     private ImageView image;
     private State STATE;
     private List<Integer> dayToDo = new ArrayList<>();
+    private ArrayList<Observer> observers;
+
 
     public Habit(String title){
         this.title = title;
@@ -40,7 +44,9 @@ public class Habit extends Observable {
     public enum State{
         MORNING,
         MIDDAY,
-        EVENING
+        EVENING,
+        NIGHT,
+        DONE
     }
 
     public int getGoalDays(Habit habit){
@@ -54,6 +60,13 @@ public class Habit extends Observable {
     public void setDone(Habit habit){
         habit.isDone = !habit.isDone;
         upStreak(this);
+
+    }
+    public void notifyObservers(){
+        for (Observer observer:observers){
+            //Let's be honest, probably a code smell
+            observer.update(this, model.currentUser);
+        }
     }
 
     public void upStreak(Habit habit){

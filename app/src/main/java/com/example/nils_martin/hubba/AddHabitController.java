@@ -115,7 +115,7 @@ public class AddHabitController extends AppCompatActivity {
                 createdHabit.setSTATE(Habit.State.EVENING);
             }
         });
-
+        
         daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
