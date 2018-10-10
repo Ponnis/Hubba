@@ -44,6 +44,7 @@ public class MainActivityController extends AppCompatActivity {
 
         initView();
         initList();
+        loadData();
     }
 
     @Override
@@ -51,7 +52,12 @@ public class MainActivityController extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
-
+    @Override
+    protected void onPause() {
+        saveData();
+        super.onPause();
+    }
+//saves the userlist
     private void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -60,6 +66,7 @@ public class MainActivityController extends AppCompatActivity {
         editor.putString("userlist",json);
         editor.apply();
     }
+    //loads the userlist into hubbamodels userlist
     private void loadData(){
         SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
         Gson gson = new Gson();
