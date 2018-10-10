@@ -403,6 +403,27 @@
         app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
         android:visibility="invisible"/>
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:text="I want to do this on the                              every month"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="85dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="60dp"
+        android:entries="@array/date_array"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weeklyBtn" />
 
 
 </android.support.constraint.ConstraintLayout>
