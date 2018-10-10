@@ -76,7 +76,7 @@ public class Habit extends Observable {
 
     public void setFrequency(Frequency frequency){ this.frequency = frequency; }
 
-    public Frequency getFrequency(Habit habit) {return habit.frequency;}
+    public Frequency getFrequency() {return frequency;}
 
 
 }
