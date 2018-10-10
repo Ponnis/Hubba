@@ -1,6 +1,7 @@
 package com.example.nils_martin.hubba;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +50,25 @@ public class MainActivityController extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+    }
+
+    private void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json =gson.toJson(HubbaModel.getUsers());
+        editor.putString("userlist",json);
+        editor.apply();
+    }
+    private void loadData(){
+        SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("userlist",null);
+        Type type = new TypeToken<ArrayList<User>>(){}.getType();
+        HubbaModel.getInstance().setUsers(gson.fromJson(json,type));
+         if(HubbaModel.getUsers() == null){
+             HubbaModel.getInstance().setUsers(new ArrayList<>());
+         }
     }
 
 
