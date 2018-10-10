@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class HubbaModel {
     private static HubbaModel instance = null;
     private static ArrayList<User> users = new ArrayList<>();
-    static User currentUser;
+    private User currentUser;
 
     public static HubbaModel getInstance(){
         if(instance == null){
@@ -34,7 +34,7 @@ public class HubbaModel {
     }
     public User getCurrentUser(){return this.currentUser;}
 
-    public void setCurrentUser(User user){currentUser = user;}
+    public void setCurrentUser(User user){this.currentUser = user;}
 
 
     public void setUsers(ArrayList<User>users){
