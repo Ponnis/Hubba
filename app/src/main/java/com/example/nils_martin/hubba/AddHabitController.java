@@ -31,7 +31,7 @@ public class AddHabitController extends AppCompatActivity {
     List<Integer> calendarDaysList = new ArrayList<>();
 
 
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +74,7 @@ public class AddHabitController extends AppCompatActivity {
     public void update() {
 
         createdHabit = new Habit("", calendarDaysList);
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +120,7 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dayVisible();
+                createdHabit.setFrequency(Frequency.DAILY);
             }
         });
 
@@ -126,6 +128,7 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 weekVisible();
+                createdHabit.setFrequency(Frequency.WEEKLY);
             }
         });
 
@@ -133,6 +136,7 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 monthVisible();
+                createdHabit.setFrequency(Frequency.MONTHLY);
             }
         });
 

@@ -93,4 +93,10 @@ public class Habit extends Observable {
     public List<Integer> getDayToDo () {
         return dayToDo;
     }
+
+    public void setFrequency(Frequency frequency){ this.frequency = frequency; }
+
+    public Frequency getFrequency() {return frequency;}
+
+
 }
