@@ -215,12 +215,16 @@ public class AddHabitController extends AppCompatActivity {
         }
 
         //Put the day that is click, when the frequency is weekly
-        if(createdHabit.getFrequency() == Frequency.WEEKLY) {
+        else if(createdHabit.getFrequency() == Frequency.WEEKLY) {
             for (int i = 0; i < cbxDayList.size(); i++) {
                 if (cbxDayList.get(i).isChecked()) {
                     calendarDaysList.add(i + 1);
                 }
             }
+        }
+
+        else if(createdHabit.getFrequency() == Frequency.MONTHLY) {
+            calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
         }
     }
 
