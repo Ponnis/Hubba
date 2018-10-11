@@ -8,7 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Habit extends Observable {
-
+//TODO IMPLEMENT HERITAGE
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
     private String timestamp;
@@ -23,6 +23,7 @@ public class Habit extends Observable {
     private ImageView image;
     private State STATE;
     private List<Integer> dayToDo = new ArrayList<>();
+    //FIX OBSERVER PATTERN, TALK TO LI ABOUT THIS
     private ArrayList<Observer> observers;
     private ArrayList<Group> groupObservers;
 
@@ -65,6 +66,8 @@ public class Habit extends Observable {
         upStreak(this);
 
     }
+    //TODO make two different events?
+    //Icke modulärt som fan att ändra beteende med en boolean, använd states, delegering eller arv. FRÅGA FORREST/GOOGLE
     public void notifyObservers(){
         if (this.isGroupHabit){
             //TODO update the userGroup

@@ -1,6 +1,7 @@
 package com.example.nils_martin.hubba;
 
-public abstract class AchievementFactory {
+public class AchievementFactory {
+    //USER SHOULD NOT HAVE FACTORY(?), MODEL SHOULD (?)
 
     public static Achievement getAchievement(AchievementType achievementType, String title) {
         if (achievementType == AchievementType.NumOHabitsAchievement) {

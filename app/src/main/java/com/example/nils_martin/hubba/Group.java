@@ -17,6 +17,7 @@ public class  Group {
     private void isHabitComplete(){
 
     }
+    //TODO SPLIT THIS SHIT LIKE A CAKE ON YOUR BIRTHDAY
     private void update(){
         for(User user : usersInGroup){
             ArrayList<Habit>tempHabits = user.getHabits();

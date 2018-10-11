@@ -3,7 +3,7 @@ package com.example.nils_martin.hubba;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-
+//CLEAN HUBBAMODEL FROM STATIC
 public class HubbaModel {
     private static HubbaModel instance = null;
     private static ArrayList<User> users = new ArrayList<>();
