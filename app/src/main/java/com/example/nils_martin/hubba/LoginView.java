@@ -16,7 +16,7 @@ public class LoginView extends AppCompatActivity{
     private EditText Password;
     private Button NewUser;
     private Button Login;
-    private List<User> userList = HubbaModel.getUsers();
+    private List<User> userList = model.getUsers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

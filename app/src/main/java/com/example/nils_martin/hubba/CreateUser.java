@@ -8,6 +8,7 @@ import android.widget.EditText;
 
  public class CreateUser extends AppCompatActivity {
 
+    HubbaModel model = HubbaModel.getInstance();
     private EditText NewUsername;
     private EditText NewEmail;
     private EditText NewPassword;
@@ -34,7 +35,7 @@ import android.widget.EditText;
 
     private void addUser(){
         User user = new User(NewUsername.getText().toString(), NewEmail.getText().toString(), NewPassword.getText().toString());
-        HubbaModel.addUser(user);
+        model.addUser(user);
         finish();
     }
 }

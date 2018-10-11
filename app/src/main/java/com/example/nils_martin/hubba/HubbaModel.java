@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class HubbaModel {
     private static HubbaModel instance = null;
-    private static ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
     static User currentUser;
 
     public static HubbaModel getInstance(){
@@ -27,7 +27,8 @@ public class HubbaModel {
         }
         return users.get(index);
     }
-    public static ArrayList<User> getUsers(){
+
+    public ArrayList<User> getUsers(){
         return users;
     }
 
@@ -35,11 +36,11 @@ public class HubbaModel {
 
     public void setCurrentUser(User user){currentUser = user;}
 
-
     public void setUsers(ArrayList<User> users){
         this.users = users;
     }
-    public static void addUser(User user){
+
+    public void addUser(User user){
         getUsers().add(user);
     }
 }

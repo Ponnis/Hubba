@@ -21,6 +21,7 @@ import java.util.List;
 
 
 public class MainActivityController extends AppCompatActivity {
+    HubbaModel model = HubbaModel.getInstance();
     private LinearLayout morningLinearLayout;
     private LinearLayout middayLinearLayout;
     private LinearLayout eveningLinearLayout;
@@ -62,7 +63,7 @@ public class MainActivityController extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json =gson.toJson(HubbaModel.getUsers());
+        String json =gson.toJson(model.getUsers());
         editor.putString("userlist",json);
         editor.apply();
     }
@@ -73,7 +74,7 @@ public class MainActivityController extends AppCompatActivity {
         String json = sharedPreferences.getString("userlist",null);
         Type type = new TypeToken<ArrayList<User>>(){}.getType();
         HubbaModel.getInstance().setUsers((ArrayList<User>)gson.fromJson(json,type));
-         if(HubbaModel.getUsers() == null){
+         if(model.getUsers() == null){
              HubbaModel.getInstance().setUsers(new ArrayList<User>());
          }
     }
