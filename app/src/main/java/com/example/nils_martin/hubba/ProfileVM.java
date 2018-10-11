@@ -7,7 +7,7 @@ import android.widget.TextView;
 public class ProfileVM extends AppCompatActivity {
 
     HubbaModel model = HubbaModel.getInstance();
-    User user = new User("name", "email", "password");
+    User user;
     TextView userName;
     TextView userEmail;
 
