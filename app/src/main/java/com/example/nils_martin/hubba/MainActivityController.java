@@ -72,9 +72,9 @@ public class MainActivityController extends AppCompatActivity {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("userlist",null);
         Type type = new TypeToken<ArrayList<User>>(){}.getType();
-        HubbaModel.getInstance().setUsers(gson.fromJson(json,type));
+        HubbaModel.getInstance().setUsers((ArrayList<User>)gson.fromJson(json,type));
          if(HubbaModel.getUsers() == null){
-             HubbaModel.getInstance().setUsers(new ArrayList<>());
+             HubbaModel.getInstance().setUsers(new ArrayList<User>());
          }
     }
 
