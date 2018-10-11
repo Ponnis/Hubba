@@ -1,6 +1,7 @@
 package com.example.nils_martin.hubba;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -11,11 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivityController extends AppCompatActivity {
+    HubbaModel model = HubbaModel.getInstance();
     private LinearLayout morningLinearLayout;
     private LinearLayout middayLinearLayout;
     private LinearLayout eveningLinearLayout;
@@ -39,12 +42,39 @@ public class MainActivityController extends AppCompatActivity {
 
         initView();
         initList();
+        loadData();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onPause() {
+        saveData();
+        super.onPause();
+    }
+//saves the userlist
+    private void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json =gson.toJson(model.getUsers());
+        editor.putString("userlist",json);
+        editor.apply();
+    }
+    //loads the userlist into hubbamodels userlist
+    private void loadData(){
+        SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("userlist",null);
+        Type type = new TypeToken<ArrayList<User>>(){}.getType();
+        HubbaModel.getInstance().setUsers((ArrayList<User>)gson.fromJson(json,type));
+         if(model.getUsers() == null){
+             HubbaModel.getInstance().setUsers(new ArrayList<User>());
+         }
     }
 
 

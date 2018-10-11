@@ -42,11 +42,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="36dp"
         android:text="New Habit"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -94,7 +95,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Enter habit name"
         android:inputType="textUri|textPersonName"
@@ -389,6 +389,23 @@
         app:layout_constraintStart_toEndOf="@+id/hourSpr"
         app:layout_constraintTop_toBottomOf="@+id/remainderSwitch"
         android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/wrongMesTxtV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="177dp"
+        android:layout_marginLeft="175dp"
+        android:layout_marginRight="177dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

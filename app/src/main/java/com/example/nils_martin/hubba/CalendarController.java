@@ -8,7 +8,6 @@ import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -53,14 +52,34 @@ public class CalendarController extends Activity {
                 stringBuilder.setLength(0);
                 stringBuilder.append("Habits:");
                 cal.set(year, month, dayOfMonth); //Take in the date from the listener and set it as "current date"
+
+
                 for (int i = 0; i < habitsList.size(); i++) {
-                    if (habitsList.get(i).getDayToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {       //If the "current date"-day is the same as any day in the habitlist do this
-                        stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
-                        stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
+                    if(habitsList.get(i).getFREQUENCY() == Habit.Frequency.MONTHLY) {         //Month contains the date in a different form than day and week.
+                        monthStringBuilder(i, dayOfMonth);
+                    }
+                    else {
+                        dayAndWeekStringBuilder(i);
                     }
                 }
                 activityTxtV.setText(stringBuilder.toString());    //If you have a activity at the day, this will show as a text under the calendar
             }
         });
+    }
+
+
+    public void monthStringBuilder(int i, int dayOfMonth) {
+        if (habitsList.get(i).getDaysToDo().contains(dayOfMonth)) {
+            stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
+            stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
+        }
+    }
+
+    private void dayAndWeekStringBuilder(int i) {
+        if (habitsList.get(i).getDaysToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {       //If the "current date"-day is the same as any day in the habitlist do this
+            stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
+            stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
+            }
+
     }
 }

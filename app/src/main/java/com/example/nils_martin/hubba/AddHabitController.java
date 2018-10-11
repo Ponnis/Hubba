@@ -1,6 +1,7 @@
 package com.example.nils_martin.hubba;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +20,10 @@ public class AddHabitController extends AppCompatActivity {
 
 
     private EditText habitName;
-    private Button save, cancel, morning, midday, evening, daily, weekly, monthly;
+    private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
     private Habit createdHabit;
     CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
-    private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV;
+    private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
     private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
     private Switch remainderSwitch;
     private List<CheckBox> cbxDayList = new ArrayList<>();
@@ -46,6 +47,7 @@ public class AddHabitController extends AppCompatActivity {
         morning = findViewById(R.id.morningBtn);
         midday = findViewById(R.id.middayBtn);
         evening = findViewById(R.id.eveningBtn);
+        night = findViewById(R.id.nightBtn);
         daily = findViewById(R.id.dailyBtn);
         weekly = findViewById(R.id.weeklyBtn);
         monthly = findViewById(R.id.monthlyBtn);
@@ -60,6 +62,7 @@ public class AddHabitController extends AppCompatActivity {
         timeTxtV = findViewById(R.id.timeTxtV);
         colontxtV = findViewById(R.id.colontxtV);
         monthTxtV = findViewById(R.id.monthTxtV);
+        wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
         numberOfDaysSpr = findViewById(R.id.numSpr);
         hourSpr = findViewById(R.id.hourSpr);
         minSpr = findViewById(R.id.minSpr);
@@ -75,10 +78,19 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 makeCalendarDaysList();
+
                 createdHabit.setTitle(habitName.getText().toString());
                 createdHabit.setDayToDo(calendarDaysList);
-                MainActivityController.habits.add(createdHabit);
-                endActivity();
+
+                if(checkIfAllIsFillIn()) {
+                    MainActivityController.habits.add(createdHabit);
+                    endActivity();
+                }
+                else {
+                    wrongMesTxtV.setVisibility(View.VISIBLE);
+                    wrongMesTxtV.setText("YOU MUST FILL IN EVERYTHING!");
+                    wrongMesTxtV.setTextColor(Color.RED);
+                }
             }
         });
 
@@ -89,11 +101,11 @@ public class AddHabitController extends AppCompatActivity {
             }
         });
 
-
         morning.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
                 createdHabit.setSTATE(Habit.State.MORNING);
             }
         });
@@ -101,6 +113,7 @@ public class AddHabitController extends AppCompatActivity {
         midday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
                 createdHabit.setSTATE(Habit.State.MIDDAY);
             }
         });
@@ -108,37 +121,50 @@ public class AddHabitController extends AppCompatActivity {
         evening.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
                 createdHabit.setSTATE(Habit.State.EVENING);
+            }
+        });
+
+        night.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                createdHabit.setSTATE(Habit.State.NIGHT);
             }
         });
         
         daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
                 dayVisible();
-                createdHabit.setFrequency(Frequency.DAILY);
+                createdHabit.setFREQUENCY(Habit.Frequency.DAILY);
             }
         });
 
         weekly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
                 weekVisible();
-                createdHabit.setFrequency(Frequency.WEEKLY);
+                createdHabit.setFREQUENCY(Habit.Frequency.WEEKLY);
             }
         });
 
         monthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
                 monthVisible();
-                createdHabit.setFrequency(Frequency.MONTHLY);
+                createdHabit.setFREQUENCY(Habit.Frequency.MONTHLY);
             }
         });
 
         remainderSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
                 if(remainderSwitch.isChecked()) {
                     hourSpr.setVisibility(View.VISIBLE);
                     minSpr.setVisibility(View.VISIBLE);
@@ -194,6 +220,7 @@ public class AddHabitController extends AppCompatActivity {
         }
     }
 
+    //Make a list of the day-checkboxes because is easier to treat them as an group than individual.
     private void makeAListOfDayCbx() {
         cbxDayList.add(sunCxb);
         cbxDayList.add(monCxb);
@@ -207,21 +234,43 @@ public class AddHabitController extends AppCompatActivity {
     //Making a list of the week days
     private void makeCalendarDaysList () {
 
+        calendarDaysList.clear();
+
         //Put every day in a list, when the frequency is dayly
-        if(createdHabit.getFrequency() == Frequency.DAILY) {
+        if(createdHabit.getFREQUENCY() == Habit.Frequency.DAILY) {
             for (int i = 0; i < 7; i++) {
                 calendarDaysList.add(i+1);
             }
         }
 
         //Put the day that is click, when the frequency is weekly
-        if(createdHabit.getFrequency() == Frequency.WEEKLY) {
+        else if(createdHabit.getFREQUENCY() == Habit.Frequency.WEEKLY) {
             for (int i = 0; i < cbxDayList.size(); i++) {
                 if (cbxDayList.get(i).isChecked()) {
                     calendarDaysList.add(i + 1);
                 }
             }
         }
+
+        else if(createdHabit.getFREQUENCY() == Habit.Frequency.MONTHLY) {
+            calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
+        }
+    }
+
+    private boolean checkIfAllIsFillIn () {
+        if(createdHabit.getFREQUENCY() == null) {
+            return false;
+        }
+        if(createdHabit.getSTATE() == null) {
+            return false;
+        }
+        if(createdHabit.getDaysToDo().size() == 0) {
+            return false;
+        }
+        if (createdHabit.getTitle(createdHabit).equals("")) {
+            return false;
+        }
+        return true;
     }
 
     private void endActivity(){
