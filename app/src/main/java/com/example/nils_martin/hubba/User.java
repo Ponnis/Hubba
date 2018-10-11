@@ -1,5 +1,6 @@
 package com.example.nils_martin.hubba;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -9,8 +10,8 @@ public class User implements Observer{
     private String name;
     private String email;
     private String password;
-    private List<Habit> habits;
-    private List<Achievement> achievements;
+    private ArrayList<Habit> habits;
+    private ArrayList<Achievement> achievements;
     private boolean allowNotifications;
     private boolean soundOn;
 
@@ -19,7 +20,7 @@ public class User implements Observer{
         this.email = email;
         this.password = password;
     }
-    public List getHabits(){
+    public ArrayList getHabits(){
         return habits;
     }
     public List getAchievements(){

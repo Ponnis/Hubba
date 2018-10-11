@@ -12,16 +12,19 @@ public class Habit extends Observable {
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
     private String timestamp;
+    private int groupmembersDoneCount;
     private int streak;
     private int goalDays;
     private Frequency frequency;
     private boolean isDone;
     private boolean isActive;
+    private boolean isGroupHabit;
     private boolean enableNofitications;
     private ImageView image;
     private State STATE;
     private List<Integer> dayToDo = new ArrayList<>();
     private ArrayList<Observer> observers;
+    private ArrayList<Group> groupObservers;
 
 
     public Habit(String title){
@@ -63,8 +66,10 @@ public class Habit extends Observable {
 
     }
     public void notifyObservers(){
+        if (this.isGroupHabit){
+            //TODO update the userGroup
+        }
         for (Observer observer:observers){
-            //Let's be honest, probably a code smell
             observer.update(this, model.currentUser);
         }
     }
@@ -74,7 +79,13 @@ public class Habit extends Observable {
             habit.streak++;
         }
     }
-
+    public Boolean getIsDone(){return isDone;
+    }
+    public boolean getIsGroupHabit(){return isGroupHabit;
+    }
+    public void upGroupMembersDoneCount(){
+        groupmembersDoneCount++;
+    }
     public void setActive(Habit habit){
         habit.isActive = !habit.isActive;
     }
