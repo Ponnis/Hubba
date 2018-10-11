@@ -139,7 +139,7 @@ public class AddHabitController extends AppCompatActivity {
             public void onClick(View v) {
                 wrongMesTxtV.setVisibility(View.INVISIBLE);
                 dayVisible();
-                createdHabit.setFrequency(Frequency.DAILY);
+                createdHabit.setFREQUENCY(Habit.Frequency.DAILY);
             }
         });
 
@@ -148,7 +148,7 @@ public class AddHabitController extends AppCompatActivity {
             public void onClick(View v) {
                 wrongMesTxtV.setVisibility(View.INVISIBLE);
                 weekVisible();
-                createdHabit.setFrequency(Frequency.WEEKLY);
+                createdHabit.setFREQUENCY(Habit.Frequency.WEEKLY);
             }
         });
 
@@ -157,7 +157,7 @@ public class AddHabitController extends AppCompatActivity {
             public void onClick(View v) {
                 wrongMesTxtV.setVisibility(View.INVISIBLE);
                 monthVisible();
-                createdHabit.setFrequency(Frequency.MONTHLY);
+                createdHabit.setFREQUENCY(Habit.Frequency.MONTHLY);
             }
         });
 
@@ -237,14 +237,14 @@ public class AddHabitController extends AppCompatActivity {
         calendarDaysList.clear();
 
         //Put every day in a list, when the frequency is dayly
-        if(createdHabit.getFrequency() == Frequency.DAILY) {
+        if(createdHabit.getFREQUENCY() == Habit.Frequency.DAILY) {
             for (int i = 0; i < 7; i++) {
                 calendarDaysList.add(i+1);
             }
         }
 
         //Put the day that is click, when the frequency is weekly
-        else if(createdHabit.getFrequency() == Frequency.WEEKLY) {
+        else if(createdHabit.getFREQUENCY() == Habit.Frequency.WEEKLY) {
             for (int i = 0; i < cbxDayList.size(); i++) {
                 if (cbxDayList.get(i).isChecked()) {
                     calendarDaysList.add(i + 1);
@@ -252,13 +252,13 @@ public class AddHabitController extends AppCompatActivity {
             }
         }
 
-        else if(createdHabit.getFrequency() == Frequency.MONTHLY) {
+        else if(createdHabit.getFREQUENCY() == Habit.Frequency.MONTHLY) {
             calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
         }
     }
 
     private boolean checkIfAllIsFillIn () {
-        if(createdHabit.getFrequency() == null) {
+        if(createdHabit.getFREQUENCY() == null) {
             return false;
         }
         if(createdHabit.getSTATE() == null) {

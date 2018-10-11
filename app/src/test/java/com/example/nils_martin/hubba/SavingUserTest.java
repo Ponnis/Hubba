@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotNull;
 public class SavingUserTest {
     @Test
     public void testSaveUser(){
-        HubbaModel.getInstance().setUsers(new ArrayList<>());
+        HubbaModel.getInstance().setUsers(new ArrayList<User>());
         HubbaModel.addUser(new User("123","123","123"));
         MainActivityController mainActivityController = new MainActivityController();
         mainActivityController.onPause();

@@ -55,7 +55,7 @@ public class CalendarController extends Activity {
 
 
                 for (int i = 0; i < habitsList.size(); i++) {
-                    if(habitsList.get(i).getFrequency() == Frequency.MONTHLY) {         //Month contains the date in a different form than day and week.
+                    if(habitsList.get(i).getFREQUENCY() == Habit.Frequency.MONTHLY) {         //Month contains the date in a different form than day and week.
                         monthStringBuilder(i, dayOfMonth);
                     }
                     else {
