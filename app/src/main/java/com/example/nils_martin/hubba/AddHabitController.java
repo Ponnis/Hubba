@@ -20,7 +20,7 @@ public class AddHabitController extends AppCompatActivity {
 
 
     private EditText habitName;
-    private Button save, cancel, morning, midday, evening, daily, weekly, monthly;
+    private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
     private Habit createdHabit;
     CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
     private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
@@ -47,6 +47,7 @@ public class AddHabitController extends AppCompatActivity {
         morning = findViewById(R.id.morningBtn);
         midday = findViewById(R.id.middayBtn);
         evening = findViewById(R.id.eveningBtn);
+        night = findViewById(R.id.nightBtn);
         daily = findViewById(R.id.dailyBtn);
         weekly = findViewById(R.id.weeklyBtn);
         monthly = findViewById(R.id.monthlyBtn);
@@ -122,6 +123,14 @@ public class AddHabitController extends AppCompatActivity {
             public void onClick(View v) {
                 wrongMesTxtV.setVisibility(View.INVISIBLE);
                 createdHabit.setSTATE(Habit.State.EVENING);
+            }
+        });
+
+        night.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                createdHabit.setSTATE(Habit.State.NIGHT);
             }
         });
         
@@ -252,13 +261,13 @@ public class AddHabitController extends AppCompatActivity {
         if(createdHabit.getFrequency() == null) {
             return false;
         }
-        else if(createdHabit.getSTATE() == null) {
+        if(createdHabit.getSTATE() == null) {
             return false;
         }
-        else if(createdHabit.getDaysToDo().size() == 0) {
+        if(createdHabit.getDaysToDo().size() == 0) {
             return false;
         }
-        else if (createdHabit.getTitle(createdHabit).equals("")) {
+        if (createdHabit.getTitle(createdHabit).equals("")) {
             return false;
         }
         return true;
