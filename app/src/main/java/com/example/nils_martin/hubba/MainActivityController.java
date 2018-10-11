@@ -67,6 +67,7 @@ public class MainActivityController extends AppCompatActivity {
         editor.putString("userlist",json);
         editor.apply();
     }
+    private void testMethod(){}
     //loads the userlist into hubbamodels userlist
     private void loadData(){
         SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
