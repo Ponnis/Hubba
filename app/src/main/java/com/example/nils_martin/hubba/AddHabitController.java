@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,10 +89,6 @@ public class AddHabitController extends AppCompatActivity {
                     wrongMesTxtV.setVisibility(View.VISIBLE);
                     wrongMesTxtV.setText("YOU MUST FILL IN EVERYTHING!");
                     wrongMesTxtV.setTextColor(Color.RED);
-                    Toast toast = Toast.makeText(getApplicationContext(), "This is my Toast message!",
-                            Toast.LENGTH_LONG);
-                    toast.setGravity(50,250,1000);
-                    toast.show();
                 }
             }
         });
