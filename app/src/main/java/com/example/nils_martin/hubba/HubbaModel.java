@@ -1,7 +1,5 @@
 package com.example.nils_martin.hubba;
 
-import android.widget.EditText;
-
 import java.util.ArrayList;
 
 public class HubbaModel {
