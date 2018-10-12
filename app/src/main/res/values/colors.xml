@@ -6,4 +6,6 @@
     <color name="BackgroundColor">#000000</color>
     <color name="FontColor">#97CF4D</color>
     <color name="Grey">#6f6f6f</color>
+    <color name="Red">#FF0000</color>
+
 </resources>

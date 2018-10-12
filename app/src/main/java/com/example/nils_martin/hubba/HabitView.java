@@ -50,7 +50,7 @@ public class HabitView extends AppCompatActivity {
 
         habitTitleTextView.setText(habit.getTitle(habit));
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
-        frequencyTextView.setText(toLowerCase(habit.getFrequency().toString()));
+        frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()));
         //reminderTimeTextView
         streakDaysTextView.setText(String.valueOf(habit.getStreak(habit)) + " days");
     }
