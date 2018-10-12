@@ -1,4 +1,4 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Switch;
+
+import com.example.nils_martin.hubba.R;
 
 public class SettingsVM extends AppCompatActivity {
     //we have to get the active user from the main class " Hubba ".
@@ -57,7 +59,7 @@ public class SettingsVM extends AppCompatActivity {
                 if(isUserInteracting) {
                     switch (chosenOne) {
                         case ELITE:
-                            setTheme(R.style.Elite);
+                            setTheme(R.style.AppTheme);
                             restartApp();
                     }
 

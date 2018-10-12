@@ -1,6 +1,4 @@
-package com.example.nils_martin.hubba;
-
-import android.widget.ImageView;
+package com.example.nils_martin.hubba.Model;
 
 public class StreakAchievement extends Achievement {
 

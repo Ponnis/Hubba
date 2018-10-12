@@ -1,4 +1,4 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,15 +8,19 @@ import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.Frequency;
+import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.R;
+
 import java.util.Calendar;
 import java.util.List;
 
-public class CalendarController extends Activity {
+public class CalendarVM extends Activity {
 
     TextView dateText, activityTxtV;
     CalendarView calendarView;
     ImageButton backBtn;
-    List<Habit> habitsList = MainActivityController.habits;
+    List<Habit> habitsList = MainActivityVM.habits;
     Calendar cal = Calendar.getInstance();
 
     @Override
@@ -41,7 +45,7 @@ public class CalendarController extends Activity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CalendarController.this, MainActivityController.class);
+                Intent intent = new Intent(CalendarVM.this, MainActivityVM.class);
                 startActivity(intent);
             }
         });
@@ -55,7 +59,7 @@ public class CalendarController extends Activity {
 
 
                 for (int i = 0; i < habitsList.size(); i++) {
-                    if(habitsList.get(i).getFREQUENCY() == Habit.Frequency.MONTHLY) {         //Month contains the date in a different form than day and week.
+                    if(habitsList.get(i).getFREQUENCY() == Frequency.MONTHLY) {         //Month contains the date in a different form than day and week.
                         monthStringBuilder(i, dayOfMonth);
                     }
                     else {

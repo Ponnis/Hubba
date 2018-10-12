@@ -1,4 +1,4 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
+import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.User;
+import com.example.nils_martin.hubba.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -20,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivityController extends AppCompatActivity {
+public class MainActivityVM extends AppCompatActivity {
     HubbaModel model = HubbaModel.getInstance();
     private LinearLayout morningLinearLayout;
     private LinearLayout middayLinearLayout;
@@ -91,7 +95,7 @@ public class MainActivityController extends AppCompatActivity {
 
                 findOpenHabit(position, habitMorningString);
 
-                Intent intent = new Intent(MainActivityController.this, HabitView.class);
+                Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
                 startActivity(intent);
 
             }
@@ -102,7 +106,7 @@ public class MainActivityController extends AppCompatActivity {
             public void onClick(View v) {
                // findOpenHabit(pos, habitEveningString);
 
-                Intent intent = new Intent(MainActivityController.this, HabitView.class);
+                Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
                 startActivity(intent);
             }
         });
@@ -113,7 +117,7 @@ public class MainActivityController extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 findOpenHabit(position, habitEveningString);
 
-                Intent intent = new Intent(MainActivityController.this, HabitView.class);
+                Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
                 startActivity(intent);
             }
         });*/
@@ -133,21 +137,21 @@ public class MainActivityController extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivityController.this, AddHabitController.class);
+                Intent intent = new Intent(MainActivityVM.this, AddHabitVM.class);
                 startActivity(intent);
             }
         });
         calendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivityController.this, CalendarController.class);
+                Intent intent = new Intent(MainActivityVM.this, CalendarVM.class);
                 startActivity(intent);
             }
         });
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivityController.this, MenuVM.class);
+                Intent intent = new Intent(MainActivityVM.this, MenuVM.class);
                 startActivity(intent);
             }
         });

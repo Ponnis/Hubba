@@ -1,10 +1,11 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.ViewModel;
 
+import com.example.nils_martin.hubba.Model.Frequency;
+import com.example.nils_martin.hubba.Model.Habit;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,10 +15,13 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.State;
+import com.example.nils_martin.hubba.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddHabitController extends AppCompatActivity {
+public class AddHabitVM extends AppCompatActivity {
 
 
     private EditText habitName;
@@ -96,7 +100,7 @@ public class AddHabitController extends AppCompatActivity {
                 createdHabit.setDayToDo(calendarDaysList);
 
                 if(checkIfAllIsFillIn()) {
-                    MainActivityController.habits.add(createdHabit);
+                    MainActivityVM.habits.add(createdHabit);
                     endActivity();
                 }
                 else {
@@ -119,7 +123,7 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 takeAwayWrongMessage();
-                createdHabit.setSTATE(Habit.State.MORNING);
+                createdHabit.setSTATE(State.MORNING);
             }
         });
 
@@ -127,7 +131,7 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 takeAwayWrongMessage();
-                createdHabit.setSTATE(Habit.State.MIDDAY);
+                createdHabit.setSTATE(State.MIDDAY);
             }
         });
 
@@ -135,7 +139,7 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 takeAwayWrongMessage();
-                createdHabit.setSTATE(Habit.State.EVENING);
+                createdHabit.setSTATE(State.EVENING);
             }
         });
 
@@ -143,7 +147,7 @@ public class AddHabitController extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 takeAwayWrongMessage();
-                createdHabit.setSTATE(Habit.State.NIGHT);
+                createdHabit.setSTATE(State.NIGHT);
             }
         });
         
@@ -152,7 +156,7 @@ public class AddHabitController extends AppCompatActivity {
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 dayVisible();
-                createdHabit.setFREQUENCY(Habit.Frequency.DAILY);
+                createdHabit.setFREQUENCY(Frequency.DAILY);
             }
         });
 
@@ -161,7 +165,7 @@ public class AddHabitController extends AppCompatActivity {
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 weekVisible();
-                createdHabit.setFREQUENCY(Habit.Frequency.WEEKLY);
+                createdHabit.setFREQUENCY(Frequency.WEEKLY);
             }
         });
 
@@ -170,7 +174,7 @@ public class AddHabitController extends AppCompatActivity {
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 monthVisible();
-                createdHabit.setFREQUENCY(Habit.Frequency.MONTHLY);
+                createdHabit.setFREQUENCY(Frequency.MONTHLY);
             }
         });
 
@@ -250,14 +254,14 @@ public class AddHabitController extends AppCompatActivity {
         calendarDaysList.clear();
 
         //Put every day in a list, when the frequency is dayly
-        if(createdHabit.getFREQUENCY() == Habit.Frequency.DAILY) {
+        if(createdHabit.getFREQUENCY() == Frequency.DAILY) {
             for (int i = 0; i < 7; i++) {
                 calendarDaysList.add(i+1);
             }
         }
 
         //Put the day that is click, when the frequency is weekly
-        else if(createdHabit.getFREQUENCY() == Habit.Frequency.WEEKLY) {
+        else if(createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
             for (int i = 0; i < cbxDayList.size(); i++) {
                 if (cbxDayList.get(i).isChecked()) {
                     calendarDaysList.add(i + 1);
@@ -265,7 +269,7 @@ public class AddHabitController extends AppCompatActivity {
             }
         }
 
-        else if(createdHabit.getFREQUENCY() == Habit.Frequency.MONTHLY) {
+        else if(createdHabit.getFREQUENCY() == Frequency.MONTHLY) {
             calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
         }
     }
@@ -277,7 +281,7 @@ public class AddHabitController extends AppCompatActivity {
                 frequencyWrongImgV.setVisibility(View.VISIBLE);
             }
 
-            if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Habit.Frequency.WEEKLY) {
+            if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
                 weekWrongImgV.setVisibility(View.VISIBLE);
             }
 
@@ -303,7 +307,7 @@ public class AddHabitController extends AppCompatActivity {
 
     private void endActivity(){
         finish();
-        Intent intent = new Intent(AddHabitController.this, MainActivityController.class);
+        Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
         startActivity(intent);
     }
 }
