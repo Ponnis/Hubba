@@ -1,5 +1,8 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.app.AlarmManager;
+import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,19 +25,24 @@ public class SettingsVM extends AppCompatActivity {
     Spinner moodSpinner;
 
     private boolean isUserInteracting;
-
     private enum ColorThemes{
-        ELITE,
-        PINKFLUFFY,
+        ELITE, PinkFluffy
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getApplication().getSharedPreferences("Themes", Context.MODE_PRIVATE);
+        String currentTheme = sharedPreferences.getString("nameOfHabit","DEFAULT");
+        if(currentTheme.equals(ColorThemes.ELITE.toString())){
+            setTheme(R.style.Elite);
+        }
+        else setTheme(R.style.PinkFluffy);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_settings);
         init();
-        SharedPreferences sharedPreferences = getApplication().getSharedPreferences("position", Context.MODE_PRIVATE);
-        int spinnerValue = sharedPreferences.getInt("spinnerItem", -1);
+        int spinnerValue = sharedPreferences.getInt("spinnerItem",-1);
         if(spinnerValue != -1){
             themeSpinner.setSelection(spinnerValue, true);
         }
@@ -52,17 +60,13 @@ public class SettingsVM extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ColorThemes chosenOne = (ColorThemes) themeSpinner.getSelectedItem();
                 int chosenThemePos = themeSpinner.getSelectedItemPosition();
-                SharedPreferences sharedPreferences = getApplication().getSharedPreferences("position", 0);
+                SharedPreferences sharedPreferences = getApplication().getSharedPreferences("Themes", 0);
                 SharedPreferences.Editor prefeditor = sharedPreferences.edit();
                 prefeditor.putInt("spinnerItem", chosenThemePos);
+                prefeditor.putString("nameOfHabit", chosenOne.toString());
                 prefeditor.apply();
                 if(isUserInteracting) {
-                    switch (chosenOne) {
-                        case ELITE:
-                            setTheme(R.style.AppTheme);
-                            restartApp();
-                    }
-
+                    restartApp();
                 }
             }
 
@@ -86,7 +90,7 @@ public class SettingsVM extends AppCompatActivity {
     }
     private void restartApp(){
         Intent i = new Intent(getApplicationContext(), SettingsVM.class);
-        startActivity(i);
         finish();
+        startActivity(i);
     }
 }
