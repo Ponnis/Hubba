@@ -66,9 +66,10 @@ public class Habit extends Observable {
         if (habitState.toString().equals("GroupHabit")){
             //TODO update the userGroup
         }
-        else if(habitState.toString().equals("SingleHabit"))
+        else if(habitState.toString().equals("SingleHabit")){
         for (Observer observer:observers){
             observer.update(this, model.currentUser);
+        }
         }
     }
 
