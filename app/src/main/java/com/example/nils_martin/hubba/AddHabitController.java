@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class AddHabitController extends AppCompatActivity {
     private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
     private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
     private Switch remainderSwitch;
+    private ImageView nameWrongImgV, frequencyWrongImgV, stateWrongImgV, weekWrongImgV;
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
@@ -68,11 +70,22 @@ public class AddHabitController extends AppCompatActivity {
         minSpr = findViewById(R.id.minSpr);
         monthSpr = findViewById(R.id.monthSpr);
         remainderSwitch = findViewById(R.id.remainderSwitch);
+        nameWrongImgV = findViewById(R.id.nameImgV);
+        frequencyWrongImgV = findViewById(R.id.frequencyImgV);
+        stateWrongImgV = findViewById(R.id.stateImgV);
+        weekWrongImgV = findViewById(R.id.weekImgV);
     }
 
     public void update() {
 
         createdHabit = new Habit("", calendarDaysList);
+
+        habitName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+            }
+        });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +118,7 @@ public class AddHabitController extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                takeAwayWrongMessage();
                 createdHabit.setSTATE(Habit.State.MORNING);
             }
         });
@@ -113,7 +126,7 @@ public class AddHabitController extends AppCompatActivity {
         midday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                takeAwayWrongMessage();
                 createdHabit.setSTATE(Habit.State.MIDDAY);
             }
         });
@@ -121,7 +134,7 @@ public class AddHabitController extends AppCompatActivity {
         evening.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                takeAwayWrongMessage();
                 createdHabit.setSTATE(Habit.State.EVENING);
             }
         });
@@ -129,7 +142,7 @@ public class AddHabitController extends AppCompatActivity {
         night.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                takeAwayWrongMessage();
                 createdHabit.setSTATE(Habit.State.NIGHT);
             }
         });
@@ -137,7 +150,7 @@ public class AddHabitController extends AppCompatActivity {
         daily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                takeAwayWrongMessage();
                 dayVisible();
                 createdHabit.setFREQUENCY(Habit.Frequency.DAILY);
             }
@@ -146,7 +159,7 @@ public class AddHabitController extends AppCompatActivity {
         weekly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                takeAwayWrongMessage();
                 weekVisible();
                 createdHabit.setFREQUENCY(Habit.Frequency.WEEKLY);
             }
@@ -155,7 +168,7 @@ public class AddHabitController extends AppCompatActivity {
         monthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                takeAwayWrongMessage();
                 monthVisible();
                 createdHabit.setFREQUENCY(Habit.Frequency.MONTHLY);
             }
@@ -164,7 +177,7 @@ public class AddHabitController extends AppCompatActivity {
         remainderSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wrongMesTxtV.setVisibility(View.INVISIBLE);
+                takeAwayWrongMessage();
                 if(remainderSwitch.isChecked()) {
                     hourSpr.setVisibility(View.VISIBLE);
                     minSpr.setVisibility(View.VISIBLE);
@@ -258,19 +271,34 @@ public class AddHabitController extends AppCompatActivity {
     }
 
     private boolean checkIfAllIsFillIn () {
-        if(createdHabit.getFREQUENCY() == null) {
-            return false;
-        }
-        if(createdHabit.getSTATE() == null) {
-            return false;
-        }
-        if(createdHabit.getDaysToDo().size() == 0) {
-            return false;
-        }
-        if (createdHabit.getTitle(createdHabit).equals("")) {
+        if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
+                || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle(createdHabit).equals("")) {
+            if (createdHabit.getFREQUENCY() == null) {
+                frequencyWrongImgV.setVisibility(View.VISIBLE);
+            }
+
+            if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Habit.Frequency.WEEKLY) {
+                weekWrongImgV.setVisibility(View.VISIBLE);
+            }
+
+            if (createdHabit.getSTATE() == null) {
+                stateWrongImgV.setVisibility(View.VISIBLE);
+            }
+            if (createdHabit.getTitle(createdHabit).equals("")) {
+                nameWrongImgV.setVisibility(View.VISIBLE);
+            }
             return false;
         }
         return true;
+    }
+
+    private void takeAwayWrongMessage () {
+        wrongMesTxtV.setVisibility(View.INVISIBLE);
+        frequencyWrongImgV.setVisibility(View.INVISIBLE);
+        nameWrongImgV.setVisibility(View.INVISIBLE);
+        stateWrongImgV.setVisibility(View.INVISIBLE);
+        weekWrongImgV.setVisibility(View.INVISIBLE);
+
     }
 
     private void endActivity(){
