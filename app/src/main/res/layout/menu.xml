@@ -10,7 +10,6 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="?attr/homeAsUpIndicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
@@ -26,7 +25,6 @@
         android:layout_marginRight="8dp"
         android:gravity="center"
         android:text="Menu"
-        android:textColor="@android:color/holo_green_dark"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +56,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Profile"
-                android:backgroundTint="#ffffff"
                 android:textAllCaps="false"
                 android:textSize="24sp" />
 
@@ -68,7 +65,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Settings"
-                android:backgroundTint="#ffffff"
                 android:textAllCaps="false"
                 android:textSize="24sp"/>
 
@@ -78,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Habits"
-                android:backgroundTint="#ffffff"
                 android:textAllCaps="false"
                 android:textSize="24sp"/>
 
@@ -88,7 +83,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Groups"
-                android:backgroundTint="#ffffff"
                 android:textAllCaps="false"
                 android:textSize="24sp"/>
 
@@ -98,7 +92,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Help"
-                android:backgroundTint="#ffffff"
                 android:textAllCaps="false"
                 android:textSize="24sp"/>
 
@@ -114,12 +107,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/holo_red_light"
         android:text="Log Out"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="?attr/LoggOutColorBackground"
+        android:textColor="?attr/LoggOutColorText"
+    />
 
 </android.support.constraint.ConstraintLayout>

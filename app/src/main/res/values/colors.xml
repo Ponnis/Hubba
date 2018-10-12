@@ -3,7 +3,20 @@
     <color name="colorPrimary">#6f6f6f</color>
     <color name="colorPrimaryDark">#2f2f2f</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="BackgroundColor">#000000</color>
-    <color name="FontColor">#97cf4d</color>
+    <color name="White">#ffffff</color>
+
+
+    <color name="EliteBackgroundColor">#000000</color>
+    <color name="EliteSeckondBackground">#555555</color>
+    <color name="EliteFontColor">#97cf4d</color>
     <color name="Grey">#6f6f6f</color>
+
+    <color name="PinkFluffyBackground">#ff3eda</color>
+    <color name="PinkFluffySeckondBackground">#943982</color>
+    <color name="PinkFluffyButtonPresed">#46a3c7</color>
+    <color name="PinkFluffyFont">#FFFFFF</color>
+    <color name="PinkFluffyAccent">#eff67a</color>
+
+
+
 </resources>

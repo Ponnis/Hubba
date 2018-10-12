@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds">
+        <attr name="LoggOutColorBackground" format="color"/>
+        <attr name="LoggOutColorText" format="color"/>
+        <attr name="GradeStartNEndColor" format="color"/>
+        <attr name="GradeCenterColor" format="color"/>
+
+
+    </declare-styleable>
+    
+</resources>
