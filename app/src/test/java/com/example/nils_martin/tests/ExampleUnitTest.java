@@ -1,10 +1,7 @@
 package com.example.nils_martin.tests;
 
-import com.example.nils_martin.hubba.Achievement;
-import com.example.nils_martin.hubba.Habit;
-import com.example.nils_martin.hubba.NumOfHabitsAchievement;
-import com.example.nils_martin.hubba.StreakAchievement;
-import com.example.nils_martin.hubba.User;
+import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.User;
 
 import org.junit.Test;
 

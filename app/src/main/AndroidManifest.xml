@@ -8,25 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Elite">
 
-        <activity android:name=".CalendarController"/>
-        <activity android:name="MainActivityController"/>
 
-        <activity android:name=".LoginView">
+        <activity android:name=".ViewModel.CalendarVM"/>
+        <activity android:name=".ViewModel.MainActivityVM"/>
+
+        <activity android:name=".ViewModel.LoginVM">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".AddHabitController" />
-        <activity android:name=".CreateUser" />
-        <activity android:name=".HabitView"/>
-        <activity android:name=".MenuVM"/>
-        <activity android:name=".SettingsVM"/>
-        <activity android:name=".ProfileVM"/>
-        <activity android:name=".MenuGroupsVM"/>
-        <activity android:name=".MenuHabitsVM"/>
+        <activity android:name=".ViewModel.AddHabitVM" />
+        <activity android:name=".ViewModel.CreateUserVM" />
+        <activity android:name=".ViewModel.HabitVM"/>
+        <activity android:name=".ViewModel.MenuVM"/>
+        <activity android:name=".ViewModel.SettingsVM"/>
+        <activity android:name=".ViewModel.ProfileVM"/>
+        <activity android:name=".ViewModel.MenuGroupsVM"/>
+        <activity android:name=".ViewModel.MenuHabitsVM"/>
     </application>
 
 

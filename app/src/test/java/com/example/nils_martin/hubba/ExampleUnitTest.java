@@ -1,11 +1,10 @@
 package com.example.nils_martin.hubba;
 
-import android.widget.LinearLayout;
+import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.StreakAchievement;
+import com.example.nils_martin.hubba.Model.User;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -36,8 +35,8 @@ public class ExampleUnitTest {
     }
     /*@Test
     public void testNewUserButton(){
-    LoginView loginView = new LoginView();
-    assertTrue(LoginView.userList.isEmpty());
+    LoginVM loginView = new LoginVM();
+    assertTrue(LoginVM.userList.isEmpty());
     }*/
 
 }

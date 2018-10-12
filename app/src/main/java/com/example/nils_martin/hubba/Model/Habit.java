@@ -1,4 +1,4 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.Model;
 
 import android.widget.ImageView;
 
@@ -44,20 +44,6 @@ public class Habit extends Observable {
         this.isActive = true;
         this.enableNofitications = false;
         this.dayToDo = days;
-    }
-
-    enum State{
-        MORNING,
-        MIDDAY,
-        EVENING,
-        NIGHT,
-        DONE
-    }
-
-    enum Frequency{
-        DAILY,
-        WEEKLY,
-        MONTHLY
     }
 
     public int getGoalDays(Habit habit){

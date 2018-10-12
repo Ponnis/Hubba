@@ -1,4 +1,4 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.ArrayList;
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.User;
+import com.example.nils_martin.hubba.R;
+
 import java.util.List;
 
-public class LoginView extends AppCompatActivity{
+public class LoginVM extends AppCompatActivity{
     HubbaModel model = HubbaModel.getInstance();
     private EditText Username;
     private EditText Password;
@@ -48,7 +51,7 @@ public class LoginView extends AppCompatActivity{
     }
 
     private void newUserButton (){
-        Intent intent = new Intent(LoginView.this, CreateUser.class);
+        Intent intent = new Intent(LoginVM.this, CreateUserVM.class);
         startActivity(intent);
     }
     //Should also be in controller?
@@ -56,7 +59,7 @@ public class LoginView extends AppCompatActivity{
         for(User user: userList){
             if(user.getName().equals(Username.getText().toString())){
                 if(user.getPassword().equals(Password.getText().toString())){
-                    Intent intent = new Intent(LoginView.this, MainActivityController.class);
+                    Intent intent = new Intent(LoginVM.this, MainActivityVM.class);
                     startActivity(intent);
                     model.setCurrentUser(user);
                 }

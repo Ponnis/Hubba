@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BackgroundColor"
-    tools:context=".MainActivityController">
+    tools:context=".ViewModel.MainActivityVM">
 
     <ImageButton
         android:id="@+id/calendarBtn"
@@ -14,7 +13,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_my_calendar"
-        android:backgroundTint="@color/colorPrimaryDark"
         android:contentDescription="Calendar" />
 
     <ImageButton
@@ -24,128 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_drawer"
-        android:backgroundTint="@color/colorPrimaryDark"
         android:contentDescription="Menu"/>
-
-            <TextView
-                android:id="@+id/morningTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Morning"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ListView
-                android:id="@+id/morningListView"
-                android:layout_width="395dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/morningTextView" />
-
-            <TextView
-                android:id="@+id/middayTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Midday"
-                android:textAllCaps="false"
-                android:textSize="24sp"
-                android:typeface="sans"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/morningListView" />
-
-            <ListView
-                android:id="@+id/middayListView"
-                android:layout_width="395dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/middayTextView" />
-
-            <TextView
-                android:id="@+id/eveningTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Evening"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/middayListView" />
-
-            <ListView
-                android:id="@+id/eveningListView"
-                android:layout_width="395dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eveningTextView" />
-
-            <TextView
-                android:id="@+id/doneTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Done"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eveningListView" />
-
-            <ListView
-                android:id="@+id/doneListView"
-                android:layout_width="395dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/doneTextView" />
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addBtn"
@@ -156,7 +33,6 @@
         android:clickable="true"
         android:focusable="true"
         android:paddingBottom="253dp"
-        app:backgroundTint="@color/Grey"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_max="wrap"
@@ -183,7 +59,6 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:text="Morning"
-                android:textColor="@color/FontColor"
                 android:textSize="24sp"
                 tools:layout_editor_absoluteX="128dp"
                 tools:layout_editor_absoluteY="51dp" />
@@ -206,7 +81,6 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:text="Midday"
-                android:textColor="@color/FontColor"
                 android:textSize="24sp"
                 tools:layout_editor_absoluteX="137dp"
                 tools:layout_editor_absoluteY="185dp" />
@@ -229,7 +103,6 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:text="Evening"
-                android:textColor="@color/FontColor"
                 android:textSize="24sp"
                 tools:layout_editor_absoluteX="137dp"
                 tools:layout_editor_absoluteY="309dp" />
@@ -252,7 +125,6 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:text="Night"
-                android:textColor="@color/FontColor"
                 android:textSize="24sp"
                 tools:layout_editor_absoluteX="148dp"
                 tools:layout_editor_absoluteY="448dp" />
@@ -275,7 +147,6 @@
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:text="Done"
-                android:textColor="@color/FontColor"
                 android:textSize="24sp"
                 tools:layout_editor_absoluteX="148dp"
                 tools:layout_editor_absoluteY="448dp" />

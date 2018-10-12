@@ -1,13 +1,17 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.User;
+import com.example.nils_martin.hubba.R;
+
 public class ProfileVM extends AppCompatActivity {
 
     HubbaModel model = HubbaModel.getInstance();
-    User user = new User("name", "email", "password");
+    User user;
     TextView userName;
     TextView userEmail;
 

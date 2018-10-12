@@ -1,5 +1,8 @@
 package com.example.nils_martin.hubba;
 
+import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +21,11 @@ public class  Group {
 
     }
     //TODO SPLIT THIS SHIT LIKE A CAKE ON YOUR BIRTHDAY
-    private void update(){
+ /*   private void update(){
         for(User user : usersInGroup){
-            ArrayList<Habit>tempHabits = user.getHabits();
-            for(Habit habit : tempHabits){
-                if (habit.getIsGroupHabit()&&habit.getIsDone()){
+            List tempHabits = user.getHabits();
+            for (int i = 0; i < tempHabits.size(); i++) {
+                if (tempHabits.get(i).getIsGroupHabit()&&habit.getIsDone()){
                     habit.upGroupMembersDoneCount();
                     //TODO Add if habit is done by all
                 }
@@ -33,7 +36,7 @@ public class  Group {
     private void setHabitComplete(){}
     private void addUserToGroup(User user){
         usersInGroup.add(user);
-    }
+    }*/
 
     private List<User> getUsersInGroup(){
         return this.usersInGroup;
