@@ -41,6 +41,7 @@ public class User implements Observer{
 //TODO test the update method
     @Override
     public void update(Observable o, Object arg) {
+        checkHabitDone();
         for (Habit habit : habits){
             if(habit.getStreak(habit)%10==0){
                 achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement,habit.getStreak(habit)+" Days!"));
@@ -49,6 +50,9 @@ public class User implements Observer{
                 achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement,habits.size()+" Habits!"));
             }
         }
+    }
+
+    private void checkHabitDone() {
     }
 
 }

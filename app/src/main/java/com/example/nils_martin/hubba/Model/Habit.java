@@ -26,9 +26,6 @@ public class Habit extends Observable {
     private List<Integer> dayToDo = new ArrayList<>();
     //FIX OBSERVER PATTERN, TALK TO LI ABOUT THIS
     private ArrayList<Observer> observers;
-    private ArrayList<Group> groupObservers;
-
-
     public Habit(String title){
         this.title = title;
         this.streak = 0;
