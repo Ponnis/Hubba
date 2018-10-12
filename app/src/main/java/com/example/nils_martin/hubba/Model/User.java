@@ -11,6 +11,7 @@ public class User implements Observer{
     private String password;
     private List<Habit> habits;
     private List<Achievement> achievements;
+    private List<User> friends;
     private boolean allowNotifications;
     private boolean soundOn;
 
@@ -46,6 +47,20 @@ public class User implements Observer{
             }
             if (habits.size()%10==0){
                 achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement,habits.size()+" Habits!"));
+            }
+        }
+    }
+
+    // Adds another user to the list of friends.
+    public void addFriend(User user){
+        friends.add(user);
+    }
+
+    // Finds the friend to remove in friends list and then removes the friend.
+    public void removeFriend(User friend){
+        for(User user : friends){
+            if(user.name == friend.name) {
+                friends.remove(friend);
             }
         }
     }
