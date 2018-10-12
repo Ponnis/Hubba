@@ -10,7 +10,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Habit extends Observable {
-//TODO IMPLEMENT STATE PATTERN
+
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
     private String timestamp;
@@ -84,8 +84,6 @@ public class Habit extends Observable {
     }
     public Boolean getIsDone(){return isDone;
     }
-    public boolean getIsGroupHabit(){return isGroupHabit;
-    }
     public void upGroupMembersDoneCount(){
         groupmembersDoneCount++;
     }
@@ -96,7 +94,9 @@ public class Habit extends Observable {
     public void setNotifications(Habit habit){
         habit.enableNofitications = !habit.enableNofitications;
     }
-
+    public int getGroupmembersDoneCount(){
+        return groupmembersDoneCount;
+    }
     public Habit getHabit(){return this;}
 
     public int getStreak(Habit habit){
