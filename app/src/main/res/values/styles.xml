@@ -7,4 +7,34 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="Elite" parent="Theme.AppCompat.Light.NoActionBar" >
+        <!--  Sets color of spinner drop down  -->
+        <item name="android:colorBackground">@color/EliteBackgroundColor</item>
+        <!-- Text color obviously.. -->
+        <item name="android:textColorPrimary">@color/EliteFontColor</item>
+        <item name="android:textColor">@color/EliteFontColor</item>
+        <item name="android:textColorSecondary">@color/EliteFontColor</item>
+        <!-- colors of switches,radiobuttons etc -->
+        <item name="colorAccent">@color/EliteFontColor</item>
+        <!--  Backgrounnd color of the app -->
+        <item name="android:windowBackground">@color/EliteBackgroundColor</item>
+        <!-- Button color -->
+        <item name="android:colorButtonNormal">@color/EliteSeckondBackground</item>
+        <!--  Color of the progressbar -->
+        <item name="android:progressTint">@color/EliteFontColor</item>
+        <!-- Color of statusbar -->
+        <item name="android:statusBarColor">@color/EliteFontColor</item>
+        <!-- color of checkbox out line-->
+        <item name="android:buttonTint">@color/EliteFontColor</item>
+
+        <!-- Custom color parameters -->
+
+        <!-- color of background and text on loggout button -->
+        <item name="LoggOutColorBackground">@color/EliteFontColor</item>
+        <item name="LoggOutColorText">@color/Grey</item>
+        <!-- Color of gradient -->
+        <item name="GradeStartNEndColor">@color/EliteBackgroundColor</item>
+        <item name="GradeCenterColor">@color/EliteFontColor</item>
+    </style>
+
 </resources>

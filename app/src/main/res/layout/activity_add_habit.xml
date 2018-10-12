@@ -44,7 +44,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:text="New Habit"
-        android:textColor="@android:color/holo_green_dark"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
