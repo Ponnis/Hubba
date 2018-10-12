@@ -2,13 +2,15 @@ package com.example.nils_martin.hubba.Model;
 
 import android.widget.ImageView;
 
+import com.example.nils_martin.hubba.Group;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 public class Habit extends Observable {
-//TODO IMPLEMENT HERITAGE
+//TODO IMPLEMENT STATE PATTERN
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
     private String timestamp;
@@ -20,10 +22,11 @@ public class Habit extends Observable {
     private boolean isActive;
     private boolean isGroupHabit;
     private boolean enableNofitications;
+    private HabitState habitState;
     private ImageView image;
     private State STATE;
     private Frequency FREQUENCY;
-    private List<Integer> dayToDo = new ArrayList<>();
+    private List<Integer> dayToDo = new ArrayList<>();  
     //FIX OBSERVER PATTERN, TALK TO LI ABOUT THIS
     private ArrayList<Observer> observers;
     private ArrayList<Group> groupObservers;
@@ -49,11 +52,15 @@ public class Habit extends Observable {
     public int getGoalDays(Habit habit){
         return habit.goalDays;
     }
-
     public void setGoalDays(Habit habit, int days){
         habit.goalDays = days;
     }
-
+    public void setHabitState(HabitState habitState){
+        this.habitState = habitState;
+    }
+    public HabitState getHabitState(){
+        return this.habitState;
+    }
     public void setDone(Habit habit){
         habit.isDone = !habit.isDone;
         upStreak(this);
