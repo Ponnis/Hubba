@@ -2,8 +2,6 @@ package com.example.nils_martin.hubba.Model;
 
 import android.widget.ImageView;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
