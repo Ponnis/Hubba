@@ -20,6 +20,7 @@ public class Habit extends Observable {
     private boolean enableNofitications;
     private ImageView image;
     private State STATE;
+    private Frequency FREQUENCY;
     private List<Integer> dayToDo = new ArrayList<>();
     private ArrayList<Observer> observers;
 
@@ -41,12 +42,18 @@ public class Habit extends Observable {
         this.dayToDo = days;
     }
 
-    public enum State{
+    enum State{
         MORNING,
         MIDDAY,
         EVENING,
         NIGHT,
         DONE
+    }
+
+    enum Frequency{
+        DAILY,
+        WEEKLY,
+        MONTHLY
     }
 
     public int getGoalDays(Habit habit){
@@ -99,17 +106,27 @@ public class Habit extends Observable {
 
     public State getSTATE (){return STATE;}
 
+    /**
+     * Method to set a Frequency to the current Habit
+     * @param FREQUENCY The desired Frequency
+     */
+    public void setFREQUENCY (Frequency FREQUENCY){
+        this.FREQUENCY = FREQUENCY;
+    }
+
+    /**
+     * Method for seeing what Frequency the object is set to
+     * @return Returns the Frequency of the Habit
+     */
+    public Frequency getFREQUENCY(){
+        return FREQUENCY;
+    }
+
     public void setDayToDo (List<Integer> dayToDo) {
         this.dayToDo = dayToDo;
     }
 
-    public List<Integer> getDayToDo () {
+    public List<Integer> getDaysToDo() {
         return dayToDo;
     }
-
-    public void setFrequency(Frequency frequency){ this.frequency = frequency; }
-
-    public Frequency getFrequency() {return frequency;}
-
-
 }

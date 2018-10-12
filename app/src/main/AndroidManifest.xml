@@ -14,13 +14,13 @@
         <activity android:name=".CalendarController"/>
         <activity android:name="MainActivityController"/>
 
-        <activity android:name=".AddHabitController">
+        <activity android:name=".LoginView">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".LoginView" />
+        <activity android:name=".AddHabitController" />
         <activity android:name=".CreateUser" />
         <activity android:name=".HabitView"/>
         <activity android:name=".MenuVM"/>
