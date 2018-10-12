@@ -1,4 +1,4 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
- public class CreateUser extends AppCompatActivity {
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.User;
+import com.example.nils_martin.hubba.R;
+
+public class CreateUserVM extends AppCompatActivity {
 
     HubbaModel model = HubbaModel.getInstance();
     private EditText NewUsername;

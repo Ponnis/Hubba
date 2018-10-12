@@ -1,4 +1,4 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.ViewModel;
 
 import android.app.AlertDialog;
 import android.graphics.drawable.Drawable;

@@ -1,10 +1,6 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.Model;
 
-import android.widget.ImageView;
-
-import java.util.Observable;
-
-public class NumOfHabitsAchievement extends Achievement  {
+public class NumOfHabitsAchievement extends Achievement {
 
     static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
