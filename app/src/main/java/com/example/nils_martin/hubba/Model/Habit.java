@@ -2,7 +2,7 @@ package com.example.nils_martin.hubba.Model;
 
 import android.widget.ImageView;
 
-import com.example.nils_martin.hubba.Group;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +20,12 @@ public class Habit extends Observable {
     private Frequency frequency;
     private boolean isDone;
     private boolean isActive;
-    private boolean isGroupHabit;
     private boolean enableNofitications;
     private HabitState habitState;
     private ImageView image;
     private State STATE;
     private Frequency FREQUENCY;
-    private List<Integer> dayToDo = new ArrayList<>();  
+    private List<Integer> dayToDo = new ArrayList<>();
     //FIX OBSERVER PATTERN, TALK TO LI ABOUT THIS
     private ArrayList<Observer> observers;
     private ArrayList<Group> groupObservers;
@@ -69,9 +68,10 @@ public class Habit extends Observable {
     //TODO make two different events?
     //Icke modulärt som fan att ändra beteende med en boolean, använd states, delegering eller arv. FRÅGA FORREST/GOOGLE
     public void notifyObservers(){
-        if (this.isGroupHabit){
+        if (habitState.toString().equals("GroupHabit")){
             //TODO update the userGroup
         }
+        else if(habitState.toString().equals("SingleHabit"))
         for (Observer observer:observers){
             observer.update(this, model.currentUser);
         }
