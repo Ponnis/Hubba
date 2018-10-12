@@ -15,6 +15,7 @@ public class MenuVM extends AppCompatActivity {
     Button habitsButton;
     Button groupsButton;
     Button helpButton;
+    Button friendsButton;
     Button logOutButton;
     ImageButton backButton;
 
@@ -36,6 +37,7 @@ public class MenuVM extends AppCompatActivity {
         settingsButton = findViewById(R.id.settingsBtn);
         habitsButton = findViewById(R.id.habitsBtn);
         groupsButton = findViewById(R.id.groupsBtn);
+        friendsButton = findViewById(R.id.friendsBtn);
         helpButton = findViewById(R.id.helpBtn);
         logOutButton = findViewById(R.id.logOutButton);
 
@@ -48,6 +50,7 @@ public class MenuVM extends AppCompatActivity {
         settingsButtonOnClick();
         habitsButtonOnClick();
         groupsButtonOnClick();
+        friendsButtonOnClick();
         // helpButtonOnClick();
         logOutButtonOnClick();
 
@@ -97,6 +100,16 @@ public class MenuVM extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuVM.this, MenuGroupsVM.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void friendsButtonOnClick(){
+        friendsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuVM.this, MenuFriendsVM.class);
                 startActivity(intent);
             }
         });
