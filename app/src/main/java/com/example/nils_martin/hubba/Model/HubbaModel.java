@@ -40,16 +40,13 @@ public class HubbaModel {
         currentUser = user;
     }
 
+    public void setUsers (ArrayList < User > users) {
 
-    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
 
-        public void setUsers (ArrayList < User > users) {
-
-            this.users = users;
-        }
-
-        public void addUser (User user){
-            getUsers().add(user);
-        }
+    public void addUser (User user){
+        getUsers().add(user);
     }
 }
+
