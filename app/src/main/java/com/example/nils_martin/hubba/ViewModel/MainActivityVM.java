@@ -35,7 +35,11 @@ public class MainActivityVM extends AppCompatActivity {
     private ListView nightListView;
     private ListView doneListView;
 
-    private ArrayAdapter<String> listAdapter; // = new ArrayAdapter<String>(this, R.layout.habit_list_item);
+    private ArrayAdapter<String> morningAdapter;
+    private ArrayAdapter<String> middayAdapter;
+    private ArrayAdapter<String> eveningAdapter;
+    private ArrayAdapter<String> nightAdapter;
+    private ArrayAdapter<String> doneAdapter;
 
     public static List<Habit> habits = new ArrayList<>();
     private List<String> habitMorningString = new ArrayList<>();
@@ -139,11 +143,6 @@ public class MainActivityVM extends AppCompatActivity {
     and then populates the ListViews with corresponding habits.
     */
     private void updateLists () {
-        /*morningListView.removeAllViews();
-        clearList(middayListView);
-        clearList(eveningListView);
-        clearList(nightListView);
-        clearList(doneListView);*/
 
         for (Habit habit : habits) {
             switch (habit.getSTATE()) {
@@ -172,11 +171,35 @@ public class MainActivityVM extends AppCompatActivity {
 
         //morning = new HabitListItemVM();
         //morning.populateHabitList(habitMorningString, morningListView);
-        listAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitMorningString);
+        morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitMorningString);
         for(String string: habitMorningString){
-            listAdapter.add(string);
+            morningAdapter.add(string);
         }
-        morningListView.setAdapter(listAdapter);
+        morningListView.setAdapter(morningAdapter);
+
+        middayAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitMiddayString);
+        for(String string: habitMiddayString){
+            morningAdapter.add(string);
+        }
+        middayListView.setAdapter(middayAdapter);
+
+        eveningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitEveningString);
+        for(String string: habitEveningString){
+            eveningAdapter.add(string);
+        }
+        eveningListView.setAdapter(eveningAdapter);
+
+        nightAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitNightString);
+        for(String string: habitNightString){
+            nightAdapter.add(string);
+        }
+        nightListView.setAdapter(nightAdapter);
+
+        doneAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitDoneString);
+        for(String string: habitDoneString){
+            doneAdapter.add(string);
+        }
+        doneListView.setAdapter(doneAdapter);
     }
 
     //clicked on item
@@ -193,11 +216,6 @@ public class MainActivityVM extends AppCompatActivity {
                 setOpenHabit(habit);
             }
         }
-    }
-
-    //Clearing all Views from the LinearLayout.
-    private void clearList (ListView listView){
-        listView.removeAllViews();
     }
 
     //Loops through given list of strings and call for addItem with that string and given ListView.
