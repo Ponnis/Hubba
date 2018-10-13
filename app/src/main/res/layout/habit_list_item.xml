@@ -1,0 +1,37 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/habit_list_item"
+    tools:context=".ViewModel.MainActivityVM"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:onClick="clicked">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/listItemTextView"
+        android:layout_width="332dp"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/checkboxIsDone"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:textSize="16dp"
+        tools:padding="10dp"
+        tools:text="Fisk" />
+
+    <CheckBox
+        android:id="@+id/checkboxIsDone"
+        android:layout_width="39dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:padding="10dp" />
+</RelativeLayout>
+
