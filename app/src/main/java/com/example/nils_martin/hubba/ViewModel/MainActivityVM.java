@@ -199,7 +199,7 @@ public class MainActivityVM extends AppCompatActivity {
         //morning.populateHabitList(habitMorningString, morningListView);
 
 
-        morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitMorningString);
+        morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
         Iterator<String> iterator = habitMorningString.iterator();
         ArrayList<String> strings = new ArrayList<>();
         while(iterator.hasNext()){
