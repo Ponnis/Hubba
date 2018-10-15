@@ -9,11 +9,8 @@ public class Habit extends Observable {
 
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
-    private String timestamp;
     private int groupmembersDoneCount;
     private int streak;
-    private int goalDays;
-    private Frequency frequency;
     private boolean isDone;
     private boolean isActive;
     private boolean enableNotifications;
@@ -21,7 +18,6 @@ public class Habit extends Observable {
     private State STATE;
     private Frequency FREQUENCY;
     private List<Integer> dayToDo = new ArrayList<>();
-    //FIX OBSERVER PATTERN, TALK TO LI ABOUT THIS
     private ArrayList<Observer> observers;
     public Habit(String title){
         this.title = title;
@@ -40,12 +36,7 @@ public class Habit extends Observable {
         this.dayToDo = days;
     }
 
-    public int getGoalDays(Habit habit){
-        return habit.goalDays;
-    }
-    public void setGoalDays(Habit habit, int days){
-        habit.goalDays = days;
-    }
+
     public void setHabitTypeState(HabitTypeState habitTypeState){
         this.habitTypeState = habitTypeState;
     }
@@ -58,7 +49,6 @@ public class Habit extends Observable {
 
     }
     //TODO make two different events?
-    //Icke modulärt som fan att ändra beteende med en boolean, använd states, delegering eller arv. FRÅGA FORREST/GOOGLE
     public void notifyObservers(){
         if (habitTypeState.toString().equals("GroupHabit")){
             //TODO update the userGroup
