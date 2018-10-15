@@ -1,7 +1,5 @@
 package com.example.nils_martin.hubba.Model;
 
-import android.widget.ImageView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -18,9 +16,8 @@ public class Habit extends Observable {
     private Frequency frequency;
     private boolean isDone;
     private boolean isActive;
-    private boolean enableNofitications;
+    private boolean enableNotifications;
     private HabitTypeState habitTypeState;
-    private ImageView image;
     private State STATE;
     private Frequency FREQUENCY;
     private List<Integer> dayToDo = new ArrayList<>();
@@ -31,7 +28,7 @@ public class Habit extends Observable {
         this.streak = 0;
         this.isDone = false;
         this.isActive = true;
-        this.enableNofitications = false;
+        this.enableNotifications = false;
     }
 
     public Habit(String title, List<Integer> days) {
@@ -39,7 +36,7 @@ public class Habit extends Observable {
         this.streak = 0;
         this.isDone = false;
         this.isActive = true;
-        this.enableNofitications = false;
+        this.enableNotifications = false;
         this.dayToDo = days;
     }
 
@@ -88,7 +85,7 @@ public class Habit extends Observable {
     }
 
     public void setNotifications(Habit habit){
-        habit.enableNofitications = !habit.enableNofitications;
+        habit.enableNotifications = !habit.enableNotifications;
     }
     public int getGroupmembersDoneCount(){
         return groupmembersDoneCount;
