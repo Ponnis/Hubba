@@ -8,9 +8,9 @@ import java.util.List;
 
 public class  Group {
 
-    String groupName;
-    List<User> usersInGroup;
-    Habit habit;
+    private String groupName;
+    private List<User> usersInGroup;
+   private  Habit habit;
 
     public Group(String groupName){
         this.groupName = groupName;
