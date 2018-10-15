@@ -62,6 +62,7 @@ public class MainActivityVM extends AppCompatActivity {
         initView();
         initList();
         loadData();
+        updateLists();
     }
 
     @Override
@@ -106,7 +107,7 @@ public class MainActivityVM extends AppCompatActivity {
        morningListView = findViewById(R.id.morningListView);
        middayListView = findViewById(R.id.middayListView);
        eveningListView = findViewById(R.id.eveningListView);
-       nightListView = findViewById(R.id.eveningListView);
+       nightListView = findViewById(R.id.nightListView);
        doneListView = findViewById(R.id.doneListView);
 
         menuButton = findViewById((R.id.menuBtn));
@@ -135,7 +136,7 @@ public class MainActivityVM extends AppCompatActivity {
             }
         });
 
-        updateLists();
+        //updateLists();
     }
 
     /*
