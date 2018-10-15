@@ -53,6 +53,7 @@ public class User implements Observer{
     }
 
     private void checkHabitDone() {
+
     }
 
 }

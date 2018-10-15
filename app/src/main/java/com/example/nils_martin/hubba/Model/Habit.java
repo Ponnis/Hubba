@@ -19,7 +19,7 @@ public class Habit extends Observable {
     private boolean isDone;
     private boolean isActive;
     private boolean enableNofitications;
-    private HabitState habitState;
+    private HabitTypeState habitTypeState;
     private ImageView image;
     private State STATE;
     private Frequency FREQUENCY;
@@ -49,11 +49,11 @@ public class Habit extends Observable {
     public void setGoalDays(Habit habit, int days){
         habit.goalDays = days;
     }
-    public void setHabitState(HabitState habitState){
-        this.habitState = habitState;
+    public void setHabitTypeState(HabitTypeState habitTypeState){
+        this.habitTypeState = habitTypeState;
     }
-    public HabitState getHabitState(){
-        return this.habitState;
+    public HabitTypeState getHabitTypeState(){
+        return this.habitTypeState;
     }
     public void setDone(Habit habit){
         habit.isDone = !habit.isDone;
@@ -63,10 +63,10 @@ public class Habit extends Observable {
     //TODO make two different events?
     //Icke modulärt som fan att ändra beteende med en boolean, använd states, delegering eller arv. FRÅGA FORREST/GOOGLE
     public void notifyObservers(){
-        if (habitState.toString().equals("GroupHabit")){
+        if (habitTypeState.toString().equals("GroupHabit")){
             //TODO update the userGroup
         }
-        else if(habitState.toString().equals("SingleHabit")){
+        else if(habitTypeState.toString().equals("SingleHabit")){
         for (Observer observer:observers){
             observer.update(this, model.currentUser);
         }
