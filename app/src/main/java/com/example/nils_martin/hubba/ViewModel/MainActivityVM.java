@@ -24,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -51,8 +52,6 @@ public class MainActivityVM extends AppCompatActivity {
     private ImageButton calendarBtn;
     private ImageButton menuButton;
     public static Habit openHabit = new Habit("");
-
-    private HabitListItemVM morning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +103,12 @@ public class MainActivityVM extends AppCompatActivity {
 
     //Instantiates the different views and buttons on the MainPage.
     private void initView() {
-       morningListView = findViewById(R.id.morningListView);
-       middayListView = findViewById(R.id.middayListView);
-       eveningListView = findViewById(R.id.eveningListView);
-       nightListView = findViewById(R.id.nightListView);
-       doneListView = findViewById(R.id.doneListView);
+        morningListView = findViewById(R.id.morningListView);
+        morningListView.setScrollContainer(false);
+        middayListView = findViewById(R.id.middayListView);
+        eveningListView = findViewById(R.id.eveningListView);
+        nightListView = findViewById(R.id.nightListView);
+        doneListView = findViewById(R.id.doneListView);
 
         menuButton = findViewById((R.id.menuBtn));
         calendarBtn = findViewById(R.id.calendarBtn);
@@ -144,7 +144,7 @@ public class MainActivityVM extends AppCompatActivity {
     and then populates the ListViews with corresponding habits.
     */
     private void updateLists () {
-
+        /*
         for (Habit habit : habits) {
             switch (habit.getSTATE()) {
                 case MORNING:
@@ -164,6 +164,31 @@ public class MainActivityVM extends AppCompatActivity {
                     break;
             }
         }
+        */
+        habitMorningString.clear();
+
+        Iterator<Habit> habitIterator = habits.iterator();
+        while(habitIterator.hasNext()){
+            Habit habit = habitIterator.next();
+            switch (habit.getSTATE()) {
+                case MORNING:
+                    habitMorningString.add(habit.getTitle(habit));
+                    break;
+                case MIDDAY:
+                    habitMiddayString.add(habit.getTitle(habit));
+                    break;
+                case EVENING:
+                    habitEveningString.add(habit.getTitle(habit));
+                    break;
+                case NIGHT:
+                    habitNightString.add(habit.getTitle(habit));
+                    break;
+                case DONE:
+                    habitDoneString.add(habit.getTitle(habit));
+                    break;
+            }
+        }
+
         /*populate(habitMorningString, morningListView);
         populate(habitMiddayString, middayListView);
         populate(habitEveningString, eveningListView);
@@ -172,6 +197,23 @@ public class MainActivityVM extends AppCompatActivity {
 
         //morning = new HabitListItemVM();
         //morning.populateHabitList(habitMorningString, morningListView);
+
+
+        morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitMorningString);
+        Iterator<String> iterator = habitMorningString.iterator();
+        ArrayList<String> strings = new ArrayList<>();
+        while(iterator.hasNext()){
+            String string = iterator.next();
+            if(!string.equals(null)){
+                strings.add(string);
+            }
+        }
+        for(String string: strings) {
+            morningAdapter.add(string);
+        }
+        morningListView.setAdapter(morningAdapter);
+
+        /*
         morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView, habitMorningString);
         for(String string: habitMorningString){
             morningAdapter.add(string);
@@ -201,6 +243,7 @@ public class MainActivityVM extends AppCompatActivity {
             doneAdapter.add(string);
         }
         doneListView.setAdapter(doneAdapter);
+        */
     }
 
     //clicked on item
