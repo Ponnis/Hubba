@@ -7,7 +7,7 @@ import java.util.Observer;
 
 public class User implements Observer{
 
-    private String name;
+    private String userName;
     private String email;
     private String password;
     private ArrayList<Habit> habits;
@@ -16,7 +16,7 @@ public class User implements Observer{
     private boolean soundOn;
 
     public User (String name,String email,String password){
-        this.name = name;
+        this.userName = name;
         this.email = email;
         this.password = password;
     }
@@ -28,7 +28,7 @@ public class User implements Observer{
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     public String getEmail() {
@@ -53,6 +53,7 @@ public class User implements Observer{
     }
 
     private void checkHabitDone() {
+
     }
 
 }

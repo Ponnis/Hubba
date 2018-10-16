@@ -1,7 +1,5 @@
 package com.example.nils_martin.hubba.Model;
 
-import android.widget.ImageView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -11,27 +9,22 @@ public class Habit extends Observable {
 
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
-    private String timestamp;
     private int groupmembersDoneCount;
     private int streak;
-    private int goalDays;
-    private Frequency frequency;
     private boolean isDone;
     private boolean isActive;
-    private boolean enableNofitications;
-    private HabitState habitState;
-    private ImageView image;
+    private boolean enableNotifications;
+    private HabitTypeState habitTypeState;
     private State STATE;
     private Frequency FREQUENCY;
     private List<Integer> dayToDo = new ArrayList<>();
-    //FIX OBSERVER PATTERN, TALK TO LI ABOUT THIS
     private ArrayList<Observer> observers;
     public Habit(String title){
         this.title = title;
         this.streak = 0;
         this.isDone = false;
         this.isActive = true;
-        this.enableNofitications = false;
+        this.enableNotifications = false;
     }
 
     public Habit(String title, List<Integer> days) {
@@ -39,21 +32,16 @@ public class Habit extends Observable {
         this.streak = 0;
         this.isDone = false;
         this.isActive = true;
-        this.enableNofitications = false;
+        this.enableNotifications = false;
         this.dayToDo = days;
     }
 
-    public int getGoalDays(Habit habit){
-        return habit.goalDays;
+
+    public void setHabitTypeState(HabitTypeState habitTypeState){
+        this.habitTypeState = habitTypeState;
     }
-    public void setGoalDays(Habit habit, int days){
-        habit.goalDays = days;
-    }
-    public void setHabitState(HabitState habitState){
-        this.habitState = habitState;
-    }
-    public HabitState getHabitState(){
-        return this.habitState;
+    public HabitTypeState getHabitTypeState(){
+        return this.habitTypeState;
     }
     public void setDone(Habit habit){
         habit.isDone = !habit.isDone;
@@ -61,14 +49,13 @@ public class Habit extends Observable {
 
     }
     //TODO make two different events?
-    //Icke modulärt som fan att ändra beteende med en boolean, använd states, delegering eller arv. FRÅGA FORREST/GOOGLE
     public void notifyObservers(){
-        if (habitState.toString().equals("GroupHabit")){
+        if (habitTypeState.toString().equals("GroupHabit")){
             //TODO update the userGroup
         }
-        else if(habitState.toString().equals("SingleHabit")){
+        else if(habitTypeState.toString().equals("SingleHabit")){
         for (Observer observer:observers){
-            observer.update(this, model.currentUser);
+            observer.update(this, model.getCurrentUser());
         }
         }
     }
@@ -88,7 +75,7 @@ public class Habit extends Observable {
     }
 
     public void setNotifications(Habit habit){
-        habit.enableNofitications = !habit.enableNofitications;
+        habit.enableNotifications = !habit.enableNotifications;
     }
     public int getGroupmembersDoneCount(){
         return groupmembersDoneCount;
