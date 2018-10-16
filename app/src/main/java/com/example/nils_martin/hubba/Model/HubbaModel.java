@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class HubbaModel {
     private static HubbaModel instance = null;
     private ArrayList<User> users = new ArrayList<>();
-    static User currentUser;
+   private User currentUser;
 
     public static HubbaModel getInstance() {
         if (instance == null) {

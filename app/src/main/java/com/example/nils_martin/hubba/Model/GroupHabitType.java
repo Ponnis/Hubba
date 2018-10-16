@@ -1,8 +1,8 @@
 package com.example.nils_martin.hubba.Model;
 
-public class GroupHabitState implements HabitTypeState {
+public class GroupHabitType implements HabitTypeState {
     @Override
-    public void updateHabit(Habit habit) {
+     void update    Habit(Habit habit) {
        /* if(.isChecked){
           habit.upGroupMembersDoneCount();
         }*/
