@@ -37,6 +37,10 @@ public class CalendarVM extends Activity {
     }
 
 
+
+    /**
+     * Initialize the view.
+     */
     void init() {
         calendarView = findViewById(R.id.calendarView);
         dateText = findViewById(R.id.dateText);
@@ -44,6 +48,9 @@ public class CalendarVM extends Activity {
         backBtn = findViewById(R.id.backBtn);
     }
 
+    /**
+     * This method have all OnClickListener and update when someone click on the view.
+     */
     void Update() {
 
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,15 +84,27 @@ public class CalendarVM extends Activity {
     }
 
 
-    public void monthStringBuilder(int i, int dayOfMonth) {
+    /**
+     * This method build a text of the activity  when the frequency is month because is different
+     * then when the frequency is daily and weekly
+     * @param i - The index-number of the habit that has a activity on the clicked date
+     * @param dayOfMonth - The date of the day of the month
+     */
+    private void monthStringBuilder(int i, int dayOfMonth) {
         if (habitsList.get(i).getDaysToDo().contains(dayOfMonth)) {
             stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
             stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
         }
     }
 
+    /**
+     * This method build a text of the activity  when the frequency is daily or monthly because
+     * is different then when the frequency is monthly
+     * @param i - The index-number of the habit that has a activity on the clicked date
+     */
     private void dayAndWeekStringBuilder(int i) {
-        if (habitsList.get(i).getDaysToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {       //If the "current date"-day is the same as any day in the habitlist do this
+        //If the "current date"-day is the same as any day in the habitlist do this
+        if (habitsList.get(i).getDaysToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {
             stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
             stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
         }
