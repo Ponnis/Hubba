@@ -5,7 +5,8 @@ import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.Model.NumOfHabitsAchievement;
 import com.example.nils_martin.hubba.Model.StreakAchievement;
 
-public abstract class AchievementFactory {
+public class AchievementFactory {
+    //USER SHOULD NOT HAVE FACTORY(?), MODEL SHOULD (?)
 
     public static Achievement getAchievement(AchievementType achievementType, String title) {
         if (achievementType == AchievementType.NumOHabitsAchievement) {

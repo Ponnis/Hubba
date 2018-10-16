@@ -1,4 +1,4 @@
-package com.example.nils_martin.hubba;
+package com.example.nils_martin.hubba.Model;
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.User;
@@ -8,9 +8,9 @@ import java.util.List;
 
 public class  Group {
 
-    String groupName;
-    List<User> usersInGroup;
-    ArrayList<Habit> groupHabits;
+    private String groupName;
+    private List<User> usersInGroup;
+   private  Habit habit;
 
     public Group(String groupName){
         this.groupName = groupName;
@@ -18,28 +18,13 @@ public class  Group {
     }
 
     private void isHabitComplete(){
-
-    }
-    //TODO SPLIT THIS SHIT LIKE A CAKE ON YOUR BIRTHDAY
- /*   private void update(){
-        for(User user : usersInGroup){
-            List tempHabits = user.getHabits();
-            for (int i = 0; i < tempHabits.size(); i++) {
-                if (tempHabits.get(i).getIsGroupHabit()&&habit.getIsDone()){
-                    habit.upGroupMembersDoneCount();
-                    //TODO Add if habit is done by all
-                }
-
-            }
+        if(habit.getGroupmembersDoneCount()==usersInGroup.size()){
+            habit.setDone(habit);
         }
     }
-    private void setHabitComplete(){}
-    private void addUserToGroup(User user){
-        usersInGroup.add(user);
-    }*/
+    //TODO SPLIT THIS SHIT LIKE A CAKE ON YOUR BIRTHDAY
 
     private List<User> getUsersInGroup(){
         return this.usersInGroup;
     }
-
 }
