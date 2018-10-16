@@ -55,7 +55,7 @@ public class Habit extends Observable {
         }
         else if(habitTypeState.toString().equals("SingleHabit")){
         for (Observer observer:observers){
-            observer.update(this, model.currentUser);
+            observer.update(this, model.getCurrentUser());
         }
         }
     }

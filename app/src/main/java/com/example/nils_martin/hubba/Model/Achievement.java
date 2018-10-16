@@ -13,7 +13,7 @@ public class Achievement {
         this.title = title;
     }
     //Private so you can't create objects of superclass.
-    private Achievement(String title, String imagePath){
+    Achievement(String title, String imagePath){
         this.title = title;
         this.imagePath = imagePath;
 
