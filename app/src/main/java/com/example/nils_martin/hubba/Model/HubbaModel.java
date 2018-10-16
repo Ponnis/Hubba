@@ -31,9 +31,9 @@ public class HubbaModel {
     public ArrayList<User> getUsers() {
         return users;
     }
-
+    //Defensive copying.
     public User getCurrentUser() {
-        return this.currentUser;
+        return new User(this.currentUser.getName(), this.currentUser.getEmail(),this.currentUser.getPassword());
     }
 
     public void setCurrentUser(User user) {
