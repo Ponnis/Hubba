@@ -10,6 +10,9 @@
         <!-- Color of FloatButton on mainpage and the plus -->
         <item name="FloatButtonColor">@color/Grey</item>
         <item name="FloatImageColor">@color/White</item>
+        <!-- Color for loggout -->
+        <item name="LoggOutColorBackground">@color/Grey</item>
+        <item name="LoggOutColorText">@color/White</item>
     </style>
     <style name="Elite" parent="Theme.AppCompat.Light.NoActionBar" >
         <!--  Sets color of spinner drop down  -->
