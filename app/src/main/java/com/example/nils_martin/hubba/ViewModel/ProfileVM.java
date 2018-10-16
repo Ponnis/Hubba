@@ -2,6 +2,9 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
@@ -12,8 +15,10 @@ public class ProfileVM extends AppCompatActivity {
 
     HubbaModel model = HubbaModel.getInstance();
     User user;
-    TextView userName;
-    TextView userEmail;
+    TextView Username;
+    TextView Email;
+    ImageView ProfilePic;
+    Button ChangePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +27,23 @@ public class ProfileVM extends AppCompatActivity {
         init();
     }
 
+
+
     private void init(){
         initFindByView();
         getUserInformation();
         setUserInformaion();
+        initButtons();
+        initImage();
     }
 
-    private  void initFindByView(){
-        userName = findViewById(R.id.userNameTextView);
-        userEmail = findViewById(R.id.usersEmailTextView);
+
+
+    private void initFindByView(){
+        Username = findViewById(R.id.userNameTextView);
+        Email = findViewById(R.id.usersEmailTextView);
+        ChangePic = findViewById(R.id.changePicBtn);
+        ProfilePic = findViewById(R.id.profilePicImg);
     }
 
     private void getUserInformation(){
@@ -38,7 +51,21 @@ public class ProfileVM extends AppCompatActivity {
     }
 
     private void setUserInformaion(){
-        userName.setText(user.getName());
-        userEmail.setText(user.getEmail());
+        Username.setText(user.getName());
+        Email.setText(user.getEmail());
+    }
+
+    private void initButtons() {
+        ChangePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void initImage() {
+        //TODO
+        //ProfilePic.setImageResource(R.drawable.);
     }
 }
