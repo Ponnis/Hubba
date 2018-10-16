@@ -14,6 +14,8 @@
         <item name="android:textColorPrimary">@color/EliteFontColor</item>
         <item name="android:textColor">@color/EliteFontColor</item>
         <item name="android:textColorSecondary">@color/EliteFontColor</item>
+        <!-- inputHint Color -->
+        <item name="android:textColorHint">@color/Grey</item>
         <!--  Set color of the checkboxes and switches when it's not activted -->
         <item name="android:textColorPrimaryDisableOnly">@color/Grey</item>
         <!-- colors of switches,radiobuttons etc -->
@@ -50,6 +52,8 @@
         <item name="android:textColorPrimary">@color/PinkFluffyFont</item>
         <item name="android:textColor">@color/PinkFluffyFont</item>
         <item name="android:textColorSecondary">@color/PinkFluffyFont</item>
+        <!-- inputHint Color -->
+        <item name="android:textColorHint">@color/Grey</item>
         <!--  Set color of the checkboxes and switches when it's not activted -->
         <item name="android:textColorPrimaryDisableOnly">@color/PinkFluffyFont</item>
         <!-- colors of switches,radiobuttons etc -->
