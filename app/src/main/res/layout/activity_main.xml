@@ -95,11 +95,13 @@
                 android:layout_height="3dp"
                 android:background="@drawable/elite_gradient" />
 
-            <LinearLayout
-                android:id="@+id/morningList"
+            <ListView
+                android:id="@+id/morningListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:scrollbars="vertical"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -117,11 +119,13 @@
                 android:layout_height="3dp"
                 android:background="@drawable/elite_gradient" />
 
-            <LinearLayout
-                android:id="@+id/middayList"
+            <ListView
+                android:id="@+id/middayListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:scrollbars="none"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/textView4"
@@ -140,11 +144,13 @@
                 android:layout_height="3dp"
                 android:background="@drawable/elite_gradient" />
 
-            <LinearLayout
-                android:id="@+id/eveningList"
+            <ListView
+                android:id="@+id/eveningListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:scrollbars="none"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -162,11 +168,13 @@
                 android:layout_height="3dp"
                 android:background="@drawable/elite_gradient" />
 
-            <LinearLayout
-                android:id="@+id/NightList"
+            <ListView
+                android:id="@+id/nightListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:scrollbars="none"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/textView6"
@@ -184,11 +192,13 @@
                 android:layout_height="3dp"
                 android:background="@drawable/elite_gradient" />
 
-            <LinearLayout
-                android:id="@+id/doneList"
+            <ListView
+                android:id="@+id/doneListView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:scrollbars="none"
+                android:clickable="true"/>
 
 
         </LinearLayout>

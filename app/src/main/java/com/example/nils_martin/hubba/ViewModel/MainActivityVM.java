@@ -8,7 +8,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
@@ -22,16 +24,24 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
 public class MainActivityVM extends AppCompatActivity {
     HubbaModel model = HubbaModel.getInstance();
-    private LinearLayout morningLinearLayout;
-    private LinearLayout middayLinearLayout;
-    private LinearLayout eveningLinearLayout;
-    private LinearLayout nightLinearLayout;
-    private LinearLayout doneLinearLayout;
+    private ListView morningListView;
+    private ListView middayListView;
+    private ListView eveningListView;
+    private ListView nightListView;
+    private ListView doneListView;
+
+    private ArrayAdapter<String> morningAdapter;
+    private ArrayAdapter<String> middayAdapter;
+    private ArrayAdapter<String> eveningAdapter;
+    private ArrayAdapter<String> nightAdapter;
+    private ArrayAdapter<String> doneAdapter;
+
     public static List<Habit> habits = new ArrayList<>();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
@@ -88,48 +98,22 @@ public class MainActivityVM extends AppCompatActivity {
 
     private void initList() {
         // TODO: 2018-10-05 Implement on click listener for the LinearLayouts that fetch position
-        /*
-        morningLinearLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                findOpenHabit(position, habitMorningString);
-
-                Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
-                startActivity(intent);
-
-            }
-        });
-
-        middayLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // findOpenHabit(pos, habitEveningString);
-
-                Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
-                startActivity(intent);
-            }
-        });
-
-
-        eveningLinearLayout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                findOpenHabit(position, habitEveningString);
-
-                Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
-                startActivity(intent);
-            }
-        });*/
     }
 
     //Instantiates the different views and buttons on the MainPage.
     private void initView() {
-        morningLinearLayout = (LinearLayout) findViewById(R.id.morningList);
-        middayLinearLayout = (LinearLayout) findViewById(R.id.middayList);
-        eveningLinearLayout = (LinearLayout) findViewById(R.id.eveningList);
-        nightLinearLayout = (LinearLayout) findViewById(R.id.NightList);
-        doneLinearLayout = (LinearLayout) findViewById(R.id.doneList);
+        morningListView = findViewById(R.id.morningListView);
+        middayListView = findViewById(R.id.middayListView);
+        eveningListView = findViewById(R.id.eveningListView);
+        nightListView = findViewById(R.id.nightListView);
+        doneListView = findViewById(R.id.doneListView);
+
+        morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
+        middayAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
+        eveningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
+        nightAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
+        doneAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
+
         menuButton = findViewById((R.id.menuBtn));
         calendarBtn = findViewById(R.id.calendarBtn);
         addBtn = findViewById(R.id.addBtn);
@@ -157,24 +141,18 @@ public class MainActivityVM extends AppCompatActivity {
         });
 
         updateLists();
-
-
-
-
     }
 
     /*
-    Goes thrue the habbit list and put the string title into the correct list depending on state.
-    and then populates the Linearlayouts with corresponding habits.
+    Goes through the habit list and put the string title into the correct list depending on state.
+    and then populates the ListViews with corresponding habits.
     */
     private void updateLists () {
-        clearLayout(morningLinearLayout);
-        clearLayout(middayLinearLayout);
-        clearLayout(eveningLinearLayout);
-        clearLayout(nightLinearLayout);
-        clearLayout(doneLinearLayout);
+        clearStrings();
 
-        for (Habit habit : habits) {
+        Iterator<Habit> habitIterator = habits.iterator();
+        while(habitIterator.hasNext()){
+            Habit habit = habitIterator.next();
             switch (habit.getSTATE()) {
                 case MORNING:
                     habitMorningString.add(habit.getTitle(habit));
@@ -193,37 +171,59 @@ public class MainActivityVM extends AppCompatActivity {
                     break;
             }
         }
-        populate(habitMorningString, morningLinearLayout);
-        populate(habitMiddayString, middayLinearLayout);
-        populate(habitEveningString, eveningLinearLayout);
-        populate(habitNightString,nightLinearLayout);
-        populate(habitDoneString,doneLinearLayout);
+
+        fillLists(morningListView, morningAdapter, habitMorningString);
+        fillLists(middayListView, middayAdapter, habitMiddayString);
+        fillLists(eveningListView, eveningAdapter, habitEveningString);
+        fillLists(nightListView, nightAdapter, habitNightString);
+        fillLists(doneListView, doneAdapter, habitDoneString);
     }
 
-
-    //Clearing all Views from the LinearLayout.
-    private void clearLayout (LinearLayout layout){
-        layout.removeAllViews();
-    }
-
-    //Loops thru given list of strings and call for addItem with that string and given Linearlayout.
-    private void populate (List < String > inputList, LinearLayout linearLayout){
-        for (String string : inputList) {
-            addItem(string, linearLayout);
+    /*
+    Method to fill lists with habits by adding titles to adapters and setting to listviews
+     */
+    private void fillLists(ListView listView, ArrayAdapter<String> adapter, List<String> strings){
+        Iterator<String> iterator = strings.iterator();
+        ArrayList<String> temp = new ArrayList<>();
+        while(iterator.hasNext()){
+            String string = iterator.next();
+            if(!string.equals(null)){
+                temp.add(string);
+            }
         }
+        for(String string: temp) {
+            adapter.add(string);
+        }
+        listView.setAdapter(adapter);
     }
 
-    //A method that puts String s in an constraint layout habbit_list_item and put's that inside of the chosen Linearlayout.
-    private void addItem (String s, LinearLayout linearLayout){
-        ConstraintLayout consLayout = (ConstraintLayout) View.inflate(this, R.layout.habbit_list_item, null);
-        TextView textview = (TextView) consLayout.getViewById(R.id.habbit_list_item);
-        textview.setText(s);
-        linearLayout.addView(consLayout);
+    /*
+    method clearing all lists of strings
+     */
+    private void clearStrings(){
+        habitMorningString.clear();
+        habitMiddayString.clear();
+        habitEveningString.clear();
+        habitNightString.clear();
+        habitDoneString.clear();
     }
 
-    private void findOpenHabit ( int position, List list){
-        for (Habit habit : habits) {
-            if (list.get(position).equals(habit.getTitle(habit))) {
+    /*
+    When a list item is clicked on
+     */
+    public void clicked(View view){
+        TextView textView = findViewById(R.id.listItemTextView);
+        findHabit(textView.getText().toString());
+        Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
+        startActivity(intent);
+    }
+
+    /*
+    Find which habit is clicked on and set variable openhabit.
+     */
+    private void findHabit(String string){
+        for(Habit habit: habits){
+            if(habit.getTitle(habit).equals(string)){
                 setOpenHabit(habit);
             }
         }

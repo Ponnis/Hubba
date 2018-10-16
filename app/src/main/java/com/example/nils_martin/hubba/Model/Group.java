@@ -16,13 +16,13 @@ public class  Group {
         this.groupName = groupName;
         usersInGroup = new ArrayList<>();
     }
-
+    //Ska delegeras till GroupHabitType istället? Dock får den inte veta något om gruppen då det är uppåt
+    
     private void isHabitComplete(){
         if(habit.getGroupmembersDoneCount()==usersInGroup.size()){
             habit.setDone(habit);
         }
     }
-    //TODO SPLIT THIS SHIT LIKE A CAKE ON YOUR BIRTHDAY
 
     private List<User> getUsersInGroup(){
         return this.usersInGroup;

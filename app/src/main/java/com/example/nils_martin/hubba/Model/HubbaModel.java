@@ -1,7 +1,7 @@
 package com.example.nils_martin.hubba.Model;
 
 import java.util.ArrayList;
-//CLEAN HUBBAMODEL FROM STATIC
+
 public class HubbaModel {
     private static HubbaModel instance = null;
     private ArrayList<User> users = new ArrayList<>();

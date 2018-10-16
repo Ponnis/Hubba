@@ -87,6 +87,15 @@
                 android:textSize="24sp"/>
 
             <Button
+                android:id="@+id/friendsBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Friends"
+                android:textAllCaps="false"
+                android:textSize="24sp"/>
+
+            <Button
                 android:id="@+id/helpBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
