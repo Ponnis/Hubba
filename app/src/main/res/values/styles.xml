@@ -26,6 +26,9 @@
         <item name="android:progressTint">@color/EliteFontColor</item>
         <!-- Color of statusbar -->
         <item name="android:statusBarColor">@color/EliteFontColor</item>
+        <!-- color of checkbox out line-->
+        <item name="android:buttonTint">@color/EliteFontColor</item>
+
         <item name="android:colorPrimary">@color/EliteSeckondBackground</item>
         <item name="android:textSelectHandleLeft">@color/Grey</item>
         <item name="android:textSelectHandleRight">@color/EliteFontColor</item>
