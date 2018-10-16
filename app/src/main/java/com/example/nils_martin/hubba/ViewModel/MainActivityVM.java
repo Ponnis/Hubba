@@ -75,7 +75,9 @@ public class MainActivityVM extends AppCompatActivity {
         super.onPause();
     }
 
-    //saves the userlist
+    /**
+     *saves the userlist
+     */
     private void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -84,7 +86,10 @@ public class MainActivityVM extends AppCompatActivity {
         editor.putString("userlist",json);
         editor.apply();
     }
-    //loads the userlist into hubbamodels userlist
+
+    /**
+     * loads the userlist into hubbamodels userlist
+     */
     private void loadData(){
         SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
         Gson gson = new Gson();
@@ -100,7 +105,9 @@ public class MainActivityVM extends AppCompatActivity {
         // TODO: 2018-10-05 Implement on click listener for the LinearLayouts that fetch position
     }
 
-    //Instantiates the different views and buttons on the MainPage.
+    /**
+     * Instantiates the different views and buttons on the MainPage.
+     */
     private void initView() {
         morningListView = findViewById(R.id.morningListView);
         middayListView = findViewById(R.id.middayListView);
@@ -143,7 +150,7 @@ public class MainActivityVM extends AppCompatActivity {
         updateLists();
     }
 
-    /*
+    /**
     Goes through the habit list and put the string title into the correct list depending on state.
     and then populates the ListViews with corresponding habits.
     */
@@ -179,7 +186,7 @@ public class MainActivityVM extends AppCompatActivity {
         fillLists(doneListView, doneAdapter, habitDoneString);
     }
 
-    /*
+    /**
     Method to fill lists with habits by adding titles to adapters and setting to listviews
      */
     private void fillLists(ListView listView, ArrayAdapter<String> adapter, List<String> strings){
@@ -197,7 +204,7 @@ public class MainActivityVM extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    /*
+    /**
     method clearing all lists of strings
      */
     private void clearStrings(){
@@ -208,7 +215,7 @@ public class MainActivityVM extends AppCompatActivity {
         habitDoneString.clear();
     }
 
-    /*
+    /**
     When a list item is clicked on
      */
     public void clicked(View view){
@@ -218,7 +225,7 @@ public class MainActivityVM extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*
+    /**
     Find which habit is clicked on and set variable openhabit.
      */
     private void findHabit(String string){
