@@ -1,5 +1,9 @@
 package com.example.nils_martin.hubba.Model;
 
+import android.graphics.Paint;
+
+import com.example.nils_martin.hubba.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -24,18 +28,30 @@ public class User implements Observer, Friend {
         this.email = email;
         this.password = password;
         this.theme = Themes.STANDARD;
+        this.themeObservers = new ArrayList<>();
     }
     public void setTheme(Themes theme){
         this.theme = theme;
         notifyThemeObservers(themeObservers);
 
     }
-    public Themes getTheme(){
-        return theme;
+    public int getTheme(){
+        int returntheme = 0;
+        switch (theme){
+            case ELITE:
+                returntheme = R.style.Elite;
+                break;
+            case STANDARD:
+                returntheme = R.style.Standard;
+                break;
+            case PINKFLUFFY:
+                returntheme = R.style.PinkFluffy;
+                break;
+        }
+        return returntheme;
     }
     private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers){
         for (ThemableObserver theme: themeObservers) {
-            theme.updateTheme(this.theme);
             theme.recreateActivity();
         }
     }

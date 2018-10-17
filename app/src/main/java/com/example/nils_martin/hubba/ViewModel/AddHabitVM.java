@@ -15,13 +15,15 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.State;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddHabitVM extends AppCompatActivity {
+public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
 
     private EditText habitName;
@@ -35,10 +37,12 @@ public class AddHabitVM extends AppCompatActivity {
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
+    HubbaModel model = HubbaModel.getInstance();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(model.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
         init();
@@ -330,5 +334,10 @@ public class AddHabitVM extends AppCompatActivity {
         finish();
         Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

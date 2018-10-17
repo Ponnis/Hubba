@@ -44,7 +44,7 @@ public class HubbaModel {
 
         this.users = users;
     }
-    public Themes getTheme(){
+    public int getTheme(){
         return currentUser.getTheme();
     }
     public void setTheme(Themes theme){

@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
-public class MenuVM extends AppCompatActivity {
+public class MenuVM extends AppCompatActivity implements ThemableObserver {
     Button profileButton;
     Button settingsButton;
     Button habitsButton;
@@ -18,12 +20,15 @@ public class MenuVM extends AppCompatActivity {
     Button helpButton;
     Button logOutButton;
     ImageButton backButton;
+    HubbaModel model = HubbaModel.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(model.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         init();
+        model.addThemeListener(this);
     }
 
     private void init(){
@@ -133,5 +138,10 @@ public class MenuVM extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

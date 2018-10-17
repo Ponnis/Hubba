@@ -34,18 +34,7 @@ public class SettingsVM extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getApplication().getSharedPreferences("Themes", Context.MODE_PRIVATE);
         String currentTheme = sharedPreferences.getString("nameOfHabit","DEFAULT");
-        if(currentTheme.equals(Themes.ELITE.toString())){
-            setTheme(R.style.Elite);
-            model.setTheme(Themes.ELITE);
-        }
-        else if(currentTheme.equals(Themes.STANDARD.toString())){
-          setTheme(R.style.Standard);
-          model.setTheme(Themes.STANDARD);
-        }
-        else{
-            setTheme(R.style.PinkFluffy);
-            model.setTheme(Themes.ELITE);
-        }
+        setTheme(model.getTheme());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_settings);
@@ -67,6 +56,7 @@ public class SettingsVM extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Themes chosenOne = (Themes) themeSpinner.getSelectedItem();
+                model.setTheme(chosenOne);
                 int chosenThemePos = themeSpinner.getSelectedItemPosition();
                 SharedPreferences sharedPreferences = getApplication().getSharedPreferences("Themes", 0);
                 SharedPreferences.Editor prefeditor = sharedPreferences.edit();

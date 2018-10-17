@@ -62,14 +62,16 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Themes currentTheme = model.getTheme();
-        updateTheme(currentTheme);
+        int currentTheme = model.getTheme();
+        setTheme(currentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initView();
         initList();
         loadData();
+        System.out.println(model);
+
         model.addThemeListener(this);
     }
 
@@ -260,20 +262,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         this.openHabit = habit;
     }
 
-    @Override
-    public void updateTheme(Themes theme) {
-        switch (theme){
-            case ELITE:
-                setTheme(R.style.Elite);
-                break;
-            case STANDARD:
-                setTheme(R.style.Standard);
-                break;
-            case PINKFLUFFY:
-                setTheme(R.style.PinkFluffy);
-                break;
-        }
-    }
+
     public void recreateActivity(){recreate();}
 
 }
