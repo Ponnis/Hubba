@@ -35,7 +35,7 @@ public class ExampleUnitTest {
     @Test
     public void testUpStreak() {
         Habit habit = new Habit("test");
-        habit.setDone(habit);
+        habit.setDone();
         assertTrue(habit.getStreak(habit) == 1);
     }
 }
