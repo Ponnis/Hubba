@@ -54,8 +54,8 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ImageButton menuButton;
     public static Habit openHabit = new Habit("");
 
-    private int listItemHeight;
-    private int dividerHeight;
+    private int listItemHeight = 80;
+    private int dividerHeight = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,6 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         setContentView(R.layout.activity_main);
 
         initView();
-        initList();
         loadData();
         System.out.println(model);
 
@@ -108,11 +107,6 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
          if(model.getUsers() == null){
              HubbaModel.getInstance().setUsers(new ArrayList<User>());
          }
-    }
-
-    private void initList() {
-        // TODO: 2018-10-05 Implement on click listener for the LinearLayouts that fetch position
-
     }
 
     /**
@@ -232,6 +226,12 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         habitDoneString.clear();
     }
 
+    /**
+     * methods to adjust height of listviews depending on number of items
+     * in list
+     * @param listView
+     * @param strings
+     */
     private void adjustListHeight(ListView listView, List<String> strings){
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = calculateHeight(strings);
@@ -239,6 +239,11 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         listView.requestLayout();
     }
 
+    /**
+     * method to calculate height and return int 
+     * @param strings
+     * @return int
+     */
     private int calculateHeight(List<String> strings){
         int num = strings.size();
         int height = listItemHeight*(num +1)+ dividerHeight*num;
