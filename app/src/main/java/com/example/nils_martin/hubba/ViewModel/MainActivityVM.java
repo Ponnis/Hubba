@@ -43,6 +43,7 @@ public class MainActivityVM extends AppCompatActivity {
     private ArrayAdapter<String> doneAdapter;
 
     public static List<Habit> habits = new ArrayList<>();
+    private List<Habit> habits2 = HubbaModel.getInstance().getCurrentUser().getHabits();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
@@ -125,6 +126,7 @@ public class MainActivityVM extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         calendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +134,7 @@ public class MainActivityVM extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,9 +153,10 @@ public class MainActivityVM extends AppCompatActivity {
     private void updateLists () {
         clearStrings();
 
-        Iterator<Habit> habitIterator = habits.iterator();
-        while(habitIterator.hasNext()){
-            Habit habit = habitIterator.next();
+     //   Iterator<Habit> habitIterator = habits.iterator();
+        Iterator<Habit> habit2Iterator = habits2.iterator();
+        while(habit2Iterator.hasNext()){
+            Habit habit = habit2Iterator.next();
             switch (habit.getSTATE()) {
                 case MORNING:
                     habitMorningString.add(habit.getTitle(habit));
@@ -222,7 +226,7 @@ public class MainActivityVM extends AppCompatActivity {
     Find which habit is clicked on and set variable openhabit.
      */
     private void findHabit(String string){
-        for(Habit habit: habits){
+        for(Habit habit: habits2){
             if(habit.getTitle(habit).equals(string)){
                 setOpenHabit(habit);
             }

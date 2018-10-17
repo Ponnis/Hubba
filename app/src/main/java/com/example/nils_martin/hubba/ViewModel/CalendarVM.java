@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.R;
 
 import java.util.Calendar;
@@ -20,7 +21,8 @@ public class CalendarVM extends Activity {
     private TextView dateText, activityTxtV;
     private CalendarView calendarView;
     private ImageButton backBtn;
-    private List<Habit> habitsList = MainActivityVM.habits;
+   // private List<Habit> habitsList = MainActivityVM.habits;
+    private List<Habit> habitsList = HubbaModel.getInstance().getCurrentUser().getHabits();
     private Calendar cal = Calendar.getInstance();
     private int currentMonth = cal.get(Calendar.MONTH) + 1;
     private int currentYear = cal.get(Calendar.YEAR);
@@ -65,21 +67,7 @@ public class CalendarVM extends Activity {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
                 setActivityTxtV(year, month, dayOfMonth);
-       /*         stringBuilder.setLength(0);
-                stringBuilder.append("Habits:");
-                cal.set(year, month, dayOfMonth); //Take in the date from the listener and set it as "current date"
-
-
-                for (int i = 0; i < habitsList.size(); i++) {
-                    if(habitsList.get(i).getFREQUENCY() == Frequency.MONTHLY) {         //Month contains the date in a different form than day and week.
-                        monthStringBuilder(i, dayOfMonth);
-                    }
-                    else {
-                        dayAndWeekStringBuilder(i);
-                    }
-                }
-                activityTxtV.setText(stringBuilder.toString());    //If you have a activity at the day, this will show as a text under the calendar
-         */   }
+            }
         });
     }
 

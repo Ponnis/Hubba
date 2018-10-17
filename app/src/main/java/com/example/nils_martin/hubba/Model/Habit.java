@@ -17,8 +17,9 @@ public class Habit extends Observable {
     private HabitTypeState habitTypeState;
     private State STATE;
     private Frequency FREQUENCY;
-    private List<Integer> dayToDo = new ArrayList<>();
+    private List<Integer> daysToDo = new ArrayList<>();
     private ArrayList<Observer> observers;
+
     public Habit(String title){
         this.title = title;
         this.streak = 0;
@@ -33,9 +34,8 @@ public class Habit extends Observable {
         this.isDone = false;
         this.isActive = true;
         this.enableNotifications = false;
-        this.dayToDo = days;
+        this.daysToDo = days;
     }
-
 
     public void setHabitTypeState(HabitTypeState habitTypeState){
         this.habitTypeState = habitTypeState;
@@ -43,6 +43,7 @@ public class Habit extends Observable {
     public HabitTypeState getHabitTypeState(){
         return this.habitTypeState;
     }
+
     public void setDone(Habit habit){
         habit.isDone = !habit.isDone;
         upStreak(this);
@@ -71,6 +72,7 @@ public class Habit extends Observable {
     public void upGroupMembersDoneCount(){
         groupmembersDoneCount++;
     }
+
     public void setActive(Habit habit){
         habit.isActive = !habit.isActive;
     }
@@ -78,9 +80,11 @@ public class Habit extends Observable {
     public void setNotifications(Habit habit){
         habit.enableNotifications = !habit.enableNotifications;
     }
+
     public int getGroupmembersDoneCount(){
         return groupmembersDoneCount;
     }
+
     public Habit getHabit(){return this;}
 
     public int getStreak(Habit habit){
@@ -113,11 +117,11 @@ public class Habit extends Observable {
         return FREQUENCY;
     }
 
-    public void setDayToDo (List<Integer> dayToDo) {
-        this.dayToDo = dayToDo;
+    public void setDaysToDo(List<Integer> daysToDo) {
+        this.daysToDo = daysToDo;
     }
 
     public List<Integer> getDaysToDo() {
-        return dayToDo;
+        return daysToDo;
     }
 }

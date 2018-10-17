@@ -11,7 +11,7 @@ public class User implements Observer {
     private String email;
     private String password;
     private List<User> friends;
-    private ArrayList<Habit> habits;
+    private ArrayList<Habit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
     private boolean allowNotifications;
     private boolean soundOn;
@@ -22,8 +22,20 @@ public class User implements Observer {
         this.password = password;
     }
 
+    public User() {
+
+    }
+
     public ArrayList getHabits() {
         return habits;
+    }
+
+    public void addHabit (Habit habit) {
+        habits.add(habit);
+    }
+
+    public void removeHabit (Habit habit) {
+        habits.remove(habit);
     }
 
     public List getAchievements() {
