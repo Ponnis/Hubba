@@ -2,6 +2,8 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.sip.SipAudioCall;
+import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -43,6 +46,8 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ArrayAdapter<String> eveningAdapter;
     private ArrayAdapter<String> nightAdapter;
     private ArrayAdapter<String> doneAdapter;
+
+    List<EventListener> listeners;
 
     public static List<Habit> habits = new ArrayList<>();
     private List<String> habitMorningString = new ArrayList<>();
@@ -80,7 +85,9 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         super.onPause();
     }
 
-    //saves the userlist
+    /**
+     *saves the userlist
+     */
     private void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -89,7 +96,10 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         editor.putString("userlist",json);
         editor.apply();
     }
-    //loads the userlist into hubbamodels userlist
+
+    /**
+     * loads the userlist into hubbamodels userlist
+     */
     private void loadData(){
         SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
         Gson gson = new Gson();
@@ -103,9 +113,12 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
 
     private void initList() {
         // TODO: 2018-10-05 Implement on click listener for the LinearLayouts that fetch position
+
     }
 
-    //Instantiates the different views and buttons on the MainPage.
+    /**
+     * Instantiates the different views and buttons on the MainPage.
+     */
     private void initView() {
         morningListView = findViewById(R.id.morningListView);
         middayListView = findViewById(R.id.middayListView);
@@ -113,11 +126,11 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         nightListView = findViewById(R.id.nightListView);
         doneListView = findViewById(R.id.doneListView);
 
-        morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        middayAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        eveningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        nightAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        doneAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
+        morningAdapter = new Adapter(this, this);
+        middayAdapter = new Adapter(this, this);
+        eveningAdapter = new Adapter(this, this);
+        nightAdapter = new Adapter(this, this);
+        doneAdapter = new Adapter(this, this);
 
         menuButton = findViewById((R.id.menuBtn));
         calendarBtn = findViewById(R.id.calendarBtn);
@@ -148,7 +161,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         updateLists();
     }
 
-    /*
+    /**
     Goes through the habit list and put the string title into the correct list depending on state.
     and then populates the ListViews with corresponding habits.
     */
@@ -184,7 +197,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         fillLists(doneListView, doneAdapter, habitDoneString);
     }
 
-    /*
+    /**
     Method to fill lists with habits by adding titles to adapters and setting to listviews
      */
     private void fillLists(ListView listView, ArrayAdapter<String> adapter, List<String> strings){
@@ -202,7 +215,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         listView.setAdapter(adapter);
     }
 
-    /*
+    /**
     method clearing all lists of strings
      */
     private void clearStrings(){
@@ -213,25 +226,34 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         habitDoneString.clear();
     }
 
-    /*
+    /**
     When a list item is clicked on
      */
     public void clicked(View view){
-        TextView textView = findViewById(R.id.listItemTextView);
-        findHabit(textView.getText().toString());
+        /*TextView textView = findViewById(R.id.listItemTextView);
+        findHabit(textView.getText().toString());*/
         Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
         startActivity(intent);
     }
 
-    /*
+    /**
     Find which habit is clicked on and set variable openhabit.
      */
-    private void findHabit(String string){
+    public void findHabit(String string){
         for(Habit habit: habits){
             if(habit.getTitle(habit).equals(string)){
                 setOpenHabit(habit);
             }
         }
+    }
+
+    private Habit getHabit(String string){
+        for(Habit habit: habits){
+            if (habit.getTitle(habit).equals(string)) {
+                return habit;
+            }
+        }
+        return null;
     }
 
     private void setOpenHabit (Habit habit){

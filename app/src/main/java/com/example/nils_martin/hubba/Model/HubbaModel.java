@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class HubbaModel {
     private static HubbaModel instance = null;
     private ArrayList<User> users = new ArrayList<>();
-   private User currentUser;
+    private User currentUser;
 
     public static HubbaModel getInstance() {
         if (instance == null) {
@@ -21,7 +21,7 @@ public class HubbaModel {
     public User getUser(String userName) {
         int index = 0;
         for (User user : users) {
-            if (user.getName().equals(userName)) {
+            if (user.getUserName().equals(userName)) {
                 index = users.indexOf(user);
             }
         }
@@ -33,7 +33,7 @@ public class HubbaModel {
     }
     //Defensive copying.
     public User getCurrentUser() {
-        return new User(this.currentUser.getName(), this.currentUser.getEmail(),this.currentUser.getPassword());
+        return new User(this.currentUser.getUserName(), this.currentUser.getEmail(),this.currentUser.getPassword());
     }
 
     public void setCurrentUser(User user) {

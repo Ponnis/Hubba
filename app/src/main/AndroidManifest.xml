@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nils_martin.hubba">
 
+    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE"
+        />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,7 +32,15 @@
         <activity android:name=".ViewModel.MenuGroupsVM"/>
         <activity android:name=".ViewModel.MenuHabitsVM"/>
         <activity android:name=".ViewModel.MenuFriendsVM"/>
+        <activity android:name=".ViewModel.ProfileEditInformationVM"/>
+        <activity android:name=".ViewModel.ProfileEditPasswordVM"/>
     </application>
 
 
+
+
 </manifest>
+
+
+
+
