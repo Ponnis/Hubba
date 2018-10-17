@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class User implements Observer {
+public class User implements Observer, Friend {
 
     private String userName;
     private String email;
     private String password;
-    private List<User> friends;
+    private ArrayList<User> friends;
     private ArrayList<Habit> habits;
     private ArrayList<Achievement> achievements;
     private boolean allowNotifications;
@@ -30,7 +30,7 @@ public class User implements Observer {
         return achievements;
     }
 
-    public String getName() {
+    public String getUserName() {
         return userName;
     }
 

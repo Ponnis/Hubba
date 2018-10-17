@@ -38,7 +38,7 @@ public class ProfileVM extends AppCompatActivity {
     }
 
     private void setUserInformaion(){
-        userName.setText(user.getName());
+        userName.setText(user.getUserName());
         userEmail.setText(user.getEmail());
     }
 }
