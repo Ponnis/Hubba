@@ -238,7 +238,7 @@ public class MainActivityVM extends AppCompatActivity {
     /**
     Find which habit is clicked on and set variable openhabit.
      */
-    private void findHabit(String string){
+    protected void findHabit(String string){
         for(Habit habit: habits2){
             if(habit.getTitle(habit).equals(string)){
                 setOpenHabit(habit);
