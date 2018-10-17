@@ -2,6 +2,8 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.sip.SipAudioCall;
+import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,6 +44,8 @@ public class MainActivityVM extends AppCompatActivity {
     private ArrayAdapter<String> eveningAdapter;
     private ArrayAdapter<String> nightAdapter;
     private ArrayAdapter<String> doneAdapter;
+
+    List<EventListener> listeners;
 
     public static List<Habit> habits = new ArrayList<>();
     private List<String> habitMorningString = new ArrayList<>();
@@ -103,6 +108,7 @@ public class MainActivityVM extends AppCompatActivity {
 
     private void initList() {
         // TODO: 2018-10-05 Implement on click listener for the LinearLayouts that fetch position
+
     }
 
     /**
@@ -115,11 +121,11 @@ public class MainActivityVM extends AppCompatActivity {
         nightListView = findViewById(R.id.nightListView);
         doneListView = findViewById(R.id.doneListView);
 
-        morningAdapter = new Adapter(this);
-        middayAdapter = new Adapter(this);
-        eveningAdapter = new Adapter(this);
-        nightAdapter = new Adapter(this);
-        doneAdapter = new Adapter(this);
+        morningAdapter = new Adapter(this, this);
+        middayAdapter = new Adapter(this, this);
+        eveningAdapter = new Adapter(this, this);
+        nightAdapter = new Adapter(this, this);
+        doneAdapter = new Adapter(this, this);
 
         menuButton = findViewById((R.id.menuBtn));
         calendarBtn = findViewById(R.id.calendarBtn);

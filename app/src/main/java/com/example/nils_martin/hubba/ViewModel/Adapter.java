@@ -22,9 +22,10 @@ public class Adapter extends ArrayAdapter<String>  {
     MainActivityVM mainActivityVM;
     String title;
 
-    public Adapter(Context context){
+    public Adapter(Context context, MainActivityVM mainActivityVM){
         super(context, 0);
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.mainActivityVM = mainActivityVM;
     }
 
     /*@Override
