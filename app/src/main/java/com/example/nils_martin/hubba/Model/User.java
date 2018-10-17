@@ -71,6 +71,10 @@ public class User implements Observer {
         }
     }
 
+    public List<User> getFriends(){
+        return friends;
+    }
+
     private void checkHabitDone(){
 
 
