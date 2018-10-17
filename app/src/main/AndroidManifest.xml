@@ -32,6 +32,8 @@
         <activity android:name=".ViewModel.MenuGroupsVM"/>
         <activity android:name=".ViewModel.MenuHabitsVM"/>
         <activity android:name=".ViewModel.MenuFriendsVM"/>
+        <activity android:name=".ViewModel.ProfileEditInformationVM"/>
+        <activity android:name=".ViewModel.ProfileEditPasswordVM"/>
     </application>
 
 

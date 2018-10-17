@@ -2,18 +2,13 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.sip.SipAudioCall;
-import android.net.sip.SipSession;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.ImageButton;
 
 
@@ -47,7 +42,7 @@ public class MainActivityVM extends AppCompatActivity {
 
     List<EventListener> listeners;
 
-    public static List<Habit> habits = new ArrayList<>();
+    private List<Habit> habits = HubbaModel.getInstance().getCurrentUser().getHabits();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
@@ -138,6 +133,7 @@ public class MainActivityVM extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         calendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,6 +141,7 @@ public class MainActivityVM extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,6 +160,7 @@ public class MainActivityVM extends AppCompatActivity {
     private void updateLists () {
         clearStrings();
 
+     //   Iterator<Habit> habitIterator = habits.iterator();
         Iterator<Habit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             Habit habit = habitIterator.next();
@@ -236,7 +234,7 @@ public class MainActivityVM extends AppCompatActivity {
     /**
     Find which habit is clicked on and set variable openhabit.
      */
-    public void findHabit(String string){
+    protected void findHabit(String string){
         for(Habit habit: habits){
             if(habit.getTitle(habit).equals(string)){
                 setOpenHabit(habit);

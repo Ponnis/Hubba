@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.R;
 
@@ -97,10 +98,12 @@ public class AddHabitVM extends AppCompatActivity {
                 makeCalendarDaysList();
 
                 createdHabit.setTitle(habitName.getText().toString());
-                createdHabit.setDayToDo(calendarDaysList);
+                createdHabit.setDaysToDo(calendarDaysList);
 
                 if(checkIfAllIsFillIn()) {
-                    MainActivityVM.habits.add(createdHabit);
+                    //MainActivityVM.habits.add(createdHabit);
+                    HubbaModel.getInstance().getCurrentUser().addHabit(createdHabit);
+
                     endActivity();
                 }
                 else {
