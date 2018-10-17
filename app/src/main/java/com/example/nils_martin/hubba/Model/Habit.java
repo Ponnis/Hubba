@@ -51,6 +51,7 @@ public class Habit extends Observable {
     //TODO make two different events?
     public void notifyObservers(){
         if (habitTypeState.toString().equals("GroupHabit")){
+            //How to notify user group without wrecking dependency?
             //TODO update the userGroup
         }
         else if(habitTypeState.toString().equals("SingleHabit")){
