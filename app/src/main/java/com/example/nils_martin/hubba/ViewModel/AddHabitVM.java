@@ -101,10 +101,12 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 makeCalendarDaysList();
 
                 createdHabit.setTitle(habitName.getText().toString());
-                createdHabit.setDayToDo(calendarDaysList);
+                createdHabit.setDaysToDo(calendarDaysList);
 
                 if(checkIfAllIsFillIn()) {
-                    MainActivityVM.habits.add(createdHabit);
+                    //MainActivityVM.habits.add(createdHabit);
+                    HubbaModel.getInstance().getCurrentUser().addHabit(createdHabit);
+
                     endActivity();
                 }
                 else {
@@ -191,12 +193,14 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                     minSpr.setVisibility(View.VISIBLE);
                     timeTxtV.setVisibility(View.VISIBLE);
                     colontxtV.setVisibility(View.VISIBLE);
+                    createdHabit.reminderEnabled(createdHabit);
                 }
                 else {
                     hourSpr.setVisibility(View.INVISIBLE);
                     minSpr.setVisibility(View.INVISIBLE);
                     timeTxtV.setVisibility(View.INVISIBLE);
                     colontxtV.setVisibility(View.INVISIBLE);
+                    createdHabit.reminderDisabled(createdHabit);
                 }
             }
         });
