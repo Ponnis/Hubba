@@ -166,23 +166,28 @@ public class MainActivityVM extends AppCompatActivity {
         Iterator<Habit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             Habit habit = habitIterator.next();
-            switch (habit.getSTATE()) {
-                case MORNING:
-                    habitMorningString.add(habit.getTitle(habit));
-                    break;
-                case MIDDAY:
-                    habitMiddayString.add(habit.getTitle(habit));
-                    break;
-                case EVENING:
-                    habitEveningString.add(habit.getTitle(habit));
-                    break;
-                case NIGHT:
-                    habitNightString.add(habit.getTitle(habit));
-                    break;
-                case DONE:
-                    habitDoneString.add(habit.getTitle(habit));
-                    break;
+            if(habit.getIsDone()){
+                habitDoneString.add(habit.getTitle(habit));
+            }else{
+                switch (habit.getSTATE()) {
+                    case MORNING:
+                        habitMorningString.add(habit.getTitle(habit));
+                        break;
+                    case MIDDAY:
+                        habitMiddayString.add(habit.getTitle(habit));
+                        break;
+                    case EVENING:
+                        habitEveningString.add(habit.getTitle(habit));
+                        break;
+                    case NIGHT:
+                        habitNightString.add(habit.getTitle(habit));
+                        break;
+                    case DONE:
+                        habitDoneString.add(habit.getTitle(habit));
+                        break;
+                }
             }
+
         }
 
         fillLists(morningListView, morningAdapter, habitMorningString);

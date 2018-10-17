@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.R;
@@ -39,6 +40,7 @@ public class Adapter extends ArrayAdapter<String>  {
         String string = getItem(position);
         title = string;
         TextView name = (TextView) view.findViewById(R.id.listItemTextView);
+        CheckBox checkBox = view.findViewById(R.id.checkboxIsDone);
         name.setText(string);
         name.setOnClickListener(new View.OnClickListener() {
             @Override
