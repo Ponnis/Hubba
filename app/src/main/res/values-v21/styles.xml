@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="GradeCenterColor">@color/Grey</item>
+        <!-- Color of FloatButton on mainpage and the plus -->
+        <item name="FloatButtonColor">@color/Grey</item>
+        <item name="FloatImageColor">@color/White</item>
+        <!-- Color for loggout -->
+        <item name="LoggOutColorBackground">@color/Grey</item>
+        <item name="LoggOutColorText">@color/White</item>
     </style>
     <style name="Elite" parent="Theme.AppCompat.Light.NoActionBar" >
         <!--  Sets color of spinner drop down  -->
@@ -14,6 +21,8 @@
         <item name="android:textColorPrimary">@color/EliteFontColor</item>
         <item name="android:textColor">@color/EliteFontColor</item>
         <item name="android:textColorSecondary">@color/EliteFontColor</item>
+        <!-- inputHint Color -->
+        <item name="android:textColorHint">@color/Grey</item>
         <!--  Set color of the checkboxes and switches when it's not activted -->
         <item name="android:textColorPrimaryDisableOnly">@color/Grey</item>
         <!-- colors of switches,radiobuttons etc -->
@@ -41,6 +50,9 @@
         <!-- Color of gradient -->
         <item name="GradeStartNEndColor">@color/EliteBackgroundColor</item>
         <item name="GradeCenterColor">@color/EliteFontColor</item>
+        <!-- Color of FloatButton on mainpage and the plus -->
+        <item name="FloatButtonColor">@color/Grey</item>
+        <item name="FloatImageColor">@color/White</item>
     </style>
 
     <style name="PinkFluffy" parent="Theme.AppCompat.Light.NoActionBar" >
@@ -50,6 +62,8 @@
         <item name="android:textColorPrimary">@color/PinkFluffyFont</item>
         <item name="android:textColor">@color/PinkFluffyFont</item>
         <item name="android:textColorSecondary">@color/PinkFluffyFont</item>
+        <!-- inputHint Color -->
+        <item name="android:textColorHint">@color/Grey</item>
         <!--  Set color of the checkboxes and switches when it's not activted -->
         <item name="android:textColorPrimaryDisableOnly">@color/PinkFluffyFont</item>
         <!-- colors of switches,radiobuttons etc -->
@@ -77,6 +91,9 @@
         <!-- Color of gradient -->
         <item name="GradeStartNEndColor">@color/PinkFluffyBackground</item>
         <item name="GradeCenterColor">@color/PinkFluffyAccent</item>
+        <!-- Color of FloatButton on mainpage and the plus -->
+        <item name="FloatButtonColor">@color/Grey</item>
+        <item name="FloatImageColor">@color/White</item>
     </style>
 
 

@@ -2,14 +2,20 @@ package com.example.nils_martin.hubba.Model;
 
 public class StreakAchievement extends Achievement {
 
+    AchievementType achievementType;
+
     StreakAchievement(String title) {
         super(title);
-        AchievementType achievementType = AchievementType.StreakAchievement;
+        achievementType = AchievementType.StreakAchievement;
     }
 
     StreakAchievement(String title, String pathToImage) {
         super(title, pathToImage);
+        achievementType = AchievementType.StreakAchievement;
+    }
 
-        AchievementType achievementType = AchievementType.StreakAchievement;
+    @Override
+    public void assessAchievement() {
+
     }
 }

@@ -2,7 +2,7 @@ package com.example.nils_martin.hubba.Model;
 
 
 
-public class Achievement {
+public abstract class Achievement {
 
     //private User user;
     private String title = "";
@@ -24,7 +24,5 @@ public class Achievement {
         //Call for achievedAlert.
     }
 
-    public void assessAchievement(){
-        
-    }
+    abstract public void assessAchievement();
 }

@@ -6,14 +6,14 @@ import android.widget.LinearLayout;
 
 import com.example.nils_martin.hubba.R;
 
-public class MenuGroupsVM extends AppCompatActivity {
+public class MenuFriendsVM extends AppCompatActivity {
 
-    LinearLayout yourGroupsLinearLayout;
+    LinearLayout yourFriendsLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_groups);
+        setContentView(R.layout.menu_friends);
         init();
     }
 
@@ -22,6 +22,6 @@ public class MenuGroupsVM extends AppCompatActivity {
     }
 
     private void initFindByView(){
-        yourGroupsLinearLayout = (LinearLayout) findViewById(R.id.yourGroupsLinearLayout);
+        yourFriendsLinearLayout = (LinearLayout) findViewById(R.id.yourFriendsLinearLayout);
     }
 }
