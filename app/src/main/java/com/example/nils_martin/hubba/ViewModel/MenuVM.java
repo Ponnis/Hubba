@@ -2,6 +2,7 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +57,7 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
         habitsButtonOnClick();
         groupsButtonOnClick();
         friendsButtonOnClick();
-        // helpButtonOnClick();
+        helpButtonOnClick();
         logOutButtonOnClick();
 
     }
@@ -120,7 +121,7 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
         });
     }
 
-    /* private void helpButtonOnClick(){
+    private void helpButtonOnClick(){
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,14 +129,18 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
                 startActivity(intent);
             }
         });
-    }*/
+    }
 
     private void logOutButtonOnClick(){
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuVM.this, LoginVM.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
     }
