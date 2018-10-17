@@ -47,6 +47,10 @@ public class HubbaModel {
     public int getTheme(){
         return currentUser.getTheme();
     }
+    public String themeEnumToString(){
+        return currentUser.themeEnumToString();
+    }
+    // Law of demeter methods for themes
     public void setTheme(Themes theme){
         currentUser.setTheme(theme);
     }

@@ -8,10 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
-public class ProfileEditInformationVM extends AppCompatActivity{
+public class ProfileEditInformationVM extends AppCompatActivity implements ThemableObserver{
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
 
@@ -22,6 +23,7 @@ public class ProfileEditInformationVM extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(hubbaModel.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile_edit_information);
 
@@ -62,5 +64,10 @@ public class ProfileEditInformationVM extends AppCompatActivity{
                 }
             }
         });
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

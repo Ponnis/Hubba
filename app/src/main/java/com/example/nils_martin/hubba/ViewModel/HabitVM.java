@@ -6,10 +6,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
 
-public class HabitVM extends AppCompatActivity {
+public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
     TextView habitTitleTextView;
     TextView timeOfDayTextView;
@@ -25,9 +27,10 @@ public class HabitVM extends AppCompatActivity {
     Habit habit = new Habit("");
 
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(HubbaModel.getInstance().getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habit_view);
-
+        HubbaModel.getInstance().addThemeListener(this);
         habit = MainActivityVM.openHabit;
         initFindView();
         init(habit);
@@ -74,4 +77,8 @@ public class HabitVM extends AppCompatActivity {
         return temp;
     }
 
+    @Override
+    public void recreateActivity() {
+        recreate();
+    }
 }

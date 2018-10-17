@@ -47,6 +47,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         setContentView(R.layout.activity_add_habit);
         init();
         makeAListOfDayCbx();
+        model.addThemeListener(this);
         update();
     }
 

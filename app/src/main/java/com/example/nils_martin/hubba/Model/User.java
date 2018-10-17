@@ -1,7 +1,5 @@
 package com.example.nils_martin.hubba.Model;
 
-import android.graphics.Paint;
-
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
@@ -21,23 +19,28 @@ public class User implements Observer, Friend {
     //User Settings
     private boolean allowNotifications;
     private boolean soundOn;
-    private Themes theme = Themes.STANDARD;
+    private Themes ActiveTheme;
 
     public User(String name, String email, String password) {
         this.userName = name;
         this.email = email;
         this.password = password;
-        this.theme = Themes.STANDARD;
+        this.ActiveTheme = Themes.STANDARD;
         this.themeObservers = new ArrayList<>();
     }
+    // Takes an ENUM from Themes and set
     public void setTheme(Themes theme){
-        this.theme = theme;
+        this.ActiveTheme = theme;
         notifyThemeObservers(themeObservers);
 
     }
+   //  Returns the int R.style associated with a specific theme
+    public String themeEnumToString(){
+        return ActiveTheme.toString();
+    }
     public int getTheme(){
         int returntheme = 0;
-        switch (theme){
+        switch (ActiveTheme){
             case ELITE:
                 returntheme = R.style.Elite;
                 break;
@@ -50,11 +53,13 @@ public class User implements Observer, Friend {
         }
         return returntheme;
     }
+    // Call recreateActivity on all that's in the Arrayist themeObservers.
     private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers){
         for (ThemableObserver theme: themeObservers) {
             theme.recreateActivity();
         }
     }
+    // Adds the ThemableObserver to the observer list themeObservers.
     public void addThemeObserver(ThemableObserver observer ){
         themeObservers.add(observer);
     }

@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 import java.util.List;
 
-public class MenuFriendsVM extends AppCompatActivity {
+public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
 
     HubbaModel model = HubbaModel.getInstance();
     List<User> friends;
@@ -18,9 +19,11 @@ public class MenuFriendsVM extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(model.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_friends);
         init();
+        model.addThemeListener(this);
     }
 
     private void init(){
@@ -34,5 +37,10 @@ public class MenuFriendsVM extends AppCompatActivity {
 
     private void getFriendsList(){
         friends = model.getCurrentUser().getFriends();
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

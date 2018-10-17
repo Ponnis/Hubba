@@ -20,10 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
-public class ProfileVM extends AppCompatActivity {
+public class ProfileVM extends AppCompatActivity implements ThemableObserver {
 
     private static final int PERMISSION_REQUEST = 0;
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -40,10 +41,12 @@ public class ProfileVM extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(model.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile);
 
         init();
+        model.addThemeListener(this);
     }
 
     private void init(){
@@ -152,5 +155,10 @@ public class ProfileVM extends AppCompatActivity {
 
                 }
         }
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

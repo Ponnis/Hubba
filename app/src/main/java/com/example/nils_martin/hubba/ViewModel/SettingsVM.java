@@ -15,10 +15,11 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.R;
 
-public class SettingsVM extends AppCompatActivity {
+public class SettingsVM extends AppCompatActivity implements ThemableObserver {
     //we have to get the active user from the main class " Hubba ".
     //will control all the users menu_settings.
 
@@ -32,17 +33,13 @@ public class SettingsVM extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences sharedPreferences = getApplication().getSharedPreferences("Themes", Context.MODE_PRIVATE);
-        String currentTheme = sharedPreferences.getString("nameOfHabit","DEFAULT");
         setTheme(model.getTheme());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_settings);
         init();
-        int spinnerValue = sharedPreferences.getInt("spinnerItem",-1);
-        if(spinnerValue != -1){
-            themeSpinner.setSelection(spinnerValue, true);
-        }
+        model.addThemeListener(this);
+        themeSpinner.setSelection(getIndex(themeSpinner,model.themeEnumToString()));
     }
     // Initiate the necessary.
     private void init(){
@@ -56,15 +53,9 @@ public class SettingsVM extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Themes chosenOne = (Themes) themeSpinner.getSelectedItem();
-                model.setTheme(chosenOne);
-                int chosenThemePos = themeSpinner.getSelectedItemPosition();
-                SharedPreferences sharedPreferences = getApplication().getSharedPreferences("Themes", 0);
-                SharedPreferences.Editor prefeditor = sharedPreferences.edit();
-                prefeditor.putInt("spinnerItem", chosenThemePos);
-                prefeditor.putString("nameOfHabit", chosenOne.toString());
-                prefeditor.apply();
                 if(isUserInteracting) {
                     restartApp();
+                    model.setTheme(chosenOne);
                 }
             }
 
@@ -86,9 +77,23 @@ public class SettingsVM extends AppCompatActivity {
         super.onUserInteraction();
         isUserInteracting = true;
     }
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
     private void restartApp(){
         Intent i = new Intent(getApplicationContext(), SettingsVM.class);
         finish();
         startActivity(i);
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

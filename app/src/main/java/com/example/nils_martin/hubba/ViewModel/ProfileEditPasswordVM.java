@@ -8,9 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
-public class ProfileEditPasswordVM extends AppCompatActivity {
+public class ProfileEditPasswordVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
 
@@ -24,10 +25,12 @@ public class ProfileEditPasswordVM extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(hubbaModel.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile_edit_password);
 
         init();
+        hubbaModel.addThemeListener(this);
     }
 
     private void init() {
@@ -66,5 +69,10 @@ public class ProfileEditPasswordVM extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }
