@@ -29,12 +29,14 @@ public class ProfileVM extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
 
 
-    HubbaModel model = HubbaModel.getInstance();
-    User user;
-    TextView Username;
-    TextView Email;
-    ImageView ProfilePic;
-    Button ChangePic;
+    private HubbaModel model = HubbaModel.getInstance();
+    private User user;
+    private TextView Username;
+    private TextView Email;
+    private ImageView ProfilePic;
+    private Button ChangePic;
+    private Button EditInformation;
+    private Button ChangePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class ProfileVM extends AppCompatActivity {
         Email = findViewById(R.id.usersEmailTextView);
         ChangePic = findViewById(R.id.changePicBtn);
         ProfilePic = findViewById(R.id.profilePicImg);
+        EditInformation = findViewById(R.id.editInfBtn);
+        ChangePassword = findViewById(R.id.changePassBtn);
     }
 
     private void getUserInformation(){
@@ -92,6 +96,23 @@ public class ProfileVM extends AppCompatActivity {
                 }
             }
         });
+
+        EditInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileVM.this, ProfileEditInformationVM.class);
+                startActivity(intent);
+            }
+        });
+
+        ChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (ProfileVM.this, ProfileEditPasswordVM.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void initImage() {
@@ -107,7 +128,7 @@ public class ProfileVM extends AppCompatActivity {
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                 } else {
-                    Toast.makeText(this, "Premission Denied", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Premission Denied", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
