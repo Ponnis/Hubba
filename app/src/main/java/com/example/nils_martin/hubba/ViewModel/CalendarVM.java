@@ -11,12 +11,13 @@ import android.widget.TextView;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class CalendarVM extends Activity {
+public class CalendarVM extends Activity implements ThemableObserver {
 
     private TextView dateText, activityTxtV;
     private CalendarView calendarView;
@@ -30,10 +31,12 @@ public class CalendarVM extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(HubbaModel.getInstance().getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
         init();
         setActivityTxtV(currentYear, currentMonth, currentDayOfMonth);
+        HubbaModel.getInstance().addThemeListener(this);
         Update();
     }
 
@@ -117,4 +120,8 @@ public class CalendarVM extends Activity {
     }
 
 
+    @Override
+    public void recreateActivity() {
+        recreate();
+    }
 }

@@ -8,9 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
-public class ProfileEditPasswordVM extends AppCompatActivity {
+public class ProfileEditPasswordVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
 
@@ -24,12 +25,17 @@ public class ProfileEditPasswordVM extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(hubbaModel.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile_edit_password);
 
         init();
+        hubbaModel.addThemeListener(this);
     }
 
+    /**
+     * A method that initializes the different objects that exists in the View, as well as giving listeners to the buttons
+     */
     private void init() {
         CurrentPassword = (TextView) findViewById(R.id.profileEditPassword);
         NewPassword = (TextView) findViewById(R.id.profileNewPassword);
@@ -56,8 +62,7 @@ public class ProfileEditPasswordVM extends AppCompatActivity {
                 if (CurrentPassword.getText().toString().equals(hubbaModel.getCurrentUser().getPassword()) &&
                         NewPassword.getText().toString().equals(ConfirmPassword.getText().toString())){
 
-                    //TODO Make it possible to save the new Password
-                    //hubbaModel.getCurrentUser().setPassword();
+                    hubbaModel.getCurrentUser().setPassword(NewPassword.getText().toString());
                 }
 
                 else {
@@ -66,5 +71,10 @@ public class ProfileEditPasswordVM extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

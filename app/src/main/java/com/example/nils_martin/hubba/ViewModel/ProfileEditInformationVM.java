@@ -1,5 +1,6 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,10 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
-public class ProfileEditInformationVM extends AppCompatActivity{
+public class ProfileEditInformationVM extends AppCompatActivity implements ThemableObserver{
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
 
@@ -22,12 +24,16 @@ public class ProfileEditInformationVM extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(hubbaModel.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile_edit_information);
 
         init();
     }
 
+    /**
+     * A method that initializes the different objects that exists in the View, as well as giving listeners to the buttons
+     */
     private void init() {
         Username = (TextView) findViewById(R.id.profileEditUsername);
         Email = (TextView) findViewById(R.id.profileEditEmail);
@@ -58,9 +64,16 @@ public class ProfileEditInformationVM extends AppCompatActivity{
                         }
                     }
                     //TODO Ad changes to the User
-                    //hubbaModel.getCurrentUser().
+                    hubbaModel.getCurrentUser().setUserName(Username.getText().toString());
+                    hubbaModel.getCurrentUser().setEmail(Email.getText().toString());
+                    finish();
                 }
             }
         });
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

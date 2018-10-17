@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
+import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 import com.google.gson.Gson;
@@ -26,7 +28,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class MainActivityVM extends AppCompatActivity {
+public class MainActivityVM extends AppCompatActivity implements ThemableObserver {
     HubbaModel model = HubbaModel.getInstance();
     private ListView morningListView;
     private ListView middayListView;
@@ -53,12 +55,17 @@ public class MainActivityVM extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int currentTheme = model.getTheme();
+        setTheme(currentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initView();
         initList();
         loadData();
+        System.out.println(model);
+
+        model.addThemeListener(this);
     }
 
     @Override
@@ -250,6 +257,10 @@ public class MainActivityVM extends AppCompatActivity {
     private void setOpenHabit (Habit habit){
         this.openHabit = habit;
     }
+
+
+    public void recreateActivity(){recreate();}
+
 }
 
 
