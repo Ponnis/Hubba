@@ -21,11 +21,11 @@ public class ExampleUnitTest {
         assertNotNull(user);
     }
 
-    @Test
+    /*@Test
     public void testCreateStreakAchievement(){
         StreakAchievement streakAchievement = new StreakAchievement("You have achieved this habit 10 days in a row!");
         assertNotNull(streakAchievement);
-    }
+    }*/
 
     @Test
     public void testUpStreak() {
