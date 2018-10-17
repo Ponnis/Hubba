@@ -21,7 +21,6 @@ public class CalendarVM extends Activity {
     private TextView dateText, activityTxtV;
     private CalendarView calendarView;
     private ImageButton backBtn;
-   // private List<Habit> habitsList = MainActivityVM.habits;
     private List<Habit> habitsList = HubbaModel.getInstance().getCurrentUser().getHabits();
     private Calendar cal = Calendar.getInstance();
     private int currentMonth = cal.get(Calendar.MONTH) + 1;

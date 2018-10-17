@@ -2,18 +2,13 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.sip.SipAudioCall;
-import android.net.sip.SipSession;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.ImageButton;
 
 
@@ -47,8 +42,7 @@ public class MainActivityVM extends AppCompatActivity {
 
     List<EventListener> listeners;
 
-    public static List<Habit> habits = new ArrayList<>();
-    private List<Habit> habits2 = HubbaModel.getInstance().getCurrentUser().getHabits();
+    private List<Habit> habits = HubbaModel.getInstance().getCurrentUser().getHabits();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
@@ -167,9 +161,9 @@ public class MainActivityVM extends AppCompatActivity {
         clearStrings();
 
      //   Iterator<Habit> habitIterator = habits.iterator();
-        Iterator<Habit> habit2Iterator = habits2.iterator();
-        while(habit2Iterator.hasNext()){
-            Habit habit = habit2Iterator.next();
+        Iterator<Habit> habitIterator = habits.iterator();
+        while(habitIterator.hasNext()){
+            Habit habit = habitIterator.next();
             switch (habit.getSTATE()) {
                 case MORNING:
                     habitMorningString.add(habit.getTitle(habit));
@@ -239,7 +233,7 @@ public class MainActivityVM extends AppCompatActivity {
     Find which habit is clicked on and set variable openhabit.
      */
     protected void findHabit(String string){
-        for(Habit habit: habits2){
+        for(Habit habit: habits){
             if(habit.getTitle(habit).equals(string)){
                 setOpenHabit(habit);
             }
