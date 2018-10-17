@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class User implements Observer {
+public class User implements Observer, Friend {
 
     private String userName;
     private String email;
@@ -42,7 +42,7 @@ public class User implements Observer {
         return achievements;
     }
 
-    public String getName() {
+    public String getUserName() {
         return userName;
     }
 
@@ -81,6 +81,10 @@ public class User implements Observer {
                 friends.remove(friend);
             }
         }
+    }
+
+    public List<User> getFriends(){
+        return friends;
     }
 
     private void checkHabitDone(){

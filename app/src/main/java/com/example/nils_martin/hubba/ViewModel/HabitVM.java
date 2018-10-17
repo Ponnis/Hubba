@@ -33,7 +33,9 @@ public class HabitVM extends AppCompatActivity {
         init(habit);
     }
 
-    //connect textViews and buttons
+    /**
+     * connect textViews and buttons
+     */
     private void initFindView(){
         habitTitleTextView = findViewById(R.id.habitTitleTextView);
         timeOfDayTextView = findViewById(R.id.timeOfDayTextView);
@@ -47,9 +49,11 @@ public class HabitVM extends AppCompatActivity {
         editButton = findViewById(R.id.editButton);
     }
 
-    //set text
+    /**
+     * set text to habit title and states.
+     * @param habit
+     */
     private void init(Habit habit){
-
         habitTitleTextView.setText(habit.getTitle(habit));
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
         frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()));
@@ -57,6 +61,11 @@ public class HabitVM extends AppCompatActivity {
         streakDaysTextView.setText(String.valueOf(habit.getStreak(habit)) + " days");
     }
 
+    /**
+     * Turn string ENUM to lowercase
+     * @param string
+     * @return
+     */
     public String toLowerCase(String string){
         String temp = string;
         char[] ch = temp.toLowerCase().toCharArray();

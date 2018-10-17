@@ -6,8 +6,7 @@
     tools:context=".ViewModel.MainActivityVM"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:clickable="true"
-    android:onClick="clicked">
+    android:clickable="true">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"

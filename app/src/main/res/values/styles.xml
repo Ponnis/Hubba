@@ -30,15 +30,7 @@
         <!--  Backgrounnd color of the app -->
         <item name="android:windowBackground">@color/EliteBackgroundColor</item>
         <!-- Button color -->
-        <item name="android:colorButtonNormal">@color/EliteSeckondBackground</item>
-        <!--  Color of the progressbar -->
-        <item name="android:progressTint">@color/EliteFontColor</item>
-        <!-- Color of statusbar -->
-        <item name="android:statusBarColor">@color/EliteFontColor</item>
-        <!-- color of checkbox out line-->
-        <item name="android:buttonTint">@color/EliteFontColor</item>
 
-        <item name="android:colorPrimary">@color/EliteSeckondBackground</item>
         <item name="android:textSelectHandleLeft">@color/EliteFontColor</item>
         <item name="android:textSelectHandleRight">@color/EliteFontColor</item>
 
@@ -71,15 +63,7 @@
         <!--  Backgrounnd color of the app -->
         <item name="android:windowBackground">@color/PinkFluffyBackground</item>
         <!-- Button color -->
-        <item name="android:colorButtonNormal">@color/PinkFluffySeckondBackground</item>
-        <!--  Color of the progressbar -->
-        <item name="android:progressTint">@color/PinkFluffyAccent</item>
-        <!-- Color of statusbar -->
-        <item name="android:statusBarColor">@color/PinkFluffyAccent</item>
-        <!-- color of checkbox out line-->
-        <item name="android:buttonTint">@color/PinkFluffyAccent</item>
 
-        <item name="android:colorPrimary">@color/PinkFluffySeckondBackground</item>
         <item name="android:textSelectHandleLeft">@color/Grey</item>
         <item name="android:textSelectHandleRight">@color/colorAccent</item>
 
