@@ -35,7 +35,7 @@ public class ProfileEditInformationVM extends AppCompatActivity{
         Cancel = (Button) findViewById(R.id.profileEditCancel);
         Save = (Button) findViewById(R.id.profileEditSave);
 
-        Username.setText(hubbaModel.getCurrentUser().getName());
+        Username.setText(hubbaModel.getCurrentUser().getUserName());
         Email.setText(hubbaModel.getCurrentUser().getEmail());
 
         Cancel.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +53,7 @@ public class ProfileEditInformationVM extends AppCompatActivity{
                 }
                 else {
                     for (User user: hubbaModel.getUsers()){
-                        if (Username.getText().toString().equals(user.getName())){
+                        if (Username.getText().toString().equals(user.getUserName())){
                             Toast.makeText(ProfileEditInformationVM.this, "The username already exists, please choose another one!", Toast.LENGTH_SHORT).show();
                             return;
                         }
