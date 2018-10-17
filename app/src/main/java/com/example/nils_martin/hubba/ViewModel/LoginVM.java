@@ -49,6 +49,8 @@ public class LoginVM extends AppCompatActivity {
                 checkLoginAcceptance();
             }
         });
+
+
     }
 
     private void newUserButton (){
