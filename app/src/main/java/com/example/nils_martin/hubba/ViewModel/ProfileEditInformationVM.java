@@ -1,5 +1,6 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,13 +30,16 @@ public class ProfileEditInformationVM extends AppCompatActivity{
         init();
     }
 
+    /**
+     * A method that initializes the different objects that exists in the View, as well as giving listeners to the buttons
+     */
     private void init() {
         Username = (TextView) findViewById(R.id.profileEditUsername);
         Email = (TextView) findViewById(R.id.profileEditEmail);
         Cancel = (Button) findViewById(R.id.profileEditCancel);
         Save = (Button) findViewById(R.id.profileEditSave);
 
-        Username.setText(hubbaModel.getCurrentUser().getName());
+        Username.setText(hubbaModel.getCurrentUser().getUserName());
         Email.setText(hubbaModel.getCurrentUser().getEmail());
 
         Cancel.setOnClickListener(new View.OnClickListener() {
@@ -53,13 +57,15 @@ public class ProfileEditInformationVM extends AppCompatActivity{
                 }
                 else {
                     for (User user: hubbaModel.getUsers()){
-                        if (Username.getText().toString().equals(user.getName())){
+                        if (Username.getText().toString().equals(user.getUserName())){
                             Toast.makeText(ProfileEditInformationVM.this, "The username already exists, please choose another one!", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
                     //TODO Ad changes to the User
-                    //hubbaModel.getCurrentUser().
+                    hubbaModel.getCurrentUser().setUserName(Username.getText().toString());
+                    hubbaModel.getCurrentUser().setEmail(Email.getText().toString());
+                    finish();
                 }
             }
         });

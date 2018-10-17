@@ -27,7 +27,7 @@ public class LoginVM extends AppCompatActivity{
         setContentView(R.layout.login);
         //Should be in controller?
         if (userList.size() == 0){
-            userList.add(new User("admin", "testemail@gmail.com", "1234"));
+            userList.add(new User("admin", "testemail@gmail.com", "1234", null));
         }
 
         Username = (EditText)findViewById(R.id.txtUsername);
@@ -57,7 +57,7 @@ public class LoginVM extends AppCompatActivity{
     //Should also be in controller?
     private void checkLoginAcceptance(){
         for(User user: userList){
-            if(user.getName().equals(Username.getText().toString())){
+            if(user.getUserName().equals(Username.getText().toString())){
                 if(user.getPassword().equals(Password.getText().toString())){
                     Intent intent = new Intent(LoginVM.this, MainActivityVM.class);
                     startActivity(intent);

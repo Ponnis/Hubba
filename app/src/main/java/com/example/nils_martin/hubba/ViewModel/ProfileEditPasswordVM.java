@@ -30,6 +30,9 @@ public class ProfileEditPasswordVM extends AppCompatActivity {
         init();
     }
 
+    /**
+     * A method that initializes the different objects that exists in the View, as well as giving listeners to the buttons
+     */
     private void init() {
         CurrentPassword = (TextView) findViewById(R.id.profileEditPassword);
         NewPassword = (TextView) findViewById(R.id.profileNewPassword);
@@ -56,8 +59,7 @@ public class ProfileEditPasswordVM extends AppCompatActivity {
                 if (CurrentPassword.getText().toString().equals(hubbaModel.getCurrentUser().getPassword()) &&
                         NewPassword.getText().toString().equals(ConfirmPassword.getText().toString())){
 
-                    //TODO Make it possible to save the new Password
-                    //hubbaModel.getCurrentUser().setPassword();
+                    hubbaModel.getCurrentUser().setPassword(NewPassword.getText().toString());
                 }
 
                 else {

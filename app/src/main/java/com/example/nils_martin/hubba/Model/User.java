@@ -10,16 +10,52 @@ public class User implements Observer {
     private String userName;
     private String email;
     private String password;
+    private String imagePath;
     private List<User> friends;
     private ArrayList<Habit> habits;
     private ArrayList<Achievement> achievements;
     private boolean allowNotifications;
     private boolean soundOn;
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, String imagePath) {
         this.userName = name;
         this.email = email;
         this.password = password;
+        this.imagePath = imagePath;
+    }
+
+
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String string){
+        this.userName = string;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String string){
+        this.email = string;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String string){
+        this.password = string;
+    }
+
+    public void setImagePath(String string){
+        this.imagePath = string;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 
     public ArrayList getHabits() {
@@ -28,18 +64,6 @@ public class User implements Observer {
 
     public List getAchievements() {
         return achievements;
-    }
-
-    public String getName() {
-        return userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     //TODO test the update method
@@ -75,4 +99,6 @@ public class User implements Observer {
 
 
     }
+
+
 }
