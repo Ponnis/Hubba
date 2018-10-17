@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
@@ -19,17 +20,25 @@ public class HabitListItemVM extends AppCompatActivity{
     TextView textView;
     CheckBox checkBox;
     MainActivityVM mainActivityVM;
+    Habit habit;
 
 
-    public HabitListItemVM(){
+    /*public HabitListItemVM(){
         textView = findViewById(R.id.listItemTextView);
         checkBox = findViewById(R.id.checkboxIsDone);
-    }
+    }*/
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habit_list_item);
+        initView();
+        update();
+    }*/
+
+    public HabitListItemVM(){
+        //setContentView(R.layout.habit_list_item);
+        //getLayoutInflater().inflate(R.layout.habit_list_item, );
         initView();
         update();
     }
@@ -37,23 +46,26 @@ public class HabitListItemVM extends AppCompatActivity{
     private void initView(){
         textView = findViewById(R.id.listItemTextView);
         checkBox = findViewById(R.id.checkboxIsDone);
+
+        mainActivityVM.setVisible(false);
     }
 
     private void update(){
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivityVM.clicked(v, textView.getText().toString());
+                String string = textView.getText().toString();
+                mainActivityVM.findHabit(string);
+                mainActivityVM.clicked(v);
             }
         });
+    }
+
+    protected void setHabit(Habit habit){
+        this.habit = habit;
     }
 
     protected void setTextView(String string){
         textView.setText(string);
     }
-
-    public void isClicked(View v){
-        mainActivityVM.clicked(v, this.textView.getText().toString());
-    }
-
 }

@@ -115,11 +115,11 @@ public class MainActivityVM extends AppCompatActivity {
         nightListView = findViewById(R.id.nightListView);
         doneListView = findViewById(R.id.doneListView);
 
-        morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        middayAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        eveningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        nightAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        doneAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
+        morningAdapter = new Adapter(this);
+        middayAdapter = new Adapter(this);
+        eveningAdapter = new Adapter(this);
+        nightAdapter = new Adapter(this);
+        doneAdapter = new Adapter(this);
 
         menuButton = findViewById((R.id.menuBtn));
         calendarBtn = findViewById(R.id.calendarBtn);
@@ -219,8 +219,8 @@ public class MainActivityVM extends AppCompatActivity {
     When a list item is clicked on
      */
     public void clicked(View view){
-        TextView textView = findViewById(R.id.listItemTextView);
-        findHabit(textView.getText().toString());
+        /*TextView textView = findViewById(R.id.listItemTextView);
+        findHabit(textView.getText().toString());*/
         Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
         startActivity(intent);
     }
@@ -228,12 +228,21 @@ public class MainActivityVM extends AppCompatActivity {
     /**
     Find which habit is clicked on and set variable openhabit.
      */
-    private void findHabit(String string){
+    public void findHabit(String string){
         for(Habit habit: habits){
             if(habit.getTitle(habit).equals(string)){
                 setOpenHabit(habit);
             }
         }
+    }
+
+    private Habit getHabit(String string){
+        for(Habit habit: habits){
+            if (habit.getTitle(habit).equals(string)) {
+                return habit;
+            }
+        }
+        return null;
     }
 
     private void setOpenHabit (Habit habit){
