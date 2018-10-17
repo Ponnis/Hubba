@@ -1,6 +1,11 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +17,10 @@ import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 public class ProfileVM extends AppCompatActivity {
+
+    private static final int PERMISSION_REQUEST = 0;
+    private static final int RESULT_LOAD_IMAGE = 1;
+
 
     HubbaModel model = HubbaModel.getInstance();
     User user;
@@ -60,12 +69,21 @@ public class ProfileVM extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED){
+                    requestPermissions(new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST);
+                }*/
+
+
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+
             }
         });
     }
 
     private void initImage() {
-        //TODO
-        //ProfilePic.setImageResource(R.drawable.);
+        ProfilePic.setImageResource(R.drawable.profilepic);
     }
 }
