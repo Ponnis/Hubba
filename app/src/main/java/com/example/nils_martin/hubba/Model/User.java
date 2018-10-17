@@ -12,6 +12,7 @@ public class User implements Observer, Friend {
     private String userName;
     private String email;
     private String password;
+    private String imagePath;
     private List<User> friends;
     private ArrayList<Habit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
@@ -21,7 +22,7 @@ public class User implements Observer, Friend {
     private boolean soundOn;
     private Themes ActiveTheme;
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, String imagePath) {
         this.userName = name;
         this.email = email;
         this.password = password;
@@ -64,13 +65,6 @@ public class User implements Observer, Friend {
         themeObservers.add(observer);
     }
 
-    public User() {
-
-    }
-
-    public ArrayList getHabits() {
-        return habits;
-    }
 
     public void addHabit (Habit habit) {
         habits.add(habit);
@@ -80,20 +74,44 @@ public class User implements Observer, Friend {
         habits.remove(habit);
     }
 
-    public List getAchievements() {
-        return achievements;
-    }
-
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String string){
+        this.userName = string;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String string){
+        this.email = string;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String string){
+        this.password = string;
+    }
+
+    public void setImagePath(String string){
+        this.imagePath = string;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public ArrayList getHabits() {
+        return habits;
+    }
+
+    public List getAchievements() {
+        return achievements;
     }
 
     //TODO test the update method
@@ -133,4 +151,6 @@ public class User implements Observer, Friend {
 
 
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +31,9 @@ public class ProfileEditInformationVM extends AppCompatActivity implements Thema
         init();
     }
 
+    /**
+     * A method that initializes the different objects that exists in the View, as well as giving listeners to the buttons
+     */
     private void init() {
         Username = (TextView) findViewById(R.id.profileEditUsername);
         Email = (TextView) findViewById(R.id.profileEditEmail);
@@ -60,7 +64,9 @@ public class ProfileEditInformationVM extends AppCompatActivity implements Thema
                         }
                     }
                     //TODO Ad changes to the User
-                    //hubbaModel.getCurrentUser().
+                    hubbaModel.getCurrentUser().setUserName(Username.getText().toString());
+                    hubbaModel.getCurrentUser().setEmail(Email.getText().toString());
+                    finish();
                 }
             }
         });
