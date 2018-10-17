@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ImageButton;
@@ -52,6 +53,9 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ImageButton calendarBtn;
     private ImageButton menuButton;
     public static Habit openHabit = new Habit("");
+
+    private int listItemHeight;
+    private int dividerHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,6 +195,12 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         fillLists(eveningListView, eveningAdapter, habitEveningString);
         fillLists(nightListView, nightAdapter, habitNightString);
         fillLists(doneListView, doneAdapter, habitDoneString);
+
+        adjustListHeight(morningListView, habitMorningString);
+        adjustListHeight(middayListView, habitMiddayString);
+        adjustListHeight(eveningListView, habitEveningString);
+        adjustListHeight(nightListView, habitNightString);
+        adjustListHeight(doneListView, habitDoneString);
     }
 
     /**
@@ -220,6 +230,19 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         habitEveningString.clear();
         habitNightString.clear();
         habitDoneString.clear();
+    }
+
+    private void adjustListHeight(ListView listView, List<String> strings){
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = calculateHeight(strings);
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+
+    private int calculateHeight(List<String> strings){
+        int num = strings.size();
+        int height = listItemHeight*(num +1)+ dividerHeight*num;
+        return height;
     }
 
     /**
