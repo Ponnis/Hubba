@@ -57,7 +57,7 @@ public class LoginVM extends AppCompatActivity{
     //Should also be in controller?
     private void checkLoginAcceptance(){
         for(User user: userList){
-            if(user.getName().equals(Username.getText().toString())){
+            if(user.getUserName().equals(Username.getText().toString())){
                 if(user.getPassword().equals(Password.getText().toString())){
                     Intent intent = new Intent(LoginVM.this, MainActivityVM.class);
                     startActivity(intent);

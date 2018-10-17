@@ -26,13 +26,11 @@ public class CreateUserVM extends AppCompatActivity {
         NewEmail = (EditText)findViewById(R.id.txtNewEmail);
         Button createNewUser = (Button) findViewById(R.id.btnCreateNewUser);
 
-        createNewUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!NewUsername.getText().toString().isEmpty() && !NewEmail.getText().toString().isEmpty()
-                        && !NewPassword.getText().toString().isEmpty()){
-                    addUser();
-                }
+        createNewUser.setOnClickListener(v -> {
+
+            if(!NewUsername.getText().toString().isEmpty() && !NewEmail.getText().toString().isEmpty()
+                    && !NewPassword.getText().toString().isEmpty()){
+                addUser();
             }
         });
     }
