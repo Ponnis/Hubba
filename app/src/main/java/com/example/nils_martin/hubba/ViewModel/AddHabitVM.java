@@ -84,30 +84,22 @@ public class AddHabitVM extends AppCompatActivity {
 
         createdHabit = new Habit("", calendarDaysList);
 
-        habitName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
+        habitName.setOnClickListener(v -> takeAwayWrongMessage());
+
+        save.setOnClickListener(v -> {
+            makeCalendarDaysList();
+
+            createdHabit.setTitle(habitName.getText().toString());
+            createdHabit.setDayToDo(calendarDaysList);
+
+            if(checkIfAllIsFillIn()) {
+                MainActivityVM.habits.add(createdHabit);
+                endActivity();
             }
-        });
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeCalendarDaysList();
-
-                createdHabit.setTitle(habitName.getText().toString());
-                createdHabit.setDayToDo(calendarDaysList);
-
-                if(checkIfAllIsFillIn()) {
-                    MainActivityVM.habits.add(createdHabit);
-                    endActivity();
-                }
-                else {
-                    wrongMesTxtV.setVisibility(View.VISIBLE);
-                    wrongMesTxtV.setText("You must fill in everything");
-                    wrongMesTxtV.setTextColor(Color.RED);
-                }
+            else {
+                wrongMesTxtV.setVisibility(View.VISIBLE);
+                wrongMesTxtV.setText("You must fill in everything");
+                wrongMesTxtV.setTextColor(Color.RED);
             }
         });
 

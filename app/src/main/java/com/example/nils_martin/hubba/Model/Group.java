@@ -9,12 +9,12 @@ import java.util.List;
 public class  Group {
 
     private String groupName;
-    private List<User> usersInGroup;
+    private List<Friend> usersInGroup;
    private  Habit habit;
 
-    public Group(String groupName){
+    public Group(String groupName, ArrayList<Friend> friends){
         this.groupName = groupName;
-        usersInGroup = new ArrayList<>();
+        usersInGroup = friends;
     }
     //Ska delegeras till GroupHabitType istället? Dock får den inte veta något om gruppen då det är uppåt
     
@@ -24,7 +24,7 @@ public class  Group {
         }
     }
 
-    private List<User> getUsersInGroup(){
+    private List<Friend> getUsersInGroup(){
         return this.usersInGroup;
     }
 }
