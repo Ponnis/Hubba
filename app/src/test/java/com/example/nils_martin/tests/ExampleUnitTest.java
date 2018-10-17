@@ -16,7 +16,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testCreateUser(){
-        User user = new User("bla", "bla", "bla");
+        User user = new User("bla", "bla", "bla", "bla");
         assertNotNull(user);
     }
 
