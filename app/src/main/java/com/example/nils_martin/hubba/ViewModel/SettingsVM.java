@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.R;
 
 public class SettingsVM extends AppCompatActivity {
@@ -25,19 +27,25 @@ public class SettingsVM extends AppCompatActivity {
     Spinner moodSpinner;
 
     private boolean isUserInteracting;
-    private enum ColorThemes{
-        ELITE, PinkFluffy
+    private HubbaModel model = HubbaModel.getInstance();
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getApplication().getSharedPreferences("Themes", Context.MODE_PRIVATE);
         String currentTheme = sharedPreferences.getString("nameOfHabit","DEFAULT");
-        if(currentTheme.equals(ColorThemes.ELITE.toString())){
+        if(currentTheme.equals(Themes.ELITE.toString())){
             setTheme(R.style.Elite);
+            model.setTheme(Themes.ELITE);
         }
-        else setTheme(R.style.PinkFluffy);
+        else if(currentTheme.equals(Themes.STANDARD.toString())){
+          setTheme(R.style.Standard);
+          model.setTheme(Themes.STANDARD);
+        }
+        else{
+            setTheme(R.style.PinkFluffy);
+            model.setTheme(Themes.ELITE);
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_settings);
@@ -54,11 +62,11 @@ public class SettingsVM extends AppCompatActivity {
     }
 
     private void initSpinners() {
-        themeSpinner.setAdapter(new ArrayAdapter<ColorThemes>(this, android.R.layout.simple_list_item_1, ColorThemes.values()));
+        themeSpinner.setAdapter(new ArrayAdapter<Themes>(this, android.R.layout.simple_list_item_1, Themes.values()));
         themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ColorThemes chosenOne = (ColorThemes) themeSpinner.getSelectedItem();
+                Themes chosenOne = (Themes) themeSpinner.getSelectedItem();
                 int chosenThemePos = themeSpinner.getSelectedItemPosition();
                 SharedPreferences sharedPreferences = getApplication().getSharedPreferences("Themes", 0);
                 SharedPreferences.Editor prefeditor = sharedPreferences.edit();

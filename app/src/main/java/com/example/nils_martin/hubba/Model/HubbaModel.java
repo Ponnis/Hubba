@@ -44,6 +44,15 @@ public class HubbaModel {
 
         this.users = users;
     }
+    public Themes getTheme(){
+        return currentUser.getTheme();
+    }
+    public void setTheme(Themes theme){
+        currentUser.setTheme(theme);
+    }
+    public void addThemeListener(ThemableObserver observer){
+        currentUser.addThemeObserver(observer);
+    }
 
     public void addUser (User user){
         getUsers().add(user);

@@ -13,13 +13,34 @@ public class User implements Observer {
     private List<User> friends;
     private ArrayList<Habit> habits;
     private ArrayList<Achievement> achievements;
+    private ArrayList<ThemableObserver> themeObservers;
+    //User Settings
     private boolean allowNotifications;
     private boolean soundOn;
+    private Themes theme = Themes.STANDARD;
 
     public User(String name, String email, String password) {
         this.userName = name;
         this.email = email;
         this.password = password;
+        this.theme = Themes.STANDARD;
+    }
+    public void setTheme(Themes theme){
+        this.theme = theme;
+        notifyThemeObservers(themeObservers);
+
+    }
+    public Themes getTheme(){
+        return theme;
+    }
+    private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers){
+        for (ThemableObserver theme: themeObservers) {
+            theme.updateTheme(this.theme);
+            theme.recreateActivity();
+        }
+    }
+    public void addThemeObserver(ThemableObserver observer ){
+        themeObservers.add(observer);
     }
 
     public ArrayList getHabits() {
