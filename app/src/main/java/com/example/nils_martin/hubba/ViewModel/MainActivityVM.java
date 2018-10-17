@@ -182,9 +182,6 @@ public class MainActivityVM extends AppCompatActivity {
                     case NIGHT:
                         habitNightString.add(habit.getTitle(habit));
                         break;
-                    case DONE:
-                        habitDoneString.add(habit.getTitle(habit));
-                        break;
                 }
             }
 

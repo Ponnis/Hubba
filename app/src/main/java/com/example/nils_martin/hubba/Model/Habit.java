@@ -12,8 +12,7 @@ public class Habit extends Observable {
     private int groupmembersDoneCount;
     private int streak;
     private boolean isDone;
-    private boolean isActive;
-    private boolean enableNotifications;
+    private boolean reminderOn;
     private HabitTypeState habitTypeState;
     private State STATE;
     private Frequency FREQUENCY;
@@ -23,16 +22,14 @@ public class Habit extends Observable {
         this.title = title;
         this.streak = 0;
         this.isDone = false;
-        this.isActive = true;
-        this.enableNotifications = false;
+        this.reminderOn = false;
     }
 
     public Habit(String title, List<Integer> days) {
         this.title = title;
         this.streak = 0;
         this.isDone = false;
-        this.isActive = true;
-        this.enableNotifications = false;
+        this.reminderOn = false;
         this.dayToDo = days;
     }
 
@@ -71,13 +68,15 @@ public class Habit extends Observable {
     public void upGroupMembersDoneCount(){
         groupmembersDoneCount++;
     }
-    public void setActive(Habit habit){
-        habit.isActive = !habit.isActive;
+
+    public void reminderEnabled(Habit habit){
+        habit.reminderOn = true;
     }
 
-    public void setNotifications(Habit habit){
-        habit.enableNotifications = !habit.enableNotifications;
+    public void reminderDisabled(Habit habit){
+        habit.reminderOn = false;
     }
+
     public int getGroupmembersDoneCount(){
         return groupmembersDoneCount;
     }

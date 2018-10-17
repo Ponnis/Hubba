@@ -187,12 +187,14 @@ public class AddHabitVM extends AppCompatActivity {
                     minSpr.setVisibility(View.VISIBLE);
                     timeTxtV.setVisibility(View.VISIBLE);
                     colontxtV.setVisibility(View.VISIBLE);
+                    createdHabit.reminderEnabled(createdHabit);
                 }
                 else {
                     hourSpr.setVisibility(View.INVISIBLE);
                     minSpr.setVisibility(View.INVISIBLE);
                     timeTxtV.setVisibility(View.INVISIBLE);
                     colontxtV.setVisibility(View.INVISIBLE);
+                    createdHabit.reminderDisabled(createdHabit);
                 }
             }
         });
