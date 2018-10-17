@@ -7,10 +7,12 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class Adapter extends ArrayAdapter<String>  {
     LayoutInflater layoutInflater;
     MainActivityVM mainActivityVM;
     String title;
+    TextView textView;
+    CheckBox checkBox;
 
     public Adapter(Context context, MainActivityVM mainActivityVM){
         super(context, 0);
@@ -39,20 +43,48 @@ public class Adapter extends ArrayAdapter<String>  {
         view = layoutInflater.inflate(R.layout.habit_list_item, parent, false);
         String string = getItem(position);
         title = string;
-        TextView name = (TextView) view.findViewById(R.id.listItemTextView);
-        CheckBox checkBox = view.findViewById(R.id.checkboxIsDone);
-        name.setText(string);
-        name.setOnClickListener(new View.OnClickListener() {
+
+        initView(view);
+
+        textView.setText(title);
+        setCheckbox(title);
+
+        textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mainActivityVM.findHabit(title);
                 mainActivityVM.clicked(v);
             }
         });
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Habit habit = mainActivityVM.getHabit(title);
+                if(habit.getIsDone()){
+                    habit.notDone();
+                    checkBox.setChecked(false);
+                }else{
+                    habit.isDone();
+                    checkBox.setChecked(true);
+                }
+                mainActivityVM.checked(v);
+            }
+        });
+
         return view;
     }
 
+    private void initView(View view){
+        textView = view.findViewById(R.id.listItemTextView);
+        checkBox = view.findViewById(R.id.checkboxIsDone);
+    }
 
+    private void setCheckbox(String string){
+        Habit habit = mainActivityVM.getHabit(string);
+        Boolean bool = habit.getIsDone();
+        checkBox.setChecked(bool);
+    }
 
 
 }

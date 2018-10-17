@@ -40,8 +40,6 @@ public class MainActivityVM extends AppCompatActivity {
     private ArrayAdapter<String> nightAdapter;
     private ArrayAdapter<String> doneAdapter;
 
-    List<EventListener> listeners;
-
     private List<Habit> habits = HubbaModel.getInstance().getCurrentUser().getHabits();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
@@ -159,8 +157,6 @@ public class MainActivityVM extends AppCompatActivity {
     */
     private void updateLists () {
         clearStrings();
-
-     //   Iterator<Habit> habitIterator = habits.iterator();
         Iterator<Habit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             Habit habit = habitIterator.next();
@@ -182,9 +178,7 @@ public class MainActivityVM extends AppCompatActivity {
                         break;
                 }
             }
-
         }
-
         fillLists(morningListView, morningAdapter, habitMorningString);
         fillLists(middayListView, middayAdapter, habitMiddayString);
         fillLists(eveningListView, eveningAdapter, habitEveningString);
@@ -225,10 +219,12 @@ public class MainActivityVM extends AppCompatActivity {
     When a list item is clicked on
      */
     public void clicked(View view){
-        /*TextView textView = findViewById(R.id.listItemTextView);
-        findHabit(textView.getText().toString());*/
         Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
         startActivity(intent);
+    }
+
+    public void checked(View view){
+        initView();
     }
 
     /**
@@ -242,7 +238,7 @@ public class MainActivityVM extends AppCompatActivity {
         }
     }
 
-    private Habit getHabit(String string){
+    protected Habit getHabit(String string){
         for(Habit habit: habits){
             if (habit.getTitle(habit).equals(string)) {
                 return habit;

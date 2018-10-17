@@ -41,11 +41,18 @@ public class Habit extends Observable {
         return this.habitTypeState;
     }
 
-    public void setDone(Habit habit){
-        habit.isDone = !habit.isDone;
+    public void setDone(){
+        this.isDone = true;
         upStreak(this);
-
     }
+
+    public void isDone(){
+        this.isDone = true;
+    }
+    public void notDone(){
+        this.isDone = false;
+    }
+
     //TODO make two different events?
     public void notifyObservers(){
         if (habitTypeState.toString().equals("GroupHabit")){
@@ -70,12 +77,16 @@ public class Habit extends Observable {
         groupmembersDoneCount++;
     }
 
-    public void reminderEnabled(Habit habit) {
-        habit.reminderOn = true;
+    public void reminderEnabled() {
+        this.reminderOn = true;
     }
 
-    public void reminderDisabled(Habit habit){
-        habit.reminderOn = false;
+    public void reminderDisabled(){
+        this.reminderOn = false;
+    }
+
+    public boolean isReminderOn() {
+        return reminderOn;
     }
 
     public int getGroupmembersDoneCount(){
