@@ -93,7 +93,6 @@
         android:autoText="false"
         android:gravity="center"
         android:text="Hubba"
-        android:textColor="@android:color/holo_green_dark"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/txtNewUsername"
         app:layout_constraintEnd_toEndOf="parent"
