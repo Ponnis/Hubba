@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
+/**
+ * Custom adapter to get habit list items to show i listView
+ */
+
 public class Adapter extends ArrayAdapter<String>  {
 
     LayoutInflater layoutInflater;
@@ -27,17 +31,6 @@ public class Adapter extends ArrayAdapter<String>  {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mainActivityVM = mainActivityVM;
     }
-
-    /*@Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        HabitListItemVM habitListItemVM = getItem(position);
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.habit_list_item, parent, false);
-        }
-        //TextView listItem = (TextView) convertView.findViewById(R.id.listItemTextView);
-        //listItem.setText(habitListItemVM.textView.toString());
-        return convertView;
-    }*/
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
