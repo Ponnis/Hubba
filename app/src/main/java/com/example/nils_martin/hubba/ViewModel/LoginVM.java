@@ -27,7 +27,7 @@ public class LoginVM extends AppCompatActivity{
         setContentView(R.layout.login);
         //Should be in controller?
         if (userList.size() == 0){
-            userList.add(new User("admin", "testemail@gmail.com", "1234"));
+            userList.add(new User("admin", "testemail@gmail.com", "1234", null));
         }
 
         Username = (EditText)findViewById(R.id.txtUsername);

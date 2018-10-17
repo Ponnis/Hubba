@@ -29,8 +29,7 @@ public class ProfileVM extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
 
 
-    private HubbaModel model = HubbaModel.getInstance();
-    private User user;
+    private HubbaModel hubbaModel = HubbaModel.getInstance();
     private TextView Username;
     private TextView Email;
     private ImageView ProfilePic;
@@ -38,6 +37,11 @@ public class ProfileVM extends AppCompatActivity {
     private Button EditInformation;
     private Button ChangePassword;
 
+    /**
+     * A method that tells the program what to do when this class is called.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,16 +50,20 @@ public class ProfileVM extends AppCompatActivity {
         init();
     }
 
+    /**
+     * A method that calls other initializing methods
+     */
     private void init(){
         initFindByView();
-        getUserInformation();
-        setUserInformaion();
+        setUserInformation();
         initButtons();
         initImage();
     }
 
 
-
+    /**
+     * A method that initializes the different objects in the View
+     */
     private void initFindByView(){
         Username = findViewById(R.id.userNameTextView);
         Email = findViewById(R.id.usersEmailTextView);
@@ -65,17 +73,26 @@ public class ProfileVM extends AppCompatActivity {
         ChangePassword = findViewById(R.id.changePassBtn);
     }
 
-    private void getUserInformation(){
-        user = model.getCurrentUser();
+
+    /**
+     * A method that updates the textviews with the userinformation that exists
+     */
+    private void setUserInformation(){
+        Username.setText(hubbaModel.getCurrentUser().getUserName());
+        Email.setText(hubbaModel.getCurrentUser().getEmail());
     }
 
-    private void setUserInformaion(){
-        Username.setText(user.getUserName());
-        Email.setText(user.getEmail());
-    }
-
+    /**
+     * A method that initializes the buttons with their onClickListeners
+     */
     private void initButtons() {
         ChangePic.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Gives the user the opportunity in the app to allow access to the users private pictures
+             *
+             * @param v
+             */
             @Override
             public void onClick (View v){
 
@@ -115,10 +132,25 @@ public class ProfileVM extends AppCompatActivity {
 
     }
 
+    /**
+     * A method that sets the Profile picture to a default picture if there isn't one from the start, otherwise it sets the profilepicture to the one chosen
+     */
     private void initImage() {
-        ProfilePic.setImageResource(R.drawable.profilepic);
+        if(hubbaModel.getCurrentUser().getImagePath() == null){
+            ProfilePic.setImageResource(R.drawable.profilepic);
+        }
+        else {
+            ProfilePic.setImageBitmap(BitmapFactory.decodeFile(hubbaModel.getCurrentUser().getImagePath()));
+        }
     }
 
+    /**
+     * A method that checks if the user has agreed that the application can access the users private photos
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode){
@@ -134,6 +166,13 @@ public class ProfileVM extends AppCompatActivity {
         }
     }
 
+    /**
+     * A method that sets an imported picture path to an imageView.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){
@@ -144,13 +183,19 @@ public class ProfileVM extends AppCompatActivity {
                     Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                     cursor.moveToFirst();
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String picturePath = cursor.getString(columnIndex);
+                    hubbaModel.getCurrentUser().setImagePath(cursor.getString(columnIndex));
                     cursor.close();
-                    ProfilePic.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-
-
+                    ProfilePic.setImageBitmap(BitmapFactory.decodeFile(hubbaModel.getCurrentUser().getImagePath()));
                 }
         }
+    }
+
+    /**
+     * A method that updates the shown userinformation when the activity restarts from being paused due to starting another activity
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUserInformation();
     }
 }
