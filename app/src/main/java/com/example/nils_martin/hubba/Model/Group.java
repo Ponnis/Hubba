@@ -12,9 +12,10 @@ public class  Group {
     private List<Friend> usersInGroup;
    private  Habit habit;
 
-    public Group(String groupName, ArrayList<Friend> friends){
+    public Group(String groupName, List<Friend> usersInGroup,Habit habit){
         this.groupName = groupName;
-        usersInGroup = friends;
+        this.usersInGroup = usersInGroup;
+        this.habit = habit;
     }
     //Ska delegeras till GroupHabitType istället? Dock får den inte veta något om gruppen då det är uppåt
     
