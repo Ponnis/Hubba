@@ -7,18 +7,7 @@ import java.util.List;
 import java.util.Observable;
 
 public interface IUser {
-     String userName = null;
-     String email = null;
-     String password = null;
-     String imagePath = null;
-     List<User> friends = null;
-     ArrayList<Habit> habits = new ArrayList<>();
-     ArrayList<Achievement> achievements= null;
-     ArrayList<ThemableObserver> themeObservers = null;
-    //User Settings
-     boolean allowNotifications= Boolean.parseBoolean(null);
-     boolean soundOn= Boolean.parseBoolean(null);
-    Themes ActiveTheme = null;
+
 
 
     // Takes an ENUM from Themes and set
