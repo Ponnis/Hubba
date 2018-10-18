@@ -31,9 +31,9 @@ public class HubbaModel {
     public ArrayList<User> getUsers() {
         return users;
     }
-    //Defensive copying.
+
     public User getCurrentUser() {
-        return new User(this.currentUser.getUserName(), this.currentUser.getEmail(),this.currentUser.getPassword());
+        return currentUser;
     }
 
     public void setCurrentUser(User user) {
@@ -43,6 +43,19 @@ public class HubbaModel {
     public void setUsers (ArrayList < User > users) {
 
         this.users = users;
+    }
+    public int getTheme(){
+        return currentUser.getTheme();
+    }
+    public String themeEnumToString(){
+        return currentUser.themeEnumToString();
+    }
+    // Law of demeter methods for themes
+    public void setTheme(Themes theme){
+        currentUser.setTheme(theme);
+    }
+    public void addThemeListener(ThemableObserver observer){
+        currentUser.addThemeObserver(observer);
     }
 
     public void addUser (User user){

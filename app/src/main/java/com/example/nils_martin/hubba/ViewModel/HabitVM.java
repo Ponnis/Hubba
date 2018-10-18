@@ -6,10 +6,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
 
-public class HabitVM extends AppCompatActivity {
+public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
     TextView habitTitleTextView;
     TextView timeOfDayTextView;
@@ -25,15 +27,18 @@ public class HabitVM extends AppCompatActivity {
     Habit habit = new Habit("");
 
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(HubbaModel.getInstance().getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habit_view);
-
+        HubbaModel.getInstance().addThemeListener(this);
         habit = MainActivityVM.openHabit;
         initFindView();
         init(habit);
     }
 
-    //connect textViews and buttons
+    /**
+     * connect textViews and buttons
+     */
     private void initFindView(){
         habitTitleTextView = findViewById(R.id.habitTitleTextView);
         timeOfDayTextView = findViewById(R.id.timeOfDayTextView);
@@ -47,9 +52,11 @@ public class HabitVM extends AppCompatActivity {
         editButton = findViewById(R.id.editButton);
     }
 
-    //set text
+    /**
+     * set text to habit title and states.
+     * @param habit
+     */
     private void init(Habit habit){
-
         habitTitleTextView.setText(habit.getTitle(habit));
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
         frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()));
@@ -57,6 +64,11 @@ public class HabitVM extends AppCompatActivity {
         streakDaysTextView.setText(String.valueOf(habit.getStreak(habit)) + " days");
     }
 
+    /**
+     * Turn string ENUM to lowercase
+     * @param string
+     * @return
+     */
     public String toLowerCase(String string){
         String temp = string;
         char[] ch = temp.toLowerCase().toCharArray();
@@ -65,4 +77,8 @@ public class HabitVM extends AppCompatActivity {
         return temp;
     }
 
+    @Override
+    public void recreateActivity() {
+        recreate();
+    }
 }

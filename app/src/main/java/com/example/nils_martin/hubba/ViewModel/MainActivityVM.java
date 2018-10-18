@@ -3,20 +3,20 @@ package com.example.nils_martin.hubba.ViewModel;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.ImageButton;
 
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
+import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 import com.google.gson.Gson;
@@ -24,11 +24,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class MainActivityVM extends AppCompatActivity {
+public class MainActivityVM extends AppCompatActivity implements ThemableObserver {
     HubbaModel model = HubbaModel.getInstance();
     private ListView morningListView;
     private ListView middayListView;
@@ -42,7 +43,7 @@ public class MainActivityVM extends AppCompatActivity {
     private ArrayAdapter<String> nightAdapter;
     private ArrayAdapter<String> doneAdapter;
 
-    public static List<Habit> habits = new ArrayList<>();
+    private List<Habit> habits = HubbaModel.getInstance().getCurrentUser().getHabits();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
@@ -53,14 +54,21 @@ public class MainActivityVM extends AppCompatActivity {
     private ImageButton menuButton;
     public static Habit openHabit = new Habit("");
 
+    private int listItemHeight = 80;
+    private int dividerHeight = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int currentTheme = model.getTheme();
+        setTheme(currentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initView();
-        initList();
         loadData();
+        System.out.println(model);
+
+        model.addThemeListener(this);
     }
 
     @Override
@@ -75,7 +83,9 @@ public class MainActivityVM extends AppCompatActivity {
         super.onPause();
     }
 
-    //saves the userlist
+    /**
+     *saves the userlist
+     */
     private void saveData(){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -84,7 +94,10 @@ public class MainActivityVM extends AppCompatActivity {
         editor.putString("userlist",json);
         editor.apply();
     }
-    //loads the userlist into hubbamodels userlist
+
+    /**
+     * loads the userlist into hubbamodels userlist
+     */
     private void loadData(){
         SharedPreferences sharedPreferences=getSharedPreferences("shared preferences",MODE_PRIVATE);
         Gson gson = new Gson();
@@ -96,11 +109,9 @@ public class MainActivityVM extends AppCompatActivity {
          }
     }
 
-    private void initList() {
-        // TODO: 2018-10-05 Implement on click listener for the LinearLayouts that fetch position
-    }
-
-    //Instantiates the different views and buttons on the MainPage.
+    /**
+     * Instantiates the different views and buttons on the MainPage.
+     */
     private void initView() {
         morningListView = findViewById(R.id.morningListView);
         middayListView = findViewById(R.id.middayListView);
@@ -108,11 +119,11 @@ public class MainActivityVM extends AppCompatActivity {
         nightListView = findViewById(R.id.nightListView);
         doneListView = findViewById(R.id.doneListView);
 
-        morningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        middayAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        eveningAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        nightAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
-        doneAdapter = new ArrayAdapter<>(this, R.layout.habit_list_item, R.id.listItemTextView);
+        morningAdapter = new Adapter(this, this);
+        middayAdapter = new Adapter(this, this);
+        eveningAdapter = new Adapter(this, this);
+        nightAdapter = new Adapter(this, this);
+        doneAdapter = new Adapter(this, this);
 
         menuButton = findViewById((R.id.menuBtn));
         calendarBtn = findViewById(R.id.calendarBtn);
@@ -125,6 +136,7 @@ public class MainActivityVM extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         calendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +144,7 @@ public class MainActivityVM extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,43 +156,48 @@ public class MainActivityVM extends AppCompatActivity {
         updateLists();
     }
 
-    /*
+    /**
     Goes through the habit list and put the string title into the correct list depending on state.
     and then populates the ListViews with corresponding habits.
     */
     private void updateLists () {
         clearStrings();
-
         Iterator<Habit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             Habit habit = habitIterator.next();
-            switch (habit.getSTATE()) {
-                case MORNING:
-                    habitMorningString.add(habit.getTitle(habit));
-                    break;
-                case MIDDAY:
-                    habitMiddayString.add(habit.getTitle(habit));
-                    break;
-                case EVENING:
-                    habitEveningString.add(habit.getTitle(habit));
-                    break;
-                case NIGHT:
-                    habitNightString.add(habit.getTitle(habit));
-                    break;
-                case DONE:
-                    habitDoneString.add(habit.getTitle(habit));
-                    break;
+            if(habit.getIsDone()){
+                habitDoneString.add(habit.getTitle(habit));
+            }else{
+                switch (habit.getSTATE()) {
+                    case MORNING:
+                        habitMorningString.add(habit.getTitle(habit));
+                        break;
+                    case MIDDAY:
+                        habitMiddayString.add(habit.getTitle(habit));
+                        break;
+                    case EVENING:
+                        habitEveningString.add(habit.getTitle(habit));
+                        break;
+                    case NIGHT:
+                        habitNightString.add(habit.getTitle(habit));
+                        break;
+                }
             }
         }
-
         fillLists(morningListView, morningAdapter, habitMorningString);
         fillLists(middayListView, middayAdapter, habitMiddayString);
         fillLists(eveningListView, eveningAdapter, habitEveningString);
         fillLists(nightListView, nightAdapter, habitNightString);
         fillLists(doneListView, doneAdapter, habitDoneString);
+
+        adjustListHeight(morningListView, habitMorningString);
+        adjustListHeight(middayListView, habitMiddayString);
+        adjustListHeight(eveningListView, habitEveningString);
+        adjustListHeight(nightListView, habitNightString);
+        adjustListHeight(doneListView, habitDoneString);
     }
 
-    /*
+    /**
     Method to fill lists with habits by adding titles to adapters and setting to listviews
      */
     private void fillLists(ListView listView, ArrayAdapter<String> adapter, List<String> strings){
@@ -197,7 +215,7 @@ public class MainActivityVM extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    /*
+    /**
     method clearing all lists of strings
      */
     private void clearStrings(){
@@ -208,20 +226,46 @@ public class MainActivityVM extends AppCompatActivity {
         habitDoneString.clear();
     }
 
-    /*
+    /**
+     * methods to adjust height of listviews depending on number of items
+     * in list
+     * @param listView
+     * @param strings
+     */
+    private void adjustListHeight(ListView listView, List<String> strings){
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = calculateHeight(strings);
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+
+    /**
+     * method to calculate height and return int 
+     * @param strings
+     * @return int
+     */
+    private int calculateHeight(List<String> strings){
+        int num = strings.size();
+        int height = listItemHeight*(num +1)+ dividerHeight*num;
+        return height;
+    }
+
+    /**
     When a list item is clicked on
      */
     public void clicked(View view){
-        TextView textView = findViewById(R.id.listItemTextView);
-        findHabit(textView.getText().toString());
         Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
         startActivity(intent);
     }
 
-    /*
+    public void checked(View view){
+        initView();
+    }
+
+    /**
     Find which habit is clicked on and set variable openhabit.
      */
-    private void findHabit(String string){
+    protected void findHabit(String string){
         for(Habit habit: habits){
             if(habit.getTitle(habit).equals(string)){
                 setOpenHabit(habit);
@@ -229,9 +273,22 @@ public class MainActivityVM extends AppCompatActivity {
         }
     }
 
+    protected Habit getHabit(String string){
+        for(Habit habit: habits){
+            if (habit.getTitle(habit).equals(string)) {
+                return habit;
+            }
+        }
+        return null;
+    }
+
     private void setOpenHabit (Habit habit){
         this.openHabit = habit;
     }
+
+
+    public void recreateActivity(){recreate();}
+
 }
 
 

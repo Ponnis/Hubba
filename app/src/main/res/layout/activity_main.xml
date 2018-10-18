@@ -101,7 +101,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:scrollbars="vertical"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:focusable="true"/>
 
             <TextView
                 android:id="@+id/textView3"
@@ -125,7 +126,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:scrollbars="none"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:focusable="true"/>
 
             <TextView
                 android:id="@+id/textView4"
@@ -150,7 +152,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:scrollbars="none"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:focusable="true"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -174,7 +177,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:scrollbars="none"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:focusable="true"/>
 
             <TextView
                 android:id="@+id/textView6"
@@ -198,7 +202,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:scrollbars="none"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:focusable="true"/>
 
 
         </LinearLayout>

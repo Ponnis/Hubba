@@ -15,13 +15,15 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.State;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddHabitVM extends AppCompatActivity {
+public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
 
     private EditText habitName;
@@ -35,14 +37,17 @@ public class AddHabitVM extends AppCompatActivity {
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
+    HubbaModel model = HubbaModel.getInstance();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(model.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
         init();
         makeAListOfDayCbx();
+        model.addThemeListener(this);
         update();
     }
 
@@ -89,6 +94,7 @@ public class AddHabitVM extends AppCompatActivity {
         save.setOnClickListener(v -> {
             makeCalendarDaysList();
 
+
             createdHabit.setTitle(habitName.getText().toString());
             createdHabit.setDayToDo(calendarDaysList);
 
@@ -100,6 +106,22 @@ public class AddHabitVM extends AppCompatActivity {
                 wrongMesTxtV.setVisibility(View.VISIBLE);
                 wrongMesTxtV.setText("You must fill in everything");
                 wrongMesTxtV.setTextColor(Color.RED);
+
+                createdHabit.setTitle(habitName.getText().toString());
+                createdHabit.setDaysToDo(calendarDaysList);
+
+                if(checkIfAllIsFillIn()) {
+                    //MainActivityVM.habits.add(createdHabit);
+                    HubbaModel.getInstance().getCurrentUser().addHabit(createdHabit);
+
+                    endActivity();
+                }
+                else {
+                    wrongMesTxtV.setVisibility(View.VISIBLE);
+                    wrongMesTxtV.setText("You must fill in everything");
+                    wrongMesTxtV.setTextColor(Color.RED);
+                }
+
             }
         });
 
@@ -179,12 +201,14 @@ public class AddHabitVM extends AppCompatActivity {
                     minSpr.setVisibility(View.VISIBLE);
                     timeTxtV.setVisibility(View.VISIBLE);
                     colontxtV.setVisibility(View.VISIBLE);
+                    createdHabit.reminderEnabled();
                 }
                 else {
                     hourSpr.setVisibility(View.INVISIBLE);
                     minSpr.setVisibility(View.INVISIBLE);
                     timeTxtV.setVisibility(View.INVISIBLE);
                     colontxtV.setVisibility(View.INVISIBLE);
+                    createdHabit.reminderDisabled();
                 }
             }
         });
@@ -322,5 +346,10 @@ public class AddHabitVM extends AppCompatActivity {
         finish();
         Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }
