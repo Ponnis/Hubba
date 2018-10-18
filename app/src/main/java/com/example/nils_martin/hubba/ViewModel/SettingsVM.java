@@ -29,17 +29,19 @@ public class SettingsVM extends AppCompatActivity implements ThemableObserver {
 
     private boolean isUserInteracting;
     private HubbaModel model = HubbaModel.getInstance();
+    Themehandler themehandler = new Themehandler();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(model.getTheme());
+        setTheme(themehandler.getTheme());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_settings);
         init();
         model.addThemeListener(this);
-        themeSpinner.setSelection(getIndex(themeSpinner,model.themeEnumToString()));
+        themeSpinner.setSelection(getIndex(themeSpinner,themehandler.getThemeToString()));
     }
     // Initiate the necessary.
     private void init(){

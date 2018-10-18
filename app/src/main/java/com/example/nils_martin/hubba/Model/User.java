@@ -39,20 +39,8 @@ public class User implements Observer, Friend {
     public String themeEnumToString(){
         return ActiveTheme.toString();
     }
-    public int getTheme(){
-        int returntheme = 0;
-        switch (ActiveTheme){
-            case ELITE:
-                returntheme = R.style.Elite;
-                break;
-            case STANDARD:
-                returntheme = R.style.Standard;
-                break;
-            case PINKFLUFFY:
-                returntheme = R.style.PinkFluffy;
-                break;
-        }
-        return returntheme;
+    public Themes getTheme(){
+        return ActiveTheme;
     }
     // Call recreateActivity on all that's in the Arrayist themeObservers.
     private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers){

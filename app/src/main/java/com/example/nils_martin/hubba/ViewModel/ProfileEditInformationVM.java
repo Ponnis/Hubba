@@ -16,6 +16,9 @@ import com.example.nils_martin.hubba.R;
 public class ProfileEditInformationVM extends AppCompatActivity implements ThemableObserver{
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
+    Themehandler themehandler = new Themehandler();
+
+
 
     private TextView Username;
     private TextView Email;
@@ -24,10 +27,10 @@ public class ProfileEditInformationVM extends AppCompatActivity implements Thema
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(hubbaModel.getTheme());
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile_edit_information);
-
+        themehandler.addThemeListener(this);
         init();
     }
 

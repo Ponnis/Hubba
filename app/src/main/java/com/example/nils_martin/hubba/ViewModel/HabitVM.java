@@ -13,6 +13,8 @@ import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
 
 public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
+    Themehandler themehandler = new Themehandler();
+
     TextView habitTitleTextView;
     TextView timeOfDayTextView;
     TextView frequencyTextView;
@@ -27,10 +29,10 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     Habit habit = new Habit("");
 
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(HubbaModel.getInstance().getTheme());
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habit_view);
-        HubbaModel.getInstance().addThemeListener(this);
+        themehandler.addThemeListener(this);
         habit = MainActivityVM.openHabit;
         initFindView();
         init(habit);

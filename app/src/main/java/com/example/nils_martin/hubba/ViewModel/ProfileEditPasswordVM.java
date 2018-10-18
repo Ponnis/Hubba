@@ -14,6 +14,8 @@ import com.example.nils_martin.hubba.R;
 public class ProfileEditPasswordVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
+    Themehandler themehandler = new Themehandler();
+
 
     private TextView CurrentPassword;
     private TextView NewPassword;
@@ -25,12 +27,11 @@ public class ProfileEditPasswordVM extends AppCompatActivity implements Themable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(hubbaModel.getTheme());
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile_edit_password);
-
+        themehandler.addThemeListener(this);
         init();
-        hubbaModel.addThemeListener(this);
     }
 
     /**

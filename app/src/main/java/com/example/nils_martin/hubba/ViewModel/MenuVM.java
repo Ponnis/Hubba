@@ -22,14 +22,16 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
     Button logOutButton;
     ImageButton backButton;
     HubbaModel model = HubbaModel.getInstance();
+    Themehandler themehandler = new Themehandler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(model.getTheme());
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         init();
-        model.addThemeListener(this);
+        themehandler.addThemeListener(this);
     }
 
     private void init(){
