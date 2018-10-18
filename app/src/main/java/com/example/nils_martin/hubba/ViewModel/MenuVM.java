@@ -20,6 +20,7 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
     Button friendsButton;
     Button helpButton;
     Button logOutButton;
+    Button myAchievementsButton;
     ImageButton backButton;
     HubbaModel model = HubbaModel.getInstance();
     Themehandler themehandler = new Themehandler();
@@ -48,6 +49,7 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
         friendsButton = findViewById(R.id.friendsBtn);
         helpButton = findViewById(R.id.helpBtn);
         logOutButton = findViewById(R.id.logOutButton);
+        myAchievementsButton = findViewById(R.id.myAchievementsBtn);
 
     }
 
@@ -61,6 +63,7 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
         friendsButtonOnClick();
         helpButtonOnClick();
         logOutButtonOnClick();
+        myAchievementsButtonOnClick();
 
     }
 
@@ -138,6 +141,19 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuVM.this, LoginVM.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+    private void myAchievementsButtonOnClick(){
+        myAchievementsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuVM.this, MyAchievementsVM.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK |
                         Intent.FLAG_ACTIVITY_NEW_TASK);
