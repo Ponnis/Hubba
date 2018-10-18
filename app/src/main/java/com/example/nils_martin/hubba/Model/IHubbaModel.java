@@ -15,7 +15,7 @@ public interface IHubbaModel {
 
     public void setUsers (ArrayList < User > users);
 
-    public int getTheme();
+    public Themes getTheme();
     public String themeEnumToString();
 
     // Law of demeter methods for themes
