@@ -22,18 +22,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/yourFriendsLinearLayout"
-        android:layout_width="395dp"
-        android:layout_height="581dp"
+    <ListView
+        android:id="@+id/yourFriendsListView"
+        android:layout_width="match_parent"
+        android:layout_height="565dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:clickable="true"
+        android:focusable="true"
         android:orientation="vertical"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yourFriendsTextView"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/yourFriendsTextView" />
 
 </android.support.constraint.ConstraintLayout>
