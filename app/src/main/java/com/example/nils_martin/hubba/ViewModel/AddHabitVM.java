@@ -52,6 +52,9 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         update();
     }
 
+    /**
+     * Initialize all the view attribute
+     */
     public void init() {
         habitName = findViewById(R.id.habitInput);
         save = findViewById(R.id.saveBtn);
@@ -86,36 +89,27 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         weekWrongImgV = findViewById(R.id.weekImgV);
     }
 
+    /**
+     * This method has all the setOnClickListener
+     */
     public void update() {
 
         createdHabit = new Habit("", calendarDaysList);
 
-        habitName.setOnClickListener(v -> takeAwayWrongMessage());
-
-        save.setOnClickListener(v -> {
-            makeCalendarDaysList();
-
-
-            createdHabit.setTitle(habitName.getText().toString());
-            createdHabit.setDaysToDo(calendarDaysList);
-
-            if(checkIfAllIsFillIn()) {
-                /// TODO: 2018-10-18 Inte snyggt!
-                model.getCurrentUser().getHabits().add(createdHabit);
-                endActivity();
+        habitName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
             }
-            else {
-                wrongMesTxtV.setVisibility(View.VISIBLE);
-                wrongMesTxtV.setText("You must fill in everything");
-                wrongMesTxtV.setTextColor(Color.RED);
+        });
 
-                createdHabit.setTitle(habitName.getText().toString());
-                createdHabit.setDaysToDo(calendarDaysList);
-
-                if(checkIfAllIsFillIn()) {
-                    //MainActivityVM.habits.add(createdHabit);
-                    HubbaModel.getInstance().getCurrentUser().addHabit(createdHabit);
-
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCalendarDaysList();
+                if (checkIfAllIsFillIn()) {
+                    /// TODO: 2018-10-18 Inte snyggt!
+                    model.getCurrentUser().getHabits().add(createdHabit);
                     endActivity();
                 }
                 else {
@@ -123,7 +117,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                     wrongMesTxtV.setText("You must fill in everything");
                     wrongMesTxtV.setTextColor(Color.RED);
                 }
-
             }
         });
 
