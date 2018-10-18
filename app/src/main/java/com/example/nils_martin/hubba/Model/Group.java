@@ -12,7 +12,7 @@ public class  Group {
     private List<Friend> usersInGroup;
    private  Habit habit;
 
-    public Group(String groupName, List<Friend> usersInGroup,Habit habit){
+    public Group(String groupName,List<Friend> usersInGroup,Habit habit){
         this.groupName = groupName;
         this.usersInGroup = usersInGroup;
         this.habit = habit;
