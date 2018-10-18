@@ -41,7 +41,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ArrayAdapter<String> nightAdapter;
     private ArrayAdapter<String> doneAdapter;
 
-    private List<Habit> habits = HubbaModel.getInstance().getCurrentUser().getHabits();
+    private List<Habit> habits = model.getCurrentUser().getHabits();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
@@ -64,7 +64,6 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
 
         initView();
         loadData();
-        System.out.println(model);
         themehandler.addThemeListener(this);
     }
 
