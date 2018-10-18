@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class User implements Observer, Friend {
+public class User implements Observer, Friend, IUser {
 
     private String userName;
     private String email;

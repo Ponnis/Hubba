@@ -2,7 +2,7 @@ package com.example.nils_martin.hubba.Model;
 
 import java.util.ArrayList;
 
-public class HubbaModel {
+public class HubbaModel implements IHubbaModel {
     private static HubbaModel instance = null;
     private ArrayList<User> users = new ArrayList<>();
     private User currentUser;
