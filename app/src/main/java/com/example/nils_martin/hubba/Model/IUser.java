@@ -14,9 +14,7 @@ public interface IUser {
     public void setTheme(Themes theme);
     //  Returns the int R.style associated with a specific theme
     public String themeEnumToString();
-    public int getTheme();
-    // Call recreateActivity on all that's in the Arrayist themeObservers.
-    void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers);
+    public Themes getTheme();
     // Adds the ThemableObserver to the observer list themeObservers.
     public void addThemeObserver(ThemableObserver observer );
 
@@ -56,5 +54,4 @@ public interface IUser {
 
     public List<User> getFriends();
 
-    void checkHabitDone();
 }
