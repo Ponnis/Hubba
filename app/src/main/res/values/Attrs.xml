@@ -3,8 +3,12 @@
     <declare-styleable name="ds">
         <attr name="LoggOutColorBackground" format="color"/>
         <attr name="LoggOutColorText" format="color"/>
+
         <attr name="GradeStartNEndColor" format="color"/>
         <attr name="GradeCenterColor" format="color"/>
+
+        <attr name="FloatButtonColor" format="color"/>
+        <attr name="FloatImageColor" format="color"/>
 
 
     </declare-styleable>

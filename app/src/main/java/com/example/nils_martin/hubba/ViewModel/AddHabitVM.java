@@ -15,13 +15,15 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.State;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddHabitVM extends AppCompatActivity {
+public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
 
     private EditText habitName;
@@ -35,14 +37,18 @@ public class AddHabitVM extends AppCompatActivity {
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
+    HubbaModel model = HubbaModel.getInstance();
+    Themehandler themehandler = new Themehandler();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
         init();
         makeAListOfDayCbx();
+        themehandler.addThemeListener(this);
         update();
     }
 
@@ -84,30 +90,40 @@ public class AddHabitVM extends AppCompatActivity {
 
         createdHabit = new Habit("", calendarDaysList);
 
-        habitName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-            }
-        });
+        habitName.setOnClickListener(v -> takeAwayWrongMessage());
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeCalendarDaysList();
+        save.setOnClickListener(v -> {
+            makeCalendarDaysList();
+
+
+            createdHabit.setTitle(habitName.getText().toString());
+            createdHabit.setDaysToDo(calendarDaysList);
+
+            if(checkIfAllIsFillIn()) {
+                /// TODO: 2018-10-18 Inte snyggt!
+                model.getCurrentUser().getHabits().add(createdHabit);
+                endActivity();
+            }
+            else {
+                wrongMesTxtV.setVisibility(View.VISIBLE);
+                wrongMesTxtV.setText("You must fill in everything");
+                wrongMesTxtV.setTextColor(Color.RED);
 
                 createdHabit.setTitle(habitName.getText().toString());
-                createdHabit.setDayToDo(calendarDaysList);
+                createdHabit.setDaysToDo(calendarDaysList);
 
                 if(checkIfAllIsFillIn()) {
-                    MainActivityVM.habits.add(createdHabit);
+                    //MainActivityVM.habits.add(createdHabit);
+                    HubbaModel.getInstance().getCurrentUser().addHabit(createdHabit);
+
                     endActivity();
                 }
                 else {
                     wrongMesTxtV.setVisibility(View.VISIBLE);
-                    wrongMesTxtV.setText("YOU MUST FILL IN EVERYTHING!");
+                    wrongMesTxtV.setText("You must fill in everything");
                     wrongMesTxtV.setTextColor(Color.RED);
                 }
+
             }
         });
 
@@ -187,17 +203,22 @@ public class AddHabitVM extends AppCompatActivity {
                     minSpr.setVisibility(View.VISIBLE);
                     timeTxtV.setVisibility(View.VISIBLE);
                     colontxtV.setVisibility(View.VISIBLE);
+                    createdHabit.reminderEnabled();
                 }
                 else {
                     hourSpr.setVisibility(View.INVISIBLE);
                     minSpr.setVisibility(View.INVISIBLE);
                     timeTxtV.setVisibility(View.INVISIBLE);
                     colontxtV.setVisibility(View.INVISIBLE);
+                    createdHabit.reminderDisabled();
                 }
             }
         });
     }
-    //Set everything to invisible
+
+    /**
+     * This method set everything to invisible when you click on the month-button.
+     */
     private void dayVisible() {
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
@@ -213,7 +234,9 @@ public class AddHabitVM extends AppCompatActivity {
         }
     }
 
-    //Set the month-checkboxes to invisible and the week attribute to visible
+    /**
+     * This method makes it easier to see what happens when clicking on the week-button.
+     */
     private void weekVisible () {
         numberOfDaysTxtV.setVisibility(View.VISIBLE);
         numberOfDaysSpr.setVisibility(View.VISIBLE);
@@ -225,7 +248,9 @@ public class AddHabitVM extends AppCompatActivity {
         }
     }
 
-    //Set the week attribute to invisible and the month-checkboxes to visible
+    /**
+     * This method makes it easier to see what happens when clicking on the month-button.
+     */
     private void monthVisible () {
         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
         numberOfDaysSpr.setVisibility(View.INVISIBLE);
@@ -237,7 +262,10 @@ public class AddHabitVM extends AppCompatActivity {
         }
     }
 
-    //Make a list of the day-checkboxes because is easier to treat them as an group than individual.
+    /**
+     * This method makes a list of the checkboxes because is easier to treat them as a group
+     * than individual
+     */
     private void makeAListOfDayCbx() {
         cbxDayList.add(sunCxb);
         cbxDayList.add(monCxb);
@@ -248,19 +276,22 @@ public class AddHabitVM extends AppCompatActivity {
         cbxDayList.add(satCxb);
     }
 
-    //Making a list of the week days
+    /**
+     * The method making a list of which weekdays the habit is to be done an depending on which
+     * frequency that is select it so it can be shown on the right day.
+     */
     private void makeCalendarDaysList () {
 
         calendarDaysList.clear();
 
-        //Put every day in a list, when the frequency is dayly
+        //When the frequency is daily every day is added in the list
         if(createdHabit.getFREQUENCY() == Frequency.DAILY) {
             for (int i = 0; i < 7; i++) {
                 calendarDaysList.add(i+1);
             }
         }
 
-        //Put the day that is click, when the frequency is weekly
+        // When the frequency is weekly, the selected days are added to the list
         else if(createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
             for (int i = 0; i < cbxDayList.size(); i++) {
                 if (cbxDayList.get(i).isChecked()) {
@@ -269,11 +300,17 @@ public class AddHabitVM extends AppCompatActivity {
             }
         }
 
+        //When the frequency is monthly, the date is added in the list
         else if(createdHabit.getFREQUENCY() == Frequency.MONTHLY) {
             calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
         }
     }
 
+    /**
+     * This method go through all the fields and looks for all information you need when
+     * creating a Habit, is selected
+     *  @return True if everything is correct, else return false
+     */
     private boolean checkIfAllIsFillIn () {
         if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
                 || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle(createdHabit).equals("")) {
@@ -296,18 +333,25 @@ public class AddHabitVM extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * This method is used because it is necessary that the wrong message disappears when you start editing
+     */
     private void takeAwayWrongMessage () {
         wrongMesTxtV.setVisibility(View.INVISIBLE);
         frequencyWrongImgV.setVisibility(View.INVISIBLE);
         nameWrongImgV.setVisibility(View.INVISIBLE);
         stateWrongImgV.setVisibility(View.INVISIBLE);
         weekWrongImgV.setVisibility(View.INVISIBLE);
-
     }
 
     private void endActivity(){
         finish();
         Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }

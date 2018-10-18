@@ -2,28 +2,37 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
-public class MenuVM extends AppCompatActivity {
+public class MenuVM extends AppCompatActivity implements ThemableObserver {
     Button profileButton;
     Button settingsButton;
     Button habitsButton;
     Button groupsButton;
-    Button helpButton;
     Button friendsButton;
+    Button helpButton;
     Button logOutButton;
+    Button myAchievementsButton;
     ImageButton backButton;
+    HubbaModel model = HubbaModel.getInstance();
+    Themehandler themehandler = new Themehandler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         init();
+        themehandler.addThemeListener(this);
     }
 
     private void init(){
@@ -40,6 +49,7 @@ public class MenuVM extends AppCompatActivity {
         friendsButton = findViewById(R.id.friendsBtn);
         helpButton = findViewById(R.id.helpBtn);
         logOutButton = findViewById(R.id.logOutButton);
+        myAchievementsButton = findViewById(R.id.myAchievementsBtn);
 
     }
 
@@ -51,8 +61,9 @@ public class MenuVM extends AppCompatActivity {
         habitsButtonOnClick();
         groupsButtonOnClick();
         friendsButtonOnClick();
-        // helpButtonOnClick();
+        helpButtonOnClick();
         logOutButtonOnClick();
+        myAchievementsButtonOnClick();
 
     }
 
@@ -115,7 +126,8 @@ public class MenuVM extends AppCompatActivity {
         });
     }
 
-    /* private void helpButtonOnClick(){
+
+    private void helpButtonOnClick(){
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,15 +135,37 @@ public class MenuVM extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }*/
+    }
 
     private void logOutButtonOnClick(){
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuVM.this, LoginVM.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
+    }
+    private void myAchievementsButtonOnClick(){
+        myAchievementsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuVM.this, MyAchievementsVM.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 }
