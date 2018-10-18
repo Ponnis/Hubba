@@ -11,14 +11,16 @@ import com.example.nils_martin.hubba.R;
 public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver {
 
     LinearLayout yourGroupsLinearLayout;
+    Themehandler themehandler = new Themehandler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(HubbaModel.getInstance().getTheme());
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_groups);
         init();
-        HubbaModel.getInstance().addThemeListener(this);
+        themehandler.addThemeListener(this);
     }
 
     private void init(){

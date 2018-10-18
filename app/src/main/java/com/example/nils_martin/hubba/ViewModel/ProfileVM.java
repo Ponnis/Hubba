@@ -31,6 +31,7 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
 
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
+    private Themehandler themehandler = new Themehandler();
     private TextView Username;
     private TextView Email;
     private ImageView ProfilePic;
@@ -45,12 +46,12 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(hubbaModel.getTheme());
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile);
 
         init();
-        hubbaModel.addThemeListener(this);
+        themehandler.addThemeListener(this);
     }
 
     /**

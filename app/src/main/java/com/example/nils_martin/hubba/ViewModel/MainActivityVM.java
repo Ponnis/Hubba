@@ -16,7 +16,6 @@ import android.widget.ImageButton;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
-import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 import com.google.gson.Gson;
@@ -24,7 +23,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,22 +51,21 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ImageButton calendarBtn;
     private ImageButton menuButton;
     public static Habit openHabit = new Habit("");
+    private Themehandler themehandler = new Themehandler();
 
     private int listItemHeight = 80;
     private int dividerHeight = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        int currentTheme = model.getTheme();
-        setTheme(currentTheme);
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initView();
         loadData();
         System.out.println(model);
-
-        model.addThemeListener(this);
+        themehandler.addThemeListener(this);
     }
 
     @Override

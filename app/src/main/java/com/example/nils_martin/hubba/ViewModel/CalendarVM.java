@@ -28,15 +28,17 @@ public class CalendarVM extends Activity implements ThemableObserver {
     private int currentYear = cal.get(Calendar.YEAR);
     private int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
     private StringBuilder stringBuilder = new StringBuilder();
+    Themehandler themehandler = new Themehandler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(HubbaModel.getInstance().getTheme());
+        setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
         init();
         setActivityTxtV(currentYear, currentMonth, currentDayOfMonth);
-        HubbaModel.getInstance().addThemeListener(this);
+        themehandler.addThemeListener(this);
         Update();
     }
 
