@@ -1,7 +1,9 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,7 +25,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     TextView streakTextView;
     TextView streakDaysTextView;
 
-    Button backButton;
+    Button deleteButton;
     Button editButton;
 
     Habit habit = new Habit("");
@@ -36,6 +38,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         habit = MainActivityVM.openHabit;
         initFindView();
         init(habit);
+        update();
     }
 
     /**
@@ -50,7 +53,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         streakTextView = findViewById(R.id.streakTextView);
         streakDaysTextView = findViewById(R.id.streakDaysTextView);
 
-        backButton = findViewById(R.id.backButton);
+        deleteButton = findViewById(R.id.deleteButton);
         editButton = findViewById(R.id.editButton);
     }
 
@@ -64,6 +67,25 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()));
         //reminderTimeTextView
         streakDaysTextView.setText(String.valueOf(habit.getStreak(habit)) + " days");
+    }
+
+    private void update(){
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HubbaModel.getInstance().getCurrentUser().removeHabit(habit);
+                Intent intent = new Intent(HabitVM.this, MainActivityVM.class);
+                startActivity(intent);
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     /**
