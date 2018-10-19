@@ -3,11 +3,6 @@ package com.example.nils_martin.hubba.Model;
 import java.util.ArrayList;
 
 public interface IHubbaModel {
-    public static HubbaModel instance = null;
-    public ArrayList<User> users = new ArrayList<>();
-    public User currentUser = null;
-
-
 
 
     public User getUser(String userName);
