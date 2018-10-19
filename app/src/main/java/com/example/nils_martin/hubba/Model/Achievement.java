@@ -1,7 +1,5 @@
 package com.example.nils_martin.hubba.Model;
 
-
-
 public abstract class Achievement {
 
     //private User user;

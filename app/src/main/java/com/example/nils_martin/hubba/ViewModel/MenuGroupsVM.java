@@ -2,15 +2,16 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
-
-import com.example.nils_martin.hubba.Model.HubbaModel;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver {
 
-    LinearLayout yourGroupsLinearLayout;
+    ListView yourGroupsListView;
+    Button addGroupButton;
     Themehandler themehandler = new Themehandler();
 
 
@@ -25,10 +26,25 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
 
     private void init(){
         initFindByView();
+        initOnClickListeners();
+    }
+
+    private void initOnClickListeners(){
+        addGroupOnClick();
+    }
+
+    private void addGroupOnClick(){
+        addGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO add a page for adding group
+            }
+        });
     }
 
     private void initFindByView(){
-        yourGroupsLinearLayout = (LinearLayout) findViewById(R.id.yourGroupsLinearLayout);
+        yourGroupsListView = (ListView) findViewById(R.id.yourGroupsListView);
+        addGroupButton = (Button) findViewById(R.id.addGroupBtn);
     }
 
     @Override

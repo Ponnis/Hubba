@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.nils_martin.hubba.Model.Habit;
-import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
-import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
+
 
 public class HabitVM extends AppCompatActivity implements ThemableObserver {
 

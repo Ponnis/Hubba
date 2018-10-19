@@ -7,6 +7,11 @@ public class HubbaModel implements IHubbaModel {
     private ArrayList<User> users = new ArrayList<>();
     private User currentUser;
 
+    /**
+     * If no instance of HubbaModel exists it creates one and returns it.
+     * Otherwise it only returns the instance of HubbaModel.
+     * @return instance of HubbaModel.
+     */
     public static HubbaModel getInstance() {
         if (instance == null) {
             instance = new HubbaModel();
@@ -18,6 +23,11 @@ public class HubbaModel implements IHubbaModel {
 
     }
 
+    /**
+     * Loops thrugh the list of users and returns the user given as param.
+     * @param userName
+     * @return User
+     */
     public User getUser(String userName) {
         int index = 0;
         for (User user : users) {
