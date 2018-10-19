@@ -22,7 +22,7 @@ public class CreateGroupVM extends AppCompatActivity {
 
     HubbaModel hubbaModel = HubbaModel.getInstance();
     User user;
-    List friends = user.getFriends();
+    List friends;
     List<Friend> groupMembers;
     String groupName;
     private Habit habit;
@@ -40,6 +40,7 @@ public class CreateGroupVM extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         getUserToCurrent();
+        getUserFriends();
         groupName = String.valueOf((EditText)findViewById(R.id.txtGroupName));
         friendNames  = String.valueOf((EditText)findViewById(R.id.txtGroupMembers));
         Button createNewGroupHabit = (Button) findViewById(R.id.btnCreateNewGroup);
@@ -71,7 +72,13 @@ public class CreateGroupVM extends AppCompatActivity {
         }}
         return groupMembers;
     }
+    private void getUserFriends() {
+        if (user.getFriends().isEmpty()) {
 
+        } else {
+            friends = user.getFriends();
+        }
+    }
     private void createNewGroup(){
         Group group = new Group(groupName,groupMembers,habit);
       //  friendUsername = (EditText)findViewById(R.id.txtGroupNewUsername);
