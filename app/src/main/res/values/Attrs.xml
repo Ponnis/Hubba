@@ -9,6 +9,7 @@
 
         <attr name="FloatButtonColor" format="color"/>
         <attr name="FloatImageColor" format="color"/>
+        <attr name="ButtonOuterGlow" format="color"/>
 
 
     </declare-styleable>
