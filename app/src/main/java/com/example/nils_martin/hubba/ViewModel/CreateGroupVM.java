@@ -27,7 +27,7 @@ public class CreateGroupVM extends AppCompatActivity {
     String groupName;
     private Habit habit;
     private String friendNames;
-    private ArrayList<String> friendsAsString =  (ArrayList<String>) Arrays.asList(friendNames.split(","));
+    private ArrayList<String> friendsAsString;
     private Button createNewGroupHabit;
 
 //Doesn't need constructor but just saving it in case
@@ -71,6 +71,10 @@ public class CreateGroupVM extends AppCompatActivity {
             }
         }}
         return groupMembers;
+    }
+    private void setFriendsAsString(){
+        if(friendNames == null){}
+        else{friendsAsString= (ArrayList<String>) Arrays.asList(friendNames.split(","));}
     }
     private void getUserFriends() {
         if (user.getFriends().isEmpty()) {
