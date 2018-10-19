@@ -21,17 +21,11 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_friends);
-        init();
-
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_friends);
         init();
         themehandler.addThemeListener(this);
-
     }
 
     private void init() {
