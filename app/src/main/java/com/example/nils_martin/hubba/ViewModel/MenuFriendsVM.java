@@ -55,6 +55,10 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
         });
     }
 
+    /**
+     * Gets the list of friend from current user in HubbaModel and
+     * add it to the friends list in this class.
+     */
     private void getFriendsList() {
         friends = model.getCurrentUser().getFriends();
     }
