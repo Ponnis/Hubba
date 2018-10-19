@@ -10,12 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ExampleUnitTest {
-    @Test
-    public void testCreateHabit() {
-        Habit habit = new Habit("Drink Water");
-        assertNotNull(habit);
-    }
+public class UserUnitTest {
 
     @Test
     public void testCreateUser(){
@@ -39,13 +34,7 @@ public class ExampleUnitTest {
         StreakAchievement streakAchievement = new StreakAchievement("You have achieved this habit 10 days in a row!");
         assertNotNull(streakAchievement);
     }*/
-
-    @Test
-    public void testUpStreak() {
-        Habit habit = new Habit("test");
-        habit.setDone();
-        assertTrue(habit.getStreak(habit) == 1);
-    }
+    
     /*@Test
     public void testNewUserButton(){
     LoginVM loginView = new LoginVM();
