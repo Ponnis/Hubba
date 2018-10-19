@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +13,7 @@
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textSize="16dp"
@@ -21,19 +22,20 @@
         tools:text="TEST"
         android:layout_alignParentRight="true"
         />
+
     <ImageView
         android:id="@+id/AchivementShownImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toTopOf="@id/achievementTitleText"
-        app:layout_constraintBottom_toBottomOf="@id/achievementTitleText"
-        app:layout_constraintRight_toRightOf="@+id/achievementTitleText"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
 
-        android:paddingRight="10dp"
+        android:contentDescription="@null"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="5dp"
+        android:layout_alignParentLeft="true"
+        />
 
-        android:contentDescription="@null" />
 
 
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
