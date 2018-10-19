@@ -16,7 +16,6 @@
         android:layout_marginRight="8dp"
         android:gravity="center"
         android:text="Your Friends"
-        android:textColor="@android:color/holo_green_dark"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +33,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yourFriendsTextView"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/yourFriendsTextView">
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
