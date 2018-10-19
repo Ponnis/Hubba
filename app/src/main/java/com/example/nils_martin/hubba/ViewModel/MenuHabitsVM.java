@@ -2,15 +2,13 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
-
-import com.example.nils_martin.hubba.Model.HubbaModel;
+import android.widget.ListView;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver {
 
-    LinearLayout yourHabitsLinearLayout;
+    ListView yourHabitsListView;
     Themehandler themehandler = new Themehandler();
 
 
@@ -28,7 +26,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     }
 
     private void initFindByView() {
-        yourHabitsLinearLayout = (LinearLayout) findViewById(R.id.yourHabitsLinearLayout);
+        yourHabitsListView = (ListView) findViewById(R.id.yourHabitsListView);
     }
 
     @Override

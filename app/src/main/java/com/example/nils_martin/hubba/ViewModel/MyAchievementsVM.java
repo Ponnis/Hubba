@@ -9,6 +9,7 @@ import com.example.nils_martin.hubba.R;
 public class MyAchievementsVM extends AppCompatActivity implements ThemableObserver {
     Themehandler themehandler = new Themehandler();
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
