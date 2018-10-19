@@ -34,6 +34,8 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yourGroupsTextView"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/yourGroupsTextView">
+        
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
