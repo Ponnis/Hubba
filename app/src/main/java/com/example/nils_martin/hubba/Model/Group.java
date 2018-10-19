@@ -1,5 +1,9 @@
 package com.example.nils_martin.hubba.Model;
 
+import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.User;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class  Group {
