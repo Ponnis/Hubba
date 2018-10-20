@@ -13,6 +13,7 @@ public class Habit extends Observable implements HabitInterface{
     private int streak;
     private boolean isDone;
     private boolean reminderOn;
+    private List<Integer> reminderTime;
     private HabitTypeState habitTypeState;
     private State STATE;
     private Frequency FREQUENCY;
@@ -48,9 +49,11 @@ public class Habit extends Observable implements HabitInterface{
 
     public void isDone(){
         this.isDone = true;
+        this.streak++;
     }
     public void notDone(){
         this.isDone = false;
+        this.streak--;
     }
 
     //TODO make two different events?
@@ -131,5 +134,13 @@ public class Habit extends Observable implements HabitInterface{
 
     public List<Integer> getDaysToDo() {
         return daysToDo;
+    }
+
+    public void setReminderTime(List<Integer> time){
+        this.reminderTime = time;
+    }
+
+    public List<Integer> getReminderTime() {
+        return reminderTime;
     }
 }

@@ -95,9 +95,13 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         save.setOnClickListener(v -> {
             makeCalendarDaysList();
 
-
             createdHabit.setTitle(habitName.getText().toString());
             createdHabit.setDaysToDo(calendarDaysList);
+
+            List<Integer> temp = new ArrayList<>();
+            temp.add(Integer.valueOf(hourSpr.getSelectedItem().toString()));
+            temp.add(Integer.valueOf(minSpr.getSelectedItem().toString()));
+            createdHabit.setReminderTime(temp);
 
             if(checkIfAllIsFillIn()) {
                 /// TODO: 2018-10-18 Inte snyggt!

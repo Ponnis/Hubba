@@ -37,6 +37,7 @@
         <activity android:name=".ViewModel.ProfileEditPasswordVM"/>
         <activity android:name=".ViewModel.HelpVM"/>
         <activity android:name=".ViewModel.MyAchievementsVM"/>
+        <activity android:name=".ViewModel.EditHabitVM"/>
     </application>
 
 

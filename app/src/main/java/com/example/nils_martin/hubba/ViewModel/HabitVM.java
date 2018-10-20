@@ -13,6 +13,9 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
     Themehandler themehandler = new Themehandler();
@@ -64,8 +67,8 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     private void init(Habit habit){
         habitTitleTextView.setText(habit.getTitle(habit));
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
-        frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()));
-        //reminderTimeTextView
+        frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()) + ": " + weekdays());
+        setReminderTime();
         streakDaysTextView.setText(String.valueOf(habit.getStreak(habit)) + " days");
     }
 
@@ -83,9 +86,23 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(HabitVM.this, EditHabitVM.class);
+                startActivity(intent);
             }
         });
+    }
+
+    private String weekdays(){
+        String[] days = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
+        StringBuilder stringBuilder = new StringBuilder();
+        List<Integer> list = habit.getDaysToDo();
+        String prefix = "";
+        for(int i = 0; i < list.size(); i++){
+         stringBuilder.append(prefix);
+         prefix = ", ";
+         stringBuilder.append(days[(list.get(i))-1]);
+        }
+        return stringBuilder.toString();
     }
 
     /**
@@ -93,12 +110,38 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
      * @param string
      * @return
      */
-    public String toLowerCase(String string){
+    private String toLowerCase(String string){
         String temp = string;
         char[] ch = temp.toLowerCase().toCharArray();
         ch[0] = Character.toUpperCase(ch[0]);
         temp = new String(ch);
         return temp;
+    }
+
+    private void setReminderTime(){
+        List<String> list = new ArrayList<>();
+        if(habit.isReminderOn()){
+            if(habit.getReminderTime().get(0)<10){
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("0");
+                stringBuilder.append(habit.getReminderTime().get(0));
+                list.add(stringBuilder.toString());
+            }
+            if(habit.getReminderTime().get(1)<10){
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("0");
+                stringBuilder.append(habit.getReminderTime().get(1));
+                list.add(stringBuilder.toString());
+            }
+            if(list.size() == 2){
+                reminderTimeTextView.setText(list.get(0) + " : " + list.get(1));
+            } else{
+                reminderTimeTextView.setText(habit.getReminderTime().get(0) + " : " + habit.getReminderTime().get(1));
+            }
+
+        } else {
+            reminderTimeTextView.setText("None");
+        }
     }
 
     @Override
