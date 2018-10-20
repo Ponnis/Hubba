@@ -1,7 +1,7 @@
 package com.example.nils_martin.hubba.Model;
 
 public class NumOfHabitsAchievement extends Achievement {
-
+    private Boolean isAchived;
     static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
     NumOfHabitsAchievement(String title){
@@ -13,7 +13,7 @@ public class NumOfHabitsAchievement extends Achievement {
     }
 
     @Override
-    public void assessAchievement(){
-
+    public Boolean assessAchievement(){
+        return false;
     }
 }

@@ -15,7 +15,7 @@ public class StreakAchievement extends Achievement {
     }
 
     @Override
-    public void assessAchievement() {
-
+    public Boolean assessAchievement() {
+        return false;
     }
 }

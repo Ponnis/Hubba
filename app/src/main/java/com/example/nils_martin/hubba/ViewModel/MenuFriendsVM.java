@@ -2,14 +2,13 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 
-import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
+import com.example.nils_martin.hubba.R;
+
 import java.util.List;
 
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
@@ -18,9 +17,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     Themehandler themehandler = new Themehandler();
 
     List<User> friends;
-
-    ListView yourFriendsListView;
-    Button addFriendsButton;
+    LinearLayout yourFriendsLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,35 +28,16 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
         themehandler.addThemeListener(this);
     }
 
-    private void init() {
+    private void init(){
         initFindByView();
-        initOnClickListeners();
         getFriendsList();
     }
 
-    private void initFindByView() {
-        yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
-        addFriendsButton = (Button) findViewById(R.id.addFriendBtn);
+    private void initFindByView(){
+        yourFriendsLinearLayout = (LinearLayout) findViewById(R.id.yourFriendsLinearLayout);
     }
 
-    private void initOnClickListeners(){
-        addFriendOnClick();
-    }
-
-    private void addFriendOnClick(){
-        addFriendsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO add a page for adding friends
-            }
-        });
-    }
-
-    /**
-     * Gets the list of friend from current user in HubbaModel and
-     * add it to the friends list in this class.
-     */
-    private void getFriendsList() {
+    private void getFriendsList(){
         friends = model.getCurrentUser().getFriends();
     }
 
@@ -67,6 +45,4 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     public void recreateActivity() {
         recreate();
     }
-
 }
-

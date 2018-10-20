@@ -16,49 +16,24 @@
         android:layout_marginRight="8dp"
         android:gravity="center"
         android:text="Your Friends"
-        android:textColor="@android:color/holo_green_dark"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/yourFriendsListView"
-        android:layout_width="match_parent"
-        android:layout_height="526dp"
+    <LinearLayout
+        android:id="@+id/yourFriendsLinearLayout"
+        android:layout_width="395dp"
+        android:layout_height="581dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:focusable="true"
         android:orientation="vertical"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/addFriendBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yourFriendsTextView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/addFriendBtn"
-        android:layout_width="398dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="?attr/LoggOutColorBackground"
-        android:text="Add Friend"
-        android:textColor="?attr/LoggOutColorText"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/yourFriendsTextView">
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

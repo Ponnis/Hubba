@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
+import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 public class ProfileVM extends AppCompatActivity implements ThemableObserver {

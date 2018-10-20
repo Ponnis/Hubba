@@ -1,10 +1,17 @@
 package com.example.nils_martin.hubba.Model;
 
+
+
 public abstract class Achievement {
+
+
 
     //private User user;
     private String title = "";
-    private Boolean isAchieved = false;
+    private Boolean isAchieved;
+
+
+
     private String imagePath;
 
     Achievement(String title){
@@ -14,6 +21,7 @@ public abstract class Achievement {
     Achievement(String title, String imagePath){
         this.title = title;
         this.imagePath = imagePath;
+        this.isAchieved = false;
 
     }
 
@@ -22,5 +30,17 @@ public abstract class Achievement {
         //Call for achievedAlert.
     }
 
-    abstract public void assessAchievement();
+    abstract public Boolean assessAchievement();
+
+    public boolean getisAchived(){
+        isAchieved = assessAchievement();
+        if(isAchieved){ return true; }
+        else return false;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public String getImagePath() {
+        return imagePath;
+    }
 }
