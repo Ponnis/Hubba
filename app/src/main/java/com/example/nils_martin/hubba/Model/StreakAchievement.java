@@ -4,7 +4,7 @@ public class StreakAchievement extends Achievement {
 
     AchievementType achievementType;
 
-    StreakAchievement(String title) {
+    public StreakAchievement(String title) {
         super(title);
         achievementType = AchievementType.StreakAchievement;
     }
@@ -15,7 +15,7 @@ public class StreakAchievement extends Achievement {
     }
 
     @Override
-    public void assessAchievement() {
-
+    public Boolean assessAchievement() {
+        return false;
     }
 }
