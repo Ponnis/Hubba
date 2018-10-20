@@ -1,6 +1,6 @@
 package com.example.nils_martin.hubba.Model;
 
-public class NumOfHabitsAchievement extends Achievement {
+public class NumOfHabitsAchievement extends Achievement implements INumOfHabitsAchievement {
     private Boolean isAchived;
     static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
