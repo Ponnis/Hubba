@@ -111,7 +111,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             @Override
             public void onClick(View v) {
                 makeCalendarDaysList();
-                
+
                 if (checkIfAllIsFillIn()) {
                 createdHabit.setTitle(habitName.getText().toString());
                 createdHabit.setDaysToDo(calendarDaysList);
@@ -330,7 +330,8 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     }
 
     /**
-     * This method is used because it is necessary that the wrong message disappears when you start editing
+     * This method is used because it is necessary so the wrong message disappears
+     * when you editing
      */
     private void takeAwayWrongMessage () {
         wrongMesTxtV.setVisibility(View.INVISIBLE);
