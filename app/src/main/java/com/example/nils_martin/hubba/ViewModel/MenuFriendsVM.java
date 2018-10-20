@@ -2,6 +2,7 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -19,6 +20,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
 
     List<User> friends;
     ListView yourFriendsListView;
+    Button addFriendButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
 
     private void initFindByView(){
         yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
+        addFriendButton = (Button) findViewById(R.id.addFriendBtn);
     }
 
     private void getFriendsList(){
