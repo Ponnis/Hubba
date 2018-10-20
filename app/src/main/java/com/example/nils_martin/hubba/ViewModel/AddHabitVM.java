@@ -2,8 +2,14 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +46,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     HubbaModel model = HubbaModel.getInstance();
     Themehandler themehandler = new Themehandler();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
@@ -48,6 +53,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         setContentView(R.layout.activity_add_habit);
         init();
         makeAListOfDayCbx();
+        createNotificationChannel();
         themehandler.addThemeListener(this);
         update();
     }
@@ -133,6 +139,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 createdHabit.setSTATE(State.MORNING);
+                help();
             }
         });
 
@@ -341,6 +348,36 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         finish();
         Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
         startActivity(intent);
+    }
+
+
+    private void help () {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, getString(R.string.channel_id))
+                .setSmallIcon(R.drawable.profilepic)
+                .setContentTitle("text")
+                .setContentText("här är en till text")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+// notificationId is a unique int for each notification that you must define
+        notificationManager.notify(0, mBuilder.build());
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(getString(R.string.channel_id), name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     @Override
