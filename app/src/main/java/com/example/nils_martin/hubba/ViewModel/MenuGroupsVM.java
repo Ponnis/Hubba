@@ -6,33 +6,45 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.nils_martin.hubba.Model.Group;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
+import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+
+import java.util.List;
 
 public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver {
 
-    ListView yourGroupsListView;
-    Button addGroupButton;
+    private HubbaModel model = HubbaModel.getInstance();
+    private Themehandler themehandler = new Themehandler();
 
-    Themehandler themehandler = new Themehandler();
+    private List<Group> groups;
+    private ListView yourGroupsListView;
+    private Button addGroupButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_groups);
-        init();
         themehandler.addThemeListener(this);
+        init();
     }
 
     private void init(){
         initFindByView();
+        getGroupsList();
     }
 
     private void initFindByView(){
         yourGroupsListView = (ListView) findViewById(R.id.yourGroupsListView);
         addGroupButton = (Button) findViewById(R.id.addGroupBtn);
+    }
+
+    private void getGroupsList(){
+        groups = model.getCurrentUser().getGroups();
     }
 
     @Override

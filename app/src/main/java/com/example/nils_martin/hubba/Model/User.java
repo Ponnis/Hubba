@@ -13,7 +13,7 @@ public class User implements Observer, Friend, IUser {
     private String email;
     private String password;
     private String imagePath;
-    private List<User> friends;
+    private List<User> friends = new ArrayList<>();
     private ArrayList<Habit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
     private ArrayList<ThemableObserver> themeObservers;
@@ -21,6 +21,7 @@ public class User implements Observer, Friend, IUser {
     private boolean allowNotifications;
     private boolean soundOn;
     private Themes ActiveTheme;
+    private List<Group> groups = new ArrayList<>();
 
     public User(String name, String email, String password, String imagePath) {
         this.userName = name;
@@ -133,6 +134,10 @@ public class User implements Observer, Friend, IUser {
 
     public List<User> getFriends(){
         return friends;
+    }
+
+    public List<Group> getGroups(){
+        return this.groups;
     }
 
     private void checkHabitDone(){

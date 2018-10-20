@@ -15,20 +15,20 @@ import java.util.List;
 
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
 
-    HubbaModel model = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    private HubbaModel model = HubbaModel.getInstance();
+    private Themehandler themehandler = new Themehandler();
 
-    List<User> friends;
-    ListView yourFriendsListView;
-    Button addFriendButton;
+    private List<User> friends;
+    private ListView yourFriendsListView;
+    private Button addFriendButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_friends);
-        init();
         themehandler.addThemeListener(this);
+        init();
     }
 
     private void init(){

@@ -5,23 +5,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
+import java.util.List;
+
 public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver {
 
-    ListView yourHabitsListView;
-    Themehandler themehandler = new Themehandler();
+    private HubbaModel model = HubbaModel.getInstance();
+    private Themehandler themehandler = new Themehandler();
 
+    private List<Habit> habits;
+    private ListView yourHabitsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_habits);
-        init();
         themehandler.addThemeListener(this);
+        init();
     }
 
     private void init(){
@@ -30,6 +35,10 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
 
     private void initFindByView() {
         yourHabitsListView = (ListView) findViewById(R.id.yourHabitsListView);
+    }
+
+    private void getHabitsList(){
+        habits = model.getCurrentUser().getHabits();
     }
 
     @Override
