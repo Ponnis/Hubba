@@ -36,8 +36,8 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
     private Habit createdHabit;
     CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
-    private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
-    private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
+    private TextView colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
+    private Spinner  hourSpr, minSpr, monthSpr;
     private Switch remainderSwitch;
     private ImageView nameWrongImgV, frequencyWrongImgV, stateWrongImgV, weekWrongImgV;
     private List<CheckBox> cbxDayList = new ArrayList<>();
@@ -79,12 +79,10 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         friCxb = findViewById(R.id.friCbx);
         satCxb = findViewById(R.id.satCbx);
         sunCxb = findViewById(R.id.sunCbx);
-        numberOfDaysTxtV = findViewById(R.id.numTxtV);
         timeTxtV = findViewById(R.id.timeTxtV);
         colontxtV = findViewById(R.id.colontxtV);
         monthTxtV = findViewById(R.id.monthTxtV);
         wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
-        numberOfDaysSpr = findViewById(R.id.numSpr);
         hourSpr = findViewById(R.id.hourSpr);
         minSpr = findViewById(R.id.minSpr);
         monthSpr = findViewById(R.id.monthSpr);
@@ -220,8 +218,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
      * This method set everything to invisible when you click on the month-button.
      */
     private void dayVisible() {
-        numberOfDaysTxtV.setVisibility(View.INVISIBLE);
-        numberOfDaysSpr.setVisibility(View.INVISIBLE);
         monthTxtV.setVisibility(View.INVISIBLE);
         monthSpr.setVisibility(View.INVISIBLE);
 
@@ -238,8 +234,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
      * This method makes it easier to see what happens when clicking on the week-button.
      */
     private void weekVisible () {
-        numberOfDaysTxtV.setVisibility(View.VISIBLE);
-        numberOfDaysSpr.setVisibility(View.VISIBLE);
         monthSpr.setVisibility(View.INVISIBLE);
         monthTxtV.setVisibility(View.INVISIBLE);
 
@@ -252,8 +246,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
      * This method makes it easier to see what happens when clicking on the month-button.
      */
     private void monthVisible () {
-        numberOfDaysTxtV.setVisibility(View.INVISIBLE);
-        numberOfDaysSpr.setVisibility(View.INVISIBLE);
         monthTxtV.setVisibility(View.VISIBLE);
         monthSpr.setVisibility(View.VISIBLE);
 
