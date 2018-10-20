@@ -95,13 +95,13 @@ public class Habit extends Observable {
 
     public Habit getHabit(){return this;}
 
-    public int getStreak(Habit habit){
-        return habit.streak;
+    public int getStreak(){
+        return streak;
     }
 
     public void setTitle(String string){title = string;}
 
-    public String getTitle(Habit habit) {return habit.title;}
+    public String getTitle() {return title;}
 
     public void setSTATE(State state){
         this.STATE = state;

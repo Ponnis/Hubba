@@ -1,12 +1,9 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
@@ -27,8 +24,6 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private ListView yourFriendsListView;
     private ArrayAdapter<String> yourFriendsAdapter;
     private Button addFriendButton;
-
-    Context context = MenuFriendsVM.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +51,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     }
 
     private void getFriendsList(){
-        friends.add(new User("Li","","",""));
-        friends.add(new User("Camilla","","",""));
-        friends.add(new User("Jian","","",""));
-        // friends = model.getCurrentUser().getFriends();
+        friends = model.getCurrentUser().getFriends();
     }
 
     private void fillFriendStringsList(){

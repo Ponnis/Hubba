@@ -6,11 +6,13 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.nils_martin.hubba.Model.Group;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver {
@@ -18,7 +20,8 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private HubbaModel model = HubbaModel.getInstance();
     private Themehandler themehandler = new Themehandler();
 
-    private List<Habit> habits;
+    private List<Habit> habits = new ArrayList<>();
+    private ArrayList<String> habitStrings = new ArrayList<>();
     private ListView yourHabitsListView;
     private ArrayAdapter<String> yourHabitsAdapter;
 
@@ -33,6 +36,13 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
 
     private void init(){
         initFindByView();
+        getHabitsList();
+        fillHabitStringList();
+        yourHabitsAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.menu_list_item,
+                habitStrings );
+        yourHabitsListView.setAdapter(yourHabitsAdapter);
     }
 
     private void initFindByView() {
@@ -40,7 +50,16 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     }
 
     private void getHabitsList(){
-        habits = model.getCurrentUser().getHabits();
+        habits.add(new Habit("Drink Water"));
+        habits.add(new Habit("Wash Face"));
+        habits.add(new Habit("stuDIE :("));
+        // habits = model.getCurrentUser().getHabits();
+    }
+
+    private void fillHabitStringList(){
+        for(Habit habit : habits){
+            habitStrings.add(habit.getTitle());
+        }
     }
 
     @Override
