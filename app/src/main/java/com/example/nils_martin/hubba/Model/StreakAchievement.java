@@ -1,6 +1,6 @@
 package com.example.nils_martin.hubba.Model;
 
-public class StreakAchievement extends Achievement {
+public class StreakAchievement extends Achievement implements IStreakAchievement {
 
     AchievementType achievementType;
 
