@@ -54,7 +54,7 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
         update();
     }
 
-    public void init() {
+    private void init() {
         habitName = findViewById(R.id.habitInputEdit);
         save = findViewById(R.id.saveButton);
         cancel = findViewById(R.id.cancelButton);
@@ -89,10 +89,30 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
     }
 
     private void initSettings(){
-        habitName.setText(currentHabit.getTitle(currentHabit));
+        habitName.setText(currentHabit.getTitle());
+        setFrequencyDays();
+        setReminderSwitch();
+    }
 
-        //TODO make separate method for this
-        // set frequency and days
+    private void setReminderSwitch(){
+        if(currentHabit.isReminderOn()){
+            remainderSwitch.setChecked(true);
+            hourSpinner.setVisibility(View.VISIBLE);
+            minSpinner.setVisibility(View.VISIBLE);
+            timeTextView.setVisibility(View.VISIBLE);
+            colonTextView.setVisibility(View.VISIBLE);
+
+            hourSpinner.setSelection(currentHabit.getReminderTime().get(0));
+            minSpinner.setSelection((currentHabit.getReminderTime().get(1))/5);
+        } else{
+            remainderSwitch.setChecked(false);
+        }
+    }
+
+    /**
+     * method to preset the frequency and days for the habit in edit habit
+     */
+    private void setFrequencyDays(){
         if(currentHabit.getFREQUENCY().equals(Frequency.DAILY)){
         } else if(currentHabit.getFREQUENCY().equals(Frequency.WEEKLY)){
             weekVisible();
@@ -111,23 +131,9 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
             monthVisible();
             monthSpinner.setSelection(currentHabit.getDaysToDo().get(0));
         }
-
-        //Reminder switch
-        if(currentHabit.isReminderOn()){
-            remainderSwitch.setChecked(true);
-            hourSpinner.setVisibility(View.VISIBLE);
-            minSpinner.setVisibility(View.VISIBLE);
-            timeTextView.setVisibility(View.VISIBLE);
-            colonTextView.setVisibility(View.VISIBLE);
-
-            hourSpinner.setSelection(currentHabit.getReminderTime().get(0));
-            minSpinner.setSelection((currentHabit.getReminderTime().get(1))/5);
-        }
-
-
     }
 
-    public void update() {
+    private void update() {
 
         currentHabit = MainActivityVM.openHabit;
 
@@ -139,8 +145,6 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
             currentHabit.setTitle(habitName.getText().toString());
             currentHabit.setDaysToDo(calendarDaysList);
 
-            //TODO save changes
-
             if(checkIfAllIsFillIn()) {
                 endActivity();
             }
@@ -148,22 +152,8 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
                 errorMsgTextView.setVisibility(View.VISIBLE);
                 errorMsgTextView.setText("You must fill in everything");
                 errorMsgTextView.setTextColor(Color.RED);
-
                 currentHabit.setTitle(habitName.getText().toString());
                 currentHabit.setDaysToDo(calendarDaysList);
-
-                if(checkIfAllIsFillIn()) {
-                    //MainActivityVM.habits.add(currentHabit);
-                    HubbaModel.getInstance().getCurrentUser().addHabit(currentHabit);
-
-                    endActivity();
-                }
-                else {
-                    errorMsgTextView.setVisibility(View.VISIBLE);
-                    errorMsgTextView.setText("You must fill in everything");
-                    errorMsgTextView.setTextColor(Color.RED);
-                }
-
             }
         });
 
@@ -353,7 +343,7 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
      */
     private boolean checkIfAllIsFillIn () {
         if(currentHabit.getFREQUENCY() == null || currentHabit.getSTATE() == null
-                || currentHabit.getDaysToDo().size() == 0 || currentHabit.getTitle(currentHabit).equals("")) {
+                || currentHabit.getDaysToDo().size() == 0 || currentHabit.getTitle().equals("")) {
             if (currentHabit.getFREQUENCY() == null) {
                 frequencyWrongImgV.setVisibility(View.VISIBLE);
             }
@@ -365,7 +355,7 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
             if (currentHabit.getSTATE() == null) {
                 stateWrongImgV.setVisibility(View.VISIBLE);
             }
-            if (currentHabit.getTitle(currentHabit).equals("")) {
+            if (currentHabit.getTitle().equals("")) {
                 nameWrongImgV.setVisibility(View.VISIBLE);
             }
             return false;

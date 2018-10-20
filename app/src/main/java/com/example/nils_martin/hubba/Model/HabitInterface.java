@@ -28,15 +28,15 @@ public interface HabitInterface {
 
     boolean isReminderOn();
 
-    int getGroupmembersDoneCount();
+    int getGroupMembersDoneCount();
 
     Habit getHabit();
 
-    int getStreak(Habit habit);
+    int getStreak();
 
     void setTitle(String string);
 
-    String getTitle(Habit habit);
+    String getTitle();
 
     void setSTATE(State state);
 
@@ -49,4 +49,5 @@ public interface HabitInterface {
     void setDaysToDo(List<Integer> daysToDo);
 
     List<Integer> getDaysToDo();
+
 }
