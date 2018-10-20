@@ -13,7 +13,7 @@ public class User implements Observer, Friend, IUser {
     private String email;
     private String password;
     private String imagePath;
-    private List<User> friends;
+    private List<User> friends = new ArrayList<>();
     private ArrayList<Habit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
     private ArrayList<ThemableObserver> themeObservers;
@@ -21,6 +21,7 @@ public class User implements Observer, Friend, IUser {
     private boolean allowNotifications;
     private boolean soundOn;
     private Themes ActiveTheme;
+    private List<Group> groups = new ArrayList<>();
 
     public User(String name, String email, String password, String imagePath) {
         this.userName = name;
@@ -107,8 +108,8 @@ public class User implements Observer, Friend, IUser {
     public void update(Observable o, Object arg) {
         checkHabitDone();
         for (Habit habit : habits) {
-            if (habit.getStreak(habit) % 10 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak(habit) + " Days!"));
+            if (habit.getStreak() % 10 == 0) {
+                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak() + " Days!"));
             }
             if (habits.size() % 10 == 0) {
                 achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!"));
@@ -133,6 +134,10 @@ public class User implements Observer, Friend, IUser {
 
     public List<User> getFriends(){
         return friends;
+    }
+
+    public List<Group> getGroups(){
+        return this.groups;
     }
 
     private void checkHabitDone(){
