@@ -4,7 +4,7 @@ public class NumOfHabitsAchievement extends Achievement {
     private Boolean isAchived;
     static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
-    NumOfHabitsAchievement(String title){
+    public NumOfHabitsAchievement(String title){
         super(title);
     }
 

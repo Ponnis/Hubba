@@ -3,6 +3,7 @@ package com.example.nils_martin.hubba.ViewModel;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -17,7 +18,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     Themehandler themehandler = new Themehandler();
 
     List<User> friends;
-    LinearLayout yourFriendsLinearLayout;
+    ListView yourFriendsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     }
 
     private void initFindByView(){
-        yourFriendsLinearLayout = (LinearLayout) findViewById(R.id.yourFriendsLinearLayout);
+        yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
     }
 
     private void getFriendsList(){

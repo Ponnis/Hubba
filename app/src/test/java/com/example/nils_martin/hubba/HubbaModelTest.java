@@ -23,19 +23,19 @@ public class HubbaModelTest {
     }
 
     @Test
-    public void getUserTest(){
+    public void testGetUser(){
         HubbaModel.getInstance().addUser(user);
         assertEquals(HubbaModel.getInstance().getUser("Sven"), user);
     }
 
     @Test
-    public void setCurrentUserTest(){
+    public void testGetCurrentUser(){
         HubbaModel.getInstance().setCurrentUser(user);
         assertEquals(HubbaModel.getInstance().getCurrentUser(), user);
     }
 
     @Test
-    public void getUsersTest(){
+    public void testGetUsers(){
         users.add(user);
         HubbaModel.getInstance().setUsers(users);
         assertEquals(HubbaModel.getInstance().getUsers(), users);

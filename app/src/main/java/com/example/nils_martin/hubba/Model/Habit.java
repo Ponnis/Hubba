@@ -9,7 +9,7 @@ public class Habit extends Observable {
 
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
-    private int groupmembersDoneCount;
+    private int groupMembersDoneCount;
     private int streak;
     private boolean isDone;
     private boolean reminderOn;
@@ -74,7 +74,7 @@ public class Habit extends Observable {
     public Boolean getIsDone(){return isDone;
     }
     public void upGroupMembersDoneCount(){
-        groupmembersDoneCount++;
+        groupMembersDoneCount++;
     }
 
     public void reminderEnabled() {
@@ -89,8 +89,8 @@ public class Habit extends Observable {
         return reminderOn;
     }
 
-    public int getGroupmembersDoneCount(){
-        return groupmembersDoneCount;
+    public int getGroupMembersDoneCount(){
+        return groupMembersDoneCount;
     }
 
     public Habit getHabit(){return this;}
