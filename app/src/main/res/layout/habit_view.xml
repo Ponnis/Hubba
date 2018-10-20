@@ -64,13 +64,11 @@
         android:layout_width="296dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
-        android:text="Daily"
         android:gravity="left"
+        android:text="Daily"
         android:textSize="12pt"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeOfDayTextView" />
 
@@ -79,14 +77,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
-        android:text="Reminder"
         android:gravity="left"
+        android:text="Reminder"
         android:textSize="12pt"
-        app:layout_constraintEnd_toStartOf="@+id/reminderTimeTextView"
-        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frequencyTextView" />
 
