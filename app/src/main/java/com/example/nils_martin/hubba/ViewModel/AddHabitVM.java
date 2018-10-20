@@ -90,32 +90,23 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
         createdHabit = new Habit("", calendarDaysList);
 
-        habitName.setOnClickListener(v -> takeAwayWrongMessage());
-
-        save.setOnClickListener(v -> {
-            makeCalendarDaysList();
-
-
-            createdHabit.setTitle(habitName.getText().toString());
-            createdHabit.setDaysToDo(calendarDaysList);
-
-            if(checkIfAllIsFillIn()) {
-                /// TODO: 2018-10-18 Inte snyggt!
-                model.getCurrentUser().getHabits().add(createdHabit);
-                endActivity();
+        habitName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
             }
-            else {
-                wrongMesTxtV.setVisibility(View.VISIBLE);
-                wrongMesTxtV.setText("You must fill in everything");
-                wrongMesTxtV.setTextColor(Color.RED);
+        });
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCalendarDaysList();
                 createdHabit.setTitle(habitName.getText().toString());
                 createdHabit.setDaysToDo(calendarDaysList);
 
                 if(checkIfAllIsFillIn()) {
-                    //MainActivityVM.habits.add(createdHabit);
-                    HubbaModel.getInstance().getCurrentUser().addHabit(createdHabit);
-
+                    /// TODO: 2018-10-18 Inte snyggt!
+                    model.getCurrentUser().getHabits().add(createdHabit);
                     endActivity();
                 }
                 else {
@@ -123,7 +114,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                     wrongMesTxtV.setText("You must fill in everything");
                     wrongMesTxtV.setTextColor(Color.RED);
                 }
-
             }
         });
 
