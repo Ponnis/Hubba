@@ -41,9 +41,9 @@ public class HubbaModel implements IHubbaModel {
     }
 
     public void setUsers (ArrayList < User > users) {
-
         this.users = users;
     }
+
     public Themes getTheme(){
         return currentUser.getTheme();
     }
@@ -51,6 +51,7 @@ public class HubbaModel implements IHubbaModel {
     public void setTheme(Themes theme){
         currentUser.setTheme(theme);
     }
+
     public void addThemeListener(ThemableObserver observer){
         currentUser.addThemeObserver(observer);
     }

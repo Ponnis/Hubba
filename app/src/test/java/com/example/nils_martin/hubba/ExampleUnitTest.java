@@ -22,7 +22,8 @@ public class ExampleUnitTest {
         User user = new User("Åke", "Åke@gmail.com","Ninja1337", "ABS");
         assertNotNull(user);
     }
-    @Test
+
+    /*@Test
     public void testThemeChange(){
         HubbaModel hubbaModel = HubbaModel.getInstance();
         hubbaModel.setCurrentUser(new User("Åke", "Åke@gmail.com", "Ninja1337", "ABS"));
@@ -31,7 +32,7 @@ public class ExampleUnitTest {
         String themeAfterChange = hubbaModel.themeEnumToString();
         assert !themeOnStart.equals(themeAfterChange);
 
-    }
+    }*/
 
     /*@Test
     public void testCreateStreakAchievement(){
@@ -43,7 +44,7 @@ public class ExampleUnitTest {
     public void testUpStreak() {
         Habit habit = new Habit("test");
         habit.setDone();
-        assertTrue(habit.getStreak(habit) == 1);
+        assertTrue(habit.getStreak() == 1);
     }
     /*@Test
     public void testNewUserButton(){

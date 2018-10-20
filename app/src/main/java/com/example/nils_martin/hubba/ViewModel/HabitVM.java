@@ -65,7 +65,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
      * @param habit
      */
     private void init(Habit habit){
-        habitTitleTextView.setText(habit.getTitle(habit));
+        habitTitleTextView.setText(habit.getTitle());
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
         frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()) + ": " + weekdays());
         setReminderTime();

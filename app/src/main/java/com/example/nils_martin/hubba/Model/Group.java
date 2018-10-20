@@ -1,9 +1,5 @@
 package com.example.nils_martin.hubba.Model;
 
-import com.example.nils_martin.hubba.Model.Habit;
-import com.example.nils_martin.hubba.Model.User;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class  Group {
@@ -18,9 +14,13 @@ public class  Group {
         this.habit = habit;
     }
     //Ska delegeras till GroupHabitType istället? Dock får den inte veta något om gruppen då det är uppåt
-    
+
+    public String getGroupName(){
+        return this.groupName;
+    }
+
     private void isHabitComplete(){
-        if(habit.getGroupmembersDoneCount()==usersInGroup.size()){
+        if(habit.getGroupMembersDoneCount()==usersInGroup.size()){
             habit.setDone();
         }
     }

@@ -9,7 +9,8 @@
         <item name="GradeCenterColor">@color/Grey</item>
         <!-- Color of FloatButton on mainpage and the plus -->
         <item name="FloatButtonColor">@color/Grey</item>
-        <item name="FloatImageColor">@color/White</item>
+        <item name="FloatImageColor">@color/colorAccent</item>
+        <item name="ButtonOuterGlow">@color/colorAccent</item>
         <!-- Color for loggout -->
         <item name="LoggOutColorBackground">@color/Grey</item>
         <item name="LoggOutColorText">@color/White</item>
@@ -52,7 +53,9 @@
         <item name="GradeCenterColor">@color/EliteFontColor</item>
         <!-- Color of FloatButton on mainpage and the plus -->
         <item name="FloatButtonColor">@color/Grey</item>
-        <item name="FloatImageColor">@color/White</item>
+        <item name="FloatImageColor">@color/EliteFontColor</item>
+        <item name="ButtonOuterGlow">@color/EliteFontColor</item>
+
     </style>
 
     <style name="PinkFluffy" parent="Theme.AppCompat.Light.NoActionBar" >
@@ -75,7 +78,7 @@
         <!--  Color of the progressbar -->
         <item name="android:progressTint">@color/PinkFluffyAccent</item>
         <!-- Color of statusbar -->
-        <item name="android:statusBarColor">@color/PinkFluffyAccent</item>
+        <item name="android:statusBarColor">@color/PinkFluffySeckondBackground</item>
         <!-- color of checkbox out line-->
         <item name="android:buttonTint">@color/PinkFluffyAccent</item>
 
@@ -93,7 +96,9 @@
         <item name="GradeCenterColor">@color/PinkFluffyAccent</item>
         <!-- Color of FloatButton on mainpage and the plus -->
         <item name="FloatButtonColor">@color/Grey</item>
-        <item name="FloatImageColor">@color/White</item>
+        <item name="FloatImageColor">@color/PinkFluffyFont</item>
+        <item name="ButtonOuterGlow">@color/PinkFluffyFont</item>
+
     </style>
 
 

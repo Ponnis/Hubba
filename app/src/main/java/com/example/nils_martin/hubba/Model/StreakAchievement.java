@@ -1,10 +1,10 @@
 package com.example.nils_martin.hubba.Model;
 
-public class StreakAchievement extends Achievement {
+public class StreakAchievement extends Achievement implements IStreakAchievement {
 
     AchievementType achievementType;
 
-    StreakAchievement(String title) {
+    public StreakAchievement(String title) {
         super(title);
         achievementType = AchievementType.StreakAchievement;
     }
@@ -15,7 +15,7 @@ public class StreakAchievement extends Achievement {
     }
 
     @Override
-    public void assessAchievement() {
-
+    public Boolean assessAchievement() {
+        return false;
     }
 }

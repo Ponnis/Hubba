@@ -9,7 +9,7 @@ public class Habit extends Observable implements HabitInterface{
 
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
-    private int groupmembersDoneCount;
+    private int groupMembersDoneCount;
     private int streak;
     private boolean isDone;
     private boolean reminderOn;
@@ -77,7 +77,7 @@ public class Habit extends Observable implements HabitInterface{
     public Boolean getIsDone(){return isDone;
     }
     public void upGroupMembersDoneCount(){
-        groupmembersDoneCount++;
+        groupMembersDoneCount++;
     }
 
     public void reminderEnabled() {
@@ -92,19 +92,19 @@ public class Habit extends Observable implements HabitInterface{
         return reminderOn;
     }
 
-    public int getGroupmembersDoneCount(){
-        return groupmembersDoneCount;
+    public int getGroupMembersDoneCount(){
+        return groupMembersDoneCount;
     }
 
     public Habit getHabit(){return this;}
 
-    public int getStreak(Habit habit){
-        return habit.streak;
+    public int getStreak(){
+        return streak;
     }
 
     public void setTitle(String string){title = string;}
 
-    public String getTitle(Habit habit) {return habit.title;}
+    public String getTitle() {return title;}
 
     public void setSTATE(State state){
         this.STATE = state;
