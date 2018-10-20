@@ -2,6 +2,7 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
 
     private List<Group> groups;
     private ListView yourGroupsListView;
+    private ArrayAdapter<String> yourGroupsAdapter;
     private Button addGroupButton;
 
 

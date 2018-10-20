@@ -1,7 +1,10 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -11,6 +14,7 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
@@ -18,9 +22,13 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private HubbaModel model = HubbaModel.getInstance();
     private Themehandler themehandler = new Themehandler();
 
-    private List<User> friends;
+    private List<User> friends = new ArrayList<>();
+    private ArrayList<String> friendStrings = new ArrayList<>();
     private ListView yourFriendsListView;
+    private ArrayAdapter<String> yourFriendsAdapter;
     private Button addFriendButton;
+
+    Context context = MenuFriendsVM.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,12 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private void init(){
         initFindByView();
         getFriendsList();
+        fillFriendStringsList();
+        yourFriendsAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.menu_list_item,
+                friendStrings );
+        yourFriendsListView.setAdapter(yourFriendsAdapter);
     }
 
     private void initFindByView(){
@@ -42,7 +56,16 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     }
 
     private void getFriendsList(){
-        friends = model.getCurrentUser().getFriends();
+        friends.add(new User("Li","","",""));
+        friends.add(new User("Camilla","","",""));
+        friends.add(new User("Jian","","",""));
+        // friends = model.getCurrentUser().getFriends();
+    }
+
+    private void fillFriendStringsList(){
+        for(User friend : friends){
+            friendStrings.add(friend.getUserName());
+        }
     }
 
     @Override

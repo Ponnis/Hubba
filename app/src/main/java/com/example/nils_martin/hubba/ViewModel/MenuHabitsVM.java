@@ -2,6 +2,7 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -19,6 +20,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
 
     private List<Habit> habits;
     private ListView yourHabitsListView;
+    private ArrayAdapter<String> yourHabitsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
