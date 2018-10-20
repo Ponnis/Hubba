@@ -37,12 +37,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private void init(){
         initFindByView();
         getHabitsList();
-        fillHabitStringList();
-        yourHabitsAdapter = new ArrayAdapter<String>(
-                this,
-                R.layout.menu_list_item,
-                habitStrings );
-        yourHabitsListView.setAdapter(yourHabitsAdapter);
+        updateList();
     }
 
     private void initFindByView() {
@@ -50,16 +45,27 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     }
 
     private void getHabitsList(){
-        habits.add(new Habit("Drink Water"));
-        habits.add(new Habit("Wash Face"));
-        habits.add(new Habit("stuDIE :("));
-        // habits = model.getCurrentUser().getHabits();
+        habits = model.getCurrentUser().getHabits();
+    }
+
+    private void updateList(){
+        habitStrings.clear();
+        fillHabitStringList();
+        fillHabitListView();
     }
 
     private void fillHabitStringList(){
         for(Habit habit : habits){
             habitStrings.add(habit.getTitle());
         }
+    }
+
+    private void fillHabitListView(){
+        yourHabitsAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.menu_list_item,
+                habitStrings );
+        yourHabitsListView.setAdapter(yourHabitsAdapter);
     }
 
     @Override

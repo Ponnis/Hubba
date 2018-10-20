@@ -40,12 +40,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
     private void init(){
         initFindByView();
         getGroupsList();
-        fillGroupStringsList();
-        yourGroupsAdapter = new ArrayAdapter<String>(
-                this,
-                R.layout.menu_list_item,
-                groupStrings );
-        yourGroupsListView.setAdapter(yourGroupsAdapter);
+        updateList();
     }
 
     private void initFindByView(){
@@ -57,10 +52,24 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
        groups = model.getCurrentUser().getGroups();
     }
 
+    private void updateList(){
+        groupStrings.clear();
+        fillGroupStringsList();
+        fillGroupListView();
+    }
+
     private void fillGroupStringsList(){
         for(Group group : groups){
             groupStrings.add(group.getGroupName());
         }
+    }
+
+    private void fillGroupListView(){
+        yourGroupsAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.menu_list_item,
+                groupStrings );
+        yourGroupsListView.setAdapter(yourGroupsAdapter);
     }
 
 

@@ -37,12 +37,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private void init(){
         initFindByView();
         getFriendsList();
-        fillFriendStringsList();
-        yourFriendsAdapter = new ArrayAdapter<String>(
-                this,
-                R.layout.menu_list_item,
-                friendStrings );
-        yourFriendsListView.setAdapter(yourFriendsAdapter);
+        updateList();
     }
 
     private void initFindByView(){
@@ -54,10 +49,24 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
         friends = model.getCurrentUser().getFriends();
     }
 
+    private void updateList(){
+        friendStrings.clear();
+        fillFriendStringsList();
+        fillFriendListView();
+    }
+
     private void fillFriendStringsList(){
         for(User friend : friends){
             friendStrings.add(friend.getUserName());
         }
+    }
+
+    private void fillFriendListView(){
+        yourFriendsAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.menu_list_item,
+                friendStrings );
+        yourFriendsListView.setAdapter(yourFriendsAdapter);
     }
 
     @Override
