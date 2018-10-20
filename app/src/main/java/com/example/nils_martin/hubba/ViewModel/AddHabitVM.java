@@ -111,11 +111,10 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             @Override
             public void onClick(View v) {
                 makeCalendarDaysList();
-
-                if (checkIfAllIsFillIn()) {
                 createdHabit.setTitle(habitName.getText().toString());
                 createdHabit.setDaysToDo(calendarDaysList);
 
+                if(checkIfAllIsFillIn()) {
                     /// TODO: 2018-10-18 Inte snyggt!
                     model.getCurrentUser().getHabits().add(createdHabit);
                     endActivity();
