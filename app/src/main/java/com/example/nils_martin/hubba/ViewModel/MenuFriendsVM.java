@@ -66,18 +66,28 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
         friends = model.getCurrentUser().getFriends();
     }
 
+    /**
+     * Calls methods that update the list and the ListView in the interface.
+     */
     private void updateFriendsListView(){
-        friendStrings.clear();
         fillFriendStringsList();
         fillFriendListView();
     }
 
+    /**
+     * First clears the list friendStrings and then updates it with the
+     * names of users in friends.
+     */
     private void fillFriendStringsList(){
+        friendStrings.clear();
         for(User friend : friends){
             friendStrings.add(friend.getUserName());
         }
     }
 
+    /**
+     * Fills the ListView with strings from friendStrings.
+     */
     private void fillFriendListView(){
         yourFriendsAdapter = new ArrayAdapter<String>(
                 this,

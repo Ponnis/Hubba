@@ -49,18 +49,28 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
        groups = model.getCurrentUser().getGroups();
     }
 
+    /**
+     * Calls methods that update the list and the ListView in the interface.
+     */
     private void updateGroupsListView(){
-        groupStrings.clear();
         fillGroupStringsList();
         fillGroupListView();
     }
 
+    /**
+     * First clears the list groupStrings and then updates it with the
+     * names of groups in groups.
+     */
     private void fillGroupStringsList(){
+        groupStrings.clear();
         for(Group group : groups){
             groupStrings.add(group.getGroupName());
         }
     }
 
+    /**
+     * Fills the ListView with strings from groupStrings.
+     */
     private void fillGroupListView(){
         yourGroupsAdapter = new ArrayAdapter<String>(
                 this,

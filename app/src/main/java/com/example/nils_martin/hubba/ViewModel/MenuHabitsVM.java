@@ -32,6 +32,9 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
         init();
     }
 
+    /**
+     * Calls on other functions that initialize ListViews, lists etc.
+     */
     private void init(){
         initArrays();
         initFindByView();
@@ -48,22 +51,35 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
         yourHabitsListView = (ListView) findViewById(R.id.yourHabitsListView);
     }
 
+    /**
+     * Gets the users habits from HubbaModel and adds them to habits list in this class
+     */
     private void getHabitsList(){
         habits = model.getCurrentUser().getHabits();
     }
 
+    /**
+     * Calls methods that update the list and the ListView in the interface.
+     */
     private void updateHabitsListView(){
-        habitStrings.clear();
         fillHabitStringList();
         fillHabitListView();
     }
 
+    /**
+     * First clears the list habitStrings and then updates it with the
+     * titles of habits in habits.
+     */
     private void fillHabitStringList(){
+        habitStrings.clear();
         for(Habit habit : habits){
             habitStrings.add(habit.getTitle());
         }
     }
 
+    /**
+     * Fills the ListView with strings from habitStrings.
+     */
     private void fillHabitListView(){
         yourHabitsAdapter = new ArrayAdapter<String>(
                 this,

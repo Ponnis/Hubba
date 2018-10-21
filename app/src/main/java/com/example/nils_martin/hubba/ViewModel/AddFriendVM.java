@@ -40,21 +40,32 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
         addFriendButton = (Button) findViewById(R.id.buttonAddFriend);
     }
 
-    // Calls methods that set what actions the buttons have on click.
+    /**
+     * Calls methods that set what actions the buttons have on click.
+     */
     private void initOnClickListeners(){
         addFriendOnClick();
     }
 
+    /**
+     * Sets an onCLick listener for addFriend button and defines what happens when
+     * that button is clicked.
+     */
     private void addFriendOnClick(){
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO Uncomment row below when loadData is fixed.
                 // addFriendToCurrentUser();
                 finish();
             }
         });
     }
 
+    /**
+     * Checks if the user tries to add herself and if the list of users in HubbaModel is empty.
+     * If they are no it gets the user added from HubbaModel.
+     */
     private void addFriendToCurrentUser() {
         if (!model.getUsers().isEmpty() || !(model.getCurrentUser().getUserName().equals(friendsUserName.getText().toString()))) {
             User user = model.getUser(friendsUserName.getText().toString());
