@@ -18,6 +18,7 @@ public abstract class Achievement {
         this.title = title;
         this.targetNmbr = targetNmbr;
     }
+
     public void setAchieved(Boolean achieved) {
         isAchieved = achieved;
         //Call for achievedAlert.

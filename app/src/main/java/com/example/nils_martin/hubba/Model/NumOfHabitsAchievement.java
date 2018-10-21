@@ -8,6 +8,11 @@ public class NumOfHabitsAchievement extends Achievement {
         super(title, targetNmbr);
     }
 
+    /**
+     * Checks how many habits there is in current users Habit List and if there is equal or more then targetNmbr.
+     * If so, it returns true and sets Achiveed in super class to true, else returns false.
+     * @return
+     */
     @Override
     public Boolean assessAchievement(){
         Boolean isAchived = false;

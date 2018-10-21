@@ -40,7 +40,6 @@ public class ExampleUnitTest {
 
     @Test
     public void testCreateStreakAchievement(){
-        IHubbaModel model = HubbaModel.getInstance();
         Achievement streakAchievement = AchievementFactory.getAchievement(AchievementType.StreakAchievement,"You have achieved this habit 10 days in a row!", 10);
         assertNotNull(streakAchievement);
     }
