@@ -1,19 +1,26 @@
 package com.example.nils_martin.hubba.Model;
+import java.util.List;
 
-public class NumOfHabitsAchievement extends Achievement implements INumOfHabitsAchievement {
-    private Boolean isAchived;
-    static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
+public class NumOfHabitsAchievement extends Achievement {
+    private static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
-    public NumOfHabitsAchievement(String title){
-        super(title);
-    }
-
-    NumOfHabitsAchievement(String title, String pathToImage){
-        super(title, pathToImage);
+    NumOfHabitsAchievement(String title, int targetNmbr){
+        super(title, targetNmbr);
     }
 
     @Override
     public Boolean assessAchievement(){
-        return false;
+        Boolean isAchived = false;
+        List<Habit> habits = model.getCurrentUser().getHabits();
+        if(habits.size() >= targetNmbr) {
+            isAchived = true;
+            this.setAchieved(true);
+        }
+        return isAchived;
+    }
+
+    @Override
+    public AchievementType getAchievementType() {
+        return achievementType;
     }
 }
