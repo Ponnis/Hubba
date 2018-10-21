@@ -84,7 +84,7 @@ public class CalendarVM extends Activity implements ThemableObserver {
      */
     private void monthStringBuilder(int i, int dayOfMonth) {
         if (habitsList.get(i).getDaysToDo().contains(dayOfMonth)) {
-            stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
+            stringBuilder.append("\n" + (habitsList.get(i).getTitle()));
             stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
         }
     }
@@ -97,7 +97,7 @@ public class CalendarVM extends Activity implements ThemableObserver {
     private void dayAndWeekStringBuilder(int i) {
         //If the "current date"-day is the same as any day in the habitlist do this
         if (habitsList.get(i).getDaysToDo().contains(cal.get(Calendar.DAY_OF_WEEK))) {
-            stringBuilder.append("\n" + (habitsList.get(i).getTitle(habitsList.get(i))));
+            stringBuilder.append("\n" + (habitsList.get(i).getTitle()));
             stringBuilder.append(" (" + habitsList.get(i).getSTATE().toString().toLowerCase() + ")");
         }
     }

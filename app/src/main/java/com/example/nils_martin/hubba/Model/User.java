@@ -94,11 +94,11 @@ public class User implements Observer, Friend, IUser {
         return imagePath;
     }
 
-    public ArrayList getHabits() {
+    public ArrayList<Habit> getHabits() {
         return habits;
     }
 
-    public List getAchievements() {
+    public List<Achievement> getAchievements() {
         return achievements;
     }
 
@@ -107,11 +107,11 @@ public class User implements Observer, Friend, IUser {
     public void update(Observable o, Object arg) {
         checkHabitDone();
         for (Habit habit : habits) {
-            if (habit.getStreak(habit) % 10 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak(habit) + " Days!"));
+            if (habit.getStreak() % 10 == 0) {
+                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak() + " Days!", 5));
             }
             if (habits.size() % 10 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!"));
+                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!", 5));
             }
         }
     }
