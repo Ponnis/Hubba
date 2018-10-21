@@ -1,7 +1,9 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,7 +25,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private ArrayList<String> friendStrings = new ArrayList<>();
     private ListView yourFriendsListView;
     private ArrayAdapter<String> yourFriendsAdapter;
-    private Button addFriendButton;
+    private Button addFriendsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +38,35 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
 
     private void init(){
         initFindByView();
+        initOnClickListeners();
         getFriendsList();
-        updateList();
+        updateFriendsListView();
     }
 
     private void initFindByView(){
         yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
-        addFriendButton = (Button) findViewById(R.id.addFriendBtn);
+        addFriendsButton = (Button) findViewById(R.id.addFriendBtn);
+    }
+
+    private void initOnClickListeners(){
+        addFriendOnClick();
+    }
+
+    private void addFriendOnClick(){
+        addFriendsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuFriendsVM.this, AddFriendVM.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getFriendsList(){
         friends = model.getCurrentUser().getFriends();
     }
 
-    private void updateList(){
+    private void updateFriendsListView(){
         friendStrings.clear();
         fillFriendStringsList();
         fillFriendListView();

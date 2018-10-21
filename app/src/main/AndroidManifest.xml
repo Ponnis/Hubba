@@ -38,6 +38,7 @@
         <activity android:name=".ViewModel.HelpVM"/>
         <activity android:name=".ViewModel.MyAchievementsVM"/>
         <activity android:name=".ViewModel.EditHabitVM"/>
+        <activity android:name=".ViewModel.AddFriendVM"/>
     </application>
 
 

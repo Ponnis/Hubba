@@ -4,14 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.Group;
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
@@ -40,7 +37,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
     private void init(){
         initFindByView();
         getGroupsList();
-        updateList();
+        updateGroupsListView();
     }
 
     private void initFindByView(){
@@ -52,7 +49,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
        groups = model.getCurrentUser().getGroups();
     }
 
-    private void updateList(){
+    private void updateGroupsListView(){
         groupStrings.clear();
         fillGroupStringsList();
         fillGroupListView();
