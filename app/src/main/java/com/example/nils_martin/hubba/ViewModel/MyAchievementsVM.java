@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MyAchievementsVM extends AppCompatActivity implements ThemableObserver {
     Themehandler themehandler = new Themehandler();
-    List achievements;
+    List<Achievement> achievements;
     IHubbaModel model;
 
     protected void onCreate(Bundle savedInstanceState) {

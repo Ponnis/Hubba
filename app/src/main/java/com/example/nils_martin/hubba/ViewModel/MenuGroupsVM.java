@@ -1,7 +1,9 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -34,25 +36,26 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
         init();
     }
 
-    private void init(){
+    private void init() {
         initFindByView();
         getGroupsList();
         updateGroupsListView();
+        addGroupOnClick();
     }
 
-    private void initFindByView(){
+    private void initFindByView() {
         yourGroupsListView = (ListView) findViewById(R.id.yourGroupsListView);
         addGroupButton = (Button) findViewById(R.id.addGroupBtn);
     }
 
-    private void getGroupsList(){
-       groups = model.getCurrentUser().getGroups();
+    private void getGroupsList() {
+        groups = model.getCurrentUser().getGroups();
     }
 
     /**
      * Calls methods that update the list and the ListView in the interface.
      */
-    private void updateGroupsListView(){
+    private void updateGroupsListView() {
         fillGroupStringsList();
         fillGroupListView();
     }
@@ -61,9 +64,9 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
      * First clears the list groupStrings and then updates it with the
      * names of groups in groups.
      */
-    private void fillGroupStringsList(){
+    private void fillGroupStringsList() {
         groupStrings.clear();
-        for(Group group : groups){
+        for (Group group : groups) {
             groupStrings.add(group.getGroupName());
         }
     }
@@ -71,17 +74,25 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
     /**
      * Fills the ListView with strings from groupStrings.
      */
-    private void fillGroupListView(){
+    private void fillGroupListView () {
         yourGroupsAdapter = new ArrayAdapter<String>(
                 this,
                 R.layout.menu_list_item,
-                groupStrings );
+                groupStrings);
         yourGroupsListView.setAdapter(yourGroupsAdapter);
     }
 
-
-    @Override
-    public void recreateActivity() {
+    public void recreateActivity () {
         recreate();
+    }
+
+    private void addGroupOnClick() {
+        addGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuGroupsVM.this, CreateGroupVM.class);
+                startActivity(intent);
+            }
+        });
     }
 }

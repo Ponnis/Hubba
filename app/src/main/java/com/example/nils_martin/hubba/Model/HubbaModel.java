@@ -59,5 +59,8 @@ public class HubbaModel implements IHubbaModel {
     public void addUser (User user){
         this.users.add(user);
     }
+    public String themeEnumToString(){
+        return currentUser.themeEnumToString();
+    }
 }
 

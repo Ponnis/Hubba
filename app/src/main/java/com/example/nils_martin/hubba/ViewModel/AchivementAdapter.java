@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Achievement;
+import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.R;
 
 import java.util.List;
@@ -41,8 +42,8 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
         achivementTitle.setText(achievement.getTitle());
         ImageView achivementPicture = viewHolder.achivementPicture;
         try {
-            if (achievement.getisAchived()) {
-                achivementPicture.setImageBitmap(BitmapFactory.decodeFile(getImage(achievement)));
+            if (achievement.getsAchieved()) {
+                achivementPicture.setImageResource(getImage(achievement));
             } else {
                 achivementPicture.setImageResource(R.drawable.achivement_locked);
             }
@@ -61,9 +62,15 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
         return achivements.size();
     }
 
-    public String getImage(Achievement achievement) {
-       String imagePath =  achievement.getImagePath();
-        return imagePath;
+    public int getImage(Achievement achievement) {
+       AchievementType achievementType =  achievement.getAchievementType();
+       if (achievementType == AchievementType.NumOHabitsAchievement){
+           return R.drawable.streak;
+       }
+       else if (achievementType == AchievementType.StreakAchievement){
+            return R.drawable.num_of_habits;
+       }
+       else return R.drawable.profilepic;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
