@@ -36,6 +36,6 @@ public class ExampleUnitTest {
     public void testUpStreak() {
         Habit habit = new Habit("test");
         habit.setDone();
-        assertTrue(habit.getStreak(habit) == 1);
+        assertTrue(habit.getStreak() == 1);
     }
 }

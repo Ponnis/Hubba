@@ -18,11 +18,8 @@
         android:id="@+id/textView"
         android:layout_width="181dp"
         android:layout_height="78dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center"
         android:text="Menu"
         android:textSize="40sp"
@@ -32,14 +29,8 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="498dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/logOutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -49,12 +40,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <Button
 
                 android:id="@+id/profileBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:text="Profile"
                 android:textAllCaps="false"
                 android:textSize="24sp" />
@@ -63,10 +55,10 @@
                 android:id="@+id/settingsBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:text="Settings"
                 android:textAllCaps="false"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/habitsBtn"
@@ -75,7 +67,7 @@
                 android:gravity="left"
                 android:text="Habits"
                 android:textAllCaps="false"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/groupsBtn"
@@ -84,7 +76,7 @@
                 android:gravity="left"
                 android:text="Groups"
                 android:textAllCaps="false"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/friendsBtn"
@@ -93,7 +85,7 @@
                 android:gravity="left"
                 android:text="Friends"
                 android:textAllCaps="false"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/myAchievementsBtn"
@@ -102,7 +94,7 @@
                 android:gravity="left"
                 android:text="My Achievements"
                 android:textAllCaps="false"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/helpBtn"
@@ -111,7 +103,7 @@
                 android:gravity="left"
                 android:text="Help"
                 android:textAllCaps="false"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
         </LinearLayout>
     </ScrollView>

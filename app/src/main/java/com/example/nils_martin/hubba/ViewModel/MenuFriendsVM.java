@@ -2,71 +2,75 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
+import com.example.nils_martin.hubba.R;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
 
-    HubbaModel model = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    private HubbaModel model = HubbaModel.getInstance();
+    private Themehandler themehandler = new Themehandler();
 
-    List<User> friends;
-
-    ListView yourFriendsListView;
-    Button addFriendsButton;
+    private List<User> friends = new ArrayList<>();
+    private ArrayList<String> friendStrings = new ArrayList<>();
+    private ListView yourFriendsListView;
+    private ArrayAdapter<String> yourFriendsAdapter;
+    private Button addFriendButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_friends);
-        init();
         themehandler.addThemeListener(this);
+        init();
     }
 
-    private void init() {
+    private void init(){
         initFindByView();
-        initOnClickListeners();
         getFriendsList();
+        updateList();
     }
 
-    private void initFindByView() {
+    private void initFindByView(){
         yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
-        addFriendsButton = (Button) findViewById(R.id.addFriendBtn);
+        addFriendButton = (Button) findViewById(R.id.addFriendBtn);
     }
 
-    private void initOnClickListeners(){
-        addFriendOnClick();
-    }
-
-    private void addFriendOnClick(){
-        addFriendsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO add a page for adding friends
-            }
-        });
-    }
-
-    /**
-     * Gets the list of friend from current user in HubbaModel and
-     * add it to the friends list in this class.
-     */
-    private void getFriendsList() {
+    private void getFriendsList(){
         friends = model.getCurrentUser().getFriends();
+    }
+
+    private void updateList(){
+        friendStrings.clear();
+        fillFriendStringsList();
+        fillFriendListView();
+    }
+
+    private void fillFriendStringsList(){
+        for(User friend : friends){
+            friendStrings.add(friend.getUserName());
+        }
+    }
+
+    private void fillFriendListView(){
+        yourFriendsAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.menu_list_item,
+                friendStrings );
+        yourFriendsListView.setAdapter(yourFriendsAdapter);
     }
 
     @Override
     public void recreateActivity() {
         recreate();
     }
-
 }
-

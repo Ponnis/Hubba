@@ -5,14 +5,15 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Habit extends Observable {
+public class Habit extends Observable implements HabitInterface{
 
     private HubbaModel model = HubbaModel.getInstance();
     private String title;
-    private int groupmembersDoneCount;
+    private int groupMembersDoneCount;
     private int streak;
     private boolean isDone;
     private boolean reminderOn;
+    private List<Integer> reminderTime;
     private HabitTypeState habitTypeState;
     private State STATE;
     private Frequency FREQUENCY;
@@ -48,9 +49,11 @@ public class Habit extends Observable {
 
     public void isDone(){
         this.isDone = true;
+        this.streak++;
     }
     public void notDone(){
         this.isDone = false;
+        this.streak--;
     }
 
     //TODO make two different events?
@@ -74,7 +77,7 @@ public class Habit extends Observable {
     public Boolean getIsDone(){return isDone;
     }
     public void upGroupMembersDoneCount(){
-        groupmembersDoneCount++;
+        groupMembersDoneCount++;
     }
 
     public void reminderEnabled() {
@@ -89,19 +92,19 @@ public class Habit extends Observable {
         return reminderOn;
     }
 
-    public int getGroupmembersDoneCount(){
-        return groupmembersDoneCount;
+    public int getGroupMembersDoneCount(){
+        return groupMembersDoneCount;
     }
 
     public Habit getHabit(){return this;}
 
-    public int getStreak(Habit habit){
-        return habit.streak;
+    public int getStreak(){
+        return streak;
     }
 
     public void setTitle(String string){title = string;}
 
-    public String getTitle(Habit habit) {return habit.title;}
+    public String getTitle() {return title;}
 
     public void setSTATE(State state){
         this.STATE = state;
@@ -131,5 +134,13 @@ public class Habit extends Observable {
 
     public List<Integer> getDaysToDo() {
         return daysToDo;
+    }
+
+    public void setReminderTime(List<Integer> time){
+        this.reminderTime = time;
+    }
+
+    public List<Integer> getReminderTime() {
+        return reminderTime;
     }
 }

@@ -1,12 +1,3 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/habit_list_item"
-    tools:context=".ViewModel.MainActivityVM"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:clickable="true">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -28,5 +19,4 @@
         tools:padding="10dp"
         tools:text="Fisk" />
 
-</RelativeLayout>
 

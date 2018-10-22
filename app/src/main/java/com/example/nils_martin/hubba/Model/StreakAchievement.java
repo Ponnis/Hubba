@@ -1,21 +1,36 @@
 package com.example.nils_martin.hubba.Model;
 
-public class StreakAchievement extends Achievement {
+public class StreakAchievement extends Achievement implements IStreakAchievement {
 
-    AchievementType achievementType;
+    private AchievementType achievementType;
 
-    StreakAchievement(String title) {
-        super(title);
+
+    StreakAchievement(String title, int targetnmbr) {
+        super(title,targetnmbr);
         achievementType = AchievementType.StreakAchievement;
+
     }
 
-    StreakAchievement(String title, String pathToImage) {
-        super(title, pathToImage);
-        achievementType = AchievementType.StreakAchievement;
+    /**
+     * Goes thru all habits and check if any of them have a streak higher then targetNmbr.
+     * If so it returns true and sets Achived in superclass to true, else false.
+     * @return
+     */
+    @Override
+    public Boolean assessAchievement() {
+        Boolean isAchived = false;
+        for (Habit habit: model.getCurrentUser().getHabits()) {
+            if(targetNmbr == habit.getStreak()){
+                this.setAchieved(true);
+                isAchived = true;
+                break;
+            }
+        }
+        return isAchived;
     }
 
     @Override
-    public void assessAchievement() {
-
+    public AchievementType getAchievementType() {
+        return achievementType;
     }
 }

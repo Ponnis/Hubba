@@ -1,20 +1,22 @@
 package com.example.nils_martin.hubba.Model;
 
+
+import java.util.List;
+
 public abstract class Achievement {
+
+    IHubbaModel model = HubbaModel.getInstance();
+
 
     //private User user;
     private String title = "";
-    private Boolean isAchieved = false;
-    private String imagePath;
+    private Boolean isAchieved;
+    protected int targetNmbr;
 
-    Achievement(String title){
-        this.title = title;
-    }
-    //Private so you can't create objects of superclass.
-    Achievement(String title, String imagePath){
-        this.title = title;
-        this.imagePath = imagePath;
 
+    Achievement(String title, int targetNmbr){
+        this.title = title;
+        this.targetNmbr = targetNmbr;
     }
 
     public void setAchieved(Boolean achieved) {
@@ -22,5 +24,17 @@ public abstract class Achievement {
         //Call for achievedAlert.
     }
 
-    abstract public void assessAchievement();
+    abstract public Boolean assessAchievement();
+
+    public boolean getsAchieved( ){
+        isAchieved = assessAchievement();
+        return isAchieved;
+    }
+    public String getTitle() {
+        return title;
+    }
+    abstract public AchievementType getAchievementType();
+    public int getTargetNmbr(){
+        return targetNmbr;
+    }
 }

@@ -1,19 +1,31 @@
 package com.example.nils_martin.hubba.Model;
+import java.util.List;
 
 public class NumOfHabitsAchievement extends Achievement {
+    private static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
-    static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
-
-    NumOfHabitsAchievement(String title){
-        super(title);
+    NumOfHabitsAchievement(String title, int targetNmbr){
+        super(title, targetNmbr);
     }
 
-    NumOfHabitsAchievement(String title, String pathToImage){
-        super(title, pathToImage);
+    /**
+     * Checks how many habits there is in current users Habit List and if there is equal or more then targetNmbr.
+     * If so, it returns true and sets Achiveed in super class to true, else returns false.
+     * @return
+     */
+    @Override
+    public Boolean assessAchievement(){
+        Boolean isAchived = false;
+        List<Habit> habits = model.getCurrentUser().getHabits();
+        if(habits.size() >= targetNmbr) {
+            isAchived = true;
+            this.setAchieved(true);
+        }
+        return isAchived;
     }
 
     @Override
-    public void assessAchievement(){
-
+    public AchievementType getAchievementType() {
+        return achievementType;
     }
 }
