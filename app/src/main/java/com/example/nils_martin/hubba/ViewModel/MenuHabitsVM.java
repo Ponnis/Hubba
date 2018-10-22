@@ -38,7 +38,6 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private void init(){
         initArrays();
         initFindByView();
-        getHabitsList();
         updateHabitsListView();
     }
 
@@ -62,6 +61,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
      * Calls methods that update the list and the ListView in the interface.
      */
     private void updateHabitsListView(){
+        getHabitsList();
         fillHabitStringList();
         fillHabitListView();
     }

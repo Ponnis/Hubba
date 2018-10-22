@@ -72,6 +72,7 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
             model.getCurrentUser().addFriend(user);
         }
     }
+
     @Override
     public void recreateActivity() {
         recreate();

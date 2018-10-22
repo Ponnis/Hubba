@@ -38,7 +38,6 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
 
     private void init() {
         initFindByView();
-        getGroupsList();
         updateGroupsListView();
         addGroupOnClick();
     }
@@ -56,6 +55,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
      * Calls methods that update the list and the ListView in the interface.
      */
     private void updateGroupsListView() {
+        getGroupsList();
         fillGroupStringsList();
         fillGroupListView();
     }
