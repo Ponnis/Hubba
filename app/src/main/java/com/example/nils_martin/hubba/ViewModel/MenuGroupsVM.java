@@ -1,7 +1,9 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -37,44 +39,51 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
         init();
     }
 
-    private void init(){
+    private void init() {
         initFindByView();
         getGroupsList();
         updateList();
     }
 
-    private void initFindByView(){
+    private void initFindByView() {
         yourGroupsListView = (ListView) findViewById(R.id.yourGroupsListView);
         addGroupButton = (Button) findViewById(R.id.addGroupBtn);
     }
 
-    private void getGroupsList(){
-       groups = model.getCurrentUser().getGroups();
+    @Override
+    public void recreateActivity () {
+        recreate();
     }
-
-    private void updateList(){
+    private void fillGroupListView () {
+        yourGroupsAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.menu_list_item,
+                groupStrings);
+        yourGroupsListView.setAdapter(yourGroupsAdapter);
+    }
+    private void fillGroupStringsList () {
+        for (Group group : groups) {
+            groupStrings.add(group.getGroupName());
+        }
+    }
+    private void updateList () {
         groupStrings.clear();
         fillGroupStringsList();
         fillGroupListView();
     }
+    private void getGroupsList () {
+        groups = model.getCurrentUser().getGroups();
 
-    private void fillGroupStringsList(){
-        for(Group group : groups){
-            groupStrings.add(group.getGroupName());
-        }
     }
 
-    private void fillGroupListView(){
-        yourGroupsAdapter = new ArrayAdapter<String>(
-                this,
-                R.layout.menu_list_item,
-                groupStrings );
-        yourGroupsListView.setAdapter(yourGroupsAdapter);
-    }
-
-
-    @Override
-    public void recreateActivity() {
-        recreate();
+    private void addGroupOnClick() {
+        addGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuGroupsVM.this, CreateGroupVM.class);
+                startActivity(intent);
+                // TODO add a page for adding group
+            }
+        });
     }
 }
