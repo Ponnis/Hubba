@@ -25,11 +25,12 @@ import java.util.zip.Inflater;
 
 public class Adapter extends ArrayAdapter<String>  {
 
-    LayoutInflater layoutInflater;
-    MainActivityVM mainActivityVM;
-    String title;
-    TextView textView;
-    CheckBox checkBox;
+    private LayoutInflater layoutInflater;
+    private MainActivityVM mainActivityVM;
+    private String title;
+    private TextView streakNmbrView;
+    private TextView textView;
+    private CheckBox checkBox;
 
     public Adapter(Context context, MainActivityVM mainActivityVM){
         super(context, 0);
@@ -41,10 +42,10 @@ public class Adapter extends ArrayAdapter<String>  {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         view = layoutInflater.inflate(R.layout.habit_list_item, parent, false);
-        String string = getItem(position);
-        title = string;
+        title = getItem(position);
 
         initView(view);
+
 
         textView.setText(title);
         setCheckbox(title);
@@ -78,6 +79,7 @@ public class Adapter extends ArrayAdapter<String>  {
     private void initView(View view){
         textView = view.findViewById(R.id.listItemTextView);
         checkBox = view.findViewById(R.id.checkboxIsDone);
+        streakNmbrView = view.findViewById(R.id.streakDaysTextView);
     }
 
     private void setCheckbox(String string){
