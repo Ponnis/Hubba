@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.ImageButton;
 
 
+import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -23,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -161,6 +163,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         Iterator<Habit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             Habit habit = habitIterator.next();
+            if(eventIsToday(habit)) {}
             if(habit.getIsDone()){
                 habitDoneString.add(habit.getTitle(habit));
             }else{
@@ -191,6 +194,22 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         adjustListHeight(eveningListView, habitEveningString);
         adjustListHeight(nightListView, habitNightString);
         adjustListHeight(doneListView, habitDoneString);
+    }
+
+    private boolean eventIsToday(Habit habit) {
+        Calendar nowCalendar = Calendar.getInstance();
+        if(habit.getFREQUENCY() == Frequency.MONTHLY) {
+            if(habit.getDaysToDo().contains(nowCalendar.get(Calendar.DAY_OF_MONTH))) {
+                return true;
+            }
+        }
+        else if(habit.getFREQUENCY() == Frequency.DAILY || habit.getFREQUENCY() == Frequency.WEEKLY) {
+            if(habit.getDaysToDo().contains(nowCalendar.get(Calendar.DAY_OF_WEEK)));
+                return true;
+        }
+
+
+        return false;
     }
 
     /**
