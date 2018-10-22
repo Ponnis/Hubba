@@ -22,13 +22,14 @@ public class CalendarVM extends Activity implements ThemableObserver {
     private TextView dateText, activityTxtV;
     private CalendarView calendarView;
     private ImageButton backBtn;
-    private List<Habit> habitsList = HubbaModel.getInstance().getCurrentUser().getHabits();
     private Calendar cal = Calendar.getInstance();
     private int currentMonth = cal.get(Calendar.MONTH) + 1;
     private int currentYear = cal.get(Calendar.YEAR);
     private int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
     private StringBuilder stringBuilder = new StringBuilder();
     Themehandler themehandler = new Themehandler();
+    List<Habit> habitsList = HubbaModel.getInstance().getCurrentUser().getHabits();
+
 
 
     @Override
@@ -39,7 +40,7 @@ public class CalendarVM extends Activity implements ThemableObserver {
         init();
         setActivityTxtV(currentYear, currentMonth, currentDayOfMonth);
         themehandler.addThemeListener(this);
-        Update();
+        update();
     }
 
 
@@ -57,7 +58,7 @@ public class CalendarVM extends Activity implements ThemableObserver {
     /**
      * This method have all OnClickListener and update when someone click on the view.
      */
-    void Update() {
+    void update() {
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +107,6 @@ public class CalendarVM extends Activity implements ThemableObserver {
         stringBuilder.setLength(0);
         stringBuilder.append("Habits:");
         cal.set(year, month, dayOfMonth); //Take in the date from the listener and set it as "current date"
-
 
         for (int i = 0; i < habitsList.size(); i++) {
             //Month contains the date in a different form than day and week.

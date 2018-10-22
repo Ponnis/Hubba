@@ -38,6 +38,7 @@
         <activity android:name=".ViewModel.ProfileEditPasswordVM"/>
         <activity android:name=".ViewModel.HelpVM"/>
         <activity android:name=".ViewModel.MyAchievementsVM"/>
+        <receiver android:name=".ViewModel.NotificationReceiver" />
         <activity android:name=".ViewModel.EditHabitVM"/>
         <activity android:name=".ViewModel.AddFriendVM"/>
     </application>

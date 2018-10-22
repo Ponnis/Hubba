@@ -176,33 +176,6 @@
         app:layout_constraintTop_toBottomOf="@+id/middayBtn"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/numTxtV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="21dp"
-        android:text="Number of day/week:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyBtn"
-        tools:ignore="MissingConstraints"
-        android:visibility="invisible"/>
-
-    <Spinner
-        android:id="@+id/numSpr"
-        android:layout_width="135dp"
-        android:layout_height="31dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/numTxtV"
-        app:layout_constraintTop_toBottomOf="@+id/monthlyBtn"
-        tools:ignore="MissingConstraints"
-        android:visibility="invisible"
-        android:entries="@array/days_arrays"/>
-
     <CheckBox
         android:id="@+id/monCbx"
         android:layout_width="wrap_content"
