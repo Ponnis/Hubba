@@ -163,7 +163,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         Iterator<Habit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             Habit habit = habitIterator.next();
-            if(eventIsToday(habit)) {}
+            if(checkIfEventIsToday(habit)) {}
             if(habit.getIsDone()){
                 habitDoneString.add(habit.getTitle(habit));
             }else{
@@ -196,7 +196,12 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         adjustListHeight(doneListView, habitDoneString);
     }
 
-    private boolean eventIsToday(Habit habit) {
+    /**
+     * This method is used to see if a event is today or not
+     * @param habit - habit is the habit that you want to check
+     * @return true the event is today otherwise return false
+     */
+    private boolean checkIfEventIsToday(Habit habit) {
         Calendar nowCalendar = Calendar.getInstance();
         if(habit.getFREQUENCY() == Frequency.MONTHLY) {
             if(habit.getDaysToDo().contains(nowCalendar.get(Calendar.DAY_OF_MONTH))) {
