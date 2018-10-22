@@ -3,13 +3,12 @@ package com.example.nils_martin.hubba.ViewModel;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +26,11 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import static com.example.nils_martin.hubba.Model.Frequency.DAILY;
+import static com.example.nils_martin.hubba.Model.Frequency.MONTHLY;
 
 public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
@@ -53,7 +56,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         setContentView(R.layout.activity_add_habit);
         init();
         makeAListOfDayCbx();
-        createNotificationChannel();
+        //createNotificationChannel();
         themehandler.addThemeListener(this);
         update();
     }
@@ -115,8 +118,8 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 createdHabit.setDaysToDo(calendarDaysList);
 
                 if(checkIfAllIsFillIn()) {
-                    /// TODO: 2018-10-18 Inte snyggt!
-                    model.getCurrentUser().getHabits().add(createdHabit);
+                    testNotifcation(getStartDate(), getInterval());
+                    model.getCurrentUser().addHabit(createdHabit);
                     endActivity();
                 }
                 else {
@@ -140,7 +143,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 createdHabit.setSTATE(State.MORNING);
-                help();
             }
         });
 
@@ -173,7 +175,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 dayVisible();
-                createdHabit.setFREQUENCY(Frequency.DAILY);
+                createdHabit.setFREQUENCY(DAILY);
             }
         });
 
@@ -191,7 +193,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 monthVisible();
-                createdHabit.setFREQUENCY(Frequency.MONTHLY);
+                createdHabit.setFREQUENCY(MONTHLY);
             }
         });
 
@@ -200,21 +202,41 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 if(remainderSwitch.isChecked()) {
-                    hourSpr.setVisibility(View.VISIBLE);
-                    minSpr.setVisibility(View.VISIBLE);
-                    timeTxtV.setVisibility(View.VISIBLE);
-                    colontxtV.setVisibility(View.VISIBLE);
-                    createdHabit.reminderEnabled();
+                    remainderOn();
                 }
                 else {
-                    hourSpr.setVisibility(View.INVISIBLE);
-                    minSpr.setVisibility(View.INVISIBLE);
-                    timeTxtV.setVisibility(View.INVISIBLE);
-                    colontxtV.setVisibility(View.INVISIBLE);
-                    createdHabit.reminderDisabled();
+                   remainderOff();
                 }
             }
         });
+    }
+
+    private void remainderOn () {
+        hourSpr.setVisibility(View.VISIBLE);
+        minSpr.setVisibility(View.VISIBLE);
+        timeTxtV.setVisibility(View.VISIBLE);
+        colontxtV.setVisibility(View.VISIBLE);
+        createdHabit.reminderEnabled();
+        checkTime();
+    }
+
+    private void checkTime() {
+        int hourTime = Integer.valueOf(hourSpr.getSelectedItem().toString());
+        int minTime = Integer.valueOf(minSpr.getSelectedItem().toString());
+        Calendar cal = Calendar.getInstance();
+        int lif = cal.get(Calendar.HOUR_OF_DAY);
+        int blf = cal.get(Calendar.MINUTE);
+        if(lif == hourTime && blf == minTime) {
+            System.out.println("hello now is the time");
+        }
+    }
+
+    private void remainderOff () {
+        hourSpr.setVisibility(View.INVISIBLE);
+        minSpr.setVisibility(View.INVISIBLE);
+        timeTxtV.setVisibility(View.INVISIBLE);
+        colontxtV.setVisibility(View.INVISIBLE);
+        createdHabit.reminderDisabled();
     }
 
     /**
@@ -279,25 +301,27 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
         calendarDaysList.clear();
 
-        //When the frequency is daily every day is added in the list
-        if(createdHabit.getFREQUENCY() == Frequency.DAILY) {
-            for (int i = 0; i < 7; i++) {
-                calendarDaysList.add(i+1);
-            }
-        }
-
-        // When the frequency is weekly, the selected days are added to the list
-        else if(createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
-            for (int i = 0; i < cbxDayList.size(); i++) {
-                if (cbxDayList.get(i).isChecked()) {
+        switch (createdHabit.getFREQUENCY()) {
+            case DAILY:
+                //When the frequency is daily every day is added in the list
+                for (int i = 0; i < 7; i++) {
                     calendarDaysList.add(i + 1);
                 }
-            }
-        }
+                break;
 
-        //When the frequency is monthly, the date is added in the list
-        else if(createdHabit.getFREQUENCY() == Frequency.MONTHLY) {
-            calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
+            case WEEKLY:
+                // When the frequency is weekly, the selected days are added to the list
+                for (int i = 0; i < cbxDayList.size(); i++) {
+                    if (cbxDayList.get(i).isChecked()) {
+                        calendarDaysList.add(i + 1);
+                    }
+                }
+                break;
+
+            case MONTHLY:
+                //When the frequency is monthly, the date is added in the list
+                calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
+                break;
         }
     }
 
@@ -347,32 +371,62 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     }
 
 
-    private void help () {
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, getString(R.string.channel_id))
-                .setSmallIcon(R.drawable.profilepic)
-                .setContentTitle("text")
-                .setContentText("här är en till text")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+    private long getStartDate() {
+        Calendar remainderCalendar = Calendar.getInstance();
+        Calendar nowCalendar = Calendar.getInstance();
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        remainderCalendar.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hourSpr.getSelectedItem().toString()));
+        remainderCalendar.set(Calendar.MINUTE, Integer.valueOf(minSpr.getSelectedItem().toString()));
 
-// notificationId is a unique int for each notification that you must define
-        notificationManager.notify(0, mBuilder.build());
+        switch (createdHabit.getFREQUENCY()) {
+            case DAILY:
+                if(remainderCalendar.getTimeInMillis() < nowCalendar.getTimeInMillis())  {
+                    remainderCalendar.set(Calendar.DAY_OF_MONTH, (remainderCalendar.get(Calendar.DAY_OF_MONTH)+1));
+                }
+                break;
+            case WEEKLY:
+            //    break;
+            case MONTHLY:
+                remainderCalendar.set(Calendar.DAY_OF_MONTH, calendarDaysList.get(0));
+
+                if(remainderCalendar.getTimeInMillis() < nowCalendar.getTimeInMillis()) {
+                    remainderCalendar.set(Calendar.MONTH, (remainderCalendar.get(Calendar.MONTH)+1));
+                }
+                break;
+        }
+        return remainderCalendar.get(Calendar.MILLISECOND);
     }
 
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(getString(R.string.channel_id), name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+    private long getInterval () {
+        Calendar remainderCalendar = Calendar.getInstance();
+        Calendar nowCalendar = Calendar.getInstance();
+        switch (createdHabit.getFREQUENCY()) {
+            case DAILY:
+                return 86400000; //One day in millisecond
+            case WEEKLY:
+                return 86400000; //One day in millisecond
+            case MONTHLY:
+                remainderCalendar.set(Calendar.MONTH, remainderCalendar.get(Calendar.MONTH)+1);
+                long oneMonth = remainderCalendar.getTimeInMillis()-nowCalendar.getTimeInMillis(); //One month in millisecond
+                return oneMonth;
+        }
+        return 2314;
+    }
+
+    private void testNotifcation(long startdate, long interval){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent notificationIntent = new Intent(this, NotificationReceiver.class);
+
+        Bundle extra = new Bundle();
+        extra.putString("HabitNamn", createdHabit.getTitle(createdHabit));
+
+        notificationIntent.putExtras(extra);
+
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, startdate, interval, broadcast);//interval, broadcast);
         }
     }
 
