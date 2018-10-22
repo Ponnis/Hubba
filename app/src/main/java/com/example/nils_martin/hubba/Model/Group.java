@@ -14,7 +14,11 @@ public class  Group {
         this.habit = habit;
     }
     //Ska delegeras till GroupHabitType istället? Dock får den inte veta något om gruppen då det är uppåt
-    
+
+    public String getGroupName(){
+        return this.groupName;
+    }
+
     private void isHabitComplete(){
         if(habit.getGroupMembersDoneCount()==usersInGroup.size()){
             habit.setDone();
