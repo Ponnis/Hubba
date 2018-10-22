@@ -26,16 +26,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObserver {
-    private EditText habitName;
-    private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
-    private Habit createdHabit;
-    CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
-    private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
-    private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
-    private Switch remainderSwitch;
-    private ImageView nameWrongImgV, frequencyWrongImgV, stateWrongImgV, weekWrongImgV;
-    private List<CheckBox> cbxDayList = new ArrayList<>();
-    private List<CheckBox> cbxMonthList = new ArrayList<>();
+     private EditText habitName;
+     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
+     private Habit createdHabit;
+     CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
+     private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
+     private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
+     private Switch remainderSwitch;
+     private ImageView nameWrongImgV, frequencyWrongImgV, stateWrongImgV, weekWrongImgV;
+     private List<CheckBox> cbxDayList = new ArrayList<>();
+     private List<CheckBox> cbxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
     HubbaModel model = HubbaModel.getInstance();
     Themehandler themehandler = new Themehandler();
@@ -251,59 +251,59 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
     /**
      * This method makes it easier to see what happens when clicking on the month-button.
      */
-    private void monthVisible () {
-        numberOfDaysTxtV.setVisibility(View.INVISIBLE);
-        numberOfDaysSpr.setVisibility(View.INVISIBLE);
-        monthTxtV.setVisibility(View.VISIBLE);
-        monthSpr.setVisibility(View.VISIBLE);
+     private void monthVisible () {
+         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
+         numberOfDaysSpr.setVisibility(View.INVISIBLE);
+         monthTxtV.setVisibility(View.VISIBLE);
+         monthSpr.setVisibility(View.VISIBLE);
 
-        for(int i = 0; i < cbxDayList.size(); i++) {
-            cbxDayList.get(i).setVisibility(View.INVISIBLE);
-        }
-    }
+         for(int i = 0; i < cbxDayList.size(); i++) {
+             cbxDayList.get(i).setVisibility(View.INVISIBLE);
+         }
+     }
 
-    /**
-     * This method makes a list of the checkboxes because is easier to treat them as a group
-     * than individual
-     */
-    private void makeAListOfDayCbx() {
-        cbxDayList.add(sunCxb);
-        cbxDayList.add(monCxb);
-        cbxDayList.add(tueCxb);
-        cbxDayList.add(wedCxb);
-        cbxDayList.add(thuCxb);
-        cbxDayList.add(friCxb);
-        cbxDayList.add(satCxb);
+     /**
+      * This method makes a list of the checkboxes because is easier to treat them as a group
+      * than individual
+      */
+     private void makeAListOfDayCbx() {
+         cbxDayList.add(sunCxb);
+         cbxDayList.add(monCxb);
+         cbxDayList.add(tueCxb);
+         cbxDayList.add(wedCxb);
+         cbxDayList.add(thuCxb);
+         cbxDayList.add(friCxb);
+         cbxDayList.add(satCxb);
     }
 
     /**
      * The method making a list of which weekdays the habit is to be done an depending on which
      * frequency that is select it so it can be shown on the right day.
      */
-    private void makeCalendarDaysList () {
+     private void makeCalendarDaysList () {
 
-        calendarDaysList.clear();
+         calendarDaysList.clear();
 
         //When the frequency is daily every day is added in the list
-        if(createdHabit.getFREQUENCY() == Frequency.DAILY) {
-            for (int i = 0; i < 7; i++) {
-                calendarDaysList.add(i+1);
-            }
-        }
+         if(createdHabit.getFREQUENCY() == Frequency.DAILY) {
+             for (int i = 0; i < 7; i++) {
+                 calendarDaysList.add(i+1);
+             }
+         }
 
         // When the frequency is weekly, the selected days are added to the list
-        else if(createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
-            for (int i = 0; i < cbxDayList.size(); i++) {
-                if (cbxDayList.get(i).isChecked()) {
-                    calendarDaysList.add(i + 1);
-                }
-            }
+         else if(createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
+             for (int i = 0; i < cbxDayList.size(); i++) {
+                 if (cbxDayList.get(i).isChecked()) {
+                     calendarDaysList.add(i + 1);
+                 }
+             }
         }
 
         //When the frequency is monthly, the date is added in the list
-        else if(createdHabit.getFREQUENCY() == Frequency.MONTHLY) {
-            calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
-        }
+         else if(createdHabit.getFREQUENCY() == Frequency.MONTHLY) {
+             calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
+         }
     }
 
     /**
@@ -311,48 +311,48 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
      * creating a Habit, is selected
      *  @return True if everything is correct, else return false
      */
-    private boolean checkIfAllIsFillIn () {
-        if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
-                || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle(createdHabit).equals("")) {
-            if (createdHabit.getFREQUENCY() == null) {
-                frequencyWrongImgV.setVisibility(View.VISIBLE);
-            }
+     private boolean checkIfAllIsFillIn () {
+         if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
+                 || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle(createdHabit).equals("")) {
+             if (createdHabit.getFREQUENCY() == null) {
+                 frequencyWrongImgV.setVisibility(View.VISIBLE);
+             }
 
-            if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
-                weekWrongImgV.setVisibility(View.VISIBLE);
-            }
+             if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
+                 weekWrongImgV.setVisibility(View.VISIBLE);
+             }
 
-            if (createdHabit.getSTATE() == null) {
-                stateWrongImgV.setVisibility(View.VISIBLE);
-            }
-            if (createdHabit.getTitle(createdHabit).equals("")) {
-                nameWrongImgV.setVisibility(View.VISIBLE);
-            }
-            return false;
-        }
-        return true;
-    }
+             if (createdHabit.getSTATE() == null) {
+                 stateWrongImgV.setVisibility(View.VISIBLE);
+             }
+             if (createdHabit.getTitle(createdHabit).equals("")) {
+                 nameWrongImgV.setVisibility(View.VISIBLE);
+             }
+             return false;
+         }
+         return true;
+     }
 
     /**
      * This method is used because it is necessary that the wrong message disappears when you start editing
      */
-    private void takeAwayWrongMessage () {
-        wrongMesTxtV.setVisibility(View.INVISIBLE);
-        frequencyWrongImgV.setVisibility(View.INVISIBLE);
-        nameWrongImgV.setVisibility(View.INVISIBLE);
-        stateWrongImgV.setVisibility(View.INVISIBLE);
-        weekWrongImgV.setVisibility(View.INVISIBLE);
-    }
+     private void takeAwayWrongMessage () {
+         wrongMesTxtV.setVisibility(View.INVISIBLE);
+         frequencyWrongImgV.setVisibility(View.INVISIBLE);
+         nameWrongImgV.setVisibility(View.INVISIBLE);
+         stateWrongImgV.setVisibility(View.INVISIBLE);
+         weekWrongImgV.setVisibility(View.INVISIBLE);
+     }
 
-    private void endActivity(){
+     private void endActivity(){
         finish();
     }
-    private void setToGroupHabit(Habit habit){
+     private void setToGroupHabit(Habit habit){
         habit.setHabitTypeState(new GroupHabitType());
     }
 
-    @Override
-    public void recreateActivity() {
+     @Override
+     public void recreateActivity() {
         recreate();
     }
-}
+ }
