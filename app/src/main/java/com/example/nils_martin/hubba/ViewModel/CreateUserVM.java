@@ -14,30 +14,30 @@ import com.example.nils_martin.hubba.R;
 public class CreateUserVM extends AppCompatActivity  {
 
     HubbaModel model = HubbaModel.getInstance();
-    private EditText NewUsername;
-    private EditText NewEmail;
-    private EditText NewPassword;
+    private EditText newUsername;
+    private EditText newEmail;
+    private EditText newPassword;
 
      protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_user);
 
-        NewUsername = (EditText)findViewById(R.id.txtNewUsername);
-        NewPassword  =(EditText)findViewById(R.id.txtNewPassword);
-        NewEmail = (EditText)findViewById(R.id.txtNewEmail);
+        newUsername = (EditText)findViewById(R.id.txtNewUsername);
+        newPassword =(EditText)findViewById(R.id.txtNewPassword);
+        newEmail = (EditText)findViewById(R.id.txtNewEmail);
         Button createNewUser = (Button) findViewById(R.id.btnCreateNewUser);
 
         createNewUser.setOnClickListener(v -> {
 
-            if(!NewUsername.getText().toString().isEmpty() && !NewEmail.getText().toString().isEmpty()
-                    && !NewPassword.getText().toString().isEmpty()){
+            if(!newUsername.getText().toString().isEmpty() && !newEmail.getText().toString().isEmpty()
+                    && !newPassword.getText().toString().isEmpty()){
                 addUser();
             }
         });
     }
 
     private void addUser(){
-        User user = new User(NewUsername.getText().toString(), NewEmail.getText().toString(), NewPassword.getText().toString(), null);
+        User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(), null);
         model.addUser(user);
         finish();
     }

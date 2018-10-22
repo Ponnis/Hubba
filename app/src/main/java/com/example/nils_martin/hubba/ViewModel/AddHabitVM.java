@@ -117,6 +117,11 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 createdHabit.setTitle(habitName.getText().toString());
                 createdHabit.setDaysToDo(calendarDaysList);
 
+                List<Integer> temp = new ArrayList<>();
+                temp.add(Integer.valueOf(hourSpr.getSelectedItem().toString()));
+                temp.add(Integer.valueOf(minSpr.getSelectedItem().toString()));
+                createdHabit.setReminderTime(temp);
+
                 if(checkIfAllIsFillIn()) {
                     testNotifcation(getStartDate(), getInterval());
                     model.getCurrentUser().addHabit(createdHabit);
@@ -332,7 +337,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
      */
     private boolean checkIfAllIsFillIn () {
         if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
-                || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle(createdHabit).equals("")) {
+                || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle().equals("")) {
             if (createdHabit.getFREQUENCY() == null) {
                 frequencyWrongImgV.setVisibility(View.VISIBLE);
             }
@@ -344,7 +349,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             if (createdHabit.getSTATE() == null) {
                 stateWrongImgV.setVisibility(View.VISIBLE);
             }
-            if (createdHabit.getTitle(createdHabit).equals("")) {
+            if (createdHabit.getTitle().equals("")) {
                 nameWrongImgV.setVisibility(View.VISIBLE);
             }
             return false;
@@ -419,7 +424,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         Intent notificationIntent = new Intent(this, NotificationReceiver.class);
 
         Bundle extra = new Bundle();
-        extra.putString("HabitNamn", createdHabit.getTitle(createdHabit));
+        extra.putString("HabitNamn", createdHabit.getTitle());
 
         notificationIntent.putExtras(extra);
 

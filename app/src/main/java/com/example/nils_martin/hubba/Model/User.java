@@ -13,7 +13,7 @@ public class User implements Observer, Friend, IUser {
     private String email;
     private String password;
     private String imagePath;
-    private List<User> friends;
+    private List<User> friends = new ArrayList<>();
     private ArrayList<Habit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
     private ArrayList<ThemableObserver> themeObservers;
@@ -21,6 +21,7 @@ public class User implements Observer, Friend, IUser {
     private boolean allowNotifications;
     private boolean soundOn;
     private Themes ActiveTheme;
+    private List<Group> groups = new ArrayList<>();
 
     public User(String name, String email, String password, String imagePath) {
         this.userName = name;
@@ -94,11 +95,11 @@ public class User implements Observer, Friend, IUser {
         return imagePath;
     }
 
-    public ArrayList getHabits() {
+    public ArrayList<Habit> getHabits() {
         return habits;
     }
 
-    public List getAchievements() {
+    public List<Achievement> getAchievements() {
         return achievements;
     }
 
@@ -107,38 +108,44 @@ public class User implements Observer, Friend, IUser {
     public void update(Observable o, Object arg) {
         checkHabitDone();
         for (Habit habit : habits) {
-            if (habit.getStreak(habit) % 10 == 0) {
+
+           /* if (habit.getStreak() % 5 == 0) {
                 achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak(habit) + " Days!"));
             }
-            if (habits.size() % 10 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!"));
-            }
+            if (habits.size() % 5 == 0) {
+                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!"),0);
+
+                if (habit.getStreak() % 10 == 0) {
+                    achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak() + " Days!", 5));
+                }
+                if (habits.size() % 10 == 0) {
+
+                }
+            }*/
         }
+
     }
-
-
-    // Adds another user to the list of friends.
-    public void addFriend(User user) {
-        friends.add(user);
-    }
-
     // Finds the friend to remove in friends list and then removes the friend.
-    public void removeFriend(User friend) {
+    public void removeFriend (User friend){
         for (User user : friends) {
             if (user.userName == friend.userName) {
                 friends.remove(friend);
             }
         }
     }
+    // Adds another user to the list of friends.
+    public void addFriend (User user){
+        friends.add(user);
+    }
 
-    public List<User> getFriends(){
+    private void checkHabitDone () {
+
+
+    }
+    public List<User> getFriends () {
         return friends;
     }
-
-    private void checkHabitDone(){
-
-
+    public List<Group> getGroups () {
+        return this.groups;
     }
-
-
 }

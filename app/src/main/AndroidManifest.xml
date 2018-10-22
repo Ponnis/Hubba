@@ -25,6 +25,7 @@
         </intent-filter>
         </activity>
         <activity android:name=".ViewModel.AddHabitVM" />
+        <activity android:name=".ViewModel.CreateGroupVM"/>
         <activity android:name=".ViewModel.CreateUserVM" />
         <activity android:name=".ViewModel.HabitVM"/>
         <activity android:name=".ViewModel.MenuVM"/>
@@ -38,6 +39,7 @@
         <activity android:name=".ViewModel.HelpVM"/>
         <activity android:name=".ViewModel.MyAchievementsVM"/>
         <receiver android:name=".ViewModel.NotificationReceiver" />
+        <activity android:name=".ViewModel.EditHabitVM"/>
     </application>
 
 

@@ -165,20 +165,20 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             Habit habit = habitIterator.next();
             if(checkIfEventIsToday(habit)) {}
             if(habit.getIsDone()){
-                habitDoneString.add(habit.getTitle(habit));
+                habitDoneString.add(habit.getTitle());
             }else{
                 switch (habit.getSTATE()) {
                     case MORNING:
-                        habitMorningString.add(habit.getTitle(habit));
+                        habitMorningString.add(habit.getTitle());
                         break;
                     case MIDDAY:
-                        habitMiddayString.add(habit.getTitle(habit));
+                        habitMiddayString.add(habit.getTitle());
                         break;
                     case EVENING:
-                        habitEveningString.add(habit.getTitle(habit));
+                        habitEveningString.add(habit.getTitle());
                         break;
                     case NIGHT:
-                        habitNightString.add(habit.getTitle(habit));
+                        habitNightString.add(habit.getTitle());
                         break;
                 }
             }
@@ -287,7 +287,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
      */
     protected void findHabit(String string){
         for(Habit habit: habits){
-            if(habit.getTitle(habit).equals(string)){
+            if(habit.getTitle().equals(string)){
                 setOpenHabit(habit);
             }
         }
@@ -295,7 +295,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
 
     protected Habit getHabit(String string){
         for(Habit habit: habits){
-            if (habit.getTitle(habit).equals(string)) {
+            if (habit.getTitle().equals(string)) {
                 return habit;
             }
         }
