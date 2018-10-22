@@ -313,7 +313,7 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
      */
      private boolean checkIfAllIsFillIn () {
          if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
-                 || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle(createdHabit).equals("")) {
+                 || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle().equals("")) {
              if (createdHabit.getFREQUENCY() == null) {
                  frequencyWrongImgV.setVisibility(View.VISIBLE);
              }
@@ -325,7 +325,7 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
              if (createdHabit.getSTATE() == null) {
                  stateWrongImgV.setVisibility(View.VISIBLE);
              }
-             if (createdHabit.getTitle(createdHabit).equals("")) {
+             if (createdHabit.getTitle().equals("")) {
                  nameWrongImgV.setVisibility(View.VISIBLE);
              }
              return false;
