@@ -6,14 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.Group;
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
@@ -41,8 +38,8 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
 
     private void init() {
         initFindByView();
-        getGroupsList();
-        updateList();
+        updateGroupsListView();
+        addGroupOnClick();
     }
 
     private void initFindByView() {
@@ -50,10 +47,33 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
         addGroupButton = (Button) findViewById(R.id.addGroupBtn);
     }
 
-    @Override
-    public void recreateActivity () {
-        recreate();
+    private void getGroupsList() {
+        groups = model.getCurrentUser().getGroups();
     }
+
+    /**
+     * Calls methods that update the list and the ListView in the interface.
+     */
+    private void updateGroupsListView() {
+        getGroupsList();
+        fillGroupStringsList();
+        fillGroupListView();
+    }
+
+    /**
+     * First clears the list groupStrings and then updates it with the
+     * names of groups in groups.
+     */
+    private void fillGroupStringsList() {
+        groupStrings.clear();
+        for (Group group : groups) {
+            groupStrings.add(group.getGroupName());
+        }
+    }
+
+    /**
+     * Fills the ListView with strings from groupStrings.
+     */
     private void fillGroupListView () {
         yourGroupsAdapter = new ArrayAdapter<String>(
                 this,
@@ -61,19 +81,9 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
                 groupStrings);
         yourGroupsListView.setAdapter(yourGroupsAdapter);
     }
-    private void fillGroupStringsList () {
-        for (Group group : groups) {
-            groupStrings.add(group.getGroupName());
-        }
-    }
-    private void updateList () {
-        groupStrings.clear();
-        fillGroupStringsList();
-        fillGroupListView();
-    }
-    private void getGroupsList () {
-        groups = model.getCurrentUser().getGroups();
 
+    public void recreateActivity () {
+        recreate();
     }
 
     private void addGroupOnClick() {
@@ -82,7 +92,6 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
             public void onClick(View v) {
                 Intent intent = new Intent(MenuGroupsVM.this, CreateGroupVM.class);
                 startActivity(intent);
-                // TODO add a page for adding group
             }
         });
     }

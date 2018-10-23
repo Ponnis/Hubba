@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-public class HabitUnitTest {
+public class HabitTest {
 
     @Test
     public void testCreateHabit() {

@@ -39,11 +39,12 @@ public class CreateGroupVM extends AppCompatActivity {
     }*/
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.create_group);
         getUserToCurrent();
         getUserFriends();
         groupName = String.valueOf((EditText)findViewById(R.id.txtGroupName));
         friendNames  = String.valueOf((EditText)findViewById(R.id.txtGroupMembers));
-        Button createNewGroupHabit = (Button) findViewById(R.id.btnCreateNewGroup);
+        createNewGroupHabit = (Button) findViewById(R.id.btnCreateNewGroup);
        // createNewGroupHabit.setOnClickListener();
         createNewGroupHabit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,12 +54,14 @@ public class CreateGroupVM extends AppCompatActivity {
             }
         });
         int listSize = hubbaModel.getCurrentUser().getHabits().size();
-        habit= (Habit) hubbaModel.getCurrentUser().getHabits().get(listSize-1);
+        // TODO The row below does not work when the user has no habits.
+        // habit= (Habit) hubbaModel.getCurrentUser().getHabits().get(listSize-1);
     }
 
     private void getUserToCurrent(){
         user = hubbaModel.getCurrentUser();
     }
+
     //Kollar så att usern finns med i vänlistan
     private ArrayList<Friend> checkUserNameToFriend(){
 
