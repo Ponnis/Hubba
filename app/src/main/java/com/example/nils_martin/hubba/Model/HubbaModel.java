@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class HubbaModel implements IHubbaModel {
     private static HubbaModel instance = null;
-    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> users;
     private User currentUser;
 
     public static HubbaModel getInstance() {
@@ -15,7 +15,7 @@ public class HubbaModel implements IHubbaModel {
     }
 
     private HubbaModel() {
-
+        users = new ArrayList<>();
     }
 
     public User getUser(String userName) {
@@ -57,7 +57,7 @@ public class HubbaModel implements IHubbaModel {
     }
 
     public void addUser (User user){
-        getUsers().add(user);
+        this.users.add(user);
     }
     public String themeEnumToString(){
         return currentUser.themeEnumToString();

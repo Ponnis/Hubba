@@ -2,8 +2,13 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +26,11 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import static com.example.nils_martin.hubba.Model.Frequency.DAILY;
+import static com.example.nils_martin.hubba.Model.Frequency.MONTHLY;
 
 public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
@@ -30,8 +39,8 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
     private Habit createdHabit;
     CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
-    private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
-    private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
+    private TextView colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
+    private Spinner  hourSpr, minSpr, monthSpr;
     private Switch remainderSwitch;
     private ImageView nameWrongImgV, frequencyWrongImgV, stateWrongImgV, weekWrongImgV;
     private List<CheckBox> cbxDayList = new ArrayList<>();
@@ -40,7 +49,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     HubbaModel model = HubbaModel.getInstance();
     Themehandler themehandler = new Themehandler();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
@@ -48,10 +56,14 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         setContentView(R.layout.activity_add_habit);
         init();
         makeAListOfDayCbx();
+        //createNotificationChannel();
         themehandler.addThemeListener(this);
         update();
     }
 
+    /**
+     * Initialize all the view attribute
+     */
     public void init() {
         habitName = findViewById(R.id.habitInput);
         save = findViewById(R.id.saveBtn);
@@ -70,12 +82,10 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         friCxb = findViewById(R.id.friCbx);
         satCxb = findViewById(R.id.satCbx);
         sunCxb = findViewById(R.id.sunCbx);
-        numberOfDaysTxtV = findViewById(R.id.numTxtV);
         timeTxtV = findViewById(R.id.timeTxtV);
         colontxtV = findViewById(R.id.colontxtV);
         monthTxtV = findViewById(R.id.monthTxtV);
         wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
-        numberOfDaysSpr = findViewById(R.id.numSpr);
         hourSpr = findViewById(R.id.hourSpr);
         minSpr = findViewById(R.id.minSpr);
         monthSpr = findViewById(R.id.monthSpr);
@@ -86,6 +96,9 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         weekWrongImgV = findViewById(R.id.weekImgV);
     }
 
+    /**
+     * This method has all the setOnClickListener
+     */
     public void update() {
 
         createdHabit = new Habit("", calendarDaysList);
@@ -110,8 +123,8 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 createdHabit.setReminderTime(temp);
 
                 if(checkIfAllIsFillIn()) {
-                    /// TODO: 2018-10-18 Inte snyggt!
-                    model.getCurrentUser().getHabits().add(createdHabit);
+                    testNotifcation(getStartDate(), getInterval());
+                    model.getCurrentUser().addHabit(createdHabit);
                     endActivity();
                 }
                 else {
@@ -167,7 +180,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 dayVisible();
-                createdHabit.setFREQUENCY(Frequency.DAILY);
+                createdHabit.setFREQUENCY(DAILY);
             }
         });
 
@@ -185,7 +198,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 monthVisible();
-                createdHabit.setFREQUENCY(Frequency.MONTHLY);
+                createdHabit.setFREQUENCY(MONTHLY);
             }
         });
 
@@ -194,29 +207,47 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 takeAwayWrongMessage();
                 if(remainderSwitch.isChecked()) {
-                    hourSpr.setVisibility(View.VISIBLE);
-                    minSpr.setVisibility(View.VISIBLE);
-                    timeTxtV.setVisibility(View.VISIBLE);
-                    colontxtV.setVisibility(View.VISIBLE);
-                    createdHabit.reminderEnabled();
+                    remainderOn();
                 }
                 else {
-                    hourSpr.setVisibility(View.INVISIBLE);
-                    minSpr.setVisibility(View.INVISIBLE);
-                    timeTxtV.setVisibility(View.INVISIBLE);
-                    colontxtV.setVisibility(View.INVISIBLE);
-                    createdHabit.reminderDisabled();
+                   remainderOff();
                 }
             }
         });
+    }
+
+    private void remainderOn () {
+        hourSpr.setVisibility(View.VISIBLE);
+        minSpr.setVisibility(View.VISIBLE);
+        timeTxtV.setVisibility(View.VISIBLE);
+        colontxtV.setVisibility(View.VISIBLE);
+        createdHabit.reminderEnabled();
+        checkTime();
+    }
+
+    private void checkTime() {
+        int hourTime = Integer.valueOf(hourSpr.getSelectedItem().toString());
+        int minTime = Integer.valueOf(minSpr.getSelectedItem().toString());
+        Calendar cal = Calendar.getInstance();
+        int lif = cal.get(Calendar.HOUR_OF_DAY);
+        int blf = cal.get(Calendar.MINUTE);
+        if(lif == hourTime && blf == minTime) {
+            System.out.println("hello now is the time");
+        }
+    }
+
+    private void remainderOff () {
+        hourSpr.setVisibility(View.INVISIBLE);
+        minSpr.setVisibility(View.INVISIBLE);
+        timeTxtV.setVisibility(View.INVISIBLE);
+        colontxtV.setVisibility(View.INVISIBLE);
+        createdHabit.reminderDisabled();
     }
 
     /**
      * This method set everything to invisible when you click on the month-button.
      */
     private void dayVisible() {
-        numberOfDaysTxtV.setVisibility(View.INVISIBLE);
-        numberOfDaysSpr.setVisibility(View.INVISIBLE);
         monthTxtV.setVisibility(View.INVISIBLE);
         monthSpr.setVisibility(View.INVISIBLE);
 
@@ -233,8 +264,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
      * This method makes it easier to see what happens when clicking on the week-button.
      */
     private void weekVisible () {
-        numberOfDaysTxtV.setVisibility(View.VISIBLE);
-        numberOfDaysSpr.setVisibility(View.VISIBLE);
         monthSpr.setVisibility(View.INVISIBLE);
         monthTxtV.setVisibility(View.INVISIBLE);
 
@@ -247,8 +276,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
      * This method makes it easier to see what happens when clicking on the month-button.
      */
     private void monthVisible () {
-        numberOfDaysTxtV.setVisibility(View.INVISIBLE);
-        numberOfDaysSpr.setVisibility(View.INVISIBLE);
         monthTxtV.setVisibility(View.VISIBLE);
         monthSpr.setVisibility(View.VISIBLE);
 
@@ -279,25 +306,27 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
         calendarDaysList.clear();
 
-        //When the frequency is daily every day is added in the list
-        if(createdHabit.getFREQUENCY() == Frequency.DAILY) {
-            for (int i = 0; i < 7; i++) {
-                calendarDaysList.add(i+1);
-            }
-        }
-
-        // When the frequency is weekly, the selected days are added to the list
-        else if(createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
-            for (int i = 0; i < cbxDayList.size(); i++) {
-                if (cbxDayList.get(i).isChecked()) {
+        switch (createdHabit.getFREQUENCY()) {
+            case DAILY:
+                //When the frequency is daily every day is added in the list
+                for (int i = 0; i < 7; i++) {
                     calendarDaysList.add(i + 1);
                 }
-            }
-        }
+                break;
 
-        //When the frequency is monthly, the date is added in the list
-        else if(createdHabit.getFREQUENCY() == Frequency.MONTHLY) {
-            calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
+            case WEEKLY:
+                // When the frequency is weekly, the selected days are added to the list
+                for (int i = 0; i < cbxDayList.size(); i++) {
+                    if (cbxDayList.get(i).isChecked()) {
+                        calendarDaysList.add(i + 1);
+                    }
+                }
+                break;
+
+            case MONTHLY:
+                //When the frequency is monthly, the date is added in the list
+                calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
+                break;
         }
     }
 
@@ -329,7 +358,8 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     }
 
     /**
-     * This method is used because it is necessary that the wrong message disappears when you start editing
+     * This method is used because it is necessary so the wrong message disappears
+     * when you editing
      */
     private void takeAwayWrongMessage () {
         wrongMesTxtV.setVisibility(View.INVISIBLE);
@@ -343,6 +373,66 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         finish();
         Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
         startActivity(intent);
+    }
+
+
+    private long getStartDate() {
+        Calendar remainderCalendar = Calendar.getInstance();
+        Calendar nowCalendar = Calendar.getInstance();
+
+        remainderCalendar.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hourSpr.getSelectedItem().toString()));
+        remainderCalendar.set(Calendar.MINUTE, Integer.valueOf(minSpr.getSelectedItem().toString()));
+
+        switch (createdHabit.getFREQUENCY()) {
+            case DAILY:
+                if(remainderCalendar.getTimeInMillis() < nowCalendar.getTimeInMillis())  {
+                    remainderCalendar.set(Calendar.DAY_OF_MONTH, (remainderCalendar.get(Calendar.DAY_OF_MONTH)+1));
+                }
+                break;
+            case WEEKLY:
+            //    break;
+            case MONTHLY:
+                remainderCalendar.set(Calendar.DAY_OF_MONTH, calendarDaysList.get(0));
+
+                if(remainderCalendar.getTimeInMillis() < nowCalendar.getTimeInMillis()) {
+                    remainderCalendar.set(Calendar.MONTH, (remainderCalendar.get(Calendar.MONTH)+1));
+                }
+                break;
+        }
+        return remainderCalendar.get(Calendar.MILLISECOND);
+    }
+
+    private long getInterval () {
+        Calendar remainderCalendar = Calendar.getInstance();
+        Calendar nowCalendar = Calendar.getInstance();
+        switch (createdHabit.getFREQUENCY()) {
+            case DAILY:
+                return 86400000; //One day in millisecond
+            case WEEKLY:
+                return 86400000; //One day in millisecond
+            case MONTHLY:
+                remainderCalendar.set(Calendar.MONTH, remainderCalendar.get(Calendar.MONTH)+1);
+                long oneMonth = remainderCalendar.getTimeInMillis()-nowCalendar.getTimeInMillis(); //One month in millisecond
+                return oneMonth;
+        }
+        return 2314;
+    }
+
+    private void testNotifcation(long startdate, long interval){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent notificationIntent = new Intent(this, NotificationReceiver.class);
+
+        Bundle extra = new Bundle();
+        extra.putString("HabitNamn", createdHabit.getTitle());
+
+        notificationIntent.putExtras(extra);
+
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, startdate, interval, broadcast);//interval, broadcast);
+        }
     }
 
     @Override

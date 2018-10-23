@@ -108,42 +108,44 @@ public class User implements Observer, Friend, IUser {
     public void update(Observable o, Object arg) {
         checkHabitDone();
         for (Habit habit : habits) {
-            if (habit.getStreak() % 10 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak() + " Days!", 5));
+
+           /* if (habit.getStreak() % 5 == 0) {
+                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak(habit) + " Days!"));
             }
-            if (habits.size() % 10 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!", 5));
-            }
+            if (habits.size() % 5 == 0) {
+                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!"),0);
+
+                if (habit.getStreak() % 10 == 0) {
+                    achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak() + " Days!", 5));
+                }
+                if (habits.size() % 10 == 0) {
+
+                }
+            }*/
         }
+
     }
-
-
-    // Adds another user to the list of friends.
-    public void addFriend(User user) {
-        friends.add(user);
-    }
-
     // Finds the friend to remove in friends list and then removes the friend.
-    public void removeFriend(User friend) {
+    public void removeFriend (User friend){
         for (User user : friends) {
             if (user.userName == friend.userName) {
                 friends.remove(friend);
             }
         }
     }
+    // Adds another user to the list of friends.
+    public void addFriend (User user){
+        friends.add(user);
+    }
 
-    public List<User> getFriends(){
+    private void checkHabitDone () {
+
+
+    }
+    public List<User> getFriends () {
         return friends;
     }
-
-    public List<Group> getGroups(){
+    public List<Group> getGroups () {
         return this.groups;
     }
-
-    private void checkHabitDone(){
-
-
-    }
-
-
 }

@@ -100,4 +100,9 @@
         <item>30</item>
         <item>31</item>
     </string-array>
+
+    <string name="channel_name">Main</string>
+    <string name="channel_description">This is the description of the main channel</string>
+    <string name="channel_id">ID_001</string>
+
 </resources>
