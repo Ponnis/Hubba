@@ -11,7 +11,7 @@ public class UserTest {
 
     @Test
     public void testCreateUser(){
-        User user = new User("bla", "bla", "bla", "bla");
+        User user = new User("Åke", "Åke@gmail.com","Ninja1337", "ABS");
         assertNotNull(user);
     }
 }

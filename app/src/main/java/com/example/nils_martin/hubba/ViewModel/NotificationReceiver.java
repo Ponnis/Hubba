@@ -19,28 +19,34 @@ import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 public class NotificationReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "hubba.notification";
+    private final String NOTIFICATIONSGROUP = "hubbaNotifications";
     int notificationID = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent notificationIntent = new Intent(context, AddHabitVM.class);
+        Intent notificationIntent = new Intent(context, MainActivityVM.class);
 
         TaskStackBuilder stackBuilder;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
             stackBuilder = TaskStackBuilder.create(context);
-            stackBuilder.addParentStack(AddHabitVM.class);
+            stackBuilder.addParentStack(MainActivityVM.class);
             stackBuilder.addNextIntent(notificationIntent);
 
             PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
             Notification.Builder builder = new Notification.Builder(context);
 
-            Notification notification = builder.setContentTitle("Remainder!")
-                    .setContentText("Don't forget to " + intent.getStringExtra("HabitNamn"))
-                    .setTicker("New Message Alert!")
-                    .setSmallIcon(R.drawable.profilepic)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setContentIntent(pendingIntent).build();
+            Notification notification = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT_WATCH) {
+                notification = builder.setContentTitle("Remainder!")
+                        .setContentText("Don't forget to " + intent.getStringExtra("HabitNamn"))
+                        .setTicker("New Message Alert!")
+                        .setSmallIcon(R.drawable.profilepic)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setGroup(NOTIFICATIONSGROUP)
+                        .setContentIntent(pendingIntent)
+                        .build();
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 builder.setChannelId(CHANNEL_ID);
@@ -57,7 +63,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 notificationManager.createNotificationChannel(channel);
             }
 
-            notificationManager.notify(notificationID, notification);
+            System.out.println(intent.getStringExtra("HabitNamn"));
+            notificationManager.notify(notification.hashCode(), notification);
             notificationID ++;
         }
 
