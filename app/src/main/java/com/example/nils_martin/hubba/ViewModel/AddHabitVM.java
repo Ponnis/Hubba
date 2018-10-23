@@ -402,7 +402,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 }
                 break;
         }
-        return remainderCalendar.get(Calendar.MILLISECOND);
+        return remainderCalendar.getTimeInMillis();
     }
 
     private long getInterval () {
@@ -418,7 +418,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 long oneMonth = remainderCalendar.getTimeInMillis()-nowCalendar.getTimeInMillis(); //One month in millisecond
                 return oneMonth;
         }
-        return 2314;
+        return -1;
     }
 
     private void testNotifcation(long startdate, long interval){
@@ -431,10 +431,11 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
         notificationIntent.putExtras(extra);
 
-        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, (int)System.currentTimeMillis(), notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, startdate, interval, broadcast);//interval, broadcast);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startdate, interval, broadcast);//interval, broadcast);
+            System.out.println(createdHabit.getTitle());
         }
     }
 
