@@ -1,6 +1,8 @@
 package com.example.nils_martin.hubba;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHubbaModel;
+import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.Model.User;
 
 
@@ -39,5 +41,13 @@ public class HubbaModelTest {
         users.add(user);
         HubbaModel.getInstance().setUsers(users);
         assertEquals(HubbaModel.getInstance().getUsers(), users);
+    }
+    public void testThemeChange() {
+        IHubbaModel hubbaModel = HubbaModel.getInstance();
+        hubbaModel.setCurrentUser(new User("Åke", "Åke@gmail.com", "Ninja1337", "ABS"));
+        String themeOnStart = hubbaModel.themeEnumToString();
+        hubbaModel.setTheme(Themes.ELITE);
+        String themeAfterChange = hubbaModel.themeEnumToString();
+        assert !themeOnStart.equals(themeAfterChange);
     }
 }
