@@ -19,12 +19,16 @@ public class StreakAchievement extends Achievement implements IStreakAchievement
     @Override
     public Boolean assessAchievement() {
         Boolean isAchived = false;
-        for (Habit habit: model.getCurrentUser().getHabits()) {
-            if(targetNmbr == habit.getStreak()){
+        try {
+        for (Habit habit : model.getCurrentUser().getHabits()) {
+            if (targetNmbr <= habit.getStreak()) {
                 this.setAchieved(true);
                 isAchived = true;
                 break;
             }
+        }
+        }catch (NullPointerException e){
+            System.out.println(e.toString());
         }
         return isAchived;
     }
