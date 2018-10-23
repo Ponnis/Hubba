@@ -48,7 +48,7 @@
         android:layout_marginLeft="30dp" />
 
     <TextView
-        android:id="@+id/StreakNmbrkShow"
+        android:id="@+id/StreakNmbrShow"
         android:layout_width="15dp"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"

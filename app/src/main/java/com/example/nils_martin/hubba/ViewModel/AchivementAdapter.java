@@ -61,7 +61,7 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
     public int getItemCount() {
         return achivements.size();
     }
-
+    // Choses picture depening on Achivement type
     public int getImage(Achievement achievement) {
        AchievementType achievementType =  achievement.getAchievementType();
        if (achievementType == AchievementType.NumOHabitsAchievement){
@@ -72,7 +72,7 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
        }
        else return R.drawable.profilepic;
     }
-
+    // An custom viewHolder to be able to have more variables in the view
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView achivementTitle;
         public ImageView achivementPicture;

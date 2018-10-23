@@ -43,10 +43,12 @@ public class Adapter extends ArrayAdapter<String>  {
         View view;
         view = layoutInflater.inflate(R.layout.habit_list_item, parent, false);
         title = getItem(position);
-
         initView(view);
-
-
+        Habit currentHabit = mainActivityVM.getHabit(title);
+        Integer temp = currentHabit.getStreak();
+        if(temp > 5){
+            streakNmbrView.setText(temp.toString());
+        }else streakNmbrView.setText("");
         textView.setText(title);
         setCheckbox(title);
 
@@ -79,7 +81,7 @@ public class Adapter extends ArrayAdapter<String>  {
     private void initView(View view){
         textView = view.findViewById(R.id.listItemTextView);
         checkBox = view.findViewById(R.id.checkboxIsDone);
-        streakNmbrView = view.findViewById(R.id.streakDaysTextView);
+        streakNmbrView = view.findViewById(R.id.StreakNmbrShow);
     }
 
     private void setCheckbox(String string){
