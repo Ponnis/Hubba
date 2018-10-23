@@ -161,25 +161,28 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private void updateLists () {
         clearStrings();
         Iterator<Habit> habitIterator = habits.iterator();
-        while(habitIterator.hasNext()){
+        while(habitIterator.hasNext()) {
             Habit habit = habitIterator.next();
-            if(checkIfEventIsToday(habit)) {}
-            if(habit.getIsDone()){
-                habitDoneString.add(habit.getTitle());
-            }else{
-                switch (habit.getSTATE()) {
-                    case MORNING:
-                        habitMorningString.add(habit.getTitle());
-                        break;
-                    case MIDDAY:
-                        habitMiddayString.add(habit.getTitle());
-                        break;
-                    case EVENING:
-                        habitEveningString.add(habit.getTitle());
-                        break;
-                    case NIGHT:
-                        habitNightString.add(habit.getTitle());
-                        break;
+            if (checkIfEventIsToday(habit)) {
+                if (habit.getIsDone()) {
+                    habitDoneString.add(habit.getTitle());
+                }
+                else {
+                    switch (habit.getSTATE()) {
+                        case MORNING:
+                            habitMorningString.add(habit.getTitle());
+                            break;
+                        case MIDDAY:
+                            habitMiddayString.add(habit.getTitle());
+                            break;
+                        case EVENING:
+                            habitEveningString.add(habit.getTitle());
+                            break;
+                        case NIGHT:
+                            habitNightString.add(habit.getTitle());
+                            break;
+
+                    }
                 }
             }
         }
@@ -209,11 +212,10 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             }
         }
         else if(habit.getFREQUENCY() == Frequency.DAILY || habit.getFREQUENCY() == Frequency.WEEKLY) {
-            if(habit.getDaysToDo().contains(nowCalendar.get(Calendar.DAY_OF_WEEK)));
+            if(habit.getDaysToDo().contains(nowCalendar.get(Calendar.DAY_OF_WEEK))) {
                 return true;
+            }
         }
-
-
         return false;
     }
 

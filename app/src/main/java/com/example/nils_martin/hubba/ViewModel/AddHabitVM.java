@@ -114,6 +114,9 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             @Override
             public void onClick(View v) {
                 makeCalendarDaysList();
+                if(createdHabit.getFREQUENCY() != null) {
+                    makeCalendarDaysList();
+                }
                 createdHabit.setTitle(habitName.getText().toString());
                 createdHabit.setDaysToDo(calendarDaysList);
 
