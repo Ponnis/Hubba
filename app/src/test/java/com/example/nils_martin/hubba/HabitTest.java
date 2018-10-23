@@ -2,6 +2,7 @@ package com.example.nils_martin.hubba;
 
 import com.example.nils_martin.hubba.Model.GroupHabitType;
 import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.HabitInterface;
 import com.example.nils_martin.hubba.Model.HabitTypeState;
 import com.example.nils_martin.hubba.Model.SingleHabitType;
 
@@ -15,13 +16,13 @@ public class HabitTest {
 
     @Test
     public void testCreateHabit() {
-        Habit habit = new Habit("Drink Water");
+        HabitInterface habit = new Habit("Drink Water");
         assertNotNull(habit);
     }
 
     @Test
     public void testSetDone() {
-        Habit habit = new Habit("test");
+        HabitInterface habit = new Habit("test");
         habit.setDone();
         assertTrue(habit.getIsDone());
         assertTrue(habit.getStreak() == 1);
@@ -29,16 +30,16 @@ public class HabitTest {
 
     @Test
     public void testSetHabitTypeStateGroup() {
-        Habit habit = new Habit("test");
-        GroupHabitType group = new GroupHabitType();
+        HabitInterface habit = new Habit("test");
+        HabitTypeState group = new GroupHabitType();
         habit.setHabitTypeState(group);
         assertSame(habit.getHabitTypeState().toString(), "GroupHabit");
     }
 
     @Test
     public void testSetHabitTypeStateSingle() {
-        Habit habit = new Habit("test");
-        SingleHabitType single = new SingleHabitType();
+        HabitInterface habit = new Habit("test");
+        HabitTypeState single = new SingleHabitType();
         habit.setHabitTypeState(single);
         assertSame(habit.getHabitTypeState().toString(), "SingleHabit");
     }

@@ -46,6 +46,9 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
         habitStrings = new ArrayList<>();
     }
 
+    /**
+     * Initialize all view attributes
+     */
     private void initFindByView() {
         yourHabitsListView = (ListView) findViewById(R.id.yourHabitsListView);
     }

@@ -36,12 +36,18 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
         init();
     }
 
+    /**
+     * Calls on other functions that initialize ListViews, list OnClicks etc.
+     */
     private void init(){
         initFindByView();
         initOnClickListeners();
         updateFriendsListView();
     }
 
+    /**
+     * Initialize all view attributes
+     */
     private void initFindByView(){
         yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
         addFriendsButton = (Button) findViewById(R.id.addFriendBtn);
