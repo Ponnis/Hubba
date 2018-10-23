@@ -16,10 +16,14 @@ public class NumOfHabitsAchievement extends Achievement {
     @Override
     public Boolean assessAchievement(){
         Boolean isAchived = false;
-        List<Habit> habits = model.getCurrentUser().getHabits();
-        if(habits.size() >= targetNmbr) {
-            isAchived = true;
-            this.setAchieved(true);
+        try {
+            List<Habit> habits = model.getCurrentUser().getHabits();
+            if (habits.size() >= targetNmbr) {
+                isAchived = true;
+                this.setAchieved(true);
+            }
+        }catch (NullPointerException e) {
+            System.out.println(e.toString());
         }
         return isAchived;
     }
