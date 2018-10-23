@@ -20,7 +20,7 @@ public class HabitTest {
     }
 
     @Test
-    public void testSetDOne() {
+    public void testSetDone() {
         Habit habit = new Habit("test");
         habit.setDone();
         assertTrue(habit.getIsDone());

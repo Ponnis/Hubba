@@ -42,6 +42,8 @@ public class HubbaModelTest {
         HubbaModel.getInstance().setUsers(users);
         assertEquals(HubbaModel.getInstance().getUsers(), users);
     }
+
+    @Test
     public void testThemeChange() {
         IHubbaModel hubbaModel = HubbaModel.getInstance();
         hubbaModel.setCurrentUser(new User("Åke", "Åke@gmail.com", "Ninja1337", "ABS"));
