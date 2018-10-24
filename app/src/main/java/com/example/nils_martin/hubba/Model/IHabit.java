@@ -2,7 +2,7 @@ package com.example.nils_martin.hubba.Model;
 
 import java.util.List;
 
-public interface HabitInterface {
+public interface IHabit {
 
     void setHabitTypeState(HabitTypeState habitTypeState);
 

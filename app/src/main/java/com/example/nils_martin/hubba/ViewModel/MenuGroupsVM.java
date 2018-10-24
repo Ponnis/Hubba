@@ -36,12 +36,18 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
         init();
     }
 
+    /**
+     * Calls on other functions that initialize ListViews, lists, OnCLicks etc.
+     */
     private void init() {
         initFindByView();
         updateGroupsListView();
         addGroupOnClick();
     }
 
+    /**
+     * Initialize all view attributes
+     */
     private void initFindByView() {
         yourGroupsListView = (ListView) findViewById(R.id.yourGroupsListView);
         addGroupButton = (Button) findViewById(R.id.addGroupBtn);

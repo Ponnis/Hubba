@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
@@ -26,6 +28,8 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private ListView yourFriendsListView;
     private ArrayAdapter<String> yourFriendsAdapter;
     private Button addFriendsButton;
+    private User openFriend;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +40,19 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
         init();
     }
 
+    /**
+     * Calls on other functions that initialize ListViews, list OnClicks etc.
+     */
     private void init(){
         initFindByView();
         initOnClickListeners();
         updateFriendsListView();
+        listViewOnClick();
     }
 
+    /**
+     * Initialize all view attributes
+     */
     private void initFindByView(){
         yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
         addFriendsButton = (Button) findViewById(R.id.addFriendBtn);
@@ -80,6 +91,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
      */
     private void fillFriendStringsList(){
         friendStrings.clear();
+        friendStrings.add("Katt"); //TODO when save work
         for(User friend : friends){
             friendStrings.add(friend.getUserName());
         }
@@ -94,6 +106,29 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
                 R.layout.menu_list_item,
                 friendStrings );
         yourFriendsListView.setAdapter(yourFriendsAdapter);
+    }
+
+    private void listViewOnClick () {
+        yourFriendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                findFriend(yourFriendsListView.getItemAtPosition(position).toString());
+                Intent intent = new Intent(MenuFriendsVM.this, RemoveFriendVM.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void findFriend(String string) {
+        for(User friend: friends) {
+            if(friend.getUserName().equals(string)) {
+                setOpenFriend(friend);
+            }
+        }
+    }
+
+    private  void setOpenFriend(User openFriend) {
+        this.openFriend = openFriend;
     }
 
     @Override
