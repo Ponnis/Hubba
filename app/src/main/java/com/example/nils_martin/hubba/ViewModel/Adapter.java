@@ -1,23 +1,16 @@
 package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.R;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.Inflater;
 
 /**
  * Custom adapter to get habit list items to show i listView
@@ -31,6 +24,7 @@ public class Adapter extends ArrayAdapter<String>  {
     private TextView streakNmbrView;
     private TextView textView;
     private CheckBox checkBox;
+    private ImageView streakImage;
 
     public Adapter(Context context, MainActivityVM mainActivityVM){
         super(context, 0);
@@ -42,15 +36,9 @@ public class Adapter extends ArrayAdapter<String>  {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         view = layoutInflater.inflate(R.layout.habit_list_item, parent, false);
-        title = getItem(position);
+
         initView(view);
-        Habit currentHabit = mainActivityVM.getHabit(title);
-        Integer temp = currentHabit.getStreak();
-        if(temp > 5){
-            streakNmbrView.setText(temp.toString());
-        }else streakNmbrView.setText("");
-        textView.setText(title);
-        setCheckbox(title);
+        initVariables(position);
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,10 +66,26 @@ public class Adapter extends ArrayAdapter<String>  {
         return view;
     }
 
+    private void initVariables(int position) {
+        title = getItem(position);
+        Habit currentHabit = mainActivityVM.getHabit(title);
+        Integer streak = currentHabit.getStreak();
+        textView.setText(title);
+        setCheckbox(title);
+        if(streak >= 5){
+            streakNmbrView.setText(streak.toString());
+            streakImage.setImageResource(R.drawable.streak);
+        }else{
+            streakNmbrView.setText("");
+            streakImage.setImageResource(0);
+        }
+    }
+
     private void initView(View view){
         textView = view.findViewById(R.id.listItemTextView);
         checkBox = view.findViewById(R.id.checkboxIsDone);
         streakNmbrView = view.findViewById(R.id.StreakNmbrShow);
+        streakImage = view.findViewById(R.id.streakImageView);
     }
 
     private void setCheckbox(String string){
