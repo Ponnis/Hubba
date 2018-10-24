@@ -41,6 +41,7 @@
         <receiver android:name=".ViewModel.NotificationReceiver" />
         <activity android:name=".ViewModel.EditHabitVM"/>
         <activity android:name=".ViewModel.AddFriendVM"/>
+        <activity android:name=".ViewModel.RemoveFriendVM"/>
     </application>
 
 
