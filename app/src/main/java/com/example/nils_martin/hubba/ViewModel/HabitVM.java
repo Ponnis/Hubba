@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
@@ -34,9 +35,8 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     Button editButton;
 
     private HubbaModel model = HubbaModel.getInstance();
+    IHabit currentHabit = new Habit("");
 
-    Habit habit = new Habit("");
-    Habit currentHabit = new Habit("");
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
@@ -71,7 +71,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
      * set text to habit title and states.
      * @param habit
      */
-    private void init(Habit habit){
+    private void init(IHabit habit){
         habitTitleTextView.setText(habit.getTitle());
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
         frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()) + ": " + weekdays());
@@ -108,7 +108,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     private String weekdays(){
         String[] days = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
         StringBuilder stringBuilder = new StringBuilder();
-        List<Integer> list = habit.getDaysToDo();
+        List<Integer> list = currentHabit.getDaysToDo();
         String prefix = "";
         for(int i = 0; i < list.size(); i++){
          stringBuilder.append(prefix);
@@ -133,23 +133,23 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
     private void setReminderTime(){
         List<String> list = new ArrayList<>();
-        if(habit.isReminderOn()){
-            if(habit.getReminderTime().get(0)<10){
+        if(currentHabit.isReminderOn()){
+            if(currentHabit.getReminderTime().get(0)<10){
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("0");
-                stringBuilder.append(habit.getReminderTime().get(0));
+                stringBuilder.append(currentHabit.getReminderTime().get(0));
                 list.add(stringBuilder.toString());
             }
-            if(habit.getReminderTime().get(1)<10){
+            if(currentHabit.getReminderTime().get(1)<10){
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("0");
-                stringBuilder.append(habit.getReminderTime().get(1));
+                stringBuilder.append(currentHabit.getReminderTime().get(1));
                 list.add(stringBuilder.toString());
             }
             if(list.size() == 2){
                 reminderTimeTextView.setText(list.get(0) + " : " + list.get(1));
             } else{
-                reminderTimeTextView.setText(habit.getReminderTime().get(0) + " : " + habit.getReminderTime().get(1));
+                reminderTimeTextView.setText(currentHabit.getReminderTime().get(0) + " : " + currentHabit.getReminderTime().get(1));
             }
 
         } else {

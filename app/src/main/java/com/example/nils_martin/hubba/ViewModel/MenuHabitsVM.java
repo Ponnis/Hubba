@@ -22,12 +22,12 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private HubbaModel model = HubbaModel.getInstance();
     private Themehandler themehandler = new Themehandler();
 
-    private List<Habit> habits;
+    private List<IHabit> habits;
     private ArrayList<String> habitStrings;
     private ListView yourHabitsListView;
     private ArrayAdapter<String> yourHabitsAdapter;
 
-    public static Habit openHabit = new Habit("");
+    public static IHabit openHabit = new Habit("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +90,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
      */
     private void fillHabitStringList(){
         habitStrings.clear();
-        for(Habit habit : habits){
+        for(IHabit habit : habits){
             habitStrings.add(habit.getTitle());
         }
     }
@@ -118,14 +118,14 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     }
 
     private void findHabit(String string) {
-        for(Habit habit: habits) {
+        for(IHabit habit: habits) {
             if(habit.getTitle().equals(string)) {
                 setOpenHabit(habit);
             }
         }
     }
 
-    private  void setOpenHabit(Habit habit) {
+    private  void setOpenHabit(IHabit habit) {
         openHabit = habit;
     }
 

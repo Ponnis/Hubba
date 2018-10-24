@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
@@ -27,7 +28,7 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
 
     private EditText habitName;
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
-    private Habit currentHabit;
+    private IHabit currentHabit;
     CheckBox mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, saturdayCheckbox, sundayCheckbox;
     private TextView numberOfDaysTextView, colonTextView, timeTextView, monthTextView, errorMsgTextView;
     private Spinner numberOfDaysSpinner, hourSpinner, minSpinner, monthSpinner;

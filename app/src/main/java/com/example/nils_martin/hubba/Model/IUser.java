@@ -19,9 +19,9 @@ public interface IUser {
     public void addThemeObserver(ThemableObserver observer );
 
 
-    public void addHabit (Habit habit);
+    public void addHabit (IHabit habit);
 
-    public void removeHabit (Habit habit);
+    public void removeHabit (IHabit habit);
 
     public String getUserName();
 

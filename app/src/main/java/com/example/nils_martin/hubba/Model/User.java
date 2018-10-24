@@ -14,7 +14,7 @@ public class User implements Observer, Friend, IUser {
     private String password;
     private String imagePath;
     private List<User> friends = new ArrayList<>();
-    private ArrayList<Habit> habits = new ArrayList<>();
+    private ArrayList<IHabit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
     private ArrayList<ThemableObserver> themeObservers;
     //User Settings
@@ -55,11 +55,11 @@ public class User implements Observer, Friend, IUser {
     }
 
 
-    public void addHabit (Habit habit) {
+    public void addHabit (IHabit habit) {
         habits.add(habit);
     }
 
-    public void removeHabit (Habit habit) {
+    public void removeHabit (IHabit habit) {
         habits.remove(habit);
     }
 
@@ -95,7 +95,7 @@ public class User implements Observer, Friend, IUser {
         return imagePath;
     }
 
-    public ArrayList<Habit> getHabits() {
+    public ArrayList<IHabit> getHabits() {
         return habits;
     }
 
@@ -107,7 +107,7 @@ public class User implements Observer, Friend, IUser {
     @Override
     public void update(Observable o, Object arg) {
         checkHabitDone();
-        for (Habit habit : habits) {
+        for (IHabit habit : habits) {
 
            /* if (habit.getStreak() % 5 == 0) {
                 achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak(habit) + " Days!"));

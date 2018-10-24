@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
@@ -43,7 +44,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ArrayAdapter<String> nightAdapter;
     private ArrayAdapter<String> doneAdapter;
 
-    private List<Habit> habits = model.getCurrentUser().getHabits();
+    private List<IHabit> habits = model.getCurrentUser().getHabits();
     private List<String> habitMorningString = new ArrayList<>();
     private List<String> habitMiddayString = new ArrayList<>();
     private List<String> habitEveningString = new ArrayList<>();
@@ -52,7 +53,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     public FloatingActionButton addBtn;
     private ImageButton calendarBtn;
     private ImageButton menuButton;
-    public static Habit openHabit = new Habit("");
+    public static IHabit openHabit = new Habit("");
     private Themehandler themehandler = new Themehandler();
 
     private int listItemHeight = 115;
@@ -169,10 +170,10 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     */
     private void updateLists () {
         clearStrings();
-        Iterator<Habit> habitIterator = habits.iterator();
+        Iterator<IHabit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
-            Habit habit = habitIterator.next();
-            if(checkIfEventIsToday(habit)) {} //TODO make if around all
+            IHabit habit = habitIterator.next();
+            if(checkIfEventIsToday(habit)) {}//TODO make if around all
             if(habit.getIsDone()){
                 habitDoneString.add(habit.getTitle());
             }else{
@@ -210,7 +211,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
      * @param habit - habit is the habit that you want to check
      * @return true the event is today otherwise return false
      */
-    private boolean checkIfEventIsToday(Habit habit) {
+    private boolean checkIfEventIsToday(IHabit habit) {
         Calendar nowCalendar = Calendar.getInstance();
         if(habit.getFREQUENCY() == Frequency.MONTHLY) {
             if(habit.getDaysToDo().contains(nowCalendar.get(Calendar.DAY_OF_MONTH))) {
@@ -295,15 +296,15 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     Find which habit is clicked on and set variable openhabit.
      */
     protected void findHabit(String string){
-        for(Habit habit: habits){
+        for(IHabit habit: habits){
             if(habit.getTitle().equals(string)){
                 setOpenHabit(habit);
             }
         }
     }
 
-    protected Habit getHabit(String string){
-        for(Habit habit: habits){
+    protected IHabit getHabit(String string){
+        for(IHabit habit: habits){
             if (habit.getTitle().equals(string)) {
                 return habit;
             }
@@ -311,7 +312,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         return null;
     }
 
-    private void setOpenHabit (Habit habit){
+    private void setOpenHabit (IHabit habit){
         this.openHabit = habit;
     }
 
