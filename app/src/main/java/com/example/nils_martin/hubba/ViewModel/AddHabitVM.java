@@ -115,7 +115,9 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             public void onClick(View v) {
                 makeCalendarDaysList();
                 createdHabit.setTitle(habitName.getText().toString());
-                createdHabit.setDaysToDo(calendarDaysList);
+                if(createdHabit != null) {
+                    createdHabit.setDaysToDo(calendarDaysList);
+                }
 
                 List<Integer> temp = new ArrayList<>();
                 temp.add(Integer.valueOf(hourSpr.getSelectedItem().toString()));
@@ -123,7 +125,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 createdHabit.setReminderTime(temp);
 
                 if(checkIfAllIsFillIn()) {
-                    testNotifcation(getStartDate(), getInterval());
+                    createNotifcation(getStartDate(), getInterval());
                     model.getCurrentUser().addHabit(createdHabit);
                     endActivity();
                 }
@@ -369,13 +371,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         weekWrongImgV.setVisibility(View.INVISIBLE);
     }
 
-    private void endActivity(){
-        finish();
-        Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
-        startActivity(intent);
-    }
-
-
     private long getStartDate() {
         Calendar remainderCalendar = Calendar.getInstance();
         Calendar nowCalendar = Calendar.getInstance();
@@ -418,7 +413,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         return -1;
     }
 
-    private void testNotifcation(long startdate, long interval){
+    private void createNotifcation(long startdate, long interval){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent notificationIntent = new Intent(this, NotificationReceiver.class);
@@ -434,6 +429,12 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startdate, interval, broadcast);//interval, broadcast);
             System.out.println(createdHabit.getTitle());
         }
+    }
+
+    private void endActivity(){
+        finish();
+        Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
+        startActivity(intent);
     }
 
     @Override
