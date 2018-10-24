@@ -49,5 +49,6 @@ public interface IHabit {
     void setDaysToDo(List<Integer> daysToDo);
 
     List<Integer> getDaysToDo();
+    List<Integer> getReminderTime();
 
 }

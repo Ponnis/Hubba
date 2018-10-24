@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
@@ -28,7 +29,7 @@ public class CalendarVM extends Activity implements ThemableObserver {
     private int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
     private StringBuilder stringBuilder = new StringBuilder();
     Themehandler themehandler = new Themehandler();
-    List<Habit> habitsList = HubbaModel.getInstance().getCurrentUser().getHabits();
+    List<IHabit> habitsList = HubbaModel.getInstance().getCurrentUser().getHabits();
 
 
 

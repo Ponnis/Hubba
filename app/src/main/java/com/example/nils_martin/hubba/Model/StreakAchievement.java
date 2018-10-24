@@ -20,7 +20,7 @@ public class StreakAchievement extends Achievement implements IStreakAchievement
     public Boolean assessAchievement() {
         Boolean isAchived = false;
         try {
-        for (Habit habit : model.getCurrentUser().getHabits()) {
+        for (IHabit habit : model.getCurrentUser().getHabits()) {
             if (targetNmbr <= habit.getStreak()) {
                 this.setAchieved(true);
                 isAchived = true;

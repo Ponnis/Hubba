@@ -17,7 +17,7 @@ public class NumOfHabitsAchievement extends Achievement {
     public Boolean assessAchievement(){
         Boolean isAchived = false;
         try {
-            List<Habit> habits = model.getCurrentUser().getHabits();
+            List<IHabit> habits = model.getCurrentUser().getHabits();
             if (habits.size() >= targetNmbr) {
                 isAchived = true;
                 this.setAchieved(true);

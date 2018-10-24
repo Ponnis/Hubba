@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Habit;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.R;
 
 /**
@@ -51,7 +52,7 @@ public class Adapter extends ArrayAdapter<String>  {
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Habit habit = mainActivityVM.getHabit(title);
+                IHabit habit = mainActivityVM.getHabit(title);
                 if(habit.getIsDone()){
                     habit.notDone();
                     checkBox.setChecked(false);
@@ -68,7 +69,7 @@ public class Adapter extends ArrayAdapter<String>  {
 
     private void initVariables(int position) {
         title = getItem(position);
-        Habit currentHabit = mainActivityVM.getHabit(title);
+        IHabit currentHabit = mainActivityVM.getHabit(title);
         Integer streak = currentHabit.getStreak();
         textView.setText(title);
         setCheckbox(title);
@@ -89,7 +90,7 @@ public class Adapter extends ArrayAdapter<String>  {
     }
 
     private void setCheckbox(String string){
-        Habit habit = mainActivityVM.getHabit(string);
+        IHabit habit = mainActivityVM.getHabit(string);
         Boolean bool = habit.getIsDone();
         checkBox.setChecked(bool);
     }

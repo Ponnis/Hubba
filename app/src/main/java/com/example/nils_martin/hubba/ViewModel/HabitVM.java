@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
@@ -31,7 +32,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     Button deleteButton;
     Button editButton;
 
-    Habit habit = new Habit("");
+    IHabit habit = new Habit("");
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
@@ -64,7 +65,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
      * set text to habit title and states.
      * @param habit
      */
-    private void init(Habit habit){
+    private void init(IHabit habit){
         habitTitleTextView.setText(habit.getTitle());
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
         frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()) + ": " + weekdays());
