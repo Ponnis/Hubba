@@ -63,10 +63,19 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initView();
         loadData();
         themehandler.addThemeListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+
+        setTheme(themehandler.getTheme());
+        super.onResume();
+        themehandler.addThemeListener(this);
+        initView();
+        loadData();
     }
 
     @Override
@@ -163,7 +172,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         Iterator<Habit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             Habit habit = habitIterator.next();
-            if(checkIfEventIsToday(habit)) {}
+            if(checkIfEventIsToday(habit)) {} //TODO make if around all
             if(habit.getIsDone()){
                 habitDoneString.add(habit.getTitle());
             }else{
