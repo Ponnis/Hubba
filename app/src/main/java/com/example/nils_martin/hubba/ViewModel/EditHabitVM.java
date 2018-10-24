@@ -46,7 +46,7 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_habit);
-        currentHabit = MainActivityVM.openHabit;
+        setCurrentHabit();
         init();
         makeAListOfDayCbx();
         initSettings();
@@ -374,10 +374,17 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
         weekWrongImgV.setVisibility(View.INVISIBLE);
     }
 
+    private void setCurrentHabit() {
+        if(!(MainActivityVM.openHabit.getTitle().equals(""))) {
+            currentHabit = MainActivityVM.openHabit;
+        }
+        else if(!(MenuHabitsVM.openHabit.getTitle().equals(""))) {
+            currentHabit = MenuHabitsVM.openHabit;
+        }
+    }
+
     private void endActivity(){
         finish();
-        Intent intent = new Intent(EditHabitVM.this, MainActivityVM.class);
-        startActivity(intent);
     }
 
     @Override

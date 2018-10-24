@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Habit extends Observable implements HabitInterface{
+public class Habit extends Observable implements IHabit {
 
     private HubbaModel model = HubbaModel.getInstance();
     private String title;

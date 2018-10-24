@@ -1,12 +1,16 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
@@ -22,6 +26,8 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private ArrayList<String> habitStrings;
     private ListView yourHabitsListView;
     private ArrayAdapter<String> yourHabitsAdapter;
+
+    public static Habit openHabit = new Habit("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
         getHabitsList();
         fillHabitStringList();
         fillHabitListView();
+        listViewOnClick();
     }
 
     /**
@@ -89,6 +96,29 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
                 R.layout.menu_list_item,
                 habitStrings );
         yourHabitsListView.setAdapter(yourHabitsAdapter);
+    }
+
+    private void listViewOnClick () {
+        yourHabitsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                findHabit(yourHabitsListView.getItemAtPosition(position).toString());
+                Intent intent = new Intent(MenuHabitsVM.this, EditHabitVM.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void findHabit(String string) {
+        for(Habit habit: habits) {
+            if(habit.getTitle().equals(string)) {
+                setOpenHabit(habit);
+            }
+        }
+    }
+
+    private  void setOpenHabit(Habit habit) {
+        openHabit = habit;
     }
 
     @Override
