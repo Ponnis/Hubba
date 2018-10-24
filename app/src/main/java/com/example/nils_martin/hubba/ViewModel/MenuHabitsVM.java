@@ -38,6 +38,14 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
         init();
     }
 
+    @Override
+    protected void onResume() {
+        setTheme(themehandler.getTheme());
+        super.onResume();
+        themehandler.addThemeListener(this);
+        updateHabitsListView();
+    }
+
     /**
      * Calls on other functions that initialize ListViews, lists etc.
      */
