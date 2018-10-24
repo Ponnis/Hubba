@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Habit;
@@ -27,20 +28,25 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     TextView reminderTimeTextView;
     TextView streakTextView;
     TextView streakDaysTextView;
+    private ImageButton backButton;
 
     Button deleteButton;
     Button editButton;
 
+    private HubbaModel model = HubbaModel.getInstance();
+
     Habit habit = new Habit("");
+    Habit currentHabit = new Habit("");
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habit_view);
         themehandler.addThemeListener(this);
-        habit = MainActivityVM.openHabit;
+        setCurrentHabit();
+       // habit = MainActivityVM.openHabit;
         initFindView();
-        init(habit);
+        init(currentHabit);
         update();
     }
 
@@ -58,6 +64,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
         deleteButton = findViewById(R.id.deleteButton);
         editButton = findViewById(R.id.editButton);
+        backButton = findViewById(R.id.backBtn);
     }
 
     /**
@@ -77,9 +84,8 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HubbaModel.getInstance().getCurrentUser().removeHabit(habit);
-                Intent intent = new Intent(HabitVM.this, MainActivityVM.class);
-                startActivity(intent);
+                model.getCurrentUser().removeHabit(currentHabit);
+                finish();
             }
         });
 
@@ -88,6 +94,13 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
             public void onClick(View v) {
                 Intent intent = new Intent(HabitVM.this, EditHabitVM.class);
                 startActivity(intent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -141,6 +154,15 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
         } else {
             reminderTimeTextView.setText("None");
+        }
+    }
+
+    private void setCurrentHabit() {
+        if(!(MainActivityVM.openHabit.getTitle().equals(""))) {
+            currentHabit = MainActivityVM.openHabit;
+        }
+        else if(!(MenuHabitsVM.openHabit.getTitle().equals(""))) {
+            currentHabit = MenuHabitsVM.openHabit;
         }
     }
 
