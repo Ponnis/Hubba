@@ -112,6 +112,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 findHabit(yourHabitsListView.getItemAtPosition(position).toString());
                 Intent intent = new Intent(MenuHabitsVM.this, HabitVM.class);
+                intent.putExtra("from", "MenuHabitsVM");
                 startActivity(intent);
             }
         });

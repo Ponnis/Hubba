@@ -55,6 +55,14 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
         update();
     }
 
+    @Override
+    protected void onResume() {
+        setTheme(themehandler.getTheme());
+        super.onResume();
+        themehandler.addThemeListener(this);
+        update();
+    }
+
     private void init() {
         habitName = findViewById(R.id.habitInputEdit);
         save = findViewById(R.id.saveButton);

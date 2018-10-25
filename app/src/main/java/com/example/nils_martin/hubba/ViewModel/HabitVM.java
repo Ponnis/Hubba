@@ -50,6 +50,15 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         update();
     }
 
+    @Override
+    protected void onResume() {
+        setTheme(themehandler.getTheme());
+        super.onResume();
+        themehandler.addThemeListener(this);
+        setCurrentHabit();
+        init(currentHabit);
+    }
+
     /**
      * connect textViews and buttons
      */
@@ -158,11 +167,13 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     }
 
     private void setCurrentHabit() {
-        if(!(MainActivityVM.openHabit.getTitle().equals(""))) {
-            currentHabit = MainActivityVM.openHabit;
-        }
-        else if(!(MenuHabitsVM.openHabit.getTitle().equals(""))) {
+
+        System.out.println(getIntent().getStringExtra("from"));
+        if(getIntent().getStringExtra("from").equals("MenuHabitsVM")) {
             currentHabit = MenuHabitsVM.openHabit;
+        }
+        else if(getIntent().getStringExtra("from").equals("MainActivityVM")) {
+            currentHabit = MainActivityVM.openHabit;
         }
     }
 

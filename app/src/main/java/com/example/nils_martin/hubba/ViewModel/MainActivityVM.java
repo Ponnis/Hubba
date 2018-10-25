@@ -173,23 +173,25 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         Iterator<IHabit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             IHabit habit = habitIterator.next();
-            if(checkIfEventIsToday(habit)) {}//TODO make if around all
-            if(habit.getIsDone()){
-                habitDoneString.add(habit.getTitle());
-            }else{
-                switch (habit.getSTATE()) {
-                    case MORNING:
-                        habitMorningString.add(habit.getTitle());
-                        break;
-                    case MIDDAY:
-                        habitMiddayString.add(habit.getTitle());
-                        break;
-                    case EVENING:
-                        habitEveningString.add(habit.getTitle());
-                        break;
-                    case NIGHT:
-                        habitNightString.add(habit.getTitle());
-                        break;
+            if(checkIfEventIsToday(habit)) {
+                if (habit.getIsDone()) {
+                    habitDoneString.add(habit.getTitle());
+                }
+                else {
+                    switch (habit.getSTATE()) {
+                        case MORNING:
+                            habitMorningString.add(habit.getTitle());
+                            break;
+                        case MIDDAY:
+                            habitMiddayString.add(habit.getTitle());
+                            break;
+                        case EVENING:
+                            habitEveningString.add(habit.getTitle());
+                            break;
+                        case NIGHT:
+                            habitNightString.add(habit.getTitle());
+                            break;
+                    }
                 }
             }
         }
@@ -285,6 +287,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
      */
     public void clicked(View view){
         Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
+        intent.putExtra("from", "MainActivityVM");
         startActivity(intent);
     }
 
