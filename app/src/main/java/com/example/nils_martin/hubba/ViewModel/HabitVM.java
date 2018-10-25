@@ -166,9 +166,11 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         }
     }
 
+    /**
+     * This method sets the current habit by looking which the last activity was.
+     */
     private void setCurrentHabit() {
 
-        System.out.println(getIntent().getStringExtra("from"));
         if(getIntent().getStringExtra("from").equals("MenuHabitsVM")) {
             currentHabit = MenuHabitsVM.openHabit;
         }
