@@ -11,46 +11,46 @@ public interface IUser {
 
 
     // Takes an ENUM from Themes and set
-    public void setTheme(Themes theme);
+     void setTheme(Themes theme);
     //  Returns the int R.style associated with a specific theme
-    public String themeEnumToString();
-    public Themes getTheme();
+     String themeEnumToString();
+     Themes getTheme();
     // Adds the ThemableObserver to the observer list themeObservers.
-    public void addThemeObserver(ThemableObserver observer );
+     void addThemeObserver(ThemableObserver observer );
 
 
-    public void addHabit (IHabit habit);
+     void addHabit (IHabit habit);
 
-    public void removeHabit (IHabit habit);
+     void removeHabit (IHabit habit);
 
-    public String getUserName();
+     String getUserName();
 
-    public void setUserName(String string);
+     void setUserName(String string);
 
-    public String getEmail();
+     String getEmail();
 
-    public void setEmail(String string);
+     void setEmail(String string);
 
-    public String getPassword();
+     String getPassword();
 
-    public void setPassword(String string);
+     void setPassword(String string);
 
-    public void setImagePath(String string);
+     void setImagePath(String string);
 
-    public String getImagePath();
+     String getImagePath();
 
-    public ArrayList getHabits();
+     ArrayList getHabits();
 
-    public List getAchievements();
+     List getAchievements();
 
 
     // TODO: 2018-10-21 Fix below methods so they depend use Iuser instead of User 
     // Adds another user to the list of friends.
-    public void addFriend(User user);
+     void addFriend(User user);
 
     // Finds the friend to remove in friends list and then removes the friend.
-    public void removeFriend(User friend);
+     void removeFriend(User friend);
 
-    public List<User> getFriends();
+     List<User> getFriends();
 
 }
