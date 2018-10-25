@@ -1,12 +1,16 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
@@ -18,10 +22,12 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private HubbaModel model = HubbaModel.getInstance();
     private Themehandler themehandler = new Themehandler();
 
-    private List<Habit> habits;
+    private List<IHabit> habits;
     private ArrayList<String> habitStrings;
     private ListView yourHabitsListView;
     private ArrayAdapter<String> yourHabitsAdapter;
+
+    public static IHabit openHabit = new Habit("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,14 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
         setContentView(R.layout.menu_habits);
         themehandler.addThemeListener(this);
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        setTheme(themehandler.getTheme());
+        super.onResume();
+        themehandler.addThemeListener(this);
+        updateHabitsListView();
     }
 
     /**
@@ -46,6 +60,9 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
         habitStrings = new ArrayList<>();
     }
 
+    /**
+     * Initialize all view attributes
+     */
     private void initFindByView() {
         yourHabitsListView = (ListView) findViewById(R.id.yourHabitsListView);
     }
@@ -64,6 +81,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
         getHabitsList();
         fillHabitStringList();
         fillHabitListView();
+        listViewOnClick();
     }
 
     /**
@@ -72,7 +90,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
      */
     private void fillHabitStringList(){
         habitStrings.clear();
-        for(Habit habit : habits){
+        for(IHabit habit : habits){
             habitStrings.add(habit.getTitle());
         }
     }
@@ -86,6 +104,30 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
                 R.layout.menu_list_item,
                 habitStrings );
         yourHabitsListView.setAdapter(yourHabitsAdapter);
+    }
+
+    private void listViewOnClick () {
+        yourHabitsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                findHabit(yourHabitsListView.getItemAtPosition(position).toString());
+                Intent intent = new Intent(MenuHabitsVM.this, HabitVM.class);
+                intent.putExtra("from", "MenuHabitsVM");
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void findHabit(String string) {
+        for(IHabit habit: habits) {
+            if(habit.getTitle().equals(string)) {
+                setOpenHabit(habit);
+            }
+        }
+    }
+
+    private  void setOpenHabit(IHabit habit) {
+        openHabit = habit;
     }
 
     @Override

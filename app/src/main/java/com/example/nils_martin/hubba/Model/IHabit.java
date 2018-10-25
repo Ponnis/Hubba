@@ -2,7 +2,7 @@ package com.example.nils_martin.hubba.Model;
 
 import java.util.List;
 
-public interface HabitInterface {
+public interface IHabit {
 
     void setHabitTypeState(HabitTypeState habitTypeState);
 
@@ -49,5 +49,6 @@ public interface HabitInterface {
     void setDaysToDo(List<Integer> daysToDo);
 
     List<Integer> getDaysToDo();
+    List<Integer> getReminderTime();
 
 }

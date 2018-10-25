@@ -1,13 +1,14 @@
 package com.example.nils_martin.hubba.ViewModel;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.R;
 
 // Gets ActiveTheme from User and depending on what theme is chosen it returns the right int.
 public class Themehandler {
-    HubbaModel model = HubbaModel.getInstance();
+    IHubbaModel model = HubbaModel.getInstance();
     public int getTheme(){
         Themes activeTheme = model.getTheme();
         int returntheme = 0;

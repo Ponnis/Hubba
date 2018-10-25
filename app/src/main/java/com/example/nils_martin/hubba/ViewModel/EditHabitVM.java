@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
@@ -27,7 +28,7 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
 
     private EditText habitName;
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
-    private Habit currentHabit;
+    private IHabit currentHabit;
     CheckBox mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, saturdayCheckbox, sundayCheckbox;
     private TextView numberOfDaysTextView, colonTextView, timeTextView, monthTextView, errorMsgTextView;
     private Spinner numberOfDaysSpinner, hourSpinner, minSpinner, monthSpinner;
@@ -38,18 +39,24 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
     List<Integer> calendarDaysList = new ArrayList<>();
     HubbaModel model = HubbaModel.getInstance();
     Themehandler themehandler = new Themehandler();
-    MainActivityVM mainActivityVM;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_habit);
-        currentHabit = MainActivityVM.openHabit;
+        setCurrentHabit();
         init();
         makeAListOfDayCbx();
         initSettings();
+        themehandler.addThemeListener(this);
+        update();
+    }
+
+    @Override
+    protected void onResume() {
+        setTheme(themehandler.getTheme());
+        super.onResume();
         themehandler.addThemeListener(this);
         update();
     }
@@ -374,10 +381,17 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
         weekWrongImgV.setVisibility(View.INVISIBLE);
     }
 
+    private void setCurrentHabit() {
+        if(!(MainActivityVM.openHabit.getTitle().equals(""))) {
+            currentHabit = MainActivityVM.openHabit;
+        }
+        else if(!(MenuHabitsVM.openHabit.getTitle().equals(""))) {
+            currentHabit = MenuHabitsVM.openHabit;
+        }
+    }
+
     private void endActivity(){
         finish();
-        Intent intent = new Intent(EditHabitVM.this, MainActivityVM.class);
-        startActivity(intent);
     }
 
     @Override

@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
@@ -27,21 +29,34 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     TextView reminderTimeTextView;
     TextView streakTextView;
     TextView streakDaysTextView;
+    private ImageButton backButton;
 
     Button deleteButton;
     Button editButton;
 
-    Habit habit = new Habit("");
+    private HubbaModel model = HubbaModel.getInstance();
+    IHabit currentHabit = new Habit("");
+
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habit_view);
         themehandler.addThemeListener(this);
-        habit = MainActivityVM.openHabit;
+        setCurrentHabit();
+       // habit = MainActivityVM.openHabit;
         initFindView();
-        init(habit);
+        init(currentHabit);
         update();
+    }
+
+    @Override
+    protected void onResume() {
+        setTheme(themehandler.getTheme());
+        super.onResume();
+        themehandler.addThemeListener(this);
+        setCurrentHabit();
+        init(currentHabit);
     }
 
     /**
@@ -58,13 +73,14 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
         deleteButton = findViewById(R.id.deleteButton);
         editButton = findViewById(R.id.editButton);
+        backButton = findViewById(R.id.backBtn);
     }
 
     /**
      * set text to habit title and states.
      * @param habit
      */
-    private void init(Habit habit){
+    private void init(IHabit habit){
         habitTitleTextView.setText(habit.getTitle());
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
         frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()) + ": " + weekdays());
@@ -77,9 +93,8 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HubbaModel.getInstance().getCurrentUser().removeHabit(habit);
-                Intent intent = new Intent(HabitVM.this, MainActivityVM.class);
-                startActivity(intent);
+                model.getCurrentUser().removeHabit(currentHabit);
+                finish();
             }
         });
 
@@ -90,12 +105,19 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
                 startActivity(intent);
             }
         });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private String weekdays(){
         String[] days = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
         StringBuilder stringBuilder = new StringBuilder();
-        List<Integer> list = habit.getDaysToDo();
+        List<Integer> list = currentHabit.getDaysToDo();
         String prefix = "";
         for(int i = 0; i < list.size(); i++){
          stringBuilder.append(prefix);
@@ -120,27 +142,40 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
     private void setReminderTime(){
         List<String> list = new ArrayList<>();
-        if(habit.isReminderOn()){
-            if(habit.getReminderTime().get(0)<10){
+        if(currentHabit.isReminderOn()){
+            if(currentHabit.getReminderTime().get(0)<10){
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("0");
-                stringBuilder.append(habit.getReminderTime().get(0));
+                stringBuilder.append(currentHabit.getReminderTime().get(0));
                 list.add(stringBuilder.toString());
             }
-            if(habit.getReminderTime().get(1)<10){
+            if(currentHabit.getReminderTime().get(1)<10){
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("0");
-                stringBuilder.append(habit.getReminderTime().get(1));
+                stringBuilder.append(currentHabit.getReminderTime().get(1));
                 list.add(stringBuilder.toString());
             }
             if(list.size() == 2){
                 reminderTimeTextView.setText(list.get(0) + " : " + list.get(1));
             } else{
-                reminderTimeTextView.setText(habit.getReminderTime().get(0) + " : " + habit.getReminderTime().get(1));
+                reminderTimeTextView.setText(currentHabit.getReminderTime().get(0) + " : " + currentHabit.getReminderTime().get(1));
             }
 
         } else {
             reminderTimeTextView.setText("None");
+        }
+    }
+
+    /**
+     * This method sets the current habit by looking which the last activity was.
+     */
+    private void setCurrentHabit() {
+
+        if(getIntent().getStringExtra("from").equals("MenuHabitsVM")) {
+            currentHabit = MenuHabitsVM.openHabit;
+        }
+        else if(getIntent().getStringExtra("from").equals("MainActivityVM")) {
+            currentHabit = MainActivityVM.openHabit;
         }
     }
 

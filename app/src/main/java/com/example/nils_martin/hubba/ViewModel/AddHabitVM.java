@@ -38,16 +38,16 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     private EditText habitName;
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
     private Habit createdHabit;
-    CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
+    private CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
     private TextView colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
     private Spinner  hourSpr, minSpr, monthSpr;
     private Switch remainderSwitch;
     private ImageView nameWrongImgV, frequencyWrongImgV, stateWrongImgV, weekWrongImgV;
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
-    List<Integer> calendarDaysList = new ArrayList<>();
-    HubbaModel model = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    private List<Integer> calendarDaysList = new ArrayList<>();
+    private HubbaModel model = HubbaModel.getInstance();
+    private Themehandler themehandler = new Themehandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     /**
      * Initialize all the view attribute
      */
-    public void init() {
+    private void init() {
         habitName = findViewById(R.id.habitInput);
         save = findViewById(R.id.saveBtn);
         cancel = findViewById(R.id.cancelBtn);
@@ -99,7 +99,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     /**
      * This method has all the setOnClickListener
      */
-    public void update() {
+    private void update() {
 
         createdHabit = new Habit("", calendarDaysList);
 
@@ -118,7 +118,9 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                     makeCalendarDaysList();
                 }
                 createdHabit.setTitle(habitName.getText().toString());
-                createdHabit.setDaysToDo(calendarDaysList);
+                if(createdHabit != null) {
+                    createdHabit.setDaysToDo(calendarDaysList);
+                }
 
                 List<Integer> temp = new ArrayList<>();
                 temp.add(Integer.valueOf(hourSpr.getSelectedItem().toString()));
@@ -126,7 +128,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 createdHabit.setReminderTime(temp);
 
                 if(checkIfAllIsFillIn()) {
-                    testNotifcation(getStartDate(), getInterval());
+                    createNotifcation(getStartDate(), getInterval());
                     model.getCurrentUser().addHabit(createdHabit);
                     endActivity();
                 }
@@ -219,26 +221,22 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         });
     }
 
+    /**
+     * This method is calls when remainderSwitch.setOnClickListener is activated and the
+     * remainderswitch is on.
+     */
     private void remainderOn () {
         hourSpr.setVisibility(View.VISIBLE);
         minSpr.setVisibility(View.VISIBLE);
         timeTxtV.setVisibility(View.VISIBLE);
         colontxtV.setVisibility(View.VISIBLE);
         createdHabit.reminderEnabled();
-        checkTime();
     }
 
-    private void checkTime() {
-        int hourTime = Integer.valueOf(hourSpr.getSelectedItem().toString());
-        int minTime = Integer.valueOf(minSpr.getSelectedItem().toString());
-        Calendar cal = Calendar.getInstance();
-        int lif = cal.get(Calendar.HOUR_OF_DAY);
-        int blf = cal.get(Calendar.MINUTE);
-        if(lif == hourTime && blf == minTime) {
-            System.out.println("hello now is the time");
-        }
-    }
-
+    /**
+     * This method is calls when remainderSwitch.setOnClickListener is activated and the
+     * remainderswitch is off.
+     */
     private void remainderOff () {
         hourSpr.setVisibility(View.INVISIBLE);
         minSpr.setVisibility(View.INVISIBLE);
@@ -372,13 +370,11 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         weekWrongImgV.setVisibility(View.INVISIBLE);
     }
 
-    private void endActivity(){
-        finish();
-        Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
-        startActivity(intent);
-    }
-
-
+    /**
+     * This method return the start time that can be used in createNotifications and depends on
+     * the current habits frequency
+     * @return long - the start time in milliseconds
+     */
     private long getStartDate() {
         Calendar remainderCalendar = Calendar.getInstance();
         Calendar nowCalendar = Calendar.getInstance();
@@ -393,7 +389,10 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
                 }
                 break;
             case WEEKLY:
-            //    break;
+                if(remainderCalendar.getTimeInMillis() < nowCalendar.getTimeInMillis())  {
+                    remainderCalendar.set(Calendar.DAY_OF_MONTH, (remainderCalendar.get(Calendar.DAY_OF_MONTH)+1));
+                }
+                break;
             case MONTHLY:
                 remainderCalendar.set(Calendar.DAY_OF_MONTH, calendarDaysList.get(0));
 
@@ -405,6 +404,11 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         return remainderCalendar.getTimeInMillis();
     }
 
+    /**
+     * This method return the interval that can be used in createNotifications and it depends on
+     * the current habits frequency
+     * @return long - interval in milliseconds
+     */
     private long getInterval () {
         Calendar remainderCalendar = Calendar.getInstance();
         Calendar nowCalendar = Calendar.getInstance();
@@ -421,7 +425,12 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         return -1;
     }
 
-    private void testNotifcation(long startdate, long interval){
+    /**
+     * This method is creating a notification for a specific habit.
+     * @param startdate - This is the time when the alarm will start i milliseconds
+     * @param interval - The interval decides the time between the notifications
+     */
+    private void createNotifcation(long startdate, long interval){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent notificationIntent = new Intent(this, NotificationReceiver.class);
@@ -437,6 +446,12 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startdate, interval, broadcast);//interval, broadcast);
             System.out.println(createdHabit.getTitle());
         }
+    }
+
+    private void endActivity(){
+        finish();
+        Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
+        startActivity(intent);
     }
 
     @Override

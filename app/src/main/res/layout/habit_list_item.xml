@@ -12,7 +12,7 @@
         android:id="@+id/listItemTextView"
         android:layout_width="332dp"
         android:layout_height="match_parent"
-        android:layout_alignLeft="@+id/StreakNmbrkShow"
+        android:layout_alignLeft="@+id/StreakNmbrShow"
         android:layout_alignParentTop="true"
         android:gravity="center_vertical"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
@@ -21,7 +21,7 @@
         android:layout_marginLeft="30dp"
         tools:paddingLeft="30dp"
         tools:text="This Habit to be done"
-        android:layout_alignStart="@+id/StreakNmbrkShow"
+        android:layout_alignStart="@+id/StreakNmbrShow"
         android:layout_marginStart="30dp" />
 
     <CheckBox
@@ -48,7 +48,7 @@
         android:layout_marginLeft="30dp" />
 
     <TextView
-        android:id="@+id/StreakNmbrkShow"
+        android:id="@+id/StreakNmbrShow"
         android:layout_width="15dp"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"

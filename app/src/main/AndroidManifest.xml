@@ -26,6 +26,7 @@
         </activity>
         <activity android:name=".ViewModel.AddHabitVM" />
         <activity android:name=".ViewModel.CreateGroupVM"/>
+        <activity android:name=".ViewModel.CreateGroupHabitVM"/>
         <activity android:name=".ViewModel.CreateUserVM" />
         <activity android:name=".ViewModel.HabitVM"/>
         <activity android:name=".ViewModel.MenuVM"/>
@@ -41,6 +42,7 @@
         <receiver android:name=".ViewModel.NotificationReceiver" />
         <activity android:name=".ViewModel.EditHabitVM"/>
         <activity android:name=".ViewModel.AddFriendVM"/>
+        <activity android:name=".ViewModel.RemoveFriendVM"/>
     </application>
 
 
