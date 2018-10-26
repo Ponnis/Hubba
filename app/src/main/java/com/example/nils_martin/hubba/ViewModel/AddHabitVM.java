@@ -54,7 +54,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
-        init();
+        initFindByView();
         makeAListOfDayCbx();
         themehandler.addThemeListener(this);
         update();
@@ -63,8 +63,55 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     /**
      * Initialize all the view attribute
      */
-    private void init() {
+    private void initFindByView() {
+        initEditText();
+        initButtons();
+        initCheckBoxes();
+        initTextViews();
+        initSpinners();
+        initSwitches();
+        initImageViews();
+    }
+
+    private void initImageViews() {
+        nameWrongImgV = findViewById(R.id.nameImgV);
+        frequencyWrongImgV = findViewById(R.id.frequencyImgV);
+        stateWrongImgV = findViewById(R.id.stateImgV);
+        weekWrongImgV = findViewById(R.id.weekImgV);
+    }
+
+    private void initSwitches() {
+        remainderSwitch = findViewById(R.id.remainderSwitch);
+    }
+
+    private void initSpinners() {
+        hourSpr = findViewById(R.id.hourSpr);
+        minSpr = findViewById(R.id.minSpr);
+        monthSpr = findViewById(R.id.monthSpr);
+    }
+
+    private void initTextViews() {
+        timeTxtV = findViewById(R.id.timeTxtV);
+        colontxtV = findViewById(R.id.colontxtV);
+        monthTxtV = findViewById(R.id.monthTxtV);
+        wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
+    }
+
+    private void initCheckBoxes() {
+        monCxb = findViewById(R.id.monCbx);
+        tueCxb = findViewById(R.id.tueCbx);
+        wedCxb = findViewById(R.id.wedCbx);
+        thuCxb = findViewById(R.id.thuCbx);
+        friCxb = findViewById(R.id.friCbx);
+        satCxb = findViewById(R.id.satCbx);
+        sunCxb = findViewById(R.id.sunCbx);
+    }
+
+    private void initEditText() {
         habitName = findViewById(R.id.habitInput);
+    }
+
+    private void initButtons() {
         save = findViewById(R.id.saveBtn);
         cancel = findViewById(R.id.cancelBtn);
         morning = findViewById(R.id.morningBtn);
@@ -74,25 +121,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         daily = findViewById(R.id.dailyBtn);
         weekly = findViewById(R.id.weeklyBtn);
         monthly = findViewById(R.id.monthlyBtn);
-        monCxb = findViewById(R.id.monCbx);
-        tueCxb = findViewById(R.id.tueCbx);
-        wedCxb = findViewById(R.id.wedCbx);
-        thuCxb = findViewById(R.id.thuCbx);
-        friCxb = findViewById(R.id.friCbx);
-        satCxb = findViewById(R.id.satCbx);
-        sunCxb = findViewById(R.id.sunCbx);
-        timeTxtV = findViewById(R.id.timeTxtV);
-        colontxtV = findViewById(R.id.colontxtV);
-        monthTxtV = findViewById(R.id.monthTxtV);
-        wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
-        hourSpr = findViewById(R.id.hourSpr);
-        minSpr = findViewById(R.id.minSpr);
-        monthSpr = findViewById(R.id.monthSpr);
-        remainderSwitch = findViewById(R.id.remainderSwitch);
-        nameWrongImgV = findViewById(R.id.nameImgV);
-        frequencyWrongImgV = findViewById(R.id.frequencyImgV);
-        stateWrongImgV = findViewById(R.id.stateImgV);
-        weekWrongImgV = findViewById(R.id.weekImgV);
     }
 
     /**
