@@ -37,13 +37,14 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
         Achievement achievement = achivements.get(position);
 
         TextView achivementTitle = viewHolder.achivementTitle;
-        achivementTitle.setText(achievement.getTitle());
         ImageView achivementPicture = viewHolder.achivementPicture;
         try {
             if (achievement.getsAchieved()) {
                 achivementPicture.setImageResource(getImage(achievement));
+                achivementTitle.setText(achievement.getTitle());
             } else {
                 achivementPicture.setImageResource(R.drawable.achivement_locked);
+                achivementTitle.setText(R.string.lockedAchievement);
             }
         }catch (NullPointerException e){
             System.out.println("Nullpointerexception at AchivementAdapter when trying to set Imageview");

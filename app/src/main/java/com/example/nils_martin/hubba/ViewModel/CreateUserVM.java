@@ -5,10 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.nils_martin.hubba.Model.Achievement;
+import com.example.nils_martin.hubba.Model.AchievementFactory;
+import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+
+import java.util.ArrayList;
 
 public class CreateUserVM extends AppCompatActivity  {
 
@@ -36,20 +41,30 @@ public class CreateUserVM extends AppCompatActivity  {
     }
 
     private void addUser(){
-        User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(), null);
-       setAchivements(user);
+        User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(),
+                 setAchivements());
         model.addUser(user);
         finish();
     }
-    private void setAchivements(User user){
-         setHabitAchivements(user);
-         setStreakAchivements(user);
+
+
+    private ArrayList<Achievement> setAchivements(){
+        ArrayList<Achievement> startAchivements = new ArrayList<>();
+
+        setHabitAchivements(startAchivements);
+        setStreakAchivements(startAchivements);
+        return startAchivements;
     }
-    private void setHabitAchivements(User user){
+    private void setHabitAchivements(ArrayList<Achievement> user){
+        user.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIVE HABITS",5));
+        user.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED TEN HABITS",10));
+        user.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIFTEEN HABITS",15));
 
     }
-    private void setStreakAchivements(User user){
-
+    private void setStreakAchivements(ArrayList<Achievement> user){
+        user.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIVE",5));
+        user.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF TEN",10));
+        user.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIFTEEN",15));
     }
 
 }

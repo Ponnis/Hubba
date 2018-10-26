@@ -12,6 +12,7 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginVM extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class LoginVM extends AppCompatActivity {
         setContentView(R.layout.login);
         //Should be in controller?
         if (userList.size() == 0){
-            userList.add(new User("admin", "testemail@gmail.com", "1234", null));
+            userList.add(new User("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
         }
 
         Username = (EditText)findViewById(R.id.txtUsername);
@@ -65,6 +66,7 @@ public class LoginVM extends AppCompatActivity {
                     Intent intent = new Intent(LoginVM.this, MainActivityVM.class);
                     startActivity(intent);
                     model.setCurrentUser(user);
+                    break;
                 }
             }
         }
