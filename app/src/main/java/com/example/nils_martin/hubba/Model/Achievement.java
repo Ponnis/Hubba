@@ -26,15 +26,15 @@ public abstract class Achievement {
 
     abstract public Boolean assessAchievement();
 
+    /**
+     *Calls on method assessAchievement
+     * @return The outcome from AssessAchievement();
+     */
     public boolean getsAchieved( ){
-        isAchieved = assessAchievement();
-        return isAchieved;
+        return assessAchievement();
     }
     public String getTitle() {
         return title;
     }
     abstract public AchievementType getAchievementType();
-    public int getTargetNmbr(){
-        return targetNmbr;
-    }
 }
