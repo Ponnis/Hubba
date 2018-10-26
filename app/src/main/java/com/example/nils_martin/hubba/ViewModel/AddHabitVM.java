@@ -326,7 +326,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
         startActivity(intent);
     }
-    
+
 
     private void initButtons() {
         save = findViewById(R.id.saveBtn);
@@ -489,7 +489,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeCalendarDaysList();
                 if(createdHabit.getFREQUENCY() != null) {
                     makeCalendarDaysList();
                 }
