@@ -23,4 +23,5 @@ public interface IHubbaModel {
      void addThemeListener(ThemableObserver observer);
 
      void addUser (User user);
+     void addAchivementListener(AchivementObserver achivementObserver);
 }

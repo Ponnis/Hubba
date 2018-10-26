@@ -19,14 +19,14 @@ import java.util.List;
 public class MyAchievementsVM extends AppCompatActivity implements ThemableObserver {
     Themehandler themehandler = new Themehandler();
     List<Achievement> achievements;
-    IHubbaModel model;
+    IHubbaModel model = HubbaModel.getInstance();
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_myachievements);
-        themehandler.addThemeListener(this);
         init();
+        themehandler.addThemeListener(this);
     }
 
     private void init(){

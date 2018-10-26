@@ -45,6 +45,8 @@ public interface IUser {
 
      List getAchievements();
 
+     void addAchivementListener(AchivementObserver achivementObserver);
+
 
     // TODO: 2018-10-21 Fix below methods so they depend use Iuser instead of User 
     // Adds another user to the list of friends.
