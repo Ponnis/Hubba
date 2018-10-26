@@ -13,17 +13,17 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 public class MenuVM extends AppCompatActivity implements ThemableObserver {
-    Button profileButton;
-    Button settingsButton;
-    Button habitsButton;
-    Button groupsButton;
-    Button friendsButton;
-    Button helpButton;
-    Button logOutButton;
-    Button myAchievementsButton;
-    ImageButton backButton;
-    HubbaModel model = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    private Button profileButton;
+    private Button settingsButton;
+    private Button habitsButton;
+    private Button groupsButton;
+    private Button friendsButton;
+    private Button helpButton;
+    private Button logOutButton;
+    private Button myAchievementsButton;
+    private ImageButton backButton;
+    private HubbaModel model = HubbaModel.getInstance();
+    private Themehandler themehandler = new Themehandler();
 
 
     @Override
