@@ -103,6 +103,11 @@ public class User implements Observer, Friend, IUser {
         return achievements;
     }
 
+    @Override
+    public void addAchivement(Achievement achievement) {
+        achievements.add(achievement);
+    }
+
     //TODO test the update method
     @Override
     public void update(Observable o, Object arg) {
