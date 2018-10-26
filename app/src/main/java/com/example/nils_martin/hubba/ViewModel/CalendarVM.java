@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Frequency;
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -28,9 +27,8 @@ public class CalendarVM extends Activity implements ThemableObserver {
     private int currentYear = cal.get(Calendar.YEAR);
     private int currentDayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
     private StringBuilder stringBuilder = new StringBuilder();
-    Themehandler themehandler = new Themehandler();
-    List<IHabit> habitsList = HubbaModel.getInstance().getCurrentUser().getHabits();
-
+    private Themehandler themehandler = new Themehandler();
+    private List<IHabit> habitsList = HubbaModel.getInstance().getCurrentUser().getHabits();
 
 
     @Override
@@ -38,18 +36,16 @@ public class CalendarVM extends Activity implements ThemableObserver {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calender);
-        init();
+        initFindByView();
         setActivityTxtV(currentYear, currentMonth, currentDayOfMonth);
         themehandler.addThemeListener(this);
         update();
     }
 
-
-
     /**
      * Initialize the view.
      */
-    void init() {
+    void initFindByView() {
         calendarView = findViewById(R.id.calendarView);
         dateText = findViewById(R.id.dateText);
         activityTxtV = findViewById(R.id.activityTxtV);
@@ -60,7 +56,11 @@ public class CalendarVM extends Activity implements ThemableObserver {
      * This method have all OnClickListener and update when someone click on the view.
      */
     void update() {
+        backButtonOnClickListener();
+        calendarViewOnClickListener();
+    }
 
+    private void backButtonOnClickListener() {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +68,9 @@ public class CalendarVM extends Activity implements ThemableObserver {
                 startActivity(intent);
             }
         });
+    }
 
+    private void calendarViewOnClickListener() {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
@@ -76,7 +78,6 @@ public class CalendarVM extends Activity implements ThemableObserver {
             }
         });
     }
-
 
     /**
      * This method build a text of the activity  when the frequency is month because is different
@@ -104,6 +105,13 @@ public class CalendarVM extends Activity implements ThemableObserver {
         }
     }
 
+    /**
+     * This method is set the text for the activity TextView. It says which habits you have you
+     * have at one specific day.
+     * @param year - The year you clicked on
+     * @param month - The month you clicked on
+     * @param dayOfMonth - The day you clicked on
+     */
     private void setActivityTxtV (int year, int month, int dayOfMonth ) {
         stringBuilder.setLength(0);
         stringBuilder.append("Habits:");
@@ -121,7 +129,6 @@ public class CalendarVM extends Activity implements ThemableObserver {
         activityTxtV.setText(stringBuilder.toString());    //If you have a activity at the day, this will show as a text under the calendar
 
     }
-
 
     @Override
     public void recreateActivity() {
