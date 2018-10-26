@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
@@ -36,8 +37,19 @@ public class CreateUserVM extends AppCompatActivity  {
 
     private void addUser(){
         User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(), null);
+       setAchivements(user);
         model.addUser(user);
         finish();
+    }
+    private void setAchivements(User user){
+         setHabitAchivements(user);
+         setStreakAchivements(user);
+    }
+    private void setHabitAchivements(User user){
+
+    }
+    private void setStreakAchivements(User user){
+
     }
 
 }
