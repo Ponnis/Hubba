@@ -30,8 +30,8 @@ public class MyAchievementsVM extends AppCompatActivity implements ThemableObser
     }
 
     private void init(){
-        RecyclerView rvAchivements = (RecyclerView) findViewById(R.id.AchievementsShowList);
-        TextView youHaveAchievedNothing = (TextView) findViewById(R.id.ifNothingAchievedTextView);
+        RecyclerView rvAchivements = findViewById(R.id.AchievementsShowList);
+        TextView youHaveAchievedNothing = findViewById(R.id.ifNothingAchievedTextView);
         try {
             achievements = model.getCurrentUser().getAchievements();
             AchivementAdapter achivementAdapter = new AchivementAdapter(achievements);

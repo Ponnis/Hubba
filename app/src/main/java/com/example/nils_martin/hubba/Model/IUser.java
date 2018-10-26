@@ -41,6 +41,8 @@ public interface IUser {
 
      ArrayList getHabits();
 
+     void addAchivement(Achievement achievement);
+
      List getAchievements();
 
 
