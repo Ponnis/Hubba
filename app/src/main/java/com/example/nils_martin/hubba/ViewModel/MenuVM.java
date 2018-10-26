@@ -35,11 +35,17 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
         themehandler.addThemeListener(this);
     }
 
+    /**
+     * Calls on other functions that initialize buttons and OnCLickListeners
+     */
     private void init(){
         initFindByView();
         initOnClickListeners();
     }
 
+    /**
+     * Connects variables to their viewID:s
+     */
     private void initFindByView(){
         backButton = findViewById(R.id.backButton);
         profileButton = findViewById(R.id.profileBtn);
@@ -53,7 +59,9 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
 
     }
 
-    // Calls methods that set what actions the buttons have on click.
+    /**
+     * Calls methods that set OnClickListeners for all buttons what actions they have on click.
+     */
     private void initOnClickListeners(){
         backButtonOnClick();
         profileButtonOnClick();
