@@ -64,10 +64,19 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initView();
         loadData();
         themehandler.addThemeListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+
+        setTheme(themehandler.getTheme());
+        super.onResume();
+        themehandler.addThemeListener(this);
+        initView();
+        loadData();
     }
 
     @Override
@@ -164,23 +173,25 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         Iterator<IHabit> habitIterator = habits.iterator();
         while(habitIterator.hasNext()){
             IHabit habit = habitIterator.next();
-            if(checkIfEventIsToday(habit)) {}
-            if(habit.getIsDone()){
-                habitDoneString.add(habit.getTitle());
-            }else{
-                switch (habit.getSTATE()) {
-                    case MORNING:
-                        habitMorningString.add(habit.getTitle());
-                        break;
-                    case MIDDAY:
-                        habitMiddayString.add(habit.getTitle());
-                        break;
-                    case EVENING:
-                        habitEveningString.add(habit.getTitle());
-                        break;
-                    case NIGHT:
-                        habitNightString.add(habit.getTitle());
-                        break;
+            if(checkIfEventIsToday(habit)) {
+                if (habit.getIsDone()) {
+                    habitDoneString.add(habit.getTitle());
+                }
+                else {
+                    switch (habit.getSTATE()) {
+                        case MORNING:
+                            habitMorningString.add(habit.getTitle());
+                            break;
+                        case MIDDAY:
+                            habitMiddayString.add(habit.getTitle());
+                            break;
+                        case EVENING:
+                            habitEveningString.add(habit.getTitle());
+                            break;
+                        case NIGHT:
+                            habitNightString.add(habit.getTitle());
+                            break;
+                    }
                 }
             }
         }
@@ -210,11 +221,10 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             }
         }
         else if(habit.getFREQUENCY() == Frequency.DAILY || habit.getFREQUENCY() == Frequency.WEEKLY) {
-            if(habit.getDaysToDo().contains(nowCalendar.get(Calendar.DAY_OF_WEEK)));
+            if(habit.getDaysToDo().contains(nowCalendar.get(Calendar.DAY_OF_WEEK))) {
                 return true;
+            }
         }
-
-
         return false;
     }
 
@@ -276,6 +286,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
      */
     public void clicked(View view){
         Intent intent = new Intent(MainActivityVM.this, HabitVM.class);
+        intent.putExtra("from", "MainActivityVM");
         startActivity(intent);
     }
 

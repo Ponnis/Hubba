@@ -39,8 +39,6 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
     List<Integer> calendarDaysList = new ArrayList<>();
     HubbaModel model = HubbaModel.getInstance();
     Themehandler themehandler = new Themehandler();
-    MainActivityVM mainActivityVM;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +49,14 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
         init();
         makeAListOfDayCbx();
         initSettings();
+        themehandler.addThemeListener(this);
+        update();
+    }
+
+    @Override
+    protected void onResume() {
+        setTheme(themehandler.getTheme());
+        super.onResume();
         themehandler.addThemeListener(this);
         update();
     }

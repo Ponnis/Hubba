@@ -5,22 +5,22 @@ import java.util.ArrayList;
 public interface IHubbaModel {
 
 
-    public User getUser(String userName);
+    User getUser(String userName);
 
-    public ArrayList<User> getUsers();
+     ArrayList<User> getUsers();
 
-    public User getCurrentUser();
+     User getCurrentUser();
 
-    public void setCurrentUser(User user);
+     void setCurrentUser(User user);
 
-    public void setUsers (ArrayList < User > users);
+     void setUsers (ArrayList < User > users);
 
-    public Themes getTheme();
-    public String themeEnumToString();
+     Themes getTheme();
+     String themeEnumToString();
 
     // Law of demeter methods for themes
-    public void setTheme(Themes theme);
-    public void addThemeListener(ThemableObserver observer);
+     void setTheme(Themes theme);
+     void addThemeListener(ThemableObserver observer);
 
-    public void addUser (User user);
+     void addUser (User user);
 }
