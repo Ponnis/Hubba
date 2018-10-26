@@ -4,7 +4,6 @@ public class StreakAchievement extends Achievement implements IStreakAchievement
 
     private AchievementType achievementType;
 
-
     StreakAchievement(String title, int targetnmbr) {
         super(title,targetnmbr);
         achievementType = AchievementType.StreakAchievement;
@@ -12,9 +11,8 @@ public class StreakAchievement extends Achievement implements IStreakAchievement
     }
 
     /**
-     * Goes thru all habits and check if any of them have a streak higher then targetNmbr.
-     * If so it returns true and sets Achived in superclass to true, else false.
-     * @return
+     * Goes thru all habits and check if any of them have a streak higher then targetNmbr. If it's true call on method setAchivedtrue on this.
+     * @return If a habit streak i equal or higher then targetnmbr it returns true, else false.
      */
     @Override
     public Boolean assessAchievement() {

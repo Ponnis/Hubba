@@ -1,9 +1,11 @@
 package com.example.nils_martin.hubba.Model;
 
 public interface ThemableObserver {
-     /* To implement themes in you activity put setTheme(model.getTheme); before Super.Oncreate()
-        and put model.addThemeListener(this); last in OnCreate.
-        In Method recreateActivity simply put recreate();
+     /* To implement themes in you activity first you need to implement the interface ThemableObserver.
+        In method recreateActivity that comes with the interface you put recreate();.
+        You should then use the deligation class Themehandler.
+        Before superOnCreate(); Put the method setTheme(themehandler.getTheme),
+        you also in onCreate need to put themehandler.addThemeListener(this).
      */
      void recreateActivity();
 }
