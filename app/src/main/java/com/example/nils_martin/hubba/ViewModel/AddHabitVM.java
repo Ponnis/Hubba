@@ -1,8 +1,5 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import com.example.nils_martin.hubba.Model.Frequency;
-import com.example.nils_martin.hubba.Model.Habit;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -20,24 +17,25 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
+import com.example.nils_martin.hubba.Model.IHubbaModel;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Model.Frequency;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import static com.example.nils_martin.hubba.Model.Frequency.DAILY;
-import static com.example.nils_martin.hubba.Model.Frequency.MONTHLY;
 
 public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
 
     private EditText habitName;
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
-    private Habit createdHabit;
+    private IHabit createdHabit;
     private CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
     private TextView colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
     private Spinner  hourSpr, minSpr, monthSpr;
@@ -46,7 +44,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     private List<CheckBox> cbxDayList = new ArrayList<>();
     private List<CheckBox> cbxMonthList = new ArrayList<>();
     private List<Integer> calendarDaysList = new ArrayList<>();
-    private HubbaModel model = HubbaModel.getInstance();
+    private IHubbaModel model = HubbaModel.getInstance();
     private Themehandler themehandler = new Themehandler();
 
     @Override
@@ -57,6 +55,7 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         initFindByView();
         makeAListOfDayCbx();
         themehandler.addThemeListener(this);
+        createdHabit = new Habit("", calendarDaysList);
         update();
     }
 
@@ -73,179 +72,21 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         initImageViews();
     }
 
-    private void initImageViews() {
-        nameWrongImgV = findViewById(R.id.nameImgV);
-        frequencyWrongImgV = findViewById(R.id.frequencyImgV);
-        stateWrongImgV = findViewById(R.id.stateImgV);
-        weekWrongImgV = findViewById(R.id.weekImgV);
-    }
-
-    private void initSwitches() {
-        remainderSwitch = findViewById(R.id.remainderSwitch);
-    }
-
-    private void initSpinners() {
-        hourSpr = findViewById(R.id.hourSpr);
-        minSpr = findViewById(R.id.minSpr);
-        monthSpr = findViewById(R.id.monthSpr);
-    }
-
-    private void initTextViews() {
-        timeTxtV = findViewById(R.id.timeTxtV);
-        colontxtV = findViewById(R.id.colontxtV);
-        monthTxtV = findViewById(R.id.monthTxtV);
-        wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
-    }
-
-    private void initCheckBoxes() {
-        monCxb = findViewById(R.id.monCbx);
-        tueCxb = findViewById(R.id.tueCbx);
-        wedCxb = findViewById(R.id.wedCbx);
-        thuCxb = findViewById(R.id.thuCbx);
-        friCxb = findViewById(R.id.friCbx);
-        satCxb = findViewById(R.id.satCbx);
-        sunCxb = findViewById(R.id.sunCbx);
-    }
-
-    private void initEditText() {
-        habitName = findViewById(R.id.habitInput);
-    }
-
-    private void initButtons() {
-        save = findViewById(R.id.saveBtn);
-        cancel = findViewById(R.id.cancelBtn);
-        morning = findViewById(R.id.morningBtn);
-        midday = findViewById(R.id.middayBtn);
-        evening = findViewById(R.id.eveningBtn);
-        night = findViewById(R.id.nightBtn);
-        daily = findViewById(R.id.dailyBtn);
-        weekly = findViewById(R.id.weeklyBtn);
-        monthly = findViewById(R.id.monthlyBtn);
-    }
-
     /**
      * This method has all the setOnClickListener
      */
     private void update() {
-
-        createdHabit = new Habit("", calendarDaysList);
-
-        habitName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-            }
-        });
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeCalendarDaysList();
-                if(createdHabit.getFREQUENCY() != null) {
-                    makeCalendarDaysList();
-                }
-                createdHabit.setTitle(habitName.getText().toString());
-                if(createdHabit != null) {
-                    createdHabit.setDaysToDo(calendarDaysList);
-                }
-
-                List<Integer> temp = new ArrayList<>();
-                temp.add(Integer.valueOf(hourSpr.getSelectedItem().toString()));
-                temp.add(Integer.valueOf(minSpr.getSelectedItem().toString()));
-                createdHabit.setReminderTime(temp);
-
-                if(checkIfAllIsFillIn()) {
-                    createNotifcation(getStartDate(), getInterval());
-                    model.getCurrentUser().addHabit(createdHabit);
-                    endActivity();
-                }
-                else {
-                    wrongMesTxtV.setVisibility(View.VISIBLE);
-                    wrongMesTxtV.setText("You must fill in everything");
-                    wrongMesTxtV.setTextColor(Color.RED);
-                }
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                endActivity();
-            }
-        });
-
-        morning.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-                createdHabit.setSTATE(State.MORNING);
-            }
-        });
-
-        midday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-                createdHabit.setSTATE(State.MIDDAY);
-            }
-        });
-
-        evening.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-                createdHabit.setSTATE(State.EVENING);
-            }
-        });
-
-        night.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-                createdHabit.setSTATE(State.NIGHT);
-            }
-        });
-        
-        daily.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-                dayVisible();
-                createdHabit.setFREQUENCY(DAILY);
-            }
-        });
-
-        weekly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-                weekVisible();
-                createdHabit.setFREQUENCY(Frequency.WEEKLY);
-            }
-        });
-
-        monthly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-                monthVisible();
-                createdHabit.setFREQUENCY(MONTHLY);
-            }
-        });
-
-        remainderSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takeAwayWrongMessage();
-                if(remainderSwitch.isChecked()) {
-                    remainderOn();
-                }
-                else {
-                   remainderOff();
-                }
-            }
-        });
+        habitNameOnClickListener();
+        morningbuttonOnClickListener();
+        middaybuttonOnClickListener();
+        evningbuttonOnClickListener();
+        nightbuttonOnClickListener();
+        dailybuttonOnClickListener();
+        weeklybuttonOnClickListener();
+        monthlybuttonOnClickListener();
+        RemainderSwitchOnClickListener();
+        cancelbuttonOnClickListener();
+        savebuttonOnClickListener();
     }
 
     /**
@@ -475,14 +316,204 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
         }
     }
 
+    @Override
+    public void recreateActivity() {
+        recreate();
+    }
+
     private void endActivity(){
         finish();
         Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
         startActivity(intent);
     }
+    
 
-    @Override
-    public void recreateActivity() {
-        recreate();
+    private void initButtons() {
+        save = findViewById(R.id.saveBtn);
+        cancel = findViewById(R.id.cancelBtn);
+        morning = findViewById(R.id.morningBtn);
+        midday = findViewById(R.id.middayBtn);
+        evening = findViewById(R.id.eveningBtn);
+        night = findViewById(R.id.nightBtn);
+        daily = findViewById(R.id.dailyBtn);
+        weekly = findViewById(R.id.weeklyBtn);
+        monthly = findViewById(R.id.monthlyBtn);
+    }
+
+    private void initEditText() {
+        habitName = findViewById(R.id.habitInput);
+    }
+
+    private void initCheckBoxes() {
+        monCxb = findViewById(R.id.monCbx);
+        tueCxb = findViewById(R.id.tueCbx);
+        wedCxb = findViewById(R.id.wedCbx);
+        thuCxb = findViewById(R.id.thuCbx);
+        friCxb = findViewById(R.id.friCbx);
+        satCxb = findViewById(R.id.satCbx);
+        sunCxb = findViewById(R.id.sunCbx);
+    }
+
+    private void initTextViews() {
+        timeTxtV = findViewById(R.id.timeTxtV);
+        colontxtV = findViewById(R.id.colontxtV);
+        monthTxtV = findViewById(R.id.monthTxtV);
+        wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
+    }
+
+    private void initSpinners() {
+        hourSpr = findViewById(R.id.hourSpr);
+        minSpr = findViewById(R.id.minSpr);
+        monthSpr = findViewById(R.id.monthSpr);
+    }
+
+    private void initSwitches() {
+        remainderSwitch = findViewById(R.id.remainderSwitch);
+    }
+
+    private void initImageViews() {
+        nameWrongImgV = findViewById(R.id.nameImgV);
+        frequencyWrongImgV = findViewById(R.id.frequencyImgV);
+        stateWrongImgV = findViewById(R.id.stateImgV);
+        weekWrongImgV = findViewById(R.id.weekImgV);
+    }
+
+    private void habitNameOnClickListener() {
+        habitName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+            }
+        });
+    }
+
+    private void morningbuttonOnClickListener() {
+        morning.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+                createdHabit.setSTATE(State.MORNING);
+            }
+        });
+    }
+
+    private void middaybuttonOnClickListener() {
+        midday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+                createdHabit.setSTATE(State.MIDDAY);
+            }
+        });
+    }
+
+    private void evningbuttonOnClickListener() {
+        evening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+                createdHabit.setSTATE(State.EVENING);
+            }
+        });
+    }
+
+    private void nightbuttonOnClickListener() {
+        night.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+                createdHabit.setSTATE(State.NIGHT);
+            }
+        });
+    }
+
+    private void dailybuttonOnClickListener() {
+        daily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+                dayVisible();
+                createdHabit.setFREQUENCY(Frequency.DAILY);
+            }
+        });
+    }
+
+    private void weeklybuttonOnClickListener() {
+        weekly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+                weekVisible();
+                createdHabit.setFREQUENCY(Frequency.WEEKLY);
+            }
+        });
+    }
+
+    private void monthlybuttonOnClickListener() {
+        monthly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+                monthVisible();
+                createdHabit.setFREQUENCY(Frequency.MONTHLY);
+            }
+        });
+    }
+
+    private void RemainderSwitchOnClickListener() {
+        remainderSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAwayWrongMessage();
+                if(remainderSwitch.isChecked()) {
+                    remainderOn();
+                }
+                else {
+                    remainderOff();
+                }
+            }
+        });
+    }
+
+    private void cancelbuttonOnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                endActivity();
+            }
+        });
+    }
+
+    private void savebuttonOnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeCalendarDaysList();
+                if(createdHabit.getFREQUENCY() != null) {
+                    makeCalendarDaysList();
+                }
+                createdHabit.setTitle(habitName.getText().toString());
+                if(createdHabit != null) {
+                    createdHabit.setDaysToDo(calendarDaysList);
+                }
+
+                List<Integer> temp = new ArrayList<>();
+                temp.add(Integer.valueOf(hourSpr.getSelectedItem().toString()));
+                temp.add(Integer.valueOf(minSpr.getSelectedItem().toString()));
+                createdHabit.setReminderTime(temp);
+
+                if(checkIfAllIsFillIn()) {
+                    createNotifcation(getStartDate(), getInterval());
+                    model.getCurrentUser().addHabit(createdHabit);
+                    endActivity();
+                }
+                else {
+                    wrongMesTxtV.setVisibility(View.VISIBLE);
+                    wrongMesTxtV.setText("You must fill in everything");
+                    wrongMesTxtV.setTextColor(Color.RED);
+                }
+            }
+        });
     }
 }
