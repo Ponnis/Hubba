@@ -105,7 +105,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     private void setFriendsAsString() {
         if (friendNames == null) {
         }else if (!(friendsAsString.contains(","))){
-            friendsAsString =(ArrayList<String>)  Arrays.asList(friendNames);
+            friendsAsString.add(friendNames);
         }
 
         else {
