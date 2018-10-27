@@ -9,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.R;
 

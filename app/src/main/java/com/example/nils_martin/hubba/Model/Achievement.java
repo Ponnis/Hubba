@@ -1,8 +1,5 @@
 package com.example.nils_martin.hubba.Model;
 
-
-import java.util.List;
-
 public abstract class Achievement {
 
     IHubbaModel model = HubbaModel.getInstance();
