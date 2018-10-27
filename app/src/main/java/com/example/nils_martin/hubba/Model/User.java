@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class User implements Observer, Friend, IUser {
+public class User implements Observer, IFriend, IUser {
 
     private String userName;
     private String email;
     private String password;
     private String imagePath;
-    private List<Friend> friends = new ArrayList<>();
+    private List<IFriend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
     private ArrayList<Acheievement> acheievements;
     private ArrayList<ThemableObserver> themeObservers;
@@ -29,32 +29,37 @@ public class User implements Observer, Friend, IUser {
         this.themeObservers = new ArrayList<>();
         this.acheievements = achivements;
     }
+
     // Takes an ENUM from Themes and set
-    public void setTheme(Themes theme){
+    public void setTheme(Themes theme) {
         this.ActiveTheme = theme;
         notifyThemeObservers(themeObservers);
 
     }
-   //  Returns the int R.style associated with a specific theme
-    public String themeEnumToString(){
+
+    //  Returns the int R.style associated with a specific theme
+    public String themeEnumToString() {
         return ActiveTheme.toString();
     }
-    public Themes getTheme(){
+
+    public Themes getTheme() {
         return ActiveTheme;
     }
+
     // Call recreateActivity on all that's in the Arrayist themeObservers.
-    private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers){
-        for (ThemableObserver theme: themeObservers) {
+    private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers) {
+        for (ThemableObserver theme : themeObservers) {
             theme.recreateActivity();
         }
     }
+
     // Adds the ThemableObserver to the observer list themeObservers.
-    public void addThemeObserver(ThemableObserver observer ){
+    public void addThemeObserver(ThemableObserver observer) {
         themeObservers.add(observer);
     }
 
 
-    public void addHabit (IHabit habit) {
+    public void addHabit(IHabit habit) {
         habits.add(habit);
         checkAchievements();
     }
@@ -65,7 +70,7 @@ public class User implements Observer, Friend, IUser {
         }
     }
 
-    public void removeHabit (IHabit habit) {
+    public void removeHabit(IHabit habit) {
         habits.remove(habit);
     }
 
@@ -73,7 +78,7 @@ public class User implements Observer, Friend, IUser {
         return userName;
     }
 
-    public void setUserName(String string){
+    public void setUserName(String string) {
         this.userName = string;
     }
 
@@ -81,7 +86,7 @@ public class User implements Observer, Friend, IUser {
         return email;
     }
 
-    public void setEmail(String string){
+    public void setEmail(String string) {
         this.email = string;
     }
 
@@ -89,11 +94,11 @@ public class User implements Observer, Friend, IUser {
         return password;
     }
 
-    public void setPassword(String string){
+    public void setPassword(String string) {
         this.password = string;
     }
 
-    public void setImagePath(String string){
+    public void setImagePath(String string) {
         this.imagePath = string;
     }
 
@@ -137,27 +142,37 @@ public class User implements Observer, Friend, IUser {
         }
 
     }
-    // Finds the friend to remove in friends list and then removes the friend.
-    public void removeFriend (Friend friend){
-        for (Friend user : friends) {
+
+    /**
+     * Finds the friend to remove in friends list and then removes the friend.
+     */
+    
+    public void removeFriend (IFriend friend){
+        for (IFriend user : friends) {
             if (user.getUserName().equals(friend.getUserName())) {
+
                 friends.remove(friend);
             }
         }
     }
-    // Adds another user to the list of friends.
-    public void addFriend (Friend friend){
-        friends.add(friend);
-    }
+    /**
+     * Adds user to list of friends
+     * */
+        public void addFriend (IFriend friend){
+            friends.add(friend);
+
+        }
+
 
     private void checkHabitDone () {
 
 
     }
-    public List<Friend> getFriends () {
+    public List<IFriend> getFriends () {
         return friends;
     }
     public List<Group> getGroups () {
         return this.groups;
     }
 }
+

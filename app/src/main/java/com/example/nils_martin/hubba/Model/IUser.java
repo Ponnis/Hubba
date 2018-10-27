@@ -44,11 +44,11 @@ public interface IUser {
 
 
     // Adds another user to the list of friends.
-     void addFriend(Friend friend);
+     void addFriend(IFriend friend);
 
     // Finds the friend to remove in friends list and then removes the friend.
-     void removeFriend(Friend friend);
+     void removeFriend(IFriend friend);
 
-     List<Friend> getFriends();
+     List<IFriend> getFriends();
 
 }

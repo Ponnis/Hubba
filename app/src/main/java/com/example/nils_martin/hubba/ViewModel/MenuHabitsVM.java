@@ -18,6 +18,9 @@ import com.example.nils_martin.hubba.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Li Rönning
+ */
 public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();

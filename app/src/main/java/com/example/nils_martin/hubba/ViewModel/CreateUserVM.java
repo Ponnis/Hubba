@@ -49,7 +49,9 @@ public class CreateUserVM extends AppCompatActivity  {
             }
         });
     }
-
+    /**
+     * Creates new user based on the input parameters
+     * */
     private void addUser(){
         User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(),
                  setAchivements());

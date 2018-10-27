@@ -2,7 +2,6 @@ package com.example.nils_martin.hubba.Model;
 /**
  * @author Nils-Martin Robeling
  * */
-public interface INumOfHabitsAchievement {
+public interface IHabitTypeState {
 
-     Boolean assessAchievement();
 }

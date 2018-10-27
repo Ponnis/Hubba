@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ImageButton;
 
-
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;

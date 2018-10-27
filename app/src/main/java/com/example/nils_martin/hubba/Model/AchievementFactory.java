@@ -1,9 +1,12 @@
 package com.example.nils_martin.hubba.Model;
 
 public class AchievementFactory {
-    //USER SHOULD NOT HAVE FACTORY(?), MODEL SHOULD (?)
-
+/**
+ * returns an achievement based on the AchievementType you asked it to return
+ * */
     public static Acheievement getAchievement(AchievementType achievementType, String title, int targetNmbr) {
+
+
         if (achievementType == AchievementType.NumOHabitsAchievement) {
             return new NumOfHabitsAcheievement(title, targetNmbr);
         } else if (achievementType == AchievementType.StreakAchievement) {

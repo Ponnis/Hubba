@@ -24,6 +24,9 @@ import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
+/**
+ * @author Li Rönning
+ */
 public class ProfileVM extends AppCompatActivity implements ThemableObserver {
 
     private static final int PERMISSION_REQUEST = 0;
