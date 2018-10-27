@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -18,7 +19,9 @@ public class RemoveFriendVM extends AppCompatActivity implements ThemableObserve
     private Themehandler themehandler = new Themehandler();
 
 
-    private Button yesButton, noButton;
+    private Button yesButton;
+    private Button noButton;
+    private TextView friendTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class RemoveFriendVM extends AppCompatActivity implements ThemableObserve
     private void initFindByView() {
         yesButton = findViewById(R.id.yesBtn);
         noButton = findViewById(R.id.noBtn);
+        friendTextView = findViewById(R.id.friendTextView);
     }
 
     private void initOnClickListener() {
