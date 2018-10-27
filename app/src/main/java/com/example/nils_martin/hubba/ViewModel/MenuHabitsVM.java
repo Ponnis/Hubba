@@ -27,7 +27,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private ListView yourHabitsListView;
     private ArrayAdapter<String> yourHabitsAdapter;
 
-    public static IHabit openHabit = new Habit("");
+    protected static IHabit openHabit = new Habit("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
