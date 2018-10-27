@@ -64,12 +64,12 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         // TODO The row below does not work when the user has no habits.
         // habit= (Habit) hubbaModel.getCurrentUser().getHabits().get(listSize-1);
     }
-    @Override
+ /*   @Override
     protected void onResume() {
         int size = hubbaModel.getCurrentUser().getHabits().size();
         super.onResume();
         this.habit=hubbaModel.getCurrentUser().getHabits().get(size-1);
-    }
+    }*/
 
 
     private void getUserToCurrent(){
