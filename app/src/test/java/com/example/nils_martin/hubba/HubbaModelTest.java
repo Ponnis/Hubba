@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class HubbaModelTest {
 
-    User user = new User("Sven","sven@sven.se", "123456789", "" );
+    User user = new User("Sven","sven@sven.se", "123456789", new ArrayList<>() );
     ArrayList<User> users = new ArrayList<>();
 
     @Test
@@ -46,7 +46,7 @@ public class HubbaModelTest {
     @Test
     public void testThemeChange() {
         IHubbaModel hubbaModel = HubbaModel.getInstance();
-        hubbaModel.setCurrentUser(new User("Åke", "Åke@gmail.com", "Ninja1337", "ABS"));
+        hubbaModel.setCurrentUser(new User("Åke", "Åke@gmail.com", "Ninja1337", new ArrayList<>()));
         String themeOnStart = hubbaModel.themeEnumToString();
         hubbaModel.setTheme(Themes.ELITE);
         String themeAfterChange = hubbaModel.themeEnumToString();
