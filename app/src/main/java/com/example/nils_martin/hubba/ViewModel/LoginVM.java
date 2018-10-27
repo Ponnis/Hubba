@@ -61,6 +61,9 @@ public class LoginVM extends AppCompatActivity {
             e.printStackTrace();
             model.setUsers(new ArrayList<>());
             model.getUsers().add(new User("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
+        } catch (NullPointerException v){
+            model.setUsers(new ArrayList<>());
+            model.getUsers().add(new User("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
         }
 
         for (int i = 0, usersSize = model.getUsers().size(); i < usersSize; i++) {
@@ -138,7 +141,7 @@ public class LoginVM extends AppCompatActivity {
         return Username;
     }
 
-    public void load() throws JSONException {
+    public void load() throws JSONException, NullPointerException {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         String json = sharedPreferences.getString("userlist", null);
         Gson gson = new GsonBuilder().create();
