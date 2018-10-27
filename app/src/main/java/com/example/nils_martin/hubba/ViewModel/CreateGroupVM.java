@@ -109,7 +109,14 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         }
 
         else {
-            friendsAsString =  Arrays.asList(friendNames.split(","));
+            loopFriendsIntoList();
+        }
+    }
+    private void loopFriendsIntoList(){
+       String[]tempFriends=  friendNames.split(",");
+        for (int i = 0; i <tempFriends.length ; i++) {
+            friendsAsString.add(tempFriends[i]);
+
         }
     }
 
