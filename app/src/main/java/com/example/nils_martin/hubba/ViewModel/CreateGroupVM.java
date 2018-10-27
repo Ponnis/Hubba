@@ -33,14 +33,6 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     private ImageButton backButton;
     private Themehandler themehandler = new Themehandler();
 
-//Doesn't need constructor but just saving it in case
-  /*  public CreateGroupVM(String friendNames, Habit habit, String groupName, User user){
-        this.friendNames = friendNames;
-        this.habit = habit;
-        this.groupName = groupName;
-        this.user=user;
-    }*/
-
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
@@ -61,18 +53,23 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
             }
         });
     }
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
-    }
+    }*/
 
 
-
+        /**
+         * sets the user to the current user of the app
+         * */
         private void getUserToCurrent () {
             user = hubbaModel.getCurrentUser();
         }
 
         //Kollar så att usern finns med i vänlistan
+    /**
+     * Checks that the users written in the textfield are actual friends of the user.
+     * */
         private List<IFriend> checkUserNameToFriend () {
             for (int i = 0; i < friends.size(); i++) {
                 for (String string : friendsAsString) {
@@ -93,6 +90,9 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
                 loopFriendsIntoList();
             }
         }
+        /**
+         * Loops the string of friends into a list
+         * */
         private void loopFriendsIntoList () {
             String[] tempFriends = friendNames.split(",");
             for (int i = 0; i < tempFriends.length; i++) {
@@ -124,11 +124,13 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         private void createNewGroup () {
             checkUserNameToFriend();
             Group group = new Group(groupName, groupMembers, habit);
-            hubbaModel.getCurrentUser().getGroups().add(group);
+            user.getGroups().add(group);
         }
 
         @Override
         protected void onStop () {
+            int size = user.getHabits().size();
+            setCreatedHabit(user.getHabits().get(size));
             super.onStop();
             createNewGroup();
             finish();
@@ -136,12 +138,8 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
 
         @Override
         public void recreateActivity () {
-            int size = hubbaModel.getCurrentUser().getHabits().size();
-            setCreatedHabit(hubbaModel.getCurrentUser().getHabits().get(size));
+
             recreate();
         }
-
-        //TODO create method to add checked friends to group list
-
 
 }
