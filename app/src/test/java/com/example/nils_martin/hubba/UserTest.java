@@ -13,8 +13,8 @@ import static org.junit.Assert.assertTrue;
 
 public class UserTest {
 
-    Friend friend = new User("Friend", "friend@friend.com", "friendly1234", "");
-    User user = new User("Åke", "Åke@gmail.com","Ninja1337", "ABS");
+    Friend friend = new User("Friend", "friend@friend.com", "friendly1234", new ArrayList<>());
+    User user = new User("Åke", "Åke@gmail.com","Ninja1337", new ArrayList<>());
     Habit habit = new Habit("Drink Water");
 
     @Test
