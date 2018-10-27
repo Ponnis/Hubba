@@ -9,8 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
@@ -28,7 +28,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private ListView yourFriendsListView;
     private ArrayAdapter<String> yourFriendsAdapter;
     private Button addFriendsButton;
-    private User openFriend;
+    private IUser openFriend;
 
 
     @Override

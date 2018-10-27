@@ -2,13 +2,11 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
@@ -22,7 +20,6 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
     private Button logOutButton;
     private Button myAchievementsButton;
     private ImageButton backButton;
-    private HubbaModel model = HubbaModel.getInstance();
     private Themehandler themehandler = new Themehandler();
 
 
