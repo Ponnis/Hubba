@@ -53,7 +53,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     public FloatingActionButton addBtn;
     private ImageButton calendarBtn;
     private ImageButton menuButton;
-    public static IHabit openHabit = new Habit("");
+    protected static IHabit openHabit = new Habit("");
     private Themehandler themehandler = new Themehandler();
 
     private int listItemHeight = 130;

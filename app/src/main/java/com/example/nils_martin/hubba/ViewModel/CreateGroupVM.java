@@ -55,6 +55,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         createNewGroupHabit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setFriendsAsString();
                 Intent intent = new Intent(CreateGroupVM.this, CreateGroupHabitVM.class);
                 startActivity(intent);
             }

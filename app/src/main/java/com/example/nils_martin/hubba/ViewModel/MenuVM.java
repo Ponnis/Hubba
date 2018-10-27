@@ -2,28 +2,25 @@ package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 public class MenuVM extends AppCompatActivity implements ThemableObserver {
-    Button profileButton;
-    Button settingsButton;
-    Button habitsButton;
-    Button groupsButton;
-    Button friendsButton;
-    Button helpButton;
-    Button logOutButton;
-    Button myAchievementsButton;
-    ImageButton backButton;
-    HubbaModel model = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    private Button profileButton;
+    private Button settingsButton;
+    private Button habitsButton;
+    private Button groupsButton;
+    private Button friendsButton;
+    private Button helpButton;
+    private Button logOutButton;
+    private Button myAchievementsButton;
+    private ImageButton backButton;
+    private Themehandler themehandler = new Themehandler();
 
 
     @Override
@@ -35,11 +32,17 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
         themehandler.addThemeListener(this);
     }
 
+    /**
+     * Calls on other functions that initialize buttons and OnCLickListeners
+     */
     private void init(){
         initFindByView();
         initOnClickListeners();
     }
 
+    /**
+     * Connects variables to their viewID:s
+     */
     private void initFindByView(){
         backButton = findViewById(R.id.backButton);
         profileButton = findViewById(R.id.profileBtn);
@@ -53,7 +56,9 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
 
     }
 
-    // Calls methods that set what actions the buttons have on click.
+    /**
+     * Calls methods that set OnClickListeners for all buttons what actions they have on click.
+     */
     private void initOnClickListeners(){
         backButtonOnClick();
         profileButtonOnClick();

@@ -11,7 +11,7 @@ public class User implements Observer, Friend, IUser {
     private String email;
     private String password;
     private String imagePath;
-    private List<User> friends = new ArrayList<>();
+    private List<Friend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
     private ArrayList<ThemableObserver> themeObservers;
@@ -138,23 +138,23 @@ public class User implements Observer, Friend, IUser {
 
     }
     // Finds the friend to remove in friends list and then removes the friend.
-    public void removeFriend (User friend){
-        for (User user : friends) {
-            if (user.userName == friend.userName) {
+    public void removeFriend (Friend friend){
+        for (Friend user : friends) {
+            if (user.getUserName().equals(friend.getUserName())) {
                 friends.remove(friend);
             }
         }
     }
     // Adds another user to the list of friends.
-    public void addFriend (User user){
-        friends.add(user);
+    public void addFriend (Friend friend){
+        friends.add(friend);
     }
 
     private void checkHabitDone () {
 
 
     }
-    public List<User> getFriends () {
+    public List<Friend> getFriends () {
         return friends;
     }
     public List<Group> getGroups () {
