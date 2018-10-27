@@ -38,4 +38,7 @@ public abstract class Acheievement {
     }
     abstract public AchievementType getAchievementType();
 
+    public Boolean getAchieved() {
+        return isAchieved;
     }
+}
