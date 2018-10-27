@@ -14,6 +14,7 @@ import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.Themes;
@@ -42,7 +43,6 @@ public class LoginVM extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-
         /*User user1 = new User("Alex", "Alex@gmail.com", "losenord","");
         model.getUsers().add(user1);
         user1.setAchievements(setAchivements());
@@ -69,38 +69,38 @@ public class LoginVM extends AppCompatActivity {
             if (user.getUserName().equals("admin")) {
                 break;
             }
-            if (i == usersSize - 1){
-                model.getUsers().add(new User ("admin", "testemail@gmail.com", "1234",""));
+            if (i == usersSize - 1) {
+                model.getUsers().add(new User("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
                 System.out.println("Skapar ny admin");
                 System.out.println(model.getUser("admin").getTheme());
             }
+
+            Username = (EditText) findViewById(R.id.txtUsername);
+            Password = (EditText) findViewById(R.id.txtPassword);
+            NewUser = (Button) findViewById(R.id.btnNewUser);
+            Login = (Button) findViewById(R.id.btnLogin);
+
+            NewUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    newUserButton();
+                }
+            });
+
+            Login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkLoginAcceptance();
+                }
+            });
         }
-
-        Username = (EditText)findViewById(R.id.txtUsername);
-        Password = (EditText)findViewById(R.id.txtPassword);
-        NewUser = (Button)findViewById(R.id.btnNewUser);
-        Login = (Button)findViewById(R.id.btnLogin);
-
-        NewUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newUserButton();
-            }
-        });
-
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkLoginAcceptance();
-            }
-        });
     }
 
     private void initList(User user) {
         user.initThemableObserver();
         user.initHabit();
-        if (user.getHabits().size() != 0){
-            for (IHabit habit: user.getHabits()){
+        if (user.getHabits().size() != 0) {
+            for (IHabit habit : user.getHabits()) {
                 habit.initDaysToDoList();
             }
         }
@@ -116,7 +116,7 @@ public class LoginVM extends AppCompatActivity {
         super.onPause();
     }
 
-    private void newUserButton (){
+    private void newUserButton() {
         Intent intent = new Intent(LoginVM.this, CreateUserVM.class);
         startActivity(intent);
     }
@@ -128,28 +128,35 @@ public class LoginVM extends AppCompatActivity {
                     Intent intent = new Intent(LoginVM.this, com.example.nils_martin.hubba.ViewModel.MainActivityVM.class);
                     startActivity(intent);
                     model.setCurrentUser(user);
+                    break;
                 }
             }
         }
     }
 
-    public EditText getUsername(){ return Username; }
+    public EditText getUsername() {
+        return Username;
+    }
 
-    public void load () throws JSONException {
+    public void load() throws JSONException {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        String json = sharedPreferences.getString("userlist",null);
+        String json = sharedPreferences.getString("userlist", null);
         Gson gson = new GsonBuilder().create();
-        Type typeUser = new TypeToken<ArrayList<User>>(){}.getType();
+        Type typeUser = new TypeToken<ArrayList<User>>() {
+        }.getType();
         JSONObject jsonResponse = new JSONObject(json);
         model.setUsers(gson.fromJson(jsonResponse.getString("user"), typeUser));
 
-        Type typeHabit = new TypeToken<ArrayList<Habit>>(){}.getType();
-        Type typeFriend = new TypeToken<ArrayList<User>>(){}.getType();
+        Type typeHabit = new TypeToken<ArrayList<Habit>>() {
+        }.getType();
+        Type typeFriend = new TypeToken<ArrayList<User>>() {
+        }.getType();
         //Type typeAchievement = new TypeToken<ArrayList<Achievement>>(){}.getType();
-        Type typeDaysToDo = new TypeToken<ArrayList<Integer>>(){}.getType();
+        Type typeDaysToDo = new TypeToken<ArrayList<Integer>>() {
+        }.getType();
 
         JSONArray jsonTheme = jsonResponse.getJSONArray("user");
-        for (int a = 0; a < jsonTheme.length(); a++){
+        for (int a = 0; a < jsonTheme.length(); a++) {
             String theme = jsonTheme.getJSONObject(a).get("theme").toString();
             initList(model.getUser(jsonTheme.getJSONObject(a).get("userName").toString()));
             if ("STANDARD".equals(theme)) {
@@ -164,9 +171,9 @@ public class LoginVM extends AppCompatActivity {
         }
 
 
-        for(User user: model.getUsers()){
+        for (User user : model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
-            String jsonHabit = sharedPreferences1.getString("habitslist",null);
+            String jsonHabit = sharedPreferences1.getString("habitslist", null);
             Gson gsonHabit = new GsonBuilder().create();
             JSONObject jsonResponseHabit = new JSONObject(jsonHabit);
             user.setHabits(gsonHabit.fromJson(jsonResponseHabit.getString("habit"), typeHabit));
@@ -174,7 +181,7 @@ public class LoginVM extends AppCompatActivity {
             System.out.println("Jämför med Hur det ser ut i habit " + jsonHabit);
 
             JSONArray jsonArray = jsonResponseHabit.getJSONArray("habit");
-            for (int i = 0; i < jsonArray.length(); i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 String string = jsonArray.getJSONObject(i).get("state").toString();
                 if ("MORNING".equals(string)) {
                     user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setSTATE(State.MORNING);
@@ -194,7 +201,7 @@ public class LoginVM extends AppCompatActivity {
                 }
             }
 
-            for (int i = 0; i < jsonArray.length(); i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 String string = jsonArray.getJSONObject(i).get("frequency").toString();
                 if ("DAILY".equals(string)) {
                     user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setFREQUENCY(Frequency.DAILY);
@@ -209,8 +216,8 @@ public class LoginVM extends AppCompatActivity {
             }
         }
 
-        for (User user: model.getUsers()){
-            for (IHabit habit: user.getHabits()){
+        for (User user : model.getUsers()) {
+            for (IHabit habit : user.getHabits()) {
                 System.out.println(habit.getDaysToDoSize());
                 SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
                 String jsonDaysToDo = sharedPreferences1.getString("dayToIntList", null);
@@ -222,13 +229,13 @@ public class LoginVM extends AppCompatActivity {
                 jsonArray.put(jsonResponseDaysToDo);
                 System.out.println("jsonArray: " + jsonArray);
                 habit.initDaysToDoList();
-                for(int i = 0; i < jsonArray.length(); i++){
-                    char [] c = jsonArray.get(i).toString().toCharArray();
-                    for (int j = 0; j < c.length; j++){
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    char[] c = jsonArray.get(i).toString().toCharArray();
+                    for (int j = 0; j < c.length; j++) {
                         String temp = Character.toString(c[j]);
-                        if(Character.isDigit(c[j])){
+                        if (Character.isDigit(c[j])) {
                             int a = Integer.parseInt(temp);
-                            if (a > 0 && a < 32){
+                            if (a > 0 && a < 32) {
                                 habit.getDaysToDo().add(a);
                             }
                         }
@@ -239,9 +246,9 @@ public class LoginVM extends AppCompatActivity {
             }
         }
 
-        for(User user: model.getUsers()){
+        for (User user : model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
-            String jsonFriend = sharedPreferences1.getString("friendslist",null);
+            String jsonFriend = sharedPreferences1.getString("friendslist", null);
             Gson gsonFriend = new GsonBuilder().create();
             JSONObject jsonResponseFriend = new JSONObject(jsonFriend);
             user.setFriends(gsonFriend.fromJson(jsonResponseFriend.getString("friend"), typeFriend));
@@ -258,10 +265,10 @@ public class LoginVM extends AppCompatActivity {
 
     }
 
-    public void save () throws JSONException {
+    public void save() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (User user: model.getUsers()){
+        for (User user : model.getUsers()) {
             JSONObject jsonUser = new JSONObject();
             jsonUser.put("userName", user.getUserName());
             jsonUser.put("password", user.getPassword());
@@ -289,10 +296,10 @@ public class LoginVM extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("userlist",jsonObject.toString());
+        editor.putString("userlist", jsonObject.toString());
         editor.apply();
 
-        for (User user: model.getUsers()){
+        for (User user : model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
@@ -300,7 +307,7 @@ public class LoginVM extends AppCompatActivity {
             editor1.apply();
         }
 
-        for (User user: model.getUsers()){
+        for (User user : model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
@@ -309,8 +316,8 @@ public class LoginVM extends AppCompatActivity {
         }
 
 
-        for (User user: model.getUsers()){
-            for (IHabit habit: user.getHabits()){
+        for (User user : model.getUsers()) {
+            for (IHabit habit : user.getHabits()) {
                 SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
@@ -329,10 +336,10 @@ public class LoginVM extends AppCompatActivity {
 
     }
 
-    private String habitsToJson (User user) throws JSONException {
+    private String habitsToJson(User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (IHabit habit: model.getUser(user.getUserName()).getHabits()){
+        for (IHabit habit : model.getUser(user.getUserName()).getHabits()) {
             JSONObject jsonHabits = new JSONObject();
             jsonHabits.put("title", habit.getTitle());
             jsonHabits.put("getGroupMembersCount", habit.getGroupMembersDoneCount());
@@ -350,13 +357,13 @@ public class LoginVM extends AppCompatActivity {
             jsonArray.put(jsonHabits);
         }
         jsonObject.put("habit", jsonArray);
-        return  jsonObject.toString();
+        return jsonObject.toString();
     }
 
-    private String daysToDoJson (IHabit habit) throws JSONException {
+    private String daysToDoJson(IHabit habit) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (Integer integer: habit.getDaysToDo()){
+        for (Integer integer : habit.getDaysToDo()) {
             JSONObject jsonDays = new JSONObject();
             jsonDays.put("daysInt", integer);
             jsonArray.put(jsonDays);
@@ -364,12 +371,12 @@ public class LoginVM extends AppCompatActivity {
         return jsonObject.put("daysToInt", jsonArray).toString();
     }
 
-    private String friendsToJson (User user) throws JSONException {
+    private String friendsToJson(User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (User user1: model.getUser(user.getUserName()).getFriends()){
+        for (IFriend friend : model.getUser(user.getUserName()).getFriends()) {
             JSONObject jsonFriends = new JSONObject();
-            jsonFriends.put("username", user1.getUserName());
+            jsonFriends.put("username", friend.getUserName());
             jsonArray.put(jsonFriends);
         }
         return jsonObject.put("friend", jsonArray).toString();
@@ -389,23 +396,22 @@ public class LoginVM extends AppCompatActivity {
     }*/
 
 
-    private ArrayList<Achievement> setAchivements(){
+    private ArrayList<Achievement> setAchivements() {
         ArrayList<Achievement> startAchievement = new ArrayList<>();
         setHabitAchivements(startAchievement);
         setStreakAchivements(startAchievement);
         return startAchievement;
     }
 
-    private void setHabitAchivements(ArrayList<Achievement> achievements){
-        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement,"5Habtis",5));
-        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement,"10Habtis", 10));
-        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement,"15Habtis",15));
+    private void setHabitAchivements(ArrayList<Achievement> achievements) {
+        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "5Habtis", 5));
+        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "10Habtis", 10));
+        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "15Habtis", 15));
     }
 
-    private void setStreakAchivements(ArrayList<Achievement> achivements){
-        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement,"5Streak",5));
-        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement,"10Streak",10));
-        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement,"15Streak",15));
+    private void setStreakAchivements(ArrayList<Achievement> achivements) {
+        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "5Streak", 5));
+        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "10Streak", 10));
+        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "15Streak", 15));
     }
-
 }

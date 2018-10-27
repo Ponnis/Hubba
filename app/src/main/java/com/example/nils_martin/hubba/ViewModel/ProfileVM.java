@@ -15,15 +15,18 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
+/**
+ * @author Li Rönning
+ */
 public class ProfileVM extends AppCompatActivity implements ThemableObserver {
 
     private static final int PERMISSION_REQUEST = 0;
@@ -38,6 +41,7 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
     private Button ChangePic;
     private Button EditInformation;
     private Button ChangePassword;
+    private ImageButton backButton;
 
     /**
      * A method that tells the program what to do when this class is called.
@@ -75,6 +79,7 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
         ProfilePic = findViewById(R.id.profilePicImg);
         EditInformation = findViewById(R.id.editInfBtn);
         ChangePassword = findViewById(R.id.changePassBtn);
+        backButton = findViewById(R.id.backBtn11);
     }
 
 
@@ -133,6 +138,7 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
                 startActivity(intent);
             }
         });
+        backButton.setOnClickListener(v -> onBackPressed());
 
     }
 

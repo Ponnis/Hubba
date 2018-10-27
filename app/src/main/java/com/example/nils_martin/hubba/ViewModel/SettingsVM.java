@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -14,13 +15,17 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.R;
 
+/**
+ * @author Li Rönning
+ */
 public class SettingsVM extends AppCompatActivity implements ThemableObserver {
     //we have to get the active user from the main class " Hubba ".
     //will control all the users menu_settings.
 
-    Switch notificationSwitch;
-    Spinner themeSpinner;
-    Spinner moodSpinner;
+    private Switch notificationSwitch;
+    private Spinner themeSpinner;
+    private Spinner moodSpinner;
+    private ImageButton backButton;
 
     private boolean isUserInteracting;
     private HubbaModel model = HubbaModel.getInstance();
@@ -42,6 +47,15 @@ public class SettingsVM extends AppCompatActivity implements ThemableObserver {
     private void init(){
         initFindByView();
         initSpinners();
+        initOnClickListeners();
+    }
+
+    private void initOnClickListeners() {
+        backButtonOnClickListeners();
+    }
+
+    private void backButtonOnClickListeners() {
+        backButton.setOnClickListener(v -> onBackPressed());
     }
 
     private void initSpinners() {
@@ -68,6 +82,7 @@ public class SettingsVM extends AppCompatActivity implements ThemableObserver {
         notificationSwitch = (Switch) findViewById(R.id.notificationSwitch);
         themeSpinner = (Spinner) findViewById(R.id.themeSpinner);
         moodSpinner = (Spinner) findViewById(R.id.moodSpinner);
+        backButton = findViewById(R.id.backBtn14);
     }
     @Override
     public void onUserInteraction(){

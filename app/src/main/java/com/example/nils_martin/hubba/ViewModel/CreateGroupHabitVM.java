@@ -1,8 +1,8 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.GroupHabitType;
 import com.example.nils_martin.hubba.Model.Habit;
-import com.example.nils_martin.hubba.Model.HabitTypeState;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -24,6 +23,9 @@ import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @author Nils-Martin Robeling
+ * */
 
 public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObserver,ICreateGroupHabitVM{
      private EditText habitName;
@@ -53,38 +55,38 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
 }
 
     public void init() {
-        habitName = findViewById(R.id.habitInput);
-        save = findViewById(R.id.saveBtn);
-        cancel = findViewById(R.id.cancelBtn);
-        morning = findViewById(R.id.morningBtn);
-        midday = findViewById(R.id.middayBtn);
-        evening = findViewById(R.id.eveningBtn);
-        night = findViewById(R.id.nightBtn);
-        daily = findViewById(R.id.dailyBtn);
-        weekly = findViewById(R.id.weeklyBtn);
-        monthly = findViewById(R.id.monthlyBtn);
-        monCxb = findViewById(R.id.monCbx);
-        tueCxb = findViewById(R.id.tueCbx);
-        wedCxb = findViewById(R.id.wedCbx);
-        thuCxb = findViewById(R.id.thuCbx);
-        friCxb = findViewById(R.id.friCbx);
-        satCxb = findViewById(R.id.satCbx);
-        sunCxb = findViewById(R.id.sunCbx);
-        numberOfDaysTxtV = findViewById(R.id.numTxtV);
-        timeTxtV = findViewById(R.id.timeTxtV);
-        colontxtV = findViewById(R.id.colontxtV);
-        monthTxtV = findViewById(R.id.monthTxtV);
-        wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
-        numberOfDaysSpr = findViewById(R.id.numSpr);
-        hourSpr = findViewById(R.id.hourSpr);
-        minSpr = findViewById(R.id.minSpr);
-        monthSpr = findViewById(R.id.monthSpr);
-        remainderSwitch = findViewById(R.id.remainderSwitch);
-        nameWrongImgV = findViewById(R.id.nameImgV);
-        frequencyWrongImgV = findViewById(R.id.frequencyImgV);
-        stateWrongImgV = findViewById(R.id.stateImgV);
-        weekWrongImgV = findViewById(R.id.weekImgV);
-    }
+         habitName = findViewById(R.id.habitInput);
+         save = findViewById(R.id.saveBtn);
+         cancel = findViewById(R.id.cancelBtn);
+         morning = findViewById(R.id.morningBtn);
+         midday = findViewById(R.id.middayBtn);
+         evening = findViewById(R.id.eveningBtn);
+         night = findViewById(R.id.nightBtn);
+         daily = findViewById(R.id.dailyBtn);
+         weekly = findViewById(R.id.weeklyBtn);
+         monthly = findViewById(R.id.monthlyBtn);
+         monCxb = findViewById(R.id.monCbx);
+         tueCxb = findViewById(R.id.tueCbx);
+         wedCxb = findViewById(R.id.wedCbx);
+         thuCxb = findViewById(R.id.thuCbx);
+         friCxb = findViewById(R.id.friCbx);
+         satCxb = findViewById(R.id.satCbx);
+         sunCxb = findViewById(R.id.sunCbx);
+         numberOfDaysTxtV = findViewById(R.id.numTxtV);
+         timeTxtV = findViewById(R.id.timeTxtV);
+         colontxtV = findViewById(R.id.colontxtV);
+         monthTxtV = findViewById(R.id.monthTxtV);
+         wrongMesTxtV = findViewById(R.id.wrongMesTxtV);
+         numberOfDaysSpr = findViewById(R.id.numSpr);
+         hourSpr = findViewById(R.id.hourSpr);
+         minSpr = findViewById(R.id.minSpr);
+         monthSpr = findViewById(R.id.monthSpr);
+         remainderSwitch = findViewById(R.id.remainderSwitch);
+         nameWrongImgV = findViewById(R.id.nameImgV);
+         frequencyWrongImgV = findViewById(R.id.frequencyImgV);
+         stateWrongImgV = findViewById(R.id.stateImgV);
+         weekWrongImgV = findViewById(R.id.weekImgV);
+     }
 
     public void update() {
 
@@ -100,7 +102,6 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
             createdHabit.setDaysToDo(calendarDaysList);
 
             if(checkIfAllFieldsFilled()) {
-                /// TODO: 2018-10-18 Inte snyggt!
                 model.getCurrentUser().getHabits().add(createdHabit);
                 endActivity();
             }
@@ -309,33 +310,28 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
  * walks through the user filled fields to check if they're filled in
  * @return true if all is filled in
  * */
-    @Override
-    public boolean checkIfAllFieldsFilled() {
-        if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
-            || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle().equals("")) {
-        if (createdHabit.getFREQUENCY() == null) {
-            frequencyWrongImgV.setVisibility(View.VISIBLE);
-        }
+     @Override
+     public boolean checkIfAllFieldsFilled() {
+         if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
+             || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle().equals("")) {
+         if (createdHabit.getFREQUENCY() == null) {
+             frequencyWrongImgV.setVisibility(View.VISIBLE);
+         }
 
-        if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
-            weekWrongImgV.setVisibility(View.VISIBLE);
-        }
+         if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
+             weekWrongImgV.setVisibility(View.VISIBLE);
+         }
 
-        if (createdHabit.getSTATE() == null) {
-            stateWrongImgV.setVisibility(View.VISIBLE);
-        }
-        if (createdHabit.getTitle().equals("")) {
-            nameWrongImgV.setVisibility(View.VISIBLE);
-        }
-        return false;
-    }
-        return true;
-    }
-
-
-
-
-
+         if (createdHabit.getSTATE() == null) {
+             stateWrongImgV.setVisibility(View.VISIBLE);
+         }
+         if (createdHabit.getTitle().equals("")) {
+             nameWrongImgV.setVisibility(View.VISIBLE);
+         }
+         return false;
+     }
+         return true;
+     }
    /**
     * removes the error message
     * */
@@ -348,7 +344,7 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
      }
 
      public void endActivity(){
-        finish();
+         finish();
     }
 
 

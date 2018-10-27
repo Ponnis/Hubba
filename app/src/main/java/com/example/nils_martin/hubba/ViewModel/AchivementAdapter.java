@@ -37,13 +37,14 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
         Achievement achievement = achivements.get(position);
 
         TextView achivementTitle = viewHolder.achivementTitle;
-        achivementTitle.setText(achievement.getTitle());
         ImageView achivementPicture = viewHolder.achivementPicture;
         try {
             if (achievement.getsAchieved()) {
                 achivementPicture.setImageResource(getImage(achievement));
+                achivementTitle.setText(achievement.getTitle());
             } else {
                 achivementPicture.setImageResource(R.drawable.achivement_locked);
+                achivementTitle.setText(R.string.lockedAchievement);
             }
         }catch (NullPointerException e){
             System.out.println("Nullpointerexception at AchivementAdapter when trying to set Imageview");
@@ -63,10 +64,10 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
     public int getImage(Achievement achievement) {
        AchievementType achievementType =  achievement.getAchievementType();
        if (achievementType == AchievementType.NumOHabitsAchievement){
-           return R.drawable.streak;
+           return R.drawable.num_of_habits;
        }
        else if (achievementType == AchievementType.StreakAchievement){
-            return R.drawable.num_of_habits;
+            return R.drawable.streak;
        }
        else return R.drawable.profilepic;
     }

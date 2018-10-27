@@ -15,7 +15,7 @@ public class Habit extends Observable implements IHabit {
     private boolean isDone;
     private boolean reminderOn;
     private List<Integer> reminderTime;
-    private HabitTypeState habitTypeState;
+    private IHabitTypeState habitTypeState;
     private State STATE;
     private Frequency FREQUENCY;
     private List<Integer> daysToDo = new ArrayList<>();
@@ -36,10 +36,10 @@ public class Habit extends Observable implements IHabit {
         this.daysToDo = days;
     }
 
-    public void setHabitTypeState(HabitTypeState habitTypeState){
+    public void setHabitTypeState(IHabitTypeState habitTypeState){
         this.habitTypeState = habitTypeState;
     }
-    public HabitTypeState getHabitTypeState(){
+    public IHabitTypeState getHabitTypeState(){
         return this.habitTypeState;
     }
 
@@ -57,7 +57,9 @@ public class Habit extends Observable implements IHabit {
         this.streak--;
     }
 
-    //TODO make two different events?
+    /**
+     * notifies the appropriate observer depending on HabitType
+     * */
     public void notifyObservers(){
         if (habitTypeState.toString().equals("GroupHabit")){
             //How to notify user group without wrecking dependency?
@@ -69,7 +71,9 @@ public class Habit extends Observable implements IHabit {
         }
         }
     }
-
+    /**
+     * Sets the streak to +1 if the habit is completed
+     * */
     public void upStreak(Habit habit){
         if(habit.isDone){
             habit.streak++;

@@ -12,23 +12,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ImageButton;
 
-
-import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -61,8 +57,8 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     protected static IHabit openHabit = new Habit("");
     private Themehandler themehandler = new Themehandler();
 
-    private int listItemHeight = 115;
-    private int dividerHeight = 10;
+    private int listItemHeight = 130;
+    private int dividerHeight = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -412,9 +408,9 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private String friendsToJson (User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (User user1: model.getUser(user.getUserName()).getFriends()){
+        for (IFriend friend: model.getUser(user.getUserName()).getFriends()){
             JSONObject jsonFriends = new JSONObject();
-            jsonFriends.put("username", user1.getUserName());
+            jsonFriends.put("username", friend.getUserName());
             jsonArray.put(jsonFriends);
         }
         return jsonObject.put("friend", jsonArray).toString();

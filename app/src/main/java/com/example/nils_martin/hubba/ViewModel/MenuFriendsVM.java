@@ -7,28 +7,32 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.HubbaModel;
-import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Li Rönning
+ */
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
     private Themehandler themehandler = new Themehandler();
 
-    private List<User> friends = new ArrayList<>();
+    private List<IFriend> friends = new ArrayList<>();
     private ArrayList<String> friendStrings = new ArrayList<>();
     private ListView yourFriendsListView;
     private ArrayAdapter<String> yourFriendsAdapter;
     private Button addFriendsButton;
-    private IUser openFriend;
+    private ImageButton backButton;
+    private IFriend openFriend;
 
 
     @Override
@@ -56,19 +60,22 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private void initFindByView(){
         yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
         addFriendsButton = (Button) findViewById(R.id.addFriendBtn);
+        backButton = findViewById(R.id.backBtn6);
     }
 
     private void initOnClickListeners(){
         addFriendOnClick();
+        backButtonOnClick();
+    }
+
+    private void backButtonOnClick() {
+        backButton.setOnClickListener(v -> onBackPressed());
     }
 
     private void addFriendOnClick(){
-        addFriendsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuFriendsVM.this, AddFriendVM.class);
-                startActivity(intent);
-            }
+        addFriendsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuFriendsVM.this, AddFriendVM.class);
+            startActivity(intent);
         });
     }
 
@@ -92,7 +99,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private void fillFriendStringsList(){
         friendStrings.clear();
         friendStrings.add("Katt"); //TODO when save work
-        for(User friend : friends){
+        for(IFriend friend : friends){
             friendStrings.add(friend.getUserName());
         }
     }
@@ -128,14 +135,14 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
      * @param string is the string of a friends username
      */
     private void findFriend(String string) {
-        for(User friend: friends) {
+        for(IFriend friend: friends) {
             if(friend.getUserName().equals(string)) {
                 setOpenFriend(friend);
             }
         }
     }
 
-    private  void setOpenFriend(User openFriend) {
+    private  void setOpenFriend(IFriend openFriend) {
         this.openFriend = openFriend;
     }
 

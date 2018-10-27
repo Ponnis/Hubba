@@ -1,12 +1,9 @@
 package com.example.nils_martin.hubba.Model;
+/**
+ * @author Nils-Martin Robeling
+ * */
+public class GroupHabitType implements IHabitTypeState {
 
-public class GroupHabitType implements HabitTypeState {
-    @Override
-    public void updateHabit(Habit habit) {
-       /* if(.isChecked){
-          habit.upGroupMembersDoneCount();
-        }*/
-    }
     @Override
     public String toString(){
         return "GroupHabit";

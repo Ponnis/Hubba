@@ -1,12 +1,14 @@
 package com.example.nils_martin.hubba.Model;
 
 import java.util.List;
-
+/**
+ * @author Nils-Martin Robeling
+ * */
 public interface IHabit {
 
-    void setHabitTypeState(HabitTypeState habitTypeState);
+    void setHabitTypeState(IHabitTypeState habitTypeState);
 
-    HabitTypeState getHabitTypeState();
+    IHabitTypeState getHabitTypeState();
 
     void setDone();
 

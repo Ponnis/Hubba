@@ -1,7 +1,9 @@
 package com.example.nils_martin.hubba.Model;
 
 import java.util.ArrayList;
-
+/**
+ * @author Nils-Martin Robeling, Li Rönning
+ * */
 public class HubbaModel implements IHubbaModel {
     private static HubbaModel instance = null;
     private ArrayList<User> users;
@@ -17,7 +19,9 @@ public class HubbaModel implements IHubbaModel {
     private HubbaModel() {
         users = new ArrayList<>();
     }
-
+    /**
+     * Returns a user based on a string Parameter for the users name
+     * */
     public User getUser(String userName) {
         int index = 0;
         for (User user : users) {
@@ -59,6 +63,7 @@ public class HubbaModel implements IHubbaModel {
     public void addUser (User user){
         this.users.add(user);
     }
+
     public String themeEnumToString(){
         return currentUser.themeEnumToString();
     }

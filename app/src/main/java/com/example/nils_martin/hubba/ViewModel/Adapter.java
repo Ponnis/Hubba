@@ -9,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.R;
 
@@ -55,6 +54,7 @@ public class Adapter extends ArrayAdapter<String>  {
                 IHabit habit = mainActivityVM.getHabit(title);
                 if(habit.getIsDone()){
                     habit.notDone();
+                    mainActivityVM.model.getCurrentUser().checkAchievements();
                     checkBox.setChecked(false);
                 }else{
                     habit.isDone();
