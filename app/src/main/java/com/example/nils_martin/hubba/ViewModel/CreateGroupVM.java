@@ -25,11 +25,11 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     HubbaModel hubbaModel = HubbaModel.getInstance();
     private User user;
     private List friends;
-    private List<Friend> groupMembers;
+    private List<Friend> groupMembers = new ArrayList<>();
     private String groupName;
     private IHabit habit;
     private String friendNames;
-    private List<String> friendsAsString= new ArrayList<>();
+    private List<String> friendsAsString = new ArrayList<>();
     private Button createNewGroupHabit;
     private Themehandler themehandler = new Themehandler();
 
@@ -60,97 +60,82 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
                 startActivity(intent);
             }
         });
-        int listSize = hubbaModel.getCurrentUser().getHabits().size();
-
-        // TODO The row below does not work when the user has no habits.
-        // habit= (Habit) hubbaModel.getCurrentUser().getHabits().get(listSize-1);
     }
-
- /*   @Override
-    protected void onResume() {
-        int size = hubbaModel.getCurrentUser().getHabits().size();
-        super.onResume();
-        this.habit=hubbaModel.getCurrentUser().getHabits().get(size-1);
-    }*/
-
-/*
     @Override
     protected void onResume() {
-        int size = hubbaModel.getCurrentUser().getHabits().size();
         super.onResume();
-        setCreatedHabit(hubbaModel.getCurrentUser().getHabits().get(size - 1));
-    }*/
-
-
-
-    private void getUserToCurrent() {
-        user = hubbaModel.getCurrentUser();
     }
 
-    //Kollar så att usern finns med i vänlistan
-    private ArrayList<Friend> checkUserNameToFriend() {
 
-        ArrayList<Friend> groupMembers = new ArrayList<>();
-        for (int i = 0; i < friends.size(); i++) {
-            for (String string : friendsAsString) {
-                Friend tempFriend = (Friend) friends.get(i);
-                if (tempFriend.getUserName().equals(string)) {
-                    groupMembers.add(user);
+
+        private void getUserToCurrent () {
+            user = hubbaModel.getCurrentUser();
+        }
+
+        //Kollar så att usern finns med i vänlistan
+        private List<Friend> checkUserNameToFriend () {
+            for (int i = 0; i < friends.size(); i++) {
+                for (String string : friendsAsString) {
+                    Friend tempFriend = (Friend) friends.get(i);
+                    if (tempFriend.getUserName().equals(string)) {
+                        groupMembers.add(user);
+                    }
                 }
             }
-        }
-        return groupMembers;
-    }
-
-    private void setFriendsAsString() {
-        if (friendNames == null) {
-        }else if (!(friendNames.contains(","))){
-            friendsAsString.add(friendNames);
+            return groupMembers;
         }
 
-        else {
-            loopFriendsIntoList();
+        private void setFriendsAsString () {
+            if (friendNames == null) {
+            } else if (!(friendNames.contains(","))) {
+                friendsAsString.add(friendNames);
+            } else {
+                loopFriendsIntoList();
+            }
         }
-    }
-    private void loopFriendsIntoList(){
-       String[]tempFriends=  friendNames.split(",");
-        for (int i = 0; i <tempFriends.length ; i++) {
-            friendsAsString.add(tempFriends[i]);
+        private void loopFriendsIntoList () {
+            String[] tempFriends = friendNames.split(",");
+            for (int i = 0; i < tempFriends.length; i++) {
+                friendsAsString.add(tempFriends[i]);
 
+            }
         }
-    }
 
-    private void getUserFriends() {
-        if (user.getFriends().isEmpty()) {
+        private void getUserFriends () {
+            if (user.getFriends().isEmpty()) {
 
-        } else {
-            friends = user.getFriends();
+            } else {
+                friends = user.getFriends();
+            }
         }
-    }
 
-    private void setCreatedHabit(IHabit habit) {
-        if (habit.getHabitTypeState().toString().equals("GroupHabit")) {
-            this.habit = habit;
+        private void setCreatedHabit (IHabit habit){
+            if (habit.getHabitTypeState().toString().equals("GroupHabit")) {
+                this.habit = habit;
+            }
         }
-    }
 
-    private void createNewGroup() {
-        Group group = new Group(groupName, groupMembers, habit);
-        hubbaModel.getCurrentUser().getGroups().add(group);
-    }
+        private void createNewGroup () {
+            checkUserNameToFriend();
+            Group group = new Group(groupName, groupMembers, habit);
+            hubbaModel.getCurrentUser().getGroups().add(group);
+        }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        createNewGroup();
-        finish();
-    }
+        @Override
+        protected void onStop () {
+            super.onStop();
+            createNewGroup();
+            finish();
+        }
 
-    @Override
-    public void recreateActivity() {
-        recreate();
-    }
+        @Override
+        public void recreateActivity () {
+            int size = hubbaModel.getCurrentUser().getHabits().size();
+            setCreatedHabit(hubbaModel.getCurrentUser().getHabits().get(size));
+            recreate();
+        }
 
-    //TODO create method to add checked friends to group list
+        //TODO create method to add checked friends to group list
+
 
 }
