@@ -1,6 +1,5 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.GroupHabitType;
 import com.example.nils_martin.hubba.Model.Habit;
-import com.example.nils_martin.hubba.Model.HabitTypeState;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -343,7 +341,6 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
      }
 
      public void endActivity(){
-
          finish();
     }
 

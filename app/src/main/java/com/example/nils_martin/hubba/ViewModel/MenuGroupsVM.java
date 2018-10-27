@@ -53,6 +53,9 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
         addGroupButton = (Button) findViewById(R.id.addGroupBtn);
     }
 
+    /**
+     * Gets the list of groups from the current user in HubbaModel.
+     */
     private void getGroupsList() {
         groups = model.getCurrentUser().getGroups();
     }

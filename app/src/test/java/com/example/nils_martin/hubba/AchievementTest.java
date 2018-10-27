@@ -25,7 +25,7 @@ public class AchievementTest {
     @Test
     public void testStreakAchievement(){
         IHubbaModel model = HubbaModel.getInstance();
-        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", "ABS"));
+        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
         List<Integer> days =  new ArrayList<Integer>();
         days.add(1);
         days.add(2);
@@ -42,7 +42,7 @@ public class AchievementTest {
     @Test
     public void testStreakAchievementFalse(){
         IHubbaModel model = HubbaModel.getInstance();
-        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", "ABS"));
+        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
         List<Integer> days =  new ArrayList<Integer>();
         days.add(1);
         days.add(2);
@@ -56,7 +56,7 @@ public class AchievementTest {
     @Test
     public void testNumOfHabitsAchievement(){
         IHubbaModel model = HubbaModel.getInstance();
-        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", "ABS"));
+        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
         List<Integer> days =  new ArrayList<Integer>();
         days.add(1);
         days.add(2);
@@ -69,7 +69,7 @@ public class AchievementTest {
     @Test
     public void testNumOfHabitsAchievementFalse(){
         IHubbaModel model = HubbaModel.getInstance();
-        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", "ABS"));
+        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
         List<Integer> days =  new ArrayList<Integer>();
         days.add(1);
         days.add(2);

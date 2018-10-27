@@ -13,7 +13,6 @@ import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
-import com.example.nils_martin.hubba.ViewModel.MainActivityVM;
 
 import java.util.ArrayList;
 import java.util.List;

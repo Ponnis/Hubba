@@ -1,10 +1,7 @@
 package com.example.nils_martin.hubba.Model;
 
-import com.example.nils_martin.hubba.R;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 public interface IUser {
 
@@ -46,13 +43,12 @@ public interface IUser {
      List getAchievements();
 
 
-    // TODO: 2018-10-21 Fix below methods so they depend use Iuser instead of User 
     // Adds another user to the list of friends.
-     void addFriend(User user);
+     void addFriend(IFriend friend);
 
     // Finds the friend to remove in friends list and then removes the friend.
-     void removeFriend(User friend);
+     void removeFriend(IFriend friend);
 
-     List<User> getFriends();
+     List<IFriend> getFriends();
 
 }

@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ImageButton;
 
-
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
@@ -53,11 +52,11 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     public FloatingActionButton addBtn;
     private ImageButton calendarBtn;
     private ImageButton menuButton;
-    public static IHabit openHabit = new Habit("");
+    protected static IHabit openHabit = new Habit("");
     private Themehandler themehandler = new Themehandler();
 
-    private int listItemHeight = 115;
-    private int dividerHeight = 10;
+    private int listItemHeight = 130;
+    private int dividerHeight = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

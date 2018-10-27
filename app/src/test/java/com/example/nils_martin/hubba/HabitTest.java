@@ -3,7 +3,7 @@ package com.example.nils_martin.hubba;
 import com.example.nils_martin.hubba.Model.GroupHabitType;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.IHabit;
-import com.example.nils_martin.hubba.Model.HabitTypeState;
+import com.example.nils_martin.hubba.Model.IHabitTypeState;
 import com.example.nils_martin.hubba.Model.SingleHabitType;
 
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class HabitTest {
     @Test
     public void testSetHabitTypeStateGroup() {
         IHabit habit = new Habit("test");
-        HabitTypeState group = new GroupHabitType();
+        IHabitTypeState group = new GroupHabitType();
         habit.setHabitTypeState(group);
         assertSame(habit.getHabitTypeState().toString(), "GroupHabit");
     }
@@ -39,7 +39,7 @@ public class HabitTest {
     @Test
     public void testSetHabitTypeStateSingle() {
         IHabit habit = new Habit("test");
-        HabitTypeState single = new SingleHabitType();
+        IHabitTypeState single = new SingleHabitType();
         habit.setHabitTypeState(single);
         assertSame(habit.getHabitTypeState().toString(), "SingleHabit");
     }

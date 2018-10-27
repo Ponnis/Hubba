@@ -1,10 +1,10 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +16,8 @@ import com.example.nils_martin.hubba.R;
 public class ProfileEditInformationVM extends AppCompatActivity implements ThemableObserver{
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    private Themehandler themehandler = new Themehandler();
+    private ImageButton backButton;
 
 
 
@@ -42,6 +43,7 @@ public class ProfileEditInformationVM extends AppCompatActivity implements Thema
         Email = (TextView) findViewById(R.id.profileEditEmail);
         Cancel = (Button) findViewById(R.id.profileEditCancel);
         Save = (Button) findViewById(R.id.profileEditSave);
+        backButton = findViewById(R.id.backBtn12);
 
         Username.setText(hubbaModel.getCurrentUser().getUserName());
         Email.setText(hubbaModel.getCurrentUser().getEmail());

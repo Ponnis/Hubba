@@ -1,10 +1,5 @@
 package com.example.nils_martin.hubba.Model;
 
-import com.example.nils_martin.hubba.Model.Achievement;
-import com.example.nils_martin.hubba.Model.AchievementType;
-import com.example.nils_martin.hubba.Model.NumOfHabitsAchievement;
-import com.example.nils_martin.hubba.Model.StreakAchievement;
-
 public class AchievementFactory {
 
     /**
