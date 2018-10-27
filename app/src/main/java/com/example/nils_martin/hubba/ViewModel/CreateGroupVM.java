@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.nils_martin.hubba.Model.Friend;
 import com.example.nils_martin.hubba.Model.Group;
@@ -30,6 +31,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     private String friendNames;
     private ArrayList<String> friendsAsString;
     private Button createNewGroupHabit;
+    private ImageButton backButton;
     private Themehandler themehandler = new Themehandler();
 
 //Doesn't need constructor but just saving it in case
