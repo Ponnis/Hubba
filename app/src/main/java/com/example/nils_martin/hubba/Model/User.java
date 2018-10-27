@@ -109,12 +109,6 @@ public class User implements Observer, Friend, IUser {
         return achievements;
     }
 
-    @Override
-    public void addAchivementListener(AchivementObserver achivementObserver) {
-        for (Achievement i: achievements) {
-            i.addAchivementListener(achivementObserver);
-        }
-    }
 
     @Override
     public void addAchivement(Achievement achievement) {

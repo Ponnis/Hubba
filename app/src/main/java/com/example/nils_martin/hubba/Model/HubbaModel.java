@@ -60,11 +60,6 @@ public class HubbaModel implements IHubbaModel {
         this.users.add(user);
     }
 
-    @Override
-    public void addAchivementListener(AchivementObserver achivementObserver) {
-        currentUser.addAchivementListener(achivementObserver);
-    }
-
     public String themeEnumToString(){
         return currentUser.themeEnumToString();
     }
