@@ -53,16 +53,18 @@ public class LoginVM extends AppCompatActivity {
 
         model.getUsers().clear();*/
 
+
+
         try {
             load();
         } catch (JSONException e) {
             e.printStackTrace();
+            model.setUsers(new ArrayList<>());
+            model.getUsers().add(new User("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
         }
 
-        ArrayList<User> users = model.getUsers();
-
-        for (int i = 0, usersSize = users.size(); i < usersSize; i++) {
-            User user = users.get(i);
+        for (int i = 0, usersSize = model.getUsers().size(); i < usersSize; i++) {
+            User user = model.getUsers().get(i);
             if (user.getUserName().equals("admin")) {
                 break;
             }
@@ -71,26 +73,27 @@ public class LoginVM extends AppCompatActivity {
                 System.out.println("Skapar ny admin");
                 System.out.println(model.getUser("admin").getTheme());
             }
-
-            Username = (EditText) findViewById(R.id.txtUsername);
-            Password = (EditText) findViewById(R.id.txtPassword);
-            NewUser = (Button) findViewById(R.id.btnNewUser);
-            Login = (Button) findViewById(R.id.btnLogin);
-
-            NewUser.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    newUserButton();
-                }
-            });
-
-            Login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    checkLoginAcceptance();
-                }
-            });
         }
+
+        Username = (EditText) findViewById(R.id.txtUsername);
+        Password = (EditText) findViewById(R.id.txtPassword);
+        NewUser = (Button) findViewById(R.id.btnNewUser);
+        Login = (Button) findViewById(R.id.btnLogin);
+
+        NewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newUserButton();
+            }
+        });
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLoginAcceptance();
+            }
+        });
+
     }
 
     private void initList(User user) {
