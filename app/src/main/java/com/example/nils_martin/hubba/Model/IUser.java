@@ -46,13 +46,13 @@ public interface IUser {
      List getAchievements();
 
 
-    // TODO: 2018-10-21 Fix below methods so they depend use Iuser instead of User 
+    // TODO: 2018-10-21 Fix below methods so they depend use Friend instead of User
     // Adds another user to the list of friends.
-     void addFriend(User user);
+     void addFriend(Friend friend);
 
     // Finds the friend to remove in friends list and then removes the friend.
-     void removeFriend(User friend);
+     void removeFriend(Friend friend);
 
-     List<User> getFriends();
+     List<Friend> getFriends();
 
 }
