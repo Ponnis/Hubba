@@ -70,7 +70,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     //Kollar så att usern finns med i vänlistan
     private ArrayList<Friend> checkUserNameToFriend(){
 
-        ArrayList<Friend> groupMembers = new ArrayList<Friend>();
+        ArrayList<Friend> groupMembers = new ArrayList<>();
         for (int i = 0;i<friends.size();i++){
             for (String string :friendsAsString){
                 Friend tempFriend = (Friend) friends.get(i);
@@ -89,6 +89,11 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
 
         } else {
             friends = user.getFriends();
+        }
+    }
+    private void setCreatedHabit(Habit habit){
+        if(habit.getHabitTypeState().toString().equals("GroupHabit")){
+            this.habit=habit;
         }
     }
     private void createNewGroup(){
