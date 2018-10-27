@@ -29,7 +29,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     private String groupName;
     private IHabit habit;
     private String friendNames;
-    private ArrayList<String> friendsAsString;
+    private List<String> friendsAsString= new ArrayList<>();
     private Button createNewGroupHabit;
     private Themehandler themehandler = new Themehandler();
 
