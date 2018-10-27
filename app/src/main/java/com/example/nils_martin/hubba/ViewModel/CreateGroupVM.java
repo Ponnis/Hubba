@@ -73,13 +73,13 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         this.habit=hubbaModel.getCurrentUser().getHabits().get(size-1);
     }*/
 
-
+/*
     @Override
     protected void onResume() {
         int size = hubbaModel.getCurrentUser().getHabits().size();
         super.onResume();
         setCreatedHabit(hubbaModel.getCurrentUser().getHabits().get(size - 1));
-    }
+    }*/
 
 
 
