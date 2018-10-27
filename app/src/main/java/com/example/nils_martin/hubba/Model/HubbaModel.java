@@ -2,7 +2,7 @@ package com.example.nils_martin.hubba.Model;
 
 import java.util.ArrayList;
 /**
- * @author Nils-Martin Robeling
+ * @author Nils-Martin Robeling, Li Rönning
  * */
 public class HubbaModel implements IHubbaModel {
     private static HubbaModel instance = null;
