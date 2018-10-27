@@ -23,6 +23,9 @@ import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @author Nils-Martin Robeling
+ * */
 
 public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObserver,ICreateGroupHabitVM{
      private EditText habitName;

@@ -1,7 +1,9 @@
 package com.example.nils_martin.hubba.Model;
 
 import java.util.List;
-
+/**
+ * @author Nils-Martin Robeling
+ * */
 public class  Group {
 
     private String groupName;

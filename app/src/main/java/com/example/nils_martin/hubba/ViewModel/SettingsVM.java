@@ -15,6 +15,9 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.R;
 
+/**
+ * @author Li Rönning
+ */
 public class SettingsVM extends AppCompatActivity implements ThemableObserver {
     //we have to get the active user from the main class " Hubba ".
     //will control all the users menu_settings.

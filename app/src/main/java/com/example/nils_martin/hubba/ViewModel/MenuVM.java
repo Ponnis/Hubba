@@ -10,6 +10,9 @@ import android.widget.ImageButton;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
+/**
+ * @author Li Rönning
+ */
 public class MenuVM extends AppCompatActivity implements ThemableObserver {
     private Button profileButton;
     private Button settingsButton;
