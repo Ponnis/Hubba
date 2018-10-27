@@ -8,9 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.example.nils_martin.hubba.Model.Friend;
+import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.Group;
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -18,7 +17,6 @@ import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CreateGroupVM extends AppCompatActivity implements ThemableObserver {
@@ -26,7 +24,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     HubbaModel hubbaModel = HubbaModel.getInstance();
     private User user;
     private List friends;
-    private List<Friend> groupMembers = new ArrayList<>();
+    private List<IFriend> groupMembers = new ArrayList<>();
     private String groupName;
     private IHabit habit;
     private String friendNames;
@@ -75,10 +73,10 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         }
 
         //Kollar så att usern finns med i vänlistan
-        private List<Friend> checkUserNameToFriend () {
+        private List<IFriend> checkUserNameToFriend () {
             for (int i = 0; i < friends.size(); i++) {
                 for (String string : friendsAsString) {
-                    Friend tempFriend = (Friend) friends.get(i);
+                    IFriend tempFriend = (IFriend) friends.get(i);
                     if (tempFriend.getUserName().equals(string)) {
                         groupMembers.add(user);
                     }

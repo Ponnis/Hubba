@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface IHabit {
 
-    void setHabitTypeState(HabitTypeState habitTypeState);
+    void setHabitTypeState(IHabitTypeState habitTypeState);
 
-    HabitTypeState getHabitTypeState();
+    IHabitTypeState getHabitTypeState();
 
     void setDone();
 

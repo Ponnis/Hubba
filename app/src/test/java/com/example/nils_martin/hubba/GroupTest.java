@@ -1,6 +1,6 @@
 package com.example.nils_martin.hubba;
 
-import com.example.nils_martin.hubba.Model.Friend;
+import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.Group;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.IHabit;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class GroupTest {
 
-    List<Friend> friends = new ArrayList<>();
+    List<IFriend> friends = new ArrayList<>();
     IHabit habit = new Habit("Drink Water");
 
     @Test

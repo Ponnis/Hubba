@@ -1,6 +1,6 @@
 package com.example.nils_martin.hubba;
 
-import com.example.nils_martin.hubba.Model.Friend;
+import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.User;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 public class UserTest {
 
-    Friend friend = new User("Friend", "friend@friend.com", "friendly1234", new ArrayList<>());
+    IFriend friend = new User("IFriend", "friend@friend.com", "friendly1234", new ArrayList<>());
     User user = new User("Åke", "Åke@gmail.com","Ninja1337", new ArrayList<>());
     Habit habit = new Habit("Drink Water");
 

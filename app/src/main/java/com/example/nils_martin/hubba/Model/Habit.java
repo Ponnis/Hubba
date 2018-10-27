@@ -14,7 +14,7 @@ public class Habit extends Observable implements IHabit {
     private boolean isDone;
     private boolean reminderOn;
     private List<Integer> reminderTime;
-    private HabitTypeState habitTypeState;
+    private IHabitTypeState habitTypeState;
     private State STATE;
     private Frequency FREQUENCY;
     private List<Integer> daysToDo = new ArrayList<>();
@@ -35,10 +35,10 @@ public class Habit extends Observable implements IHabit {
         this.daysToDo = days;
     }
 
-    public void setHabitTypeState(HabitTypeState habitTypeState){
+    public void setHabitTypeState(IHabitTypeState habitTypeState){
         this.habitTypeState = habitTypeState;
     }
-    public HabitTypeState getHabitTypeState(){
+    public IHabitTypeState getHabitTypeState(){
         return this.habitTypeState;
     }
 

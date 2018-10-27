@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class User implements Observer, Friend, IUser {
+public class User implements Observer, IFriend, IUser {
 
     private String userName;
     private String email;
     private String password;
     private String imagePath;
-    private List<Friend> friends = new ArrayList<>();
+    private List<IFriend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
     private ArrayList<ThemableObserver> themeObservers;
@@ -138,15 +138,15 @@ public class User implements Observer, Friend, IUser {
 
     }
     // Finds the friend to remove in friends list and then removes the friend.
-    public void removeFriend (Friend friend){
-        for (Friend user : friends) {
+    public void removeFriend (IFriend friend){
+        for (IFriend user : friends) {
             if (user.getUserName().equals(friend.getUserName())) {
                 friends.remove(friend);
             }
         }
     }
     // Adds another user to the list of friends.
-    public void addFriend (Friend friend){
+    public void addFriend (IFriend friend){
         friends.add(friend);
     }
 
@@ -154,7 +154,7 @@ public class User implements Observer, Friend, IUser {
 
 
     }
-    public List<Friend> getFriends () {
+    public List<IFriend> getFriends () {
         return friends;
     }
     public List<Group> getGroups () {

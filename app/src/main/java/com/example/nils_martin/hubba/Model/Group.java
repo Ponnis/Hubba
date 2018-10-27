@@ -5,10 +5,10 @@ import java.util.List;
 public class  Group {
 
     private String groupName;
-    private List<Friend> usersInGroup;
+    private List<IFriend> usersInGroup;
     private IHabit habit;
 
-    public Group(String groupName, List<Friend> usersInGroup, IHabit habit) {
+    public Group(String groupName, List<IFriend> usersInGroup, IHabit habit) {
         this.groupName = groupName;
         this.usersInGroup = usersInGroup;
         this.habit = habit;
@@ -25,7 +25,7 @@ public class  Group {
         }
     }
 
-    private List<Friend> getUsersInGroup () {
+    private List<IFriend> getUsersInGroup () {
         return this.usersInGroup;
     }
 }

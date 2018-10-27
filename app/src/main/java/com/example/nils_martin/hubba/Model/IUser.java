@@ -1,10 +1,7 @@
 package com.example.nils_martin.hubba.Model;
 
-import com.example.nils_martin.hubba.R;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 public interface IUser {
 
@@ -47,11 +44,11 @@ public interface IUser {
 
 
     // Adds another user to the list of friends.
-     void addFriend(Friend friend);
+     void addFriend(IFriend friend);
 
     // Finds the friend to remove in friends list and then removes the friend.
-     void removeFriend(Friend friend);
+     void removeFriend(IFriend friend);
 
-     List<Friend> getFriends();
+     List<IFriend> getFriends();
 
 }

@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import com.example.nils_martin.hubba.Model.Friend;
+import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
@@ -23,13 +23,13 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private HubbaModel model = HubbaModel.getInstance();
     private Themehandler themehandler = new Themehandler();
 
-    private List<Friend> friends = new ArrayList<>();
+    private List<IFriend> friends = new ArrayList<>();
     private ArrayList<String> friendStrings = new ArrayList<>();
     private ListView yourFriendsListView;
     private ArrayAdapter<String> yourFriendsAdapter;
     private Button addFriendsButton;
     private ImageButton backButton;
-    private Friend openFriend;
+    private IFriend openFriend;
 
 
     @Override
@@ -96,7 +96,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private void fillFriendStringsList(){
         friendStrings.clear();
         friendStrings.add("Katt"); //TODO when save work
-        for(Friend friend : friends){
+        for(IFriend friend : friends){
             friendStrings.add(friend.getUserName());
         }
     }
@@ -132,14 +132,14 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
      * @param string is the string of a friends username
      */
     private void findFriend(String string) {
-        for(Friend friend: friends) {
+        for(IFriend friend: friends) {
             if(friend.getUserName().equals(string)) {
                 setOpenFriend(friend);
             }
         }
     }
 
-    private  void setOpenFriend(Friend openFriend) {
+    private  void setOpenFriend(IFriend openFriend) {
         this.openFriend = openFriend;
     }
 
