@@ -312,7 +312,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startdate, interval, broadcast);//interval, broadcast);
-            System.out.println(createdHabit.getTitle());
         }
     }
 
