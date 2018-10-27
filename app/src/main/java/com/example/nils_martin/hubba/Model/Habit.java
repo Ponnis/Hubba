@@ -56,7 +56,9 @@ public class Habit extends Observable implements IHabit {
         this.streak--;
     }
 
-    //TODO make two different events?
+    /**
+     * notifies the appropriate observer depending on HabitType
+     * */
     public void notifyObservers(){
         if (habitTypeState.toString().equals("GroupHabit")){
             //How to notify user group without wrecking dependency?
@@ -68,7 +70,9 @@ public class Habit extends Observable implements IHabit {
         }
         }
     }
-
+    /**
+     * Sets the streak to +1 if the habit is completed
+     * */
     public void upStreak(Habit habit){
         if(habit.isDone){
             habit.streak++;

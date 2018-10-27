@@ -17,7 +17,9 @@ public class HubbaModel implements IHubbaModel {
     private HubbaModel() {
         users = new ArrayList<>();
     }
-
+    /**
+     * Returns a user based on a string Parameter for the users name
+     * */
     public User getUser(String userName) {
         int index = 0;
         for (User user : users) {

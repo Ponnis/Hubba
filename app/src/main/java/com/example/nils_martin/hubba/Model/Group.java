@@ -18,7 +18,9 @@ public class  Group {
     public String getGroupName(){
         return this.groupName;
     }
-
+    /**
+     * Checks with all the groupmembers if the habit is done, sets habit to done if true.
+     * */
     private void isHabitComplete(){
         if(habit.getGroupMembersDoneCount()==usersInGroup.size()){
             habit.setDone();

@@ -100,7 +100,9 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
 
             }
         }
-
+        /**
+         * Gets the users friends
+         * */
         private void getUserFriends () {
             if (user.getFriends().isEmpty()) {
 
@@ -108,13 +110,17 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
                 friends = user.getFriends();
             }
         }
-
+        /**
+         * Sets the new groups habit to the one you created
+         * */
         private void setCreatedHabit (IHabit habit){
             if (habit.getHabitTypeState().toString().equals("GroupHabit")) {
                 this.habit = habit;
             }
         }
-
+        /**
+         * Creates a new group based on you input parameters, also adds the group to the model.
+         * */
         private void createNewGroup () {
             checkUserNameToFriend();
             Group group = new Group(groupName, groupMembers, habit);

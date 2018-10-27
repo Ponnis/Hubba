@@ -130,7 +130,9 @@ public class User implements Observer, Friend, IUser {
         }
 
     }
-    // Finds the friend to remove in friends list and then removes the friend.
+    /**
+     * Finds the friend to remove in friends list and then removes the friend.
+     * */
     public void removeFriend (User friend){
         for (User user : friends) {
             if (user.userName == friend.userName) {
@@ -138,7 +140,9 @@ public class User implements Observer, Friend, IUser {
             }
         }
     }
-    // Adds another user to the list of friends.
+    /**
+     * Adds user to list of friends
+     * */
     public void addFriend (User user){
         friends.add(user);
     }
