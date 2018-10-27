@@ -6,9 +6,9 @@ public class  Group {
 
     private String groupName;
     private List<Friend> usersInGroup;
-   private  Habit habit;
+   private  IHabit habit;
 
-    public Group(String groupName,List<Friend> usersInGroup,Habit habit){
+    public Group(String groupName,List<Friend> usersInGroup,IHabit habit){
         this.groupName = groupName;
         this.usersInGroup = usersInGroup;
         this.habit = habit;

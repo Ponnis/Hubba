@@ -11,6 +11,7 @@ import com.example.nils_martin.hubba.Model.Friend;
 import com.example.nils_martin.hubba.Model.Group;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
@@ -26,7 +27,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     List friends;
     List<Friend> groupMembers;
     String groupName;
-    private Habit habit;
+    private IHabit habit;
     private String friendNames;
     private ArrayList<String> friendsAsString;
     private Button createNewGroupHabit;
@@ -59,9 +60,17 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
             }
         });
         int listSize = hubbaModel.getCurrentUser().getHabits().size();
+
         // TODO The row below does not work when the user has no habits.
         // habit= (Habit) hubbaModel.getCurrentUser().getHabits().get(listSize-1);
     }
+    @Override
+    protected void onResume() {
+        int size = hubbaModel.getCurrentUser().getHabits().size();
+        super.onResume();
+        this.habit=hubbaModel.getCurrentUser().getHabits().get(size-1);
+    }
+
 
     private void getUserToCurrent(){
         user = hubbaModel.getCurrentUser();
@@ -98,17 +107,6 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     }
     private void createNewGroup(){
         Group group = new Group(groupName,groupMembers,habit);
-      //  friendUsername = (EditText)findViewById(R.id.txtGroupNewUsername);
-        /*
-        for()
-
-
-
-
-
-
-          */
-
     }
 
     @Override

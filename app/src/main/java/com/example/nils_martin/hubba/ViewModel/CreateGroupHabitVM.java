@@ -3,6 +3,7 @@ package com.example.nils_martin.hubba.ViewModel;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -100,7 +101,6 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
             createdHabit.setDaysToDo(calendarDaysList);
 
             if(checkIfAllFieldsFilled()) {
-                /// TODO: 2018-10-18 Inte snyggt!
                 model.getCurrentUser().getHabits().add(createdHabit);
                 endActivity();
             }
@@ -343,7 +343,8 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
      }
 
      public void endActivity(){
-        finish();
+
+         finish();
     }
 
 
