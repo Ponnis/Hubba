@@ -1,6 +1,5 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Frequency;
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.State;
@@ -38,26 +36,26 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
     private List<CheckBox> checkboxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
     HubbaModel model = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    ThemeHandler themeHandler = new ThemeHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_habit);
         setCurrentHabit();
         init();
         makeAListOfDayCbx();
         initSettings();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         update();
     }
 
     @Override
     protected void onResume() {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onResume();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         update();
     }
 

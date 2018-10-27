@@ -13,7 +13,7 @@ public class User implements Observer, Friend, IUser {
     private String imagePath;
     private List<Friend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
-    private ArrayList<Achievement> achievements;
+    private ArrayList<Acheievement> acheievements;
     private ArrayList<ThemableObserver> themeObservers;
     //User Settings
     private boolean allowNotifications;
@@ -21,13 +21,13 @@ public class User implements Observer, Friend, IUser {
     private Themes ActiveTheme;
     private List<Group> groups = new ArrayList<>();
 
-    public User(String name, String email, String password, ArrayList<Achievement> achivements ) {
+    public User(String name, String email, String password, ArrayList<Acheievement> achivements ) {
         this.userName = name;
         this.email = email;
         this.password = password;
         this.ActiveTheme = Themes.STANDARD;
         this.themeObservers = new ArrayList<>();
-        this.achievements = achivements;
+        this.acheievements = achivements;
     }
     // Takes an ENUM from Themes and set
     public void setTheme(Themes theme){
@@ -60,7 +60,7 @@ public class User implements Observer, Friend, IUser {
     }
 
     public void checkAchievements() {
-        for (Achievement i: achievements) {
+        for (Acheievement i: acheievements) {
             i.assessAchievement();
         }
     }
@@ -105,14 +105,14 @@ public class User implements Observer, Friend, IUser {
         return habits;
     }
 
-    public List<Achievement> getAchievements() {
-        return achievements;
+    public List<Acheievement> getAcheievements() {
+        return acheievements;
     }
 
 
     @Override
-    public void addAchivement(Achievement achievement) {
-        achievements.add(achievement);
+    public void addAchivement(Acheievement acheievement) {
+        acheievements.add(acheievement);
     }
 
     //TODO test the update method
@@ -122,13 +122,13 @@ public class User implements Observer, Friend, IUser {
         for (IHabit habit : habits) {
 
            /* if (habit.getStreak() % 5 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak(habit) + " Days!"));
+                acheievements.add(AchievementFactory.getAchievement(AchievementType.StreakAcheievement, habit.getStreak(habit) + " Days!"));
             }
             if (habits.size() % 5 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!"),0);
+                acheievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!"),0);
 
                 if (habit.getStreak() % 10 == 0) {
-                    achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak() + " Days!", 5));
+                    acheievements.add(AchievementFactory.getAchievement(AchievementType.StreakAcheievement, habit.getStreak() + " Days!", 5));
                 }
                 if (habits.size() % 10 == 0) {
 

@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 public class ProfileVM extends AppCompatActivity implements ThemableObserver {
@@ -32,7 +31,7 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
 
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
     private TextView Username;
     private TextView Email;
     private ImageView ProfilePic;
@@ -48,12 +47,12 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile);
 
         init();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
     }
 
     /**

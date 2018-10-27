@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 
 import com.example.nils_martin.hubba.Model.Friend;
 import com.example.nils_martin.hubba.Model.Group;
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -18,7 +17,6 @@ import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CreateGroupVM extends AppCompatActivity implements ThemableObserver {
@@ -33,7 +31,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     private List<String> friendsAsString = new ArrayList<>();
     private Button createNewGroupHabit;
     private ImageButton backButton;
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
 //Doesn't need constructor but just saving it in case
   /*  public CreateGroupVM(String friendNames, Habit habit, String groupName, User user){
@@ -44,12 +42,12 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     }*/
 
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
         getUserToCurrent();
         getUserFriends();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         groupName = String.valueOf((EditText) findViewById(R.id.txtGroupName));
         friendNames = String.valueOf((EditText) findViewById(R.id.txtGroupMembers));
         createNewGroupHabit = (Button) findViewById(R.id.btnCreateNewGroup);

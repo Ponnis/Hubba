@@ -45,16 +45,16 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
     private List<CheckBox> cbxMonthList = new ArrayList<>();
     private List<Integer> calendarDaysList = new ArrayList<>();
     private IHubbaModel model = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
         initFindByView();
         makeAListOfDayCbx();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         createdHabit = new Habit("", calendarDaysList);
         update();
     }

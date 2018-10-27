@@ -1,6 +1,5 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,7 +16,7 @@ import com.example.nils_martin.hubba.R;
 public class ProfileEditInformationVM extends AppCompatActivity implements ThemableObserver{
 
     private HubbaModel hubbaModel = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
     private ImageButton backButton;
 
 
@@ -29,10 +28,10 @@ public class ProfileEditInformationVM extends AppCompatActivity implements Thema
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile_edit_information);
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         init();
     }
 

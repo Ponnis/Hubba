@@ -12,9 +12,7 @@ import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.Friend;
 import com.example.nils_martin.hubba.Model.HubbaModel;
-import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ import java.util.List;
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
     private List<Friend> friends = new ArrayList<>();
     private ArrayList<String> friendStrings = new ArrayList<>();
@@ -36,10 +34,10 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_friends);
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         init();
     }
 

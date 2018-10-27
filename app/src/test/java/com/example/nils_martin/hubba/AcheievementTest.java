@@ -1,14 +1,12 @@
 package com.example.nils_martin.hubba;
 
-import com.example.nils_martin.hubba.Model.Achievement;
+import com.example.nils_martin.hubba.Model.Acheievement;
 import com.example.nils_martin.hubba.Model.AchievementFactory;
 import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.IHubbaModel;
-import com.example.nils_martin.hubba.Model.NumOfHabitsAchievement;
-import com.example.nils_martin.hubba.Model.StreakAchievement;
 import com.example.nils_martin.hubba.Model.User;
 
 import org.junit.Test;
@@ -20,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class AchievementTest {
+public class AcheievementTest {
 
     @Test
     public void testStreakAchievement(){
@@ -35,7 +33,7 @@ public class AchievementTest {
             i.setDone();
         }
 
-        Achievement streak = AchievementFactory.getAchievement(AchievementType.StreakAchievement, "Streak Test", 1);
+        Acheievement streak = AchievementFactory.getAchievement(AchievementType.StreakAchievement, "Streak Test", 1);
         streak.assessAchievement();
         assertTrue(streak.getsAchieved());
     }
@@ -48,7 +46,7 @@ public class AchievementTest {
         days.add(2);
         model.getCurrentUser().addHabit(new Habit("Fiska",days));
 
-        Achievement streak = AchievementFactory.getAchievement(AchievementType.StreakAchievement, "Streak Test", 1);
+        Acheievement streak = AchievementFactory.getAchievement(AchievementType.StreakAchievement, "Streak Test", 1);
         streak.assessAchievement();
         assertFalse(streak.getsAchieved());
     }
@@ -63,7 +61,7 @@ public class AchievementTest {
         model.getCurrentUser().addHabit(new Habit("Fiska",days));
         model.getCurrentUser().addHabit(new Habit("Ramla",days));
         List<IHabit> habits = model.getCurrentUser().getHabits();
-        Achievement num = AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "Numofhabittest", 2);
+        Acheievement num = AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "Numofhabittest", 2);
         assertTrue(num.getsAchieved());
     }
     @Test
@@ -74,7 +72,7 @@ public class AchievementTest {
         days.add(1);
         days.add(2);
         List<IHabit> habits = model.getCurrentUser().getHabits();
-        Achievement num = AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "Numofhabittest", 2);
+        Acheievement num = AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "Numofhabittest", 2);
         assertFalse(num.getsAchieved());
     }
 }

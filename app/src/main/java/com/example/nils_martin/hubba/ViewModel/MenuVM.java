@@ -20,16 +20,16 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
     private Button logOutButton;
     private Button myAchievementsButton;
     private ImageButton backButton;
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         init();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
     }
 
     /**

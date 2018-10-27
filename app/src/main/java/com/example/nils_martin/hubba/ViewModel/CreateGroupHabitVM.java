@@ -1,9 +1,7 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +15,6 @@ import android.widget.TextView;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.GroupHabitType;
 import com.example.nils_martin.hubba.Model.Habit;
-import com.example.nils_martin.hubba.Model.HabitTypeState;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -39,17 +36,17 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
      private List<CheckBox> cbxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
     HubbaModel model = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    ThemeHandler themeHandler = new ThemeHandler();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group_habit);
         init();
         makeAListOfDayCbx();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         update();
 }
 

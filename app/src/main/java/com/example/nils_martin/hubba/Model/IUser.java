@@ -1,10 +1,7 @@
 package com.example.nils_martin.hubba.Model;
 
-import com.example.nils_martin.hubba.R;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 public interface IUser {
 
@@ -41,9 +38,9 @@ public interface IUser {
 
      ArrayList getHabits();
 
-     void addAchivement(Achievement achievement);
+     void addAchivement(Acheievement acheievement);
 
-     List getAchievements();
+     List getAcheievements();
 
 
     // Adds another user to the list of friends.
