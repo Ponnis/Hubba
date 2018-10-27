@@ -20,13 +20,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateGroupVM extends AppCompatActivity implements ThemableObserver{
+public class CreateGroupVM extends AppCompatActivity implements ThemableObserver {
 
     HubbaModel hubbaModel = HubbaModel.getInstance();
-    User user;
-    List friends;
-    List<Friend> groupMembers;
-    String groupName;
+    private User user;
+    private List friends;
+    private List<Friend> groupMembers;
+    private String groupName;
     private IHabit habit;
     private String friendNames;
     private ArrayList<String> friendsAsString;
@@ -40,17 +40,18 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         this.groupName = groupName;
         this.user=user;
     }*/
-    protected void onCreate(Bundle savedInstanceState){
+
+    protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
         getUserToCurrent();
         getUserFriends();
         themehandler.addThemeListener(this);
-        groupName = String.valueOf((EditText)findViewById(R.id.txtGroupName));
-        friendNames  = String.valueOf((EditText)findViewById(R.id.txtGroupMembers));
+        groupName = String.valueOf((EditText) findViewById(R.id.txtGroupName));
+        friendNames = String.valueOf((EditText) findViewById(R.id.txtGroupMembers));
         createNewGroupHabit = (Button) findViewById(R.id.btnCreateNewGroup);
-       // createNewGroupHabit.setOnClickListener();
+        // createNewGroupHabit.setOnClickListener();
         createNewGroupHabit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +65,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         // TODO The row below does not work when the user has no habits.
         // habit= (Habit) hubbaModel.getCurrentUser().getHabits().get(listSize-1);
     }
+
  /*   @Override
     protected void onResume() {
         int size = hubbaModel.getCurrentUser().getHabits().size();
@@ -72,27 +74,45 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     }*/
 
 
-    private void getUserToCurrent(){
+    @Override
+    protected void onResume() {
+        int size = hubbaModel.getCurrentUser().getHabits().size();
+        super.onResume();
+        setCreatedHabit(hubbaModel.getCurrentUser().getHabits().get(size - 1));
+    }
+
+
+
+    private void getUserToCurrent() {
         user = hubbaModel.getCurrentUser();
     }
 
     //Kollar så att usern finns med i vänlistan
-    private ArrayList<Friend> checkUserNameToFriend(){
+    private ArrayList<Friend> checkUserNameToFriend() {
 
         ArrayList<Friend> groupMembers = new ArrayList<>();
-        for (int i = 0;i<friends.size();i++){
-            for (String string :friendsAsString){
+        for (int i = 0; i < friends.size(); i++) {
+            for (String string : friendsAsString) {
                 Friend tempFriend = (Friend) friends.get(i);
-            if (tempFriend.getUserName().equals(string)){
-                groupMembers.add(user);
+                if (tempFriend.getUserName().equals(string)) {
+                    groupMembers.add(user);
+                }
             }
-        }}
+        }
         return groupMembers;
     }
-    private void setFriendsAsString(){
-        if(friendNames == null){}
-        else{friendsAsString= (ArrayList<String>) Arrays.asList(friendNames.split(","));}
+
+    private void setFriendsAsString() {
+        if (friendNames == null) {
+        }else if (!(friendsAsString.contains(","))){
+            friendsAsString =(ArrayList<String>)  Arrays.asList(friendNames);
+        }
+
+        else {
+            friendsAsString = (ArrayList<String>) Arrays.asList(friendNames.split(","));
+        }
     }
+
     private void getUserFriends() {
         if (user.getFriends().isEmpty()) {
 
@@ -100,13 +120,23 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
             friends = user.getFriends();
         }
     }
-    private void setCreatedHabit(Habit habit){
-        if(habit.getHabitTypeState().toString().equals("GroupHabit")){
-            this.habit=habit;
+
+    private void setCreatedHabit(IHabit habit) {
+        if (habit.getHabitTypeState().toString().equals("GroupHabit")) {
+            this.habit = habit;
         }
     }
-    private void createNewGroup(){
-        Group group = new Group(groupName,groupMembers,habit);
+
+    private void createNewGroup() {
+        Group group = new Group(groupName, groupMembers, habit);
+        hubbaModel.getCurrentUser().getGroups().add(group);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        createNewGroup();
+        finish();
     }
 
     @Override
