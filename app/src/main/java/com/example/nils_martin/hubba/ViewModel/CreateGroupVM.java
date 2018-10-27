@@ -18,7 +18,9 @@ import com.example.nils_martin.hubba.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Nils-Martin Robeling
+ * */
 public class CreateGroupVM extends AppCompatActivity implements ThemableObserver {
 
     HubbaModel hubbaModel = HubbaModel.getInstance();
