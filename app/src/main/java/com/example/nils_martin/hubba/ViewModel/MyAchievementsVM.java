@@ -5,6 +5,8 @@ import android.renderscript.Sampler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Achievement;
@@ -21,6 +23,8 @@ public class MyAchievementsVM extends AppCompatActivity implements ThemableObser
     List<Achievement> achievements;
     IHubbaModel model = HubbaModel.getInstance();
 
+    private ImageButton backbutton;
+
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themehandler.getTheme());
         super.onCreate(savedInstanceState);
@@ -30,6 +34,16 @@ public class MyAchievementsVM extends AppCompatActivity implements ThemableObser
     }
 
     private void init(){
+        findByViewInit();
+        initOnClickListeners();
+    }
+
+    private void initOnClickListeners() {
+        backbutton.setOnClickListener(v -> onBackPressed());
+    }
+
+    private void findByViewInit() {
+        backbutton =findViewById(R.id.backBtn10);
         RecyclerView rvAchivements = findViewById(R.id.AchievementsShowList);
         TextView youHaveAchievedNothing = findViewById(R.id.ifNothingAchievedTextView);
         try {
@@ -40,8 +54,6 @@ public class MyAchievementsVM extends AppCompatActivity implements ThemableObser
         }catch (NullPointerException e){
             youHaveAchievedNothing.setText(R.string.youAchievedNothing);
         }
-
-
     }
 
     @Override

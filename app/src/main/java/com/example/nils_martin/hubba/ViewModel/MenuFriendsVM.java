@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.Friend;
@@ -29,6 +30,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private ListView yourFriendsListView;
     private ArrayAdapter<String> yourFriendsAdapter;
     private Button addFriendsButton;
+    private ImageButton backButton;
     private Friend openFriend;
 
 
@@ -57,19 +59,22 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     private void initFindByView(){
         yourFriendsListView = (ListView) findViewById(R.id.yourFriendsListView);
         addFriendsButton = (Button) findViewById(R.id.addFriendBtn);
+        backButton = findViewById(R.id.backBtn6);
     }
 
     private void initOnClickListeners(){
         addFriendOnClick();
+        backButtonOnClick();
+    }
+
+    private void backButtonOnClick() {
+        backButton.setOnClickListener(v -> onBackPressed());
     }
 
     private void addFriendOnClick(){
-        addFriendsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuFriendsVM.this, AddFriendVM.class);
-                startActivity(intent);
-            }
+        addFriendsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MenuFriendsVM.this, AddFriendVM.class);
+            startActivity(intent);
         });
     }
 

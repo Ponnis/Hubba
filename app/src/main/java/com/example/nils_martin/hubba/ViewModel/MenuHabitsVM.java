@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.Habit;
@@ -26,6 +27,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private ArrayList<String> habitStrings;
     private ListView yourHabitsListView;
     private ArrayAdapter<String> yourHabitsAdapter;
+    private ImageButton backButton;
 
     protected static IHabit openHabit = new Habit("");
 
@@ -52,7 +54,16 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
     private void init(){
         initArrays();
         initFindByView();
+        initOnClickListeners();
         updateHabitsListView();
+    }
+
+    private void initOnClickListeners() {
+        backButtonOnClick();
+    }
+
+    private void backButtonOnClick() {
+        backButton.setOnClickListener(v -> onBackPressed());
     }
 
     private void initArrays(){
@@ -65,6 +76,7 @@ public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver 
      */
     private void initFindByView() {
         yourHabitsListView = (ListView) findViewById(R.id.yourHabitsListView);
+        backButton = findViewById(R.id.backBtn8);
     }
 
     /**
