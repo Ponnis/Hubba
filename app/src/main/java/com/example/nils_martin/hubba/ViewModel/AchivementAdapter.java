@@ -64,10 +64,10 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
     public int getImage(Achievement achievement) {
        AchievementType achievementType =  achievement.getAchievementType();
        if (achievementType == AchievementType.NumOHabitsAchievement){
-           return R.drawable.streak;
+           return R.drawable.num_of_habits;
        }
        else if (achievementType == AchievementType.StreakAchievement){
-            return R.drawable.num_of_habits;
+            return R.drawable.streak;
        }
        else return R.drawable.profilepic;
     }
