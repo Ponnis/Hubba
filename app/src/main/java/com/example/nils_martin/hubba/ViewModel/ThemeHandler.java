@@ -6,8 +6,11 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.R;
 
-// Gets ActiveTheme from User and depending on what theme is chosen it returns the right int.
-public class Themehandler {
+/**
+ * @author Johannes Gustavsson
+ * Delegation Class for all classes that should be Themable.
+ */
+public class ThemeHandler {
     private IHubbaModel model = HubbaModel.getInstance();
 
     /**

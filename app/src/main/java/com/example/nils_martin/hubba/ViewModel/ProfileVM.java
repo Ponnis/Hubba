@@ -40,9 +40,9 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
     private static final int PERMISSION_REQUEST = 0;
     private static final int RESULT_LOAD_IMAGE = 1;
 
-
     private HubbaModel model = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
+
     private TextView Username;
     private TextView Email;
     private ImageView ProfilePic;
@@ -58,12 +58,12 @@ public class ProfileVM extends AppCompatActivity implements ThemableObserver {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile);
 
         init();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
     }
 
     /**

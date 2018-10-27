@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.nils_martin.hubba.Model.Achievement;
-import com.example.nils_martin.hubba.Model.AchievementFactory;
-import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
@@ -394,24 +391,4 @@ public class LoginVM extends AppCompatActivity {
         }
         return jsonObject.put("achievement", jsonArray).toString();
     }*/
-
-
-    private ArrayList<Achievement> setAchivements() {
-        ArrayList<Achievement> startAchievement = new ArrayList<>();
-        setHabitAchivements(startAchievement);
-        setStreakAchivements(startAchievement);
-        return startAchievement;
-    }
-
-    private void setHabitAchivements(ArrayList<Achievement> achievements) {
-        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "5Habtis", 5));
-        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "10Habtis", 10));
-        achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "15Habtis", 15));
-    }
-
-    private void setStreakAchivements(ArrayList<Achievement> achivements) {
-        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "5Streak", 5));
-        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "10Streak", 10));
-        achivements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "15Streak", 15));
-    }
 }

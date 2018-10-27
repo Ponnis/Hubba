@@ -8,18 +8,18 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
 public class HelpVM extends AppCompatActivity implements ThemableObserver {
-    Themehandler themehandler = new Themehandler();
+    ThemeHandler themeHandler = new ThemeHandler();
     ImageButton backButton;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_help);
         initViews();
         initOnClickListeners();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
     }
 
     private void initViews() {

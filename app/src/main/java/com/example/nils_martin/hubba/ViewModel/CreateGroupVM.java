@@ -39,23 +39,15 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     private List<String> friendsAsString = new ArrayList<>();
     private Button createNewGroupHabit;
     private ImageButton backButton;
-    private Themehandler themehandler = new Themehandler();
-
-//Doesn't need constructor but just saving it in case
-  /*  public CreateGroupVM(String friendNames, Habit habit, String groupName, User user){
-        this.friendNames = friendNames;
-        this.habit = habit;
-        this.groupName = groupName;
-        this.user=user;
-    }*/
+    private ThemeHandler themeHandler = new ThemeHandler();
 
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group);
         getUserToCurrent();
         getUserFriends();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         groupName = String.valueOf((EditText) findViewById(R.id.txtGroupName));
         friendNames = String.valueOf((EditText) findViewById(R.id.txtGroupMembers));
         createNewGroupHabit = (Button) findViewById(R.id.btnCreateNewGroup);
@@ -70,17 +62,21 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         });
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
-    }
-
+    }*/
 
     private void getUserToCurrent() {
         user = model.getCurrentUser();
     }
 
+
     //Kollar så att usern finns med i vänlistan
+
+    /**
+     * Checks that the users written in the textfield are actual friends of the user.
+     */
     private List<IFriend> checkUserNameToFriend() {
         for (int i = 0; i < friends.size(); i++) {
             for (String string : friendsAsString) {
@@ -88,6 +84,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
                 if (tempFriend.getUserName().equals(string)) {
                     groupMembers.add(user);
                 }
+
             }
         }
         return groupMembers;
@@ -102,6 +99,9 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         }
     }
 
+    /**
+     * Loops the string of friends into a list
+     */
     private void loopFriendsIntoList() {
         String[] tempFriends = friendNames.split(",");
         for (int i = 0; i < tempFriends.length; i++) {
@@ -130,22 +130,6 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         }
     }
 
-    /**
-     * Creates a new group based on you input parameters, also adds the group to the model.
-     */
-    private void createNewGroup() {
-        checkUserNameToFriend();
-        Group group = new Group(groupName, groupMembers, habit);
-        model.getCurrentUser().getGroups().add(group);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        createNewGroup();
-        finish();
-    }
-
     @Override
     protected void onPause() {
         try {
@@ -156,14 +140,37 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         super.onPause();
     }
 
-    @Override
+    /*@Override
     public void recreateActivity() {
         int size = model.getCurrentUser().getHabits().size();
         setCreatedHabit(model.getCurrentUser().getHabits().get(size));
         recreate();
-    }
+    }*/
 
     //TODO create method to add checked friends to group list
+
+    /**
+     * Creates a new group based on you input parameters, also adds the group to the model.
+     */
+    private void createNewGroup() {
+        checkUserNameToFriend();
+        Group group = new Group(groupName, groupMembers, habit);
+        user.getGroups().add(group);
+    }
+
+    @Override
+    protected void onStop() {
+        int size = user.getHabits().size();
+        setCreatedHabit(user.getHabits().get(size));
+        super.onStop();
+        createNewGroup();
+        finish();
+    }
+
+    @Override
+    public void recreateActivity() {
+        recreate();
+    }
 
     public void save() throws JSONException {
         JSONObject jsonObject = new JSONObject();
@@ -294,6 +301,4 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         }
         return jsonObject.put("achievement", jsonArray).toString();
     }*/
-
-
 }

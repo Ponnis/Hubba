@@ -26,7 +26,7 @@ import java.util.List;
 
 public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
-    Themehandler themehandler = new Themehandler();
+    ThemeHandler themeHandler = new ThemeHandler();
 
     TextView habitTitleTextView;
     TextView timeOfDayTextView;
@@ -45,10 +45,10 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
 
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.habit_view);
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         setCurrentHabit();
        // habit = MainActivityVM.openHabit;
         initFindView();
@@ -58,9 +58,9 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
     @Override
     protected void onResume() {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onResume();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         setCurrentHabit();
         init(currentHabit);
     }

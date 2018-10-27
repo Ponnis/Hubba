@@ -30,7 +30,7 @@ import java.util.List;
 public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themehandler = new ThemeHandler();
 
     private List<Group> groups = new ArrayList<>();
     private ArrayList<String> groupStrings = new ArrayList<>();

@@ -21,9 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ProfileEditInformationVM extends AppCompatActivity implements ThemableObserver{
-
     private HubbaModel model = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themehandler = new ThemeHandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
     private ImageButton backButton;
 
 
@@ -35,10 +35,10 @@ public class ProfileEditInformationVM extends AppCompatActivity implements Thema
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_profile_edit_information);
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         init();
     }
 

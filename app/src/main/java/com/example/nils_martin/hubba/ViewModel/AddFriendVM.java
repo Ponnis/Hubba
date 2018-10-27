@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
     private EditText friendsUserName;
     private Button addFriendButton;
@@ -30,11 +30,11 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_friends);
         init();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
     }
 
     private void init(){

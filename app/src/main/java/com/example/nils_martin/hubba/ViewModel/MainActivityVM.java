@@ -55,25 +55,26 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ImageButton calendarBtn;
     private ImageButton menuButton;
     protected static IHabit openHabit = new Habit("");
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
     private int listItemHeight = 130;
     private int dividerHeight = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        themehandler.addThemeListener(this);
+
+        themeHandler.addThemeListener(this);
     }
 
     @Override
     protected void onResume() {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onResume();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         initView();
     }
 

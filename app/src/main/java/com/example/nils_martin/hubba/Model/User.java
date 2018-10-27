@@ -13,7 +13,7 @@ public class User implements Observer, IFriend, IUser {
     private String imagePath;
     private List<IFriend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
-    private ArrayList<Achievement> achievements;
+    private ArrayList<Acheievement> acheievements;
     private ArrayList<ThemableObserver> themeObservers;
     //User Settings
     private boolean allowNotifications;
@@ -21,13 +21,13 @@ public class User implements Observer, IFriend, IUser {
     private Themes ActiveTheme;
     private List<Group> groups = new ArrayList<>();
 
-    public User(String name, String email, String password, ArrayList<Achievement> achivements) {
+    public User(String name, String email, String password, ArrayList<Acheievement> achivements) {
         this.userName = name;
         this.email = email;
         this.password = password;
         this.ActiveTheme = Themes.STANDARD;
         this.themeObservers = new ArrayList<>();
-        this.achievements = achivements;
+        this.acheievements = achivements;
     }
 
     // Takes an ENUM from Themes and set
@@ -65,7 +65,7 @@ public class User implements Observer, IFriend, IUser {
     }
 
     public void checkAchievements() {
-        for (Achievement i : achievements) {
+        for (Acheievement i : acheievements) {
             i.assessAchievement();
         }
     }
@@ -74,7 +74,9 @@ public class User implements Observer, IFriend, IUser {
         habits.remove(habit);
     }
 
-    public void setHabits (ArrayList<IHabit> habitArrayList){ this.habits = habitArrayList; }
+    public void setHabits(ArrayList<IHabit> habitArrayList) {
+        this.habits = habitArrayList;
+    }
 
     public String getUserName() {
         return userName;
@@ -112,17 +114,17 @@ public class User implements Observer, IFriend, IUser {
         return habits;
     }
 
-    public List<Achievement> getAchievements() {
-        return achievements;
+    public List<Acheievement> getAcheievements() {
+        return acheievements;
     }
 
-    public void setAchievements(ArrayList<Achievement> achievementArrayList) {
-        this.achievements = achievementArrayList;
+    public void setAchievements(ArrayList<Acheievement> achievementArrayList) {
+        this.acheievements = achievementArrayList;
     }
 
-    public IHabit getHabit(String string){
+    public IHabit getHabit(String string) {
         int index = 0;
-        for (IHabit habit: habits) {
+        for (IHabit habit : habits) {
             if (habit.getTitle().equals(string)) {
                 index = habits.indexOf(habit);
             }
@@ -131,23 +133,17 @@ public class User implements Observer, IFriend, IUser {
     }
 
 
-    public ArrayList<ThemableObserver> getThemes(){return this.themeObservers;}
-
-    public void setFriends(ArrayList<IFriend> friendsList){
-        this.friends = friendsList;
-    }
-
     @Override
-    public void addAchivement(Achievement achievement) {
-        achievements.add(achievement);
+    public void addAchivement(Acheievement acheievement) {
+        acheievements.add(acheievement);
     }
 
 
     /**
      * Finds the friend to remove in friends list and then removes the friend.
      */
-    
-    public void removeFriend (IFriend friend){
+
+    public void removeFriend(IFriend friend) {
         for (IFriend user : friends) {
             if (user.getUserName().equals(friend.getUserName())) {
 
@@ -155,23 +151,26 @@ public class User implements Observer, IFriend, IUser {
             }
         }
     }
+
     /**
      * Adds user to list of friends
-     * */
-        public void addFriend (IFriend friend){
-            friends.add(friend);
+     */
+    public void addFriend(IFriend friend) {
+        friends.add(friend);
 
-        }
+    }
 
 
-    private void checkHabitDone () {
+    private void checkHabitDone() {
 
 
     }
-    public List<IFriend> getFriends () {
+
+    public List<IFriend> getFriends() {
         return friends;
     }
-    public List<Group> getGroups () {
+
+    public List<Group> getGroups() {
         return this.groups;
     }
 
@@ -179,7 +178,7 @@ public class User implements Observer, IFriend, IUser {
         themeObservers = new ArrayList<>();
     }
 
-    public void initHabit(){
+    public void initHabit() {
         this.habits = new ArrayList<>();
     }
 
@@ -187,5 +186,11 @@ public class User implements Observer, IFriend, IUser {
     public void update(Observable o, Object arg) {
 
     }
+    public void setFriends(ArrayList<IFriend> iFriends){
+        this.friends = iFriends;
+    }
 }
+
+
+
 

@@ -31,7 +31,7 @@ import java.util.List;
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
     private List<IFriend> friends = new ArrayList<>();
     private ArrayList<String> friendStrings = new ArrayList<>();
@@ -44,10 +44,10 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_friends);
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         init();
     }
 
