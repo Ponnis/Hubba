@@ -8,7 +8,7 @@ import com.example.nils_martin.hubba.R;
 
 // Gets ActiveTheme from User and depending on what theme is chosen it returns the right int.
 public class Themehandler {
-    IHubbaModel model = HubbaModel.getInstance();
+    private IHubbaModel model = HubbaModel.getInstance();
 
     /**
      * Takes the Active Themes Enum from User (through model) and uses a switch to find what style that is
