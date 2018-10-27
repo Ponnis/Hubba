@@ -21,9 +21,9 @@ public class GroupTest {
 
     @Test
     public void testCreateGroup(){
-        friends.add(new User("1", "1","1","1"));
-        friends.add(new User("2", "2","2","2"));
-        friends.add(new User("3", "3","3","3"));
+        friends.add(new User("1", "1","1",new ArrayList<>()));
+        friends.add(new User("2", "2","2",new ArrayList<>()));
+        friends.add(new User("3", "3","3",new ArrayList<>()));
 
         Group group = new Group("Test Group", friends, habit);
 

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -18,6 +19,7 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
 
     private EditText friendsUserName;
     private Button addFriendButton;
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
     private void initFindByView() {
         friendsUserName = (EditText) findViewById(R.id.txtFriendUsername);
         addFriendButton = (Button) findViewById(R.id.buttonAddFriend);
+        backButton = findViewById(R.id.backBtn2);
     }
 
     /**
@@ -43,6 +46,8 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
      */
     private void initOnClickListeners(){
         addFriendOnClick();
+        backButtonOnClick();
+
     }
 
     /**
@@ -56,6 +61,14 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
                 // TODO Uncomment row below when loadData is fixed.
                 // addFriendToCurrentUser();
                 finish();
+            }
+        });
+    }
+    private void backButtonOnClick(){
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

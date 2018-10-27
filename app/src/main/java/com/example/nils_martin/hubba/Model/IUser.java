@@ -41,10 +41,11 @@ public interface IUser {
 
      ArrayList getHabits();
 
+     void addAchivement(Achievement achievement);
+
      List getAchievements();
 
 
-    // TODO: 2018-10-21 Fix below methods so they depend use Friend instead of User
     // Adds another user to the list of friends.
      void addFriend(Friend friend);
 

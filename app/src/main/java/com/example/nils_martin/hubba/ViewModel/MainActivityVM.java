@@ -55,8 +55,8 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     protected static IHabit openHabit = new Habit("");
     private Themehandler themehandler = new Themehandler();
 
-    private int listItemHeight = 115;
-    private int dividerHeight = 10;
+    private int listItemHeight = 130;
+    private int dividerHeight = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

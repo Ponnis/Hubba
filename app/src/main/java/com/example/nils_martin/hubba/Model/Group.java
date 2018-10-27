@@ -8,24 +8,24 @@ public class  Group {
     private List<Friend> usersInGroup;
     private IHabit habit;
 
-    public Group(String groupName, List<Friend> usersInGroup, IHabit habit){
+    public Group(String groupName, List<Friend> usersInGroup, IHabit habit) {
         this.groupName = groupName;
         this.usersInGroup = usersInGroup;
         this.habit = habit;
     }
 
 
-    public String getGroupName(){
+    public String getGroupName () {
         return this.groupName;
     }
 
-    private void isHabitComplete(){
-        if(habit.getGroupMembersDoneCount()==usersInGroup.size()){
+    private void isHabitComplete () {
+        if (habit.getGroupMembersDoneCount() == usersInGroup.size()) {
             habit.setDone();
         }
     }
 
-    private List<Friend> getUsersInGroup(){
+    private List<Friend> getUsersInGroup () {
         return this.usersInGroup;
     }
 }

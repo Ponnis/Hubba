@@ -21,12 +21,13 @@ public class User implements Observer, Friend, IUser {
     private Themes ActiveTheme;
     private List<Group> groups = new ArrayList<>();
 
-    public User(String name, String email, String password, String imagePath) {
+    public User(String name, String email, String password, ArrayList<Achievement> achivements ) {
         this.userName = name;
         this.email = email;
         this.password = password;
         this.ActiveTheme = Themes.STANDARD;
         this.themeObservers = new ArrayList<>();
+        this.achievements = achivements;
     }
     // Takes an ENUM from Themes and set
     public void setTheme(Themes theme){
@@ -55,6 +56,13 @@ public class User implements Observer, Friend, IUser {
 
     public void addHabit (IHabit habit) {
         habits.add(habit);
+        checkAchievements();
+    }
+
+    public void checkAchievements() {
+        for (Achievement i: achievements) {
+            i.assessAchievement();
+        }
     }
 
     public void removeHabit (IHabit habit) {
@@ -99,6 +107,12 @@ public class User implements Observer, Friend, IUser {
 
     public List<Achievement> getAchievements() {
         return achievements;
+    }
+
+
+    @Override
+    public void addAchivement(Achievement achievement) {
+        achievements.add(achievement);
     }
 
     //TODO test the update method

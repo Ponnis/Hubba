@@ -54,6 +54,7 @@ public class Adapter extends ArrayAdapter<String>  {
                 IHabit habit = mainActivityVM.getHabit(title);
                 if(habit.getIsDone()){
                     habit.notDone();
+                    mainActivityVM.model.getCurrentUser().checkAchievements();
                     checkBox.setChecked(false);
                 }else{
                     habit.isDone();
