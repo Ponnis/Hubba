@@ -37,7 +37,7 @@ public class CreateUserVM extends AppCompatActivity  {
 
     private void addUser(){
         User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(), null);
-       setAchivements(user);
+        setAchivements(user);
         model.addUser(user);
         finish();
     }

@@ -55,4 +55,5 @@ public interface IUser {
 
      List<User> getFriends();
 
+    void initHabit();
 }

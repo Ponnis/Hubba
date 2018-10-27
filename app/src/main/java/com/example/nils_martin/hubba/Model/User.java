@@ -63,6 +63,8 @@ public class User implements Observer, Friend, IUser {
         habits.remove(habit);
     }
 
+    public void setHabits (ArrayList<IHabit> habitArrayList){ this.habits = habitArrayList; }
+
     public String getUserName() {
         return userName;
     }
@@ -101,6 +103,27 @@ public class User implements Observer, Friend, IUser {
 
     public List<Achievement> getAchievements() {
         return achievements;
+    }
+
+    public void setAchievements(ArrayList<Achievement> achievementArrayList) {
+        this.achievements = achievementArrayList;
+    }
+
+    public IHabit getHabit(String string){
+        int index = 0;
+        for (IHabit habit: habits) {
+            if (habit.getTitle().equals(string)) {
+                index = habits.indexOf(habit);
+            }
+        }
+        return this.habits.get(index);
+    }
+
+
+    public ArrayList<ThemableObserver> getThemes(){return this.themeObservers;}
+
+    public void setFriends(ArrayList<User> friendsList){
+        this.friends = friendsList;
     }
 
     @Override
@@ -152,5 +175,13 @@ public class User implements Observer, Friend, IUser {
     }
     public List<Group> getGroups () {
         return this.groups;
+    }
+
+    public void initThemableObserver() {
+        themeObservers = new ArrayList<>();
+    }
+
+    public void initHabit(){
+        this.habits = new ArrayList<>();
     }
 }
