@@ -1,11 +1,14 @@
 package com.example.nils_martin.hubba.Model;
+
+import java.util.ArrayList;
+
 /**
  * @author Johannes Gustavsson & Nils-Marting Robeling
  *
  * This is a template for Achievement classes.
  */
 
-public abstract class Acheievement {
+public abstract class Achievement {
 
     IHubbaModel model = HubbaModel.getInstance();
 
@@ -15,7 +18,7 @@ public abstract class Acheievement {
     private Boolean isAchieved;
     protected int targetNmbr;
 
-    Acheievement(String title, int targetNmbr){
+    Achievement(String title, int targetNmbr){
         this.title = title;
         this.targetNmbr = targetNmbr;
     }
@@ -24,14 +27,14 @@ public abstract class Acheievement {
         isAchieved = achieved;
     }
 
-    abstract public Boolean assessAchievement();
+    abstract public Boolean assessAchievement(ArrayList<IHabit> habits);
 
     /**
      *Calls on method assessAchievement
      * @return The outcome from AssessAchievement();
      */
-    public boolean getsAchieved( ){
-        return assessAchievement();
+    public boolean getsAchieved(ArrayList<IHabit> habits){
+        return assessAchievement(habits);
     }
     public String getTitle() {
         return title;

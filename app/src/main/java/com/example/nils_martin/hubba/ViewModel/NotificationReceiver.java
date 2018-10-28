@@ -15,6 +15,9 @@ import com.example.nils_martin.hubba.R;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
+/**
+ * @author Camilla Söderlund
+ */
 public class NotificationReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "hubba.notification";

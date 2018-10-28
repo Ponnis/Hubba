@@ -13,7 +13,7 @@ public class User implements Observer, IFriend, IUser {
     private String imagePath;
     private List<IFriend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
-    private ArrayList<Acheievement> acheievements;
+    private ArrayList<Achievement> achievements;
     private ArrayList<ThemableObserver> themeObservers;
     //User Settings
     private boolean allowNotifications;
@@ -21,13 +21,13 @@ public class User implements Observer, IFriend, IUser {
     private Themes ActiveTheme;
     private List<Group> groups = new ArrayList<>();
 
-    public User(String name, String email, String password, ArrayList<Acheievement> achivements) {
+    public User(String name, String email, String password, ArrayList<Achievement> achivements) {
         this.userName = name;
         this.email = email;
         this.password = password;
         this.ActiveTheme = Themes.STANDARD;
         this.themeObservers = new ArrayList<>();
-        this.acheievements = achivements;
+        this.achievements = achivements;
     }
 
     // Takes an ENUM from Themes and set
@@ -65,8 +65,8 @@ public class User implements Observer, IFriend, IUser {
     }
 
     public void checkAchievements() {
-        for (Acheievement i : acheievements) {
-            i.assessAchievement();
+        for (Achievement i : achievements) {
+            i.assessAchievement(habits);
         }
     }
 
@@ -114,12 +114,12 @@ public class User implements Observer, IFriend, IUser {
         return habits;
     }
 
-    public List<Acheievement> getAcheievements() {
-        return acheievements;
+    public List<Achievement> getAchievements() {
+        return achievements;
     }
 
-    public void setAchievements(ArrayList<Acheievement> achievementArrayList) {
-        this.acheievements = achievementArrayList;
+    public void setAchievements(ArrayList<Achievement> achievementArrayList) {
+        this.achievements = achievementArrayList;
     }
 
     public IHabit getHabit(String string) {
@@ -134,8 +134,8 @@ public class User implements Observer, IFriend, IUser {
 
 
     @Override
-    public void addAchivement(Acheievement acheievement) {
-        acheievements.add(acheievement);
+    public void addAchivement(Achievement achievement) {
+        achievements.add(achievement);
     }
 
 
@@ -192,6 +192,10 @@ public class User implements Observer, IFriend, IUser {
 
     public void initFriends(){
         this.friends = new ArrayList<>();
+    }
+
+    public void setGroup(List<Group> groupList) {
+        this.groups = groupList;
     }
 }
 

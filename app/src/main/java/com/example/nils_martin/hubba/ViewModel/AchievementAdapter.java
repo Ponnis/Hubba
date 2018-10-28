@@ -9,26 +9,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nils_martin.hubba.Model.Acheievement;
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.AchievementType;
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHubbaModel;
 import com.example.nils_martin.hubba.R;
 
 import java.util.List;
 
 /**
  * @author Johannes Gustavsson
- *  A custom RecyclerViewAdapter which contains custom ViewHolder.
+ * A custom RecyclerViewAdapter which contains custom ViewHolder.
  */
 
-public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.ViewHolder> {
-    private List<Acheievement> achivements;
+public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.ViewHolder> {
+    private List<Achievement> achivements;
+    private IHubbaModel model = HubbaModel.getInstance();
 
-    public AchivementAdapter(List<Acheievement> achivements){
+
+    public AchievementAdapter(List<Achievement> achivements) {
+
         this.achivements = achivements;
     }
+
     @NonNull
     @Override
-    public AchivementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AchievementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -37,25 +43,24 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AchivementAdapter.ViewHolder viewHolder, int position) {
-        Acheievement acheievement = achivements.get(position);
+    public void onBindViewHolder(@NonNull AchievementAdapter.ViewHolder viewHolder, int position) {
+        Achievement achievement = achivements.get(position);
 
         TextView achivementTitle = viewHolder.achivementTitle;
         ImageView achivementPicture = viewHolder.achivementPicture;
         try {
-            if (acheievement.getsAchieved()) {
-                achivementPicture.setImageResource(getImage(acheievement));
-                achivementTitle.setText(acheievement.getTitle());
+            if (achievement.getsAchieved(model.getCurrentUser().getHabits())) {
+                achivementPicture.setImageResource(getImage(achievement));
+                achivementTitle.setText(achievement.getTitle());
             } else {
                 achivementPicture.setImageResource(R.drawable.achivement_locked);
                 achivementTitle.setText(R.string.lockedAchievement);
             }
-        }catch (NullPointerException e){
-            System.out.println("Nullpointerexception at AchivementAdapter when trying to set Imageview");
+        } catch (NullPointerException e) {
+            System.out.println("Nullpointerexception at AchievementAdapter when trying to set Imageview");
             System.out.println(e.toString());
             achivementPicture.setImageResource(R.drawable.achivement_locked);
         }
-
 
 
     }
@@ -64,26 +69,30 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
     public int getItemCount() {
         return achivements.size();
     }
+
     // Choses picture depening on Achivement type
-    public int getImage(Acheievement acheievement) {
-       AchievementType achievementType =  acheievement.getAchievementType();
-       if (achievementType == AchievementType.NumOHabitsAchievement){
-           return R.drawable.num_of_habits;
-       }
-       else if (achievementType == AchievementType.StreakAchievement){
+
+
+    public int getImage(Achievement achievement) {
+        AchievementType achievementType = achievement.getAchievementType();
+        if (achievementType == AchievementType.NumOHabitsAchievement) {
+            return R.drawable.num_of_habits;
+        } else if (achievementType == AchievementType.StreakAchievement) {
+
             return R.drawable.streak;
-       }
-       else return R.drawable.profilepic;
+        } else return R.drawable.profilepic;
     }
+
+
     // An custom viewHolder to be able to have more variables in the view
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView achivementTitle;
         public ImageView achivementPicture;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            achivementTitle = (TextView) itemView.findViewById(R.id.achievementTitleText);
-            achivementPicture = (ImageView) itemView.findViewById(R.id.AchivementShownImage);
+            achivementTitle = itemView.findViewById(R.id.achievementTitleText);
+            achivementPicture = itemView.findViewById(R.id.AchivementShownImage);
         }
 
     }
