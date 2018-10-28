@@ -38,9 +38,9 @@ public interface IUser {
 
      ArrayList getHabits();
 
-     void addAchivement(Achievement achievement);
+     void addAchivement(Acheievement acheievement);
 
-     List getAchievements();
+     List getAcheievements();
 
 
     // Adds another user to the list of friends.
@@ -51,4 +51,7 @@ public interface IUser {
 
      List<IFriend> getFriends();
 
+    void initHabit();
+
+    void setFriends(ArrayList<IFriend> iFriends);
 }

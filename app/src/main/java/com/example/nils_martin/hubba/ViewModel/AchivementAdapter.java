@@ -9,16 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nils_martin.hubba.Model.Achievement;
+import com.example.nils_martin.hubba.Model.Acheievement;
 import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.R;
 
 import java.util.List;
 
-public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.ViewHolder> {
-    private List<Achievement> achivements;
+/**
+ * @author Johannes Gustavsson
+ *  A custom RecyclerViewAdapter which contains custom ViewHolder.
+ */
 
-    public AchivementAdapter(List<Achievement> achivements){
+public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.ViewHolder> {
+    private List<Acheievement> achivements;
+
+    public AchivementAdapter(List<Acheievement> achivements){
         this.achivements = achivements;
     }
     @NonNull
@@ -28,20 +33,19 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View achivementView = inflater.inflate(R.layout.achievemennt_list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(achivementView);
-        return viewHolder;
+        return new ViewHolder(achivementView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AchivementAdapter.ViewHolder viewHolder, int position) {
-        Achievement achievement = achivements.get(position);
+        Acheievement acheievement = achivements.get(position);
 
         TextView achivementTitle = viewHolder.achivementTitle;
         ImageView achivementPicture = viewHolder.achivementPicture;
         try {
-            if (achievement.getsAchieved()) {
-                achivementPicture.setImageResource(getImage(achievement));
-                achivementTitle.setText(achievement.getTitle());
+            if (acheievement.getsAchieved()) {
+                achivementPicture.setImageResource(getImage(acheievement));
+                achivementTitle.setText(acheievement.getTitle());
             } else {
                 achivementPicture.setImageResource(R.drawable.achivement_locked);
                 achivementTitle.setText(R.string.lockedAchievement);
@@ -61,8 +65,8 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
         return achivements.size();
     }
     // Choses picture depening on Achivement type
-    public int getImage(Achievement achievement) {
-       AchievementType achievementType =  achievement.getAchievementType();
+    public int getImage(Acheievement acheievement) {
+       AchievementType achievementType =  acheievement.getAchievementType();
        if (achievementType == AchievementType.NumOHabitsAchievement){
            return R.drawable.num_of_habits;
        }

@@ -11,6 +11,7 @@ public class Habit extends Observable implements IHabit {
     private String title;
     private int groupMembersDoneCount;
     private int streak;
+    private int daysToDoSize;
     private boolean isDone;
     private boolean reminderOn;
     private List<Integer> reminderTime;
@@ -147,5 +148,17 @@ public class Habit extends Observable implements IHabit {
 
     public List<Integer> getReminderTime() {
         return reminderTime;
+    }
+
+    public int getDaysToDoSize() {
+        return daysToDoSize;
+    }
+
+    public void setDaysToDoSize (int i){
+        this.daysToDoSize = i;
+    }
+
+    public void initDaysToDoList(){
+        this.daysToDo = new ArrayList<>();
     }
 }

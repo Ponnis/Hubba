@@ -1,10 +1,15 @@
 package com.example.nils_martin.hubba.Model;
 import java.util.List;
 
-public class NumOfHabitsAchievement extends Achievement {
+/**
+ * @author Johannes Gustavsson & Nils-Martin Robelin
+ *
+ */
+
+public class NumOfHabitsAcheievement extends Acheievement {
     private static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
-    NumOfHabitsAchievement(String title, int targetNmbr){
+    NumOfHabitsAcheievement(String title, int targetNmbr){
         super(title, targetNmbr);
     }
 
