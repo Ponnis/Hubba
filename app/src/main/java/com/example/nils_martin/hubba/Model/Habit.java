@@ -21,7 +21,7 @@ public class Habit extends Observable implements IHabit {
     private List<Integer> daysToDo = new ArrayList<>();
     private ArrayList<Observer> observers;
 
-    public Habit(String title){
+    public Habit(String title) {
         this.title = title;
         this.streak = 0;
         this.isDone = false;
@@ -36,52 +36,57 @@ public class Habit extends Observable implements IHabit {
         this.daysToDo = days;
     }
 
-    public void setHabitTypeState(IHabitTypeState habitTypeState){
+    public void setHabitTypeState(IHabitTypeState habitTypeState) {
         this.habitTypeState = habitTypeState;
     }
-    public IHabitTypeState getHabitTypeState(){
+
+    public IHabitTypeState getHabitTypeState() {
         return this.habitTypeState;
     }
 
-    public void setDone(){
+    public void setDone() {
         this.isDone = true;
         upStreak(this);
     }
 
-    public void isDone(){
+    public void isDone() {
         this.isDone = true;
         this.streak++;
     }
-    public void notDone(){
+
+    public void notDone() {
         this.isDone = false;
         this.streak--;
     }
 
     /**
      * notifies the appropriate observer depending on HabitType
-     * */
-    public void notifyObservers(){
-        if (habitTypeState.toString().equals("GroupHabit")){
+     */
+    public void notifyObservers() {
+        if (habitTypeState.toString().equals("GroupHabit")) {
             //How to notify user group without wrecking dependency?
             //TODO update the userGroup
-        }
-        else if(habitTypeState.toString().equals("SingleHabit")){
-        for (Observer observer:observers){
-            observer.update(this, model.getCurrentUser());
-        }
+        } else if (habitTypeState.toString().equals("SingleHabit")) {
+            for (Observer observer : observers) {
+                observer.update(this, model.getCurrentUser());
+            }
         }
     }
+
     /**
      * Sets the streak to +1 if the habit is completed
-     * */
-    public void upStreak(Habit habit){
-        if(habit.isDone){
+     */
+    public void upStreak(Habit habit) {
+        if (habit.isDone) {
             habit.streak++;
         }
     }
-    public Boolean getIsDone(){return isDone;
+
+    public Boolean getIsDone() {
+        return isDone;
     }
-    public void upGroupMembersDoneCount(){
+
+    public void upGroupMembersDoneCount() {
         groupMembersDoneCount++;
     }
 
@@ -89,7 +94,7 @@ public class Habit extends Observable implements IHabit {
         this.reminderOn = true;
     }
 
-    public void reminderDisabled(){
+    public void reminderDisabled() {
         this.reminderOn = false;
     }
 
@@ -97,40 +102,51 @@ public class Habit extends Observable implements IHabit {
         return reminderOn;
     }
 
-    public int getGroupMembersDoneCount(){
+    public int getGroupMembersDoneCount() {
         return groupMembersDoneCount;
     }
 
-    public Habit getHabit(){return this;}
+    public Habit getHabit() {
+        return this;
+    }
 
-    public int getStreak(){
+    public int getStreak() {
         return streak;
     }
 
-    public void setTitle(String string){title = string;}
+    public void setTitle(String string) {
+        title = string;
+    }
 
-    public String getTitle() {return title;}
+    public String getTitle() {
+        return title;
+    }
 
-    public void setSTATE(State state){
+    public void setSTATE(State state) {
         this.STATE = state;
     }
 
-    public State getSTATE (){return STATE;}
+    public State getSTATE() {
+        return STATE;
+    }
 
     /**
      * Method to set a Frequency to the current Habit
+     *
      * @param FREQUENCY The desired Frequency
      */
-    public void setFREQUENCY (Frequency FREQUENCY){
+    public void setFREQUENCY(Frequency FREQUENCY) {
         this.FREQUENCY = FREQUENCY;
     }
 //testest
     //test
+
     /**
      * Method for seeing what Frequency the object is set to
+     *
      * @return Returns the Frequency of the Habit
      */
-    public Frequency getFREQUENCY(){
+    public Frequency getFREQUENCY() {
         return FREQUENCY;
     }
 
@@ -142,7 +158,7 @@ public class Habit extends Observable implements IHabit {
         return daysToDo;
     }
 
-    public void setReminderTime(List<Integer> time){
+    public void setReminderTime(List<Integer> time) {
         this.reminderTime = time;
     }
 
@@ -154,11 +170,11 @@ public class Habit extends Observable implements IHabit {
         return daysToDoSize;
     }
 
-    public void setDaysToDoSize (int i){
+    public void setDaysToDoSize(int i) {
         this.daysToDoSize = i;
     }
 
-    public void initDaysToDoList(){
+    public void initDaysToDoList() {
         this.daysToDo = new ArrayList<>();
     }
 }

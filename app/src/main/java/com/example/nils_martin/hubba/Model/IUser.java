@@ -6,50 +6,52 @@ import java.util.List;
 public interface IUser {
 
 
-
     // Takes an ENUM from Themes and set
-     void setTheme(Themes theme);
+    void setTheme(Themes theme);
+
     //  Returns the int R.style associated with a specific theme
-     String themeEnumToString();
-     Themes getTheme();
+    String themeEnumToString();
+
+    Themes getTheme();
+
     // Adds the ThemableObserver to the observer list themeObservers.
-     void addThemeObserver(ThemableObserver observer );
+    void addThemeObserver(ThemableObserver observer);
 
 
-     void addHabit (IHabit habit);
+    void addHabit(IHabit habit);
 
-     void removeHabit (IHabit habit);
+    void removeHabit(IHabit habit);
 
-     String getUserName();
+    String getUserName();
 
-     void setUserName(String string);
+    void setUserName(String string);
 
-     String getEmail();
+    String getEmail();
 
-     void setEmail(String string);
+    void setEmail(String string);
 
-     String getPassword();
+    String getPassword();
 
-     void setPassword(String string);
+    void setPassword(String string);
 
-     void setImagePath(String string);
+    void setImagePath(String string);
 
-     String getImagePath();
+    String getImagePath();
 
-     ArrayList getHabits();
+    ArrayList getHabits();
 
-     void addAchivement(Acheievement acheievement);
+    void addAchivement(Acheievement acheievement);
 
-     List getAcheievements();
+    List getAcheievements();
 
 
     // Adds another user to the list of friends.
-     void addFriend(IFriend friend);
+    void addFriend(IFriend friend);
 
     // Finds the friend to remove in friends list and then removes the friend.
-     void removeFriend(IFriend friend);
+    void removeFriend(IFriend friend);
 
-     List<IFriend> getFriends();
+    List<IFriend> getFriends();
 
     void initHabit();
 

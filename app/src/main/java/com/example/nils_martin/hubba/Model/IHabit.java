@@ -1,9 +1,10 @@
 package com.example.nils_martin.hubba.Model;
 
 import java.util.List;
+
 /**
  * @author Nils-Martin Robeling
- * */
+ */
 public interface IHabit {
 
     void setHabitTypeState(IHabitTypeState habitTypeState);
@@ -42,9 +43,9 @@ public interface IHabit {
 
     void setSTATE(State state);
 
-    void setFREQUENCY (Frequency FREQUENCY);
+    void setFREQUENCY(Frequency FREQUENCY);
 
-    State getSTATE ();
+    State getSTATE();
 
     Frequency getFREQUENCY();
 
