@@ -59,12 +59,8 @@ public class LoginVM extends AppCompatActivity {
         model.getUser("Alex").addFriend(addFriend);
         model.getUser("Alex").addFriend(addFriend);
 
-        Habit habit = new Habit("I DO STUFF");
-        habit.setHabitTypeState(new GroupHabitType());
-        habit.setFREQUENCY(Frequency.DAILY);
-        habit.setSTATE(State.MORNING);
 
-        Group group = new Group("TestGroup", model.getUser("Alex").getFriends(), habit);
+        Group group = new Group("TestGroup", model.getUser("Alex").getFriends(), null);
 
         model.getUser("Alex").getGroups().add(group);
 
@@ -384,7 +380,7 @@ public class LoginVM extends AppCompatActivity {
                 editor1.putString("groupFriendslist", groupFriendsToJson(group));
                 editor1.apply();
 
-                SharedPreferences sharedPreferences2 = getSharedPreferences(user.getUserName() + "groupHabits", MODE_PRIVATE);
+                /*SharedPreferences sharedPreferences2 = getSharedPreferences(user.getUserName() + "groupHabits", MODE_PRIVATE);
                 SharedPreferences.Editor editor2 = sharedPreferences2.edit();
 
                 editor2.putString("groupHabit", groupHabitToJson(group));
@@ -394,7 +390,7 @@ public class LoginVM extends AppCompatActivity {
                 SharedPreferences.Editor editor3 = sharedPreferences3.edit();
 
                 editor3.putString("groupHabitDayToDo", daysToDoJson(group.getHabit()));
-                editor3.apply();
+                editor3.apply();*/
             }
         }
 
@@ -556,6 +552,7 @@ public class LoginVM extends AppCompatActivity {
         startAcheievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIFTEEN HABITS",15));
 
     }
+
     private void setStreakAchivements(ArrayList<Acheievement> startAcheievements){
         startAcheievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIVE",5));
         startAcheievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF TEN",10));
