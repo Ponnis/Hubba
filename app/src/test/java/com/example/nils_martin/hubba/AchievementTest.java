@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class AchievementTest {
@@ -28,14 +27,14 @@ public class AchievementTest {
         days.add(1);
         days.add(2);
         model.getCurrentUser().addHabit(new Habit("Fiska",days));
-        List<IHabit> habits = model.getCurrentUser().getHabits();
+        ArrayList<IHabit> habits = model.getCurrentUser().getHabits();
         for (IHabit i: habits) {
             i.setGroupDone();
         }
 
         Achievement streak = AchievementFactory.getAchievement(AchievementType.StreakAchievement, "Streak Test", 1);
-        streak.assessAchievement();
-        assertTrue(streak.getsAchieved());
+        streak.assessAchievement(habits);
+        assertTrue(streak.getsAchieved(habits));
     }
     @Test
     public void testStreakAchievementFalse(){
@@ -47,8 +46,8 @@ public class AchievementTest {
         model.getCurrentUser().addHabit(new Habit("Fiska",days));
 
         Achievement streak = AchievementFactory.getAchievement(AchievementType.StreakAchievement, "Streak Test", 1);
-        streak.assessAchievement();
-        assertFalse(streak.getsAchieved());
+        streak.assessAchievement(model.getCurrentUser().getHabits());
+        assertFalse(streak.getsAchieved(model.getCurrentUser().getHabits()));
     }
 
     @Test
@@ -62,7 +61,7 @@ public class AchievementTest {
         model.getCurrentUser().addHabit(new Habit("Ramla",days));
         List<IHabit> habits = model.getCurrentUser().getHabits();
         Achievement num = AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "Numofhabittest", 2);
-        assertTrue(num.getsAchieved());
+        assertTrue(num.getsAchieved(model.getCurrentUser().getHabits()));
     }
     @Test
     public void testNumOfHabitsAchievementFalse(){
@@ -73,6 +72,6 @@ public class AchievementTest {
         days.add(2);
         List<IHabit> habits = model.getCurrentUser().getHabits();
         Achievement num = AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "Numofhabittest", 2);
-        assertFalse(num.getsAchieved());
+        assertFalse(num.getsAchieved(model.getCurrentUser().getHabits()));
     }
 }

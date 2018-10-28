@@ -66,7 +66,7 @@ public class User implements Observer, IFriend, IUser {
 
     public void checkAchievements() {
         for (Achievement i : achievements) {
-            i.assessAchievement();
+            i.assessAchievement(habits);
         }
     }
 
@@ -188,6 +188,14 @@ public class User implements Observer, IFriend, IUser {
     }
     public void setFriends(ArrayList<IFriend> iFriends){
         this.friends = iFriends;
+    }
+
+    public void initFriends(){
+        this.friends = new ArrayList<>();
+    }
+
+    public void setGroup(List<Group> groupList) {
+        this.groups = groupList;
     }
 }
 

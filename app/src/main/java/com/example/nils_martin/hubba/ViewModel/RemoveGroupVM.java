@@ -1,14 +1,11 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.Group;
@@ -23,143 +20,68 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Li Rönning
  */
-public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver {
+public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
     private ThemeHandler themeHandler = new ThemeHandler();
 
-    private List<Group> groups = new ArrayList<>();
-    private ArrayList<String> groupStrings = new ArrayList<>();
-    private ListView yourGroupsListView;
-    private ArrayAdapter<String> yourGroupsAdapter;
-    private Button addGroupButton;
-    private Group openGroup;
+    private Button yesButton;
+    private Button noButton;
+    private TextView groupTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_groups);
+        setContentView(R.layout.remove_group);
         themeHandler.addThemeListener(this);
         init();
     }
 
-    /**
-     * Calls on other functions that initialize ListViews, lists, OnCLicks etc.
-     */
     private void init() {
         initFindByView();
-        updateGroupsListView();
-        addGroupOnClick();
-        listViewOnClick();
+        initOnClickListener();
+        initTextView();
     }
 
-    /**
-     * Initialize all view attributes
-     */
     private void initFindByView() {
-        yourGroupsListView = (ListView) findViewById(R.id.yourGroupsListView);
-        addGroupButton = (Button) findViewById(R.id.addGroupBtn);
+        yesButton = findViewById(R.id.yesGroupBtn);
+        noButton = findViewById(R.id.noGroupBtn);
+        groupTextView = findViewById(R.id.groupTextView);
     }
 
-    /**
-     * Gets the list of groups from the current user in HubbaModel.
-     */
-    private void getGroupsList() {
-        if (model.getCurrentUser().getGroups() != null) {
-            groups = model.getCurrentUser().getGroups();
-        }
-    }
-
-    /**
-     * Calls methods that update the list and the ListView in the interface.
-     */
-    private void updateGroupsListView() {
-        getGroupsList();
-        fillGroupStringsList();
-        fillGroupListView();
-    }
-
-    /**
-     * First clears the list groupStrings and then updates it with the
-     * names of groups in groups.
-     */
-    private void fillGroupStringsList() {
-        groupStrings.clear();
-        for (Group group : groups) {
-            groupStrings.add(group.getGroupName());
-        }
-    }
-
-    /**
-     * Fills the ListView with strings from groupStrings.
-     */
-    private void fillGroupListView () {
-        yourGroupsAdapter = new ArrayAdapter<String>(
-                this,
-                R.layout.menu_list_item,
-                groupStrings);
-        yourGroupsListView.setAdapter(yourGroupsAdapter);
-    }
-
-    /**
-     * Gets the string from the item that is clicked and then finds a group with a name that
-     * matches the item. This group is then opened on a new page.
-     */
-    private void listViewOnClick () {
-        yourGroupsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                findGroup(yourGroupsListView.getItemAtPosition(position).toString());
-                Intent intent = new Intent(MenuGroupsVM.this, RemoveGroupVM.class);
-                intent.putExtra("GROUP", openGroup.getGroupName());
-                startActivity(intent);
-            }
-        });
-    }
-
-    /**
-     * Finds the group with the name corresponding to the string in the groups list
-     * @param string is the string of a groups name
-     */
-    private void findGroup(String string) {
-        for(Group group: groups) {
-            if(group.getGroupName().equals(string)) {
-                setOpenGroup(group);
-            }
-        }
-    }
-
-    private  void setOpenGroup(Group openGroup) {
-        this.openGroup = openGroup;
-    }
-
-    public void recreateActivity () {
-        recreate();
-    }
-
-    private void addGroupOnClick() {
-        addGroupButton.setOnClickListener(new View.OnClickListener() {
+    private void initOnClickListener() {
+        yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuGroupsVM.this, CreateGroupVM.class);
-                startActivity(intent);
+                removeGroup();
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
 
+    private void removeGroup(){
+        for (Group group : model.getCurrentUser().getGroups()){
+            if(group.getGroupName().equals(getIntent().getStringExtra("GROUP"))){
+                model.getCurrentUser().getGroups().remove(group);
+            }
+        }
+    }
+
+    private void initTextView(){groupTextView.setText(getIntent().getStringExtra("GROUP"));}
+
     @Override
-    protected void onResume() {
-        setTheme(themeHandler.getTheme());
-        super.onResume();
-        themeHandler.addThemeListener(this);
-        updateGroupsListView();
+    public void recreateActivity() {
+        recreate();
     }
 
     @Override
@@ -274,8 +196,6 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
             jsonHabits.put("state", habit.getSTATE().toString());
             jsonHabits.put("frequency", habit.getFREQUENCY());
             jsonHabits.put("daysToDoSize", habit.getDaysToDoSize());
-            jsonHabits.put("previewsDayDone", habit.getPreviewsDayDone());
-            jsonHabits.put("getTodayDate", habit.getTodayDate());
 
             JSONArray daysList = new JSONArray();
             jsonHabits.put("daysInteger", daysList);

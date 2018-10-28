@@ -1,8 +1,6 @@
 package com.example.nils_martin.hubba.Model;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * @author Nils-Martin Robeling
@@ -21,8 +19,6 @@ public interface IHabit {
 
     void notifyObservers();
 
-    void upStreak(Habit habit);
-
     Boolean getIsDone();
 
     void setDoneTo(boolean b);
@@ -37,7 +33,7 @@ public interface IHabit {
 
     int getGroupMembersDoneCount();
 
-    Habit getHabit();
+    IHabit getHabit();
 
     int getStreak();
 
