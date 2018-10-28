@@ -132,7 +132,7 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
             List<Integer> daysToBeChecked = new ArrayList<>();
             for(int check = 0; check < checkboxDayList.size(); check++){
                 for(int days = 0; days < currentHabit.getDaysToDo().size(); days++){
-                    if((check + 1) == currentHabit.getDaysToDo().get(days)){
+                    if((check) == currentHabit.getDaysToDo().get(days)){
                         daysToBeChecked.add(check);
                     }
                 }
