@@ -44,7 +44,7 @@ public class Adapter extends ArrayAdapter<String>  {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initVariables(position);
+                title = getItem(position);
                 mainActivityVM.findHabit(title);
                 mainActivityVM.clicked(v);
             }
@@ -53,6 +53,7 @@ public class Adapter extends ArrayAdapter<String>  {
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                title = getItem(position);
                 IHabit habit = mainActivityVM.getHabit(title);
                 if(habit.getIsDone()){
                     habit.notDone();
