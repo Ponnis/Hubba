@@ -106,7 +106,6 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
      */
     private void fillFriendStringsList(){
         friendStrings.clear();
-        friendStrings.add("Katt"); //TODO when save work
         for(IFriend friend : friends){
             friendStrings.add(friend.getUserName());
         }

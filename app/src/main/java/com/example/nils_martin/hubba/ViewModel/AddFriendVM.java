@@ -66,8 +66,7 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Uncomment row below when loadData is fixed.
-                // addFriendToCurrentUser();
+                addFriendToCurrentUser();
                 finish();
             }
         });

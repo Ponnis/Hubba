@@ -16,7 +16,7 @@ import com.example.nils_martin.hubba.R;
 public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
     private Button yesButton;
     private Button noButton;
@@ -24,10 +24,10 @@ public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.remove_group);
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         init();
     }
 

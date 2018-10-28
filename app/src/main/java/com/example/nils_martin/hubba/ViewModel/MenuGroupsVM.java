@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -101,6 +102,33 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
                 R.layout.menu_list_item,
                 groupStrings);
         yourGroupsListView.setAdapter(yourGroupsAdapter);
+    }
+
+    /**
+     * Gets the string from the item that is clicked and then finds a group with a name that
+     * matches the item. This group is then opened on a new page.
+     */
+    private void listViewOnClick () {
+        yourGroupsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                findGroup(yourGroupsListView.getItemAtPosition(position).toString());
+                Intent intent = new Intent(MenuGroupsVM.this, RemoveFriendVM.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * Finds the group with the name corresponding to the string in the groups list
+     * @param string is the string of a groups name
+     */
+    private void findGroup(String string) {
+        for(Group group: groups) {
+            if(group.getGroupName().equals(string)) {
+                // setOpenFriend(friend);
+            }
+        }
     }
 
     public void recreateActivity () {
