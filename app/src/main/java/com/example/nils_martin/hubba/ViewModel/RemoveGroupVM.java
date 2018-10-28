@@ -57,7 +57,7 @@ public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO remove group when save works
+                removeGroup();
             }
         });
 
@@ -67,6 +67,14 @@ public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver
                 finish();
             }
         });
+    }
+
+    private void removeGroup(){
+        for (Group group : model.getCurrentUser().getGroups()){
+            if(group.getGroupName().equals(getIntent().getStringExtra("GROUP"))){
+                model.getCurrentUser().getGroups().remove(group);
+            }
+        }
     }
 
     private void initTextView(){groupTextView.setText(getIntent().getStringExtra("GROUP"));}

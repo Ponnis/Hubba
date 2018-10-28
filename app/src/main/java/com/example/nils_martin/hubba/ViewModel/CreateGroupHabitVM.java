@@ -34,9 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Nils-Martin Robeling
+ * @author Nils-Martin Robeling and Camilla Söderlund
  */
-
 public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObserver, ICreateGroupHabitVM {
     private EditText habitName;
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;

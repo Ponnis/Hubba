@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Li Rönning
+ * @author Li Rönning and Camilla Söderlund
  */
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
 
@@ -155,6 +155,14 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
 
     private  void setOpenFriend(IFriend openFriend) {
         this.openFriend = openFriend;
+    }
+
+    @Override
+    protected void onResume() {
+        setTheme(themeHandler.getTheme());
+        super.onResume();
+        themeHandler.addThemeListener(this);
+        updateFriendsListView();
     }
 
     @Override

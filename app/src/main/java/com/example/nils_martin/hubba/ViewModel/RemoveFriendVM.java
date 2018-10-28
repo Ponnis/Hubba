@@ -58,7 +58,8 @@ public class RemoveFriendVM extends AppCompatActivity implements ThemableObserve
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO remove friend when friend works
+                removeFriend();
+                finish();
             }
         });
 
@@ -74,6 +75,14 @@ public class RemoveFriendVM extends AppCompatActivity implements ThemableObserve
         friendTextView.setText(getIntent().getStringExtra("FRIEND"));
     }
 
+    private void removeFriend(){
+        for (IFriend friend : model.getCurrentUser().getFriends()){
+            if(friend.getUserName().equals(getIntent().getStringExtra("FRIEND"))){
+                model.getCurrentUser().getFriends().remove(friend);
+            }
+        }
+
+    }
 
     @Override
     public void recreateActivity() {
