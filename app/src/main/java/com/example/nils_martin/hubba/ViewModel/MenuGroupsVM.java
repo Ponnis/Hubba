@@ -32,7 +32,7 @@ import java.util.List;
 public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
-    private ThemeHandler themehandler = new ThemeHandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
     private List<Group> groups = new ArrayList<>();
     private ArrayList<String> groupStrings = new ArrayList<>();
@@ -43,10 +43,10 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_groups);
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         init();
     }
 
@@ -151,6 +151,14 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        setTheme(themeHandler.getTheme());
+        super.onResume();
+        themeHandler.addThemeListener(this);
+        updateGroupsListView();
     }
 
     @Override
