@@ -40,6 +40,8 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     private List<String> friendsAsString = new ArrayList<>();
     private Button createNewGroupHabit;
     private ThemeHandler themeHandler = new ThemeHandler();
+    private EditText groupNameEditText;
+    private EditText friendNamesEditText;
 
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(themeHandler.getTheme());
@@ -48,11 +50,12 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         getUserToCurrent();
         getUserFriends();
         themeHandler.addThemeListener(this);
-        groupName = (findViewById(R.id.txtGroupName)).toString();
+        groupNameEditText = ((EditText)findViewById(R.id.txtGroupName));
+        groupName = groupNameEditText.getText().toString();
         System.out.println(groupName);
-        friendNames = String.valueOf((EditText) findViewById(R.id.txtGroupMembers));
+        friendNamesEditText = ((EditText) findViewById(R.id.txtGroupMembers));
+        friendNames = friendNamesEditText.getText().toString();
         createNewGroupHabit = (Button) findViewById(R.id.btnCreateNewGroup);
-        // createNewGroupHabit.setOnClickListener();
         createNewGroupHabit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
