@@ -44,6 +44,7 @@ public class RemoveFriendVM extends AppCompatActivity implements ThemableObserve
     private void init() {
         initFindByView();
         initOnClickListener();
+        initTextView();
     }
 
     private void initFindByView() {
@@ -66,6 +67,10 @@ public class RemoveFriendVM extends AppCompatActivity implements ThemableObserve
                 finish();
             }
         });
+    }
+
+    private void initTextView(){
+        friendTextView.setText(getIntent().getStringExtra("FRIEND"));
     }
 
 

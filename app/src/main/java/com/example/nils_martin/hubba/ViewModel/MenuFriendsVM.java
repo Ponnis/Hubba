@@ -132,6 +132,7 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 findFriend(yourFriendsListView.getItemAtPosition(position).toString());
                 Intent intent = new Intent(MenuFriendsVM.this, RemoveFriendVM.class);
+                intent.putExtra("FRIEND", openFriend.getUserName());
                 startActivity(intent);
             }
         });
