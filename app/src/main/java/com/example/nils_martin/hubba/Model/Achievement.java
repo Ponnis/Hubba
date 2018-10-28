@@ -1,7 +1,9 @@
 package com.example.nils_martin.hubba.Model;
-
-
-import java.util.List;
+/**
+ * @author Johannes Gustavsson & Nils-Marting Robeling
+ *
+ * This is a template for Achievement classes.
+ */
 
 public abstract class Achievement {
 
@@ -13,15 +15,13 @@ public abstract class Achievement {
     private Boolean isAchieved;
     protected int targetNmbr;
 
-
     Achievement(String title, int targetNmbr){
         this.title = title;
         this.targetNmbr = targetNmbr;
     }
 
-    public void setAchieved(Boolean achieved) {
+    protected void setAchieved(Boolean achieved) {
         isAchieved = achieved;
-        //Call for achievedAlert.
     }
 
     abstract public Boolean assessAchievement();
@@ -37,4 +37,8 @@ public abstract class Achievement {
         return title;
     }
     abstract public AchievementType getAchievementType();
+
+    public Boolean getAchieved() {
+        return isAchieved;
+    }
 }

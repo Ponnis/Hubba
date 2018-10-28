@@ -1,6 +1,6 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,44 +13,55 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.GroupHabitType;
 import com.example.nils_martin.hubba.Model.Habit;
-import com.example.nils_martin.hubba.Model.HabitTypeState;
 import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IFriend;
+import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
+import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObserver,ICreateGroupHabitVM{
-     private EditText habitName;
-     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
-     private Habit createdHabit;
-     CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
-     private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
-     private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
-     private Switch remainderSwitch;
-     private ImageView nameWrongImgV, frequencyWrongImgV, stateWrongImgV, weekWrongImgV;
-     private List<CheckBox> cbxDayList = new ArrayList<>();
-     private List<CheckBox> cbxMonthList = new ArrayList<>();
+/**
+ * @author Nils-Martin Robeling
+ */
+
+public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObserver, ICreateGroupHabitVM {
+    private EditText habitName;
+    private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
+    private Habit createdHabit;
+    CheckBox monCxb, tueCxb, wedCxb, thuCxb, friCxb, satCxb, sunCxb;
+    private TextView numberOfDaysTxtV, colontxtV, timeTxtV, monthTxtV, wrongMesTxtV;
+    private Spinner numberOfDaysSpr, hourSpr, minSpr, monthSpr;
+    private Switch remainderSwitch;
+    private ImageView nameWrongImgV, frequencyWrongImgV, stateWrongImgV, weekWrongImgV;
+    private List<CheckBox> cbxDayList = new ArrayList<>();
+    private List<CheckBox> cbxMonthList = new ArrayList<>();
     List<Integer> calendarDaysList = new ArrayList<>();
     HubbaModel model = HubbaModel.getInstance();
-    Themehandler themehandler = new Themehandler();
+    ThemeHandler themeHandler = new ThemeHandler();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_group_habit);
         init();
         makeAListOfDayCbx();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
         update();
-}
+    }
 
     public void init() {
         habitName = findViewById(R.id.habitInput);
@@ -99,12 +110,10 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
             createdHabit.setTitle(habitName.getText().toString());
             createdHabit.setDaysToDo(calendarDaysList);
 
-            if(checkIfAllFieldsFilled()) {
-                /// TODO: 2018-10-18 Inte snyggt!
+            if (checkIfAllFieldsFilled()) {
                 model.getCurrentUser().getHabits().add(createdHabit);
                 endActivity();
-            }
-            else {
+            } else {
                 wrongMesTxtV.setVisibility(View.VISIBLE);
                 wrongMesTxtV.setText("You must fill in everything");
                 wrongMesTxtV.setTextColor(Color.RED);
@@ -112,14 +121,13 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
                 createdHabit.setTitle(habitName.getText().toString());
                 createdHabit.setDaysToDo(calendarDaysList);
 
-                if(checkIfAllFieldsFilled()) {
+                if (checkIfAllFieldsFilled()) {
                     setToGroupHabit(createdHabit);
                     //MainActivityVM.habits.add(createdHabit);
                     HubbaModel.getInstance().getCurrentUser().addHabit(createdHabit);
 
                     endActivity();
-                }
-                else {
+                } else {
                     wrongMesTxtV.setVisibility(View.VISIBLE);
                     wrongMesTxtV.setText("You must fill in everything");
                     wrongMesTxtV.setTextColor(Color.RED);
@@ -198,14 +206,13 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
             @Override
             public void onClick(View v) {
                 takeAwayWrongMessage();
-                if(remainderSwitch.isChecked()) {
+                if (remainderSwitch.isChecked()) {
                     hourSpr.setVisibility(View.VISIBLE);
                     minSpr.setVisibility(View.VISIBLE);
                     timeTxtV.setVisibility(View.VISIBLE);
                     colontxtV.setVisibility(View.VISIBLE);
                     createdHabit.reminderEnabled();
-                }
-                else {
+                } else {
                     hourSpr.setVisibility(View.INVISIBLE);
                     minSpr.setVisibility(View.INVISIBLE);
                     timeTxtV.setVisibility(View.INVISIBLE);
@@ -225,11 +232,11 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
         monthTxtV.setVisibility(View.INVISIBLE);
         monthSpr.setVisibility(View.INVISIBLE);
 
-        for(int i = 0; i < cbxDayList.size(); i++) {
+        for (int i = 0; i < cbxDayList.size(); i++) {
             cbxDayList.get(i).setVisibility(View.INVISIBLE);
         }
 
-        for (int i = 0; i< cbxMonthList.size(); i++) {
+        for (int i = 0; i < cbxMonthList.size(); i++) {
             cbxMonthList.get(i).setVisibility(View.INVISIBLE);
         }
     }
@@ -243,7 +250,7 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
         monthSpr.setVisibility(View.INVISIBLE);
         monthTxtV.setVisibility(View.INVISIBLE);
 
-        for(int i = 0; i < cbxDayList.size(); i++) {
+        for (int i = 0; i < cbxDayList.size(); i++) {
             cbxDayList.get(i).setVisibility(View.VISIBLE);
         }
     }
@@ -252,28 +259,28 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
      * This method makes it easier to see what happens when clicking on the month-button.
      */
     public void monthVisible() {
-         numberOfDaysTxtV.setVisibility(View.INVISIBLE);
-         numberOfDaysSpr.setVisibility(View.INVISIBLE);
-         monthTxtV.setVisibility(View.VISIBLE);
-         monthSpr.setVisibility(View.VISIBLE);
+        numberOfDaysTxtV.setVisibility(View.INVISIBLE);
+        numberOfDaysSpr.setVisibility(View.INVISIBLE);
+        monthTxtV.setVisibility(View.VISIBLE);
+        monthSpr.setVisibility(View.VISIBLE);
 
-         for(int i = 0; i < cbxDayList.size(); i++) {
-             cbxDayList.get(i).setVisibility(View.INVISIBLE);
-         }
-     }
+        for (int i = 0; i < cbxDayList.size(); i++) {
+            cbxDayList.get(i).setVisibility(View.INVISIBLE);
+        }
+    }
 
-     /**
-      * This method makes a list of the checkboxes because is easier to treat them as a group
-      * than individual
-      */
-     private void makeAListOfDayCbx() {
-         cbxDayList.add(sunCxb);
-         cbxDayList.add(monCxb);
-         cbxDayList.add(tueCxb);
-         cbxDayList.add(wedCxb);
-         cbxDayList.add(thuCxb);
-         cbxDayList.add(friCxb);
-         cbxDayList.add(satCxb);
+    /**
+     * This method makes a list of the checkboxes because is easier to treat them as a group
+     * than individual
+     */
+    private void makeAListOfDayCbx() {
+        cbxDayList.add(sunCxb);
+        cbxDayList.add(monCxb);
+        cbxDayList.add(tueCxb);
+        cbxDayList.add(wedCxb);
+        cbxDayList.add(thuCxb);
+        cbxDayList.add(friCxb);
+        cbxDayList.add(satCxb);
     }
 
     /**
@@ -282,83 +289,214 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
      */
     public void makeCalendarDaysList() {
 
-         calendarDaysList.clear();
+        calendarDaysList.clear();
 
         //When the frequency is daily every day is added in the list
-         if(createdHabit.getFREQUENCY() == Frequency.DAILY) {
-             for (int i = 0; i < 7; i++) {
-                 calendarDaysList.add(i+1);
-             }
-         }
+        if (createdHabit.getFREQUENCY() == Frequency.DAILY) {
+            for (int i = 0; i < 7; i++) {
+                calendarDaysList.add(i + 1);
+            }
+        }
 
         // When the frequency is weekly, the selected days are added to the list
-         else if(createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
-             for (int i = 0; i < cbxDayList.size(); i++) {
-                 if (cbxDayList.get(i).isChecked()) {
-                     calendarDaysList.add(i + 1);
-                 }
-             }
+        else if (createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
+            for (int i = 0; i < cbxDayList.size(); i++) {
+                if (cbxDayList.get(i).isChecked()) {
+                    calendarDaysList.add(i + 1);
+                }
+            }
         }
 
         //When the frequency is monthly, the date is added in the list
-         else if(createdHabit.getFREQUENCY() == Frequency.MONTHLY) {
-             calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
-         }
+        else if (createdHabit.getFREQUENCY() == Frequency.MONTHLY) {
+            calendarDaysList.add(Integer.valueOf(monthSpr.getSelectedItem().toString()));
+        }
     }
-/**
- * walks through the user filled fields to check if they're filled in
- * @return true if all is filled in
- * */
+
+    /**
+     * walks through the user filled fields to check if they're filled in
+     *
+     * @return true if all is filled in
+     */
     @Override
     public boolean checkIfAllFieldsFilled() {
-        if(createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
-            || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle().equals("")) {
-        if (createdHabit.getFREQUENCY() == null) {
-            frequencyWrongImgV.setVisibility(View.VISIBLE);
-        }
+        if (createdHabit.getFREQUENCY() == null || createdHabit.getSTATE() == null
+                || createdHabit.getDaysToDo().size() == 0 || createdHabit.getTitle().equals("")) {
+            if (createdHabit.getFREQUENCY() == null) {
+                frequencyWrongImgV.setVisibility(View.VISIBLE);
+            }
 
-        if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
-            weekWrongImgV.setVisibility(View.VISIBLE);
-        }
+            if (createdHabit.getDaysToDo().size() == 0 && createdHabit.getFREQUENCY() == Frequency.WEEKLY) {
+                weekWrongImgV.setVisibility(View.VISIBLE);
+            }
 
-        if (createdHabit.getSTATE() == null) {
-            stateWrongImgV.setVisibility(View.VISIBLE);
+            if (createdHabit.getSTATE() == null) {
+                stateWrongImgV.setVisibility(View.VISIBLE);
+            }
+            if (createdHabit.getTitle().equals("")) {
+                nameWrongImgV.setVisibility(View.VISIBLE);
+            }
+            return false;
         }
-        if (createdHabit.getTitle().equals("")) {
-            nameWrongImgV.setVisibility(View.VISIBLE);
-        }
-        return false;
-    }
         return true;
     }
 
+    /**
+     * removes the error message
+     */
+    public void takeAwayWrongMessage() {
+        wrongMesTxtV.setVisibility(View.INVISIBLE);
+        frequencyWrongImgV.setVisibility(View.INVISIBLE);
+        nameWrongImgV.setVisibility(View.INVISIBLE);
+        stateWrongImgV.setVisibility(View.INVISIBLE);
+        weekWrongImgV.setVisibility(View.INVISIBLE);
+    }
 
-
-
-
-   /**
-    * removes the error message
-    * */
-   public void takeAwayWrongMessage() {
-         wrongMesTxtV.setVisibility(View.INVISIBLE);
-         frequencyWrongImgV.setVisibility(View.INVISIBLE);
-         nameWrongImgV.setVisibility(View.INVISIBLE);
-         stateWrongImgV.setVisibility(View.INVISIBLE);
-         weekWrongImgV.setVisibility(View.INVISIBLE);
-     }
-
-     public void endActivity(){
+    public void endActivity() {
         finish();
     }
 
 
-
-    public void setToGroupHabit(Habit habit){
+    public void setToGroupHabit(Habit habit) {
         habit.setHabitTypeState(new GroupHabitType());
     }
 
-     @Override
-     public void recreateActivity() {
+    @Override
+    public void recreateActivity() {
         recreate();
     }
- }
+
+
+    public void save() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (User user : model.getUsers()) {
+            JSONObject jsonUser = new JSONObject();
+            jsonUser.put("userName", user.getUserName());
+            jsonUser.put("password", user.getPassword());
+            jsonUser.put("email", user.getEmail());
+            jsonUser.put("imagePath", user.getImagePath());
+
+            JSONArray friendsList = new JSONArray();
+            jsonUser.put("friendsList", friendsList);
+
+            JSONArray habitsList = new JSONArray();
+            jsonUser.put("habit", habitsList);
+
+            JSONArray achievementsList = new JSONArray();
+            jsonUser.put("achievements", achievementsList);
+
+            jsonUser.put("theme", user.getTheme());
+
+            //jsonUser.put("isUsed", user.isUsed());
+
+            jsonArray.put(jsonUser);
+        }
+
+        jsonObject.put("user", jsonArray);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("userlist", jsonObject.toString());
+        editor.apply();
+
+        for (User user : model.getUsers()) {
+            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
+            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+            editor1.putString("habitslist", habitsToJson(user));
+            editor1.apply();
+        }
+
+        for (User user : model.getUsers()) {
+            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
+            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+            editor1.putString("friendslist", friendsToJson(user));
+            editor1.apply();
+        }
+
+
+        for (User user : model.getUsers()) {
+            for (IHabit habit : user.getHabits()) {
+                SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+                editor1.putString("dayToIntList", daysToDoJson(habit));
+                editor1.apply();
+            }
+        }
+
+        for (User user : model.getUsers()) {
+            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "achievements", MODE_PRIVATE);
+            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+            editor1.putString("achievementslist", achievementsToJson(user));
+            editor1.apply();
+        }
+
+    }
+
+    private String habitsToJson(User user) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (IHabit habit : model.getUser(user.getUserName()).getHabits()) {
+            JSONObject jsonHabits = new JSONObject();
+            jsonHabits.put("title", habit.getTitle());
+            jsonHabits.put("getGroupMembersCount", habit.getGroupMembersDoneCount());
+            jsonHabits.put("streak", habit.getStreak());
+            jsonHabits.put("isDone", habit.getIsDone());
+            jsonHabits.put("reminderOn", habit.isReminderOn());
+            //jsonHabits.put("habitTypeState", habit.getHabitTypeState().toString());
+            jsonHabits.put("state", habit.getSTATE().toString());
+            jsonHabits.put("frequency", habit.getFREQUENCY());
+            jsonHabits.put("daysToDoSize", habit.getDaysToDoSize());
+
+            JSONArray daysList = new JSONArray();
+            jsonHabits.put("daysInteger", daysList);
+
+            jsonArray.put(jsonHabits);
+        }
+        jsonObject.put("habit", jsonArray);
+        return jsonObject.toString();
+    }
+
+    private String daysToDoJson(IHabit habit) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (Integer integer : habit.getDaysToDo()) {
+            JSONObject jsonDays = new JSONObject();
+            jsonDays.put("daysInt", integer);
+            jsonArray.put(jsonDays);
+        }
+        return jsonObject.put("daysToInt", jsonArray).toString();
+    }
+
+    private String friendsToJson(User user) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (IFriend friend : model.getUser(user.getUserName()).getFriends()) {
+            JSONObject jsonFriends = new JSONObject();
+            jsonFriends.put("username", friend.getUserName());
+            jsonArray.put(jsonFriends);
+        }
+        return jsonObject.put("friend", jsonArray).toString();
+    }
+
+    private String achievementsToJson(User user) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (Achievement achievement : model.getUser(user.getUserName()).getAchievements()) {
+            JSONObject jsonAchievement = new JSONObject();
+            jsonAchievement.put("title", achievement.getTitle());
+            jsonAchievement.put("isAcheived", achievement.getAchieved());
+            jsonArray.put(jsonAchievement);
+        }
+        return jsonObject.put("achievement", jsonArray).toString();
+    }
+
+
+}
+
+

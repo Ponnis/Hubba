@@ -10,6 +10,9 @@ import android.widget.ImageButton;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.R;
 
+/**
+ * @author Li Rönning
+ */
 public class MenuVM extends AppCompatActivity implements ThemableObserver {
     private Button profileButton;
     private Button settingsButton;
@@ -20,16 +23,16 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
     private Button logOutButton;
     private Button myAchievementsButton;
     private ImageButton backButton;
-    private Themehandler themehandler = new Themehandler();
+    private ThemeHandler themeHandler = new ThemeHandler();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(themehandler.getTheme());
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         init();
-        themehandler.addThemeListener(this);
+        themeHandler.addThemeListener(this);
     }
 
     /**
@@ -44,7 +47,7 @@ public class MenuVM extends AppCompatActivity implements ThemableObserver {
      * Connects variables to their viewID:s
      */
     private void initFindByView(){
-        backButton = findViewById(R.id.backButton);
+        backButton = findViewById(R.id.backBtn5);
         profileButton = findViewById(R.id.profileBtn);
         settingsButton = findViewById(R.id.settingsBtn);
         habitsButton = findViewById(R.id.habitsBtn);

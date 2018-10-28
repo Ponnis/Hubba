@@ -4,11 +4,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * @author Nils-Martin Robeling
+ */
 public interface IHabit {
 
-    void setHabitTypeState(HabitTypeState habitTypeState);
+    void setHabitTypeState(IHabitTypeState habitTypeState);
 
-    HabitTypeState getHabitTypeState();
+    IHabitTypeState getHabitTypeState();
 
     void setGroupDone();
 
@@ -44,9 +47,9 @@ public interface IHabit {
 
     void setSTATE(State state);
 
-    void setFREQUENCY (Frequency FREQUENCY);
+    void setFREQUENCY(Frequency FREQUENCY);
 
-    State getSTATE ();
+    State getSTATE();
 
     Frequency getFREQUENCY();
 
@@ -60,4 +63,9 @@ public interface IHabit {
 
     Stack<Date> getLastDateDoneStack();
 
+    int getDaysToDoSize();
+
+    void setDaysToDoSize(int size);
+
+    void initDaysToDoList();
 }

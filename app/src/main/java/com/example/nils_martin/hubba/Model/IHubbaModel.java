@@ -7,20 +7,22 @@ public interface IHubbaModel {
 
     User getUser(String userName);
 
-     ArrayList<User> getUsers();
+    ArrayList<User> getUsers();
 
-     User getCurrentUser();
+    User getCurrentUser();
 
-     void setCurrentUser(User user);
+    void setCurrentUser(User user);
 
-     void setUsers (ArrayList < User > users);
+    void setUsers(ArrayList<User> users);
 
-     Themes getTheme();
-     String themeEnumToString();
+    Themes getTheme();
+
+    String themeEnumToString();
 
     // Law of demeter methods for themes
-     void setTheme(Themes theme);
-     void addThemeListener(ThemableObserver observer);
+    void setTheme(Themes theme);
 
-     void addUser (User user);
+    void addThemeListener(ThemableObserver observer);
+
+    void addUser(User user);
 }

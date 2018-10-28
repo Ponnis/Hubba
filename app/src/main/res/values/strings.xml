@@ -4,7 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_calender">Calender</string>
     <string name="youAchievedNothing">You Have Achieved Nothing</string>
-
+    <string name="lockedAchievement">Not unlocked yet.</string>
     <string-array name="days_arrays">
         <item>1</item>
         <item>2</item>

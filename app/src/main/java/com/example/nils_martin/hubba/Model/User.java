@@ -1,19 +1,17 @@
 package com.example.nils_martin.hubba.Model;
 
-import com.example.nils_martin.hubba.R;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class User implements Observer, Friend, IUser {
+public class User implements Observer, IFriend, IUser {
 
     private String userName;
     private String email;
     private String password;
     private String imagePath;
-    private List<User> friends = new ArrayList<>();
+    private List<IFriend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
     private ArrayList<Achievement> achievements;
     private ArrayList<ThemableObserver> themeObservers;
@@ -23,51 +21,68 @@ public class User implements Observer, Friend, IUser {
     private Themes ActiveTheme;
     private List<Group> groups = new ArrayList<>();
 
-    public User(String name, String email, String password, String imagePath) {
+    public User(String name, String email, String password, ArrayList<Achievement> achivements) {
         this.userName = name;
         this.email = email;
         this.password = password;
         this.ActiveTheme = Themes.STANDARD;
         this.themeObservers = new ArrayList<>();
+        this.achievements = achivements;
     }
+
     // Takes an ENUM from Themes and set
-    public void setTheme(Themes theme){
+    public void setTheme(Themes theme) {
         this.ActiveTheme = theme;
         notifyThemeObservers(themeObservers);
 
     }
-   //  Returns the int R.style associated with a specific theme
-    public String themeEnumToString(){
+
+    //  Returns the int R.style associated with a specific theme
+    public String themeEnumToString() {
         return ActiveTheme.toString();
     }
-    public Themes getTheme(){
+
+    public Themes getTheme() {
         return ActiveTheme;
     }
+
     // Call recreateActivity on all that's in the Arrayist themeObservers.
-    private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers){
-        for (ThemableObserver theme: themeObservers) {
+    private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers) {
+        for (ThemableObserver theme : themeObservers) {
             theme.recreateActivity();
         }
     }
+
     // Adds the ThemableObserver to the observer list themeObservers.
-    public void addThemeObserver(ThemableObserver observer ){
+    public void addThemeObserver(ThemableObserver observer) {
         themeObservers.add(observer);
     }
 
 
-    public void addHabit (IHabit habit) {
+    public void addHabit(IHabit habit) {
         habits.add(habit);
+        checkAchievements();
     }
 
-    public void removeHabit (IHabit habit) {
+    public void checkAchievements() {
+        for (Achievement i : achievements) {
+            i.assessAchievement();
+        }
+    }
+
+    public void removeHabit(IHabit habit) {
         habits.remove(habit);
+    }
+
+    public void setHabits(ArrayList<IHabit> habitArrayList) {
+        this.habits = habitArrayList;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String string){
+    public void setUserName(String string) {
         this.userName = string;
     }
 
@@ -75,7 +90,7 @@ public class User implements Observer, Friend, IUser {
         return email;
     }
 
-    public void setEmail(String string){
+    public void setEmail(String string) {
         this.email = string;
     }
 
@@ -83,11 +98,11 @@ public class User implements Observer, Friend, IUser {
         return password;
     }
 
-    public void setPassword(String string){
+    public void setPassword(String string) {
         this.password = string;
     }
 
-    public void setImagePath(String string){
+    public void setImagePath(String string) {
         this.imagePath = string;
     }
 
@@ -103,54 +118,79 @@ public class User implements Observer, Friend, IUser {
         return achievements;
     }
 
+    public void setAchievements(ArrayList<Achievement> achievementArrayList) {
+        this.achievements = achievementArrayList;
+    }
+
+    public IHabit getHabit(String string) {
+        int index = 0;
+        for (IHabit habit : habits) {
+            if (habit.getTitle().equals(string)) {
+                index = habits.indexOf(habit);
+            }
+        }
+        return this.habits.get(index);
+    }
+
+
     @Override
     public void addAchivement(Achievement achievement) {
         achievements.add(achievement);
     }
 
-    //TODO test the update method
-    @Override
-    public void update(Observable o, Object arg) {
-        checkHabitDone();
-        for (IHabit habit : habits) {
 
-           /* if (habit.getStreak() % 5 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak(habit) + " Days!"));
-            }
-            if (habits.size() % 5 == 0) {
-                achievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, habits.size() + " Habits!"),0);
+    /**
+     * Finds the friend to remove in friends list and then removes the friend.
+     */
 
-                if (habit.getStreak() % 10 == 0) {
-                    achievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, habit.getStreak() + " Days!", 5));
-                }
-                if (habits.size() % 10 == 0) {
+    public void removeFriend(IFriend friend) {
+        for (IFriend user : friends) {
+            if (user.getUserName().equals(friend.getUserName())) {
 
-                }
-            }*/
-        }
-
-    }
-    // Finds the friend to remove in friends list and then removes the friend.
-    public void removeFriend (User friend){
-        for (User user : friends) {
-            if (user.userName == friend.userName) {
                 friends.remove(friend);
             }
         }
     }
-    // Adds another user to the list of friends.
-    public void addFriend (User user){
-        friends.add(user);
+
+    /**
+     * Adds user to list of friends
+     */
+    public void addFriend(IFriend friend) {
+        friends.add(friend);
+
     }
 
-    private void checkHabitDone () {
+
+    private void checkHabitDone() {
 
 
     }
-    public List<User> getFriends () {
+
+    public List<IFriend> getFriends() {
         return friends;
     }
-    public List<Group> getGroups () {
+
+    public List<Group> getGroups() {
         return this.groups;
     }
+
+    public void initThemableObserver() {
+        themeObservers = new ArrayList<>();
+    }
+
+    public void initHabit() {
+        this.habits = new ArrayList<>();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+    }
+    public void setFriends(ArrayList<IFriend> iFriends){
+        this.friends = iFriends;
+    }
 }
+
+
+
+
