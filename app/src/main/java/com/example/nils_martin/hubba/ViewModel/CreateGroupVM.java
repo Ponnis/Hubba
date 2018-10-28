@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.Group;
 import com.example.nils_martin.hubba.Model.HubbaModel;
@@ -233,13 +234,13 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
             }
         }
 
-        /*for (User user: model.getUsers()){
+        for (User user: model.getUsers()){
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "achievements", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
             editor1.putString("achievementslist", achievementsToJson(user));
             editor1.apply();
-        }*/
+        }
 
     }
 
@@ -289,16 +290,15 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         return jsonObject.put("friend", jsonArray).toString();
     }
 
-    /*private String achievementsToJson (User user) throws JSONException {
+    private String achievementsToJson (User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        System.out.println(user.getAchievements().size());
         for (Achievement achievement: model.getUser(user.getUserName()).getAchievements()){
             JSONObject jsonAchievement = new JSONObject();
             jsonAchievement.put("title", achievement.getTitle());
-            jsonAchievement.put("isAcheived", achievement.getsAchieved());
+            jsonAchievement.put("isAcheived", achievement.getAchieved());
             jsonArray.put(jsonAchievement);
         }
         return jsonObject.put("achievement", jsonArray).toString();
-    }*/
+    }
 }

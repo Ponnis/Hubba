@@ -6,12 +6,19 @@ import java.util.List;
  * @author Johannes Gustavsson & Nils-Martin Robelin
  */
 
-public class NumOfHabitsAcheievement extends Acheievement {
+public class NumOfHabitsAchievement extends Achievement {
     private static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
-    NumOfHabitsAcheievement(String title, int targetNmbr) {
+
+
+
+    NumOfHabitsAchievement(String title, int targetNmbr){
+
         super(title, targetNmbr);
     }
+
+
+
 
     /**
      * Checks how many habits there is in current users Habit List and if there is equal or more then targetNmbr. 7
@@ -33,7 +40,6 @@ public class NumOfHabitsAcheievement extends Acheievement {
         }
         return isAchived;
     }
-
     @Override
     public AchievementType getAchievementType() {
         return achievementType;

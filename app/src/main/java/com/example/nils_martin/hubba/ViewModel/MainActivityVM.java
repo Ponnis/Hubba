@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ImageButton;
 
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
@@ -300,10 +301,10 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
 
     public void recreateActivity(){recreate();}
 
-    public void save () throws JSONException {
+    public void save() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (User user: model.getUsers()){
+        for (User user : model.getUsers()) {
             JSONObject jsonUser = new JSONObject();
             jsonUser.put("userName", user.getUserName());
             jsonUser.put("password", user.getPassword());
@@ -331,10 +332,10 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString("userlist",jsonObject.toString());
+        editor.putString("userlist", jsonObject.toString());
         editor.apply();
 
-        for (User user: model.getUsers()){
+        for (User user : model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
@@ -342,18 +343,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             editor1.apply();
         }
 
-        for (User user: model.getUsers()){
-            for (IHabit habit: user.getHabits()){
-                SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
-                SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-
-                editor1.putString("dayToIntList", daysToDoJson(habit));
-                System.out.println("Skkriver ut  days to do:" + daysToDoJson(habit));
-                editor1.apply();
-            }
-        }
-
-        for (User user: model.getUsers()){
+        for (User user : model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
@@ -361,19 +351,31 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             editor1.apply();
         }
 
-        /*for (User user: model.getUsers()){
+
+        for (User user : model.getUsers()) {
+            for (IHabit habit : user.getHabits()) {
+                SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+                editor1.putString("dayToIntList", daysToDoJson(habit));
+                editor1.apply();
+            }
+        }
+
+        for (User user: model.getUsers()){
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "achievements", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
             editor1.putString("achievementslist", achievementsToJson(user));
             editor1.apply();
-        }*/
+        }
+
     }
 
-    private String habitsToJson (User user) throws JSONException {
+    private String habitsToJson(User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (IHabit habit: model.getUser(user.getUserName()).getHabits()){
+        for (IHabit habit : model.getUser(user.getUserName()).getHabits()) {
             JSONObject jsonHabits = new JSONObject();
             jsonHabits.put("title", habit.getTitle());
             jsonHabits.put("getGroupMembersCount", habit.getGroupMembersDoneCount());
@@ -391,25 +393,24 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             jsonArray.put(jsonHabits);
         }
         jsonObject.put("habit", jsonArray);
-        return  jsonObject.toString();
+        return jsonObject.toString();
     }
 
-    private String daysToDoJson (IHabit habit) throws JSONException {
+    private String daysToDoJson(IHabit habit) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (Integer integer: habit.getDaysToDo()){
+        for (Integer integer : habit.getDaysToDo()) {
             JSONObject jsonDays = new JSONObject();
             jsonDays.put("daysInt", integer);
             jsonArray.put(jsonDays);
         }
-        System.out.println(jsonObject.put("daysToInt", jsonArray).toString());
         return jsonObject.put("daysToInt", jsonArray).toString();
     }
 
-    private String friendsToJson (User user) throws JSONException {
+    private String friendsToJson(User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (IFriend friend: model.getUser(user.getUserName()).getFriends()){
+        for (IFriend friend : model.getUser(user.getUserName()).getFriends()) {
             JSONObject jsonFriends = new JSONObject();
             jsonFriends.put("username", friend.getUserName());
             jsonArray.put(jsonFriends);
@@ -417,18 +418,17 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         return jsonObject.put("friend", jsonArray).toString();
     }
 
-    /*private String achievementsToJson (User user) throws JSONException {
+    private String achievementsToJson (User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        System.out.println(user.getAchievements().size());
         for (Achievement achievement: model.getUser(user.getUserName()).getAchievements()){
             JSONObject jsonAchievement = new JSONObject();
             jsonAchievement.put("title", achievement.getTitle());
-            jsonAchievement.put("isAcheived", achievement.getsAchieved());
+            jsonAchievement.put("isAcheived", achievement.getAchieved());
             jsonArray.put(jsonAchievement);
         }
         return jsonObject.put("achievement", jsonArray).toString();
-    }*/
+    }
 
 }
 

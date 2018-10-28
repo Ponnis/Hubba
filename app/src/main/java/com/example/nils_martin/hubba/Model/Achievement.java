@@ -5,7 +5,7 @@ package com.example.nils_martin.hubba.Model;
  * This is a template for Achievement classes.
  */
 
-public abstract class Acheievement {
+public abstract class Achievement {
 
     IHubbaModel model = HubbaModel.getInstance();
 
@@ -15,7 +15,7 @@ public abstract class Acheievement {
     private Boolean isAchieved;
     protected int targetNmbr;
 
-    Acheievement(String title, int targetNmbr){
+    Achievement(String title, int targetNmbr){
         this.title = title;
         this.targetNmbr = targetNmbr;
     }
@@ -38,4 +38,7 @@ public abstract class Acheievement {
     }
     abstract public AchievementType getAchievementType();
 
+    public Boolean getAchieved() {
+        return isAchieved;
     }
+}
