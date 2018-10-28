@@ -47,34 +47,6 @@ public class LoginVM extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        User user1 = new User("Alex", "Alex@gmail.com", "losenord", new ArrayList<>());
-        User friend = new User("Semlan", "semlan@gmail.com","ghj", new ArrayList<>());
-        model.getUsers().add(user1);
-        model.getUsers().add(friend);
-        model.getUser("Alex").setAchievements(setAchivements());
-        model.getUser("Semlan").setAchievements(setAchivements());
-        model.setCurrentUser(model.getUser("Alex"));
-
-        User addFriend = model.getUser("Semlan");
-        model.getUser("Alex").addFriend(addFriend);
-        model.getUser("Alex").addFriend(addFriend);
-
-
-        Group group = new Group("TestGroup", model.getUser("Alex").getFriends(), null);
-
-        model.getUser("Alex").getGroups().add(group);
-
-
-
-        try {
-            save();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        model.getUsers().clear();
-
-
         try {
             load();
         } catch (JSONException e) {
@@ -85,9 +57,6 @@ public class LoginVM extends AppCompatActivity {
             initFirstUse();
             v.printStackTrace();
         }
-
-
-
 
 
         for (int i = 0, usersSize = model.getUsers().size(); i < usersSize; i++) {
