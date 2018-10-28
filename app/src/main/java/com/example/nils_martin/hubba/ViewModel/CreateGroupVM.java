@@ -50,15 +50,21 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
         getUserToCurrent();
         getUserFriends();
         themeHandler.addThemeListener(this);
+        initiateViewElements();
+
+
+
+    }
+
+    private void initiateViewElements(){
         groupNameEditText = ((EditText)findViewById(R.id.txtGroupName));
-        groupName = groupNameEditText.getText().toString();
-        System.out.println(groupName);
         friendNamesEditText = ((EditText) findViewById(R.id.txtGroupMembers));
-        friendNames = friendNamesEditText.getText().toString();
         createNewGroupHabit = (Button) findViewById(R.id.btnCreateNewGroup);
         createNewGroupHabit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                groupName = groupNameEditText.getText().toString();
+                friendNames = friendNamesEditText.getText().toString();
                 setFriendsAsString();
                 Intent intent = new Intent(CreateGroupVM.this, CreateGroupHabitVM.class);
                 startActivity(intent);
