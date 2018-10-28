@@ -148,14 +148,6 @@ public class CreateUserVM extends AppCompatActivity  {
         }
 
         for (User user: model.getUsers()){
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "achievements", MODE_PRIVATE);
-            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-
-            editor1.putString("achievementslist", achievementsToJson(user));
-            editor1.apply();
-        }
-
-        for (User user: model.getUsers()){
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
@@ -222,18 +214,6 @@ public class CreateUserVM extends AppCompatActivity  {
             jsonArray.put(jsonFriends);
         }
         return jsonObject.put("friend", jsonArray).toString();
-    }
-
-    private String achievementsToJson (User user) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-        for (Achievement achievement: model.getUser(user.getUserName()).getAchievements()){
-            JSONObject jsonAchievement = new JSONObject();
-            jsonAchievement.put("title", achievement.getTitle());
-            jsonAchievement.put("isAcheived", achievement.getAchieved());
-            jsonArray.put(jsonAchievement);
-        }
-        return jsonObject.put("achievement", jsonArray).toString();
     }
 
     private String groupsToJson(User user) throws JSONException{
