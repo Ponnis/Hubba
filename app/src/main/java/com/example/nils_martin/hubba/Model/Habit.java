@@ -52,7 +52,7 @@ public class Habit extends Observable implements IHabit {
 
     public void setGroupDone(){
         this.isDone = true;
-        upStreak(this);
+        upStreak();
     }
 
     public void setDoneTo(boolean b){
@@ -91,9 +91,9 @@ public class Habit extends Observable implements IHabit {
     /**
      * Sets the streak to +1 if the habit is completed
      */
-    public void upStreak(Habit habit) {
-        if (habit.isDone) {
-            habit.streak++;
+    public void upStreak() {
+        if (this.isDone) {
+            this.streak++;
         }
     }
 

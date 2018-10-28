@@ -330,8 +330,6 @@ public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
     private void endActivity(){
         finish();
-        Intent intent = new Intent(AddHabitVM.this, MainActivityVM.class);
-        startActivity(intent);
     }
 
 
