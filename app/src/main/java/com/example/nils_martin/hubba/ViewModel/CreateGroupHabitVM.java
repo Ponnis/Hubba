@@ -426,15 +426,7 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
             }
         }
 
-        for (User user : model.getUsers()) {
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "achievements", MODE_PRIVATE);
-            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-
-            editor1.putString("achievementslist", achievementsToJson(user));
-            editor1.apply();
-        }
-
-        for (User user : model.getUsers()) {
+        for (User user: model.getUsers()){
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
@@ -442,27 +434,16 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
             editor1.apply();
         }
 
-        for (User user : model.getUsers()) {
-            for (Group group : user.getGroups()) {
+        for (User user: model.getUsers()){
+            for (Group group: user.getGroups()){
                 SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + group.getGroupName() + "userInGroups", MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
                 editor1.putString("groupFriendslist", groupFriendsToJson(group));
                 editor1.apply();
-
-                /*SharedPreferences sharedPreferences2 = getSharedPreferences(user.getUserName() + "groupHabits", MODE_PRIVATE);
-                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-
-                editor2.putString("groupHabit", groupHabitToJson(group));
-                editor2.apply();
-
-                SharedPreferences sharedPreferences3 = getSharedPreferences(user.getUserName() + group.getHabit().getTitle() + "groupHabitDayToDo", MODE_PRIVATE);
-                SharedPreferences.Editor editor3 = sharedPreferences3.edit();
-
-                editor3.putString("groupHabitDayToDo", daysToDoJson(group.getHabit()));
-                editor3.apply();*/
             }
         }
+
 
 
     }
@@ -514,23 +495,10 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
         return jsonObject.put("friend", jsonArray).toString();
     }
 
-    private String achievementsToJson(User user) throws JSONException {
+    private String groupsToJson(User user) throws JSONException{
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-
-        for (Achievement achievement : model.getUser(user.getUserName()).getAchievements()) {
-            JSONObject jsonAchievement = new JSONObject();
-            jsonAchievement.put("title", achievement.getTitle());
-            jsonAchievement.put("isAcheived", achievement.getAchieved());
-            jsonArray.put(jsonAchievement);
-        }
-        return jsonObject.put("achievement", jsonArray).toString();
-    }
-
-    private String groupsToJson(User user) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-        for (Group group : model.getUser(user.getUserName()).getGroups()) {
+        for (Group group: model.getUser(user.getUserName()).getGroups()){
             JSONObject jsonGroup = new JSONObject();
             jsonGroup.put("groupName", group.getGroupName());
 
@@ -543,10 +511,10 @@ public class CreateGroupHabitVM extends AppCompatActivity implements ThemableObs
         return jsonObject.put("group", jsonArray).toString();
     }
 
-    private String groupFriendsToJson(Group group) throws JSONException {
+    private String groupFriendsToJson(Group group) throws JSONException{
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (IFriend iFriend : group.getUsersInGroup()) {
+        for (IFriend iFriend: group.getUsersInGroup()){
             JSONObject jsonGroupFriends = new JSONObject();
             jsonGroupFriends.put("GroupFriendUserName", iFriend.getUserName());
             jsonArray.put(jsonGroupFriends);

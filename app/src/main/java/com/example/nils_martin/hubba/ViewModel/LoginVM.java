@@ -124,6 +124,7 @@ public class LoginVM extends AppCompatActivity {
                     Intent intent = new Intent(LoginVM.this, com.example.nils_martin.hubba.ViewModel.MainActivityVM.class);
                     startActivity(intent);
                     model.setCurrentUser(user);
+                    model.getCurrentUser().setAchievements(setAchivements());
                     break;
                 }
             }
@@ -151,7 +152,6 @@ public class LoginVM extends AppCompatActivity {
 
         Type typeHabit = new TypeToken<ArrayList<Habit>>() {
         }.getType();
-        Type typeAchievement = new TypeToken<ArrayList<Achievement>>(){}.getType();
         Type typeGroup = new TypeToken<List<Group>>(){}.getType();
 
         JSONArray jsonTheme = jsonResponse.getJSONArray("user");
@@ -241,14 +241,6 @@ public class LoginVM extends AppCompatActivity {
             extractString(jsonFriend, "friend", "username", user.getFriends());
         }
 
-        for(User user: model.getUsers()){
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "achievements", MODE_PRIVATE);
-            String jsonAchievement = sharedPreferences1.getString("achievementslist",null);
-            Gson gsonAchievement = new GsonBuilder().registerTypeAdapter(Achievement.class, new AchievementInstanceCreator()).create();
-            JSONObject jsonResponseAchievement = new JSONObject(jsonAchievement);
-            user.setAchievements(gsonAchievement.fromJson(jsonResponseAchievement.getString("achievement"), typeAchievement));
-        }
-
         for (User user: model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
             String jsonGroup = sharedPreferences1.getString("groupslist", null);
@@ -323,14 +315,6 @@ public class LoginVM extends AppCompatActivity {
         }
 
         for (User user: model.getUsers()){
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "achievements", MODE_PRIVATE);
-            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-
-            editor1.putString("achievementslist", achievementsToJson(user));
-            editor1.apply();
-        }
-
-        for (User user: model.getUsers()){
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
@@ -345,18 +329,6 @@ public class LoginVM extends AppCompatActivity {
 
                 editor1.putString("groupFriendslist", groupFriendsToJson(group));
                 editor1.apply();
-
-                /*SharedPreferences sharedPreferences2 = getSharedPreferences(user.getUserName() + "groupHabits", MODE_PRIVATE);
-                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-
-                editor2.putString("groupHabit", groupHabitToJson(group));
-                editor2.apply();
-
-                SharedPreferences sharedPreferences3 = getSharedPreferences(user.getUserName() + group.getHabit().getTitle() + "groupHabitDayToDo", MODE_PRIVATE);
-                SharedPreferences.Editor editor3 = sharedPreferences3.edit();
-
-                editor3.putString("groupHabitDayToDo", daysToDoJson(group.getHabit()));
-                editor3.apply();*/
             }
         }
 
@@ -409,18 +381,6 @@ public class LoginVM extends AppCompatActivity {
             jsonArray.put(jsonFriends);
         }
         return jsonObject.put("friend", jsonArray).toString();
-    }
-
-    private String achievementsToJson (User user) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        JSONArray jsonArray = new JSONArray();
-        for (Achievement achievement: model.getUser(user.getUserName()).getAchievements()){
-            JSONObject jsonAchievement = new JSONObject();
-            jsonAchievement.put("title", achievement.getTitle());
-            jsonAchievement.put("isAcheived", achievement.getAchieved());
-            jsonArray.put(jsonAchievement);
-        }
-        return jsonObject.put("achievement", jsonArray).toString();
     }
 
     private String groupsToJson(User user) throws JSONException{
