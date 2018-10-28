@@ -39,6 +39,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
     private ListView yourGroupsListView;
     private ArrayAdapter<String> yourGroupsAdapter;
     private Button addGroupButton;
+    private Group openGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
         initFindByView();
         updateGroupsListView();
         addGroupOnClick();
+        listViewOnClick();
     }
 
     /**
@@ -70,7 +72,9 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
      * Gets the list of groups from the current user in HubbaModel.
      */
     private void getGroupsList() {
-        groups = model.getCurrentUser().getGroups();
+        if (model.getCurrentUser().getGroups() != null) {
+            groups = model.getCurrentUser().getGroups();
+        }
     }
 
     /**
@@ -126,9 +130,13 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
     private void findGroup(String string) {
         for(Group group: groups) {
             if(group.getGroupName().equals(string)) {
-                // setOpenFriend(friend);
+                setOpenGroup(group);
             }
         }
+    }
+
+    private  void setOpenGroup(Group openGroup) {
+        this.openGroup = openGroup;
     }
 
     public void recreateActivity () {

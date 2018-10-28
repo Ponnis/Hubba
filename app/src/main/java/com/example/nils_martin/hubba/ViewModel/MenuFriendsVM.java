@@ -87,8 +87,10 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
         });
     }
 
-    private void getFriendsList(){
-        friends = model.getCurrentUser().getFriends();
+    private void getFriendsList() {
+        if (model.getCurrentUser().getFriends() != null) {
+            friends = model.getCurrentUser().getFriends();
+        }
     }
 
     /**
