@@ -1,5 +1,6 @@
 package com.example.nils_martin.hubba.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,10 +28,9 @@ public class NumOfHabitsAchievement extends Achievement {
      * @return returns true if the size of List<Ihabit> is larger then targetnmbr else returns false.
      */
     @Override
-    public Boolean assessAchievement() {
+    public Boolean assessAchievement(ArrayList<IHabit> habits) {
         Boolean isAchived = false;
         try {
-            List<IHabit> habits = model.getCurrentUser().getHabits();
             if (habits.size() >= targetNmbr) {
                 isAchived = true;
                 this.setAchieved(true);
