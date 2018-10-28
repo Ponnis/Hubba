@@ -254,6 +254,8 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
             jsonHabits.put("state", habit.getSTATE().toString());
             jsonHabits.put("frequency", habit.getFREQUENCY());
             jsonHabits.put("daysToDoSize", habit.getDaysToDoSize());
+            jsonHabits.put("previewsDayDone", habit.getPreviewsDayDone());
+            jsonHabits.put("getTodayDate", habit.getTodayDate());
 
             JSONArray daysList = new JSONArray();
             jsonHabits.put("daysInteger", daysList);
