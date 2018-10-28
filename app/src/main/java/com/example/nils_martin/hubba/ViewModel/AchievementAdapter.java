@@ -60,6 +60,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
             System.out.println("Nullpointerexception at AchievementAdapter when trying to set Imageview");
             System.out.println(e.toString());
             achivementPicture.setImageResource(R.drawable.achivement_locked);
+            achivementTitle.setText(R.string.lockedAchievement);
         }
 
 
