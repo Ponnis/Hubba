@@ -54,7 +54,7 @@ public class LoginVM extends AppCompatActivity {
 
         User addFriend = model.getUser("Semlan");
         model.getUser("Alex").addFriend(addFriend);
-        model.getUser("Alex").addFriend(addFriend);*/
+        model.getUser("Alex").addFriend(addFriend);
 
 
 
@@ -64,7 +64,8 @@ public class LoginVM extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        model.getUsers().clear();
+        model.getUsers().clear();*/
+
 
 
 
