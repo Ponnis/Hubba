@@ -45,8 +45,17 @@ public class LoginVM extends AppCompatActivity {
         setContentView(R.layout.login);
 
         /*User user1 = new User("Alex", "Alex@gmail.com", "losenord", new ArrayList<>());
+        User friend = new User("Semlan", "semlan@gmail.com","ghj", new ArrayList<>());
         model.getUsers().add(user1);
-        model.getUser("admin").setAchievements(setAchivements());
+        model.getUsers().add(friend);
+        model.getUser("Alex").setAchievements(setAchivements());
+        model.getUser("Semlan").setAchievements(setAchivements());
+        model.setCurrentUser(model.getUser("Alex"));
+
+        User addFriend = model.getUser("Semlan");
+        model.getUser("Alex").addFriend(addFriend);
+        model.getUser("Alex").addFriend(addFriend);*/
+
 
 
         try {
@@ -55,7 +64,7 @@ public class LoginVM extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        model.getUsers().clear();*/
+        model.getUsers().clear();
 
 
 
@@ -69,6 +78,7 @@ public class LoginVM extends AppCompatActivity {
             initFirstUse();
             v.printStackTrace();
         }
+
 
 
         for (int i = 0, usersSize = model.getUsers().size(); i < usersSize; i++) {
@@ -105,6 +115,7 @@ public class LoginVM extends AppCompatActivity {
     private void initList(User user) {
         user.initThemableObserver();
         user.initHabit();
+        user.initFriends();
         if (user.getHabits().size() != 0) {
             for (IHabit habit : user.getHabits()) {
                 habit.initDaysToDoList();
@@ -159,10 +170,7 @@ public class LoginVM extends AppCompatActivity {
         JSONObject jsonResponse = new JSONObject(json);
         model.setUsers(gson.fromJson(jsonResponse.getString("user"), typeUser));
 
-        Type typeHabit = new TypeToken<ArrayList<Habit>>() {
-        }.getType();
-        Type typeFriend = new TypeToken<ArrayList<User>>() {
-        }.getType();
+        Type typeHabit = new TypeToken<ArrayList<Habit>>(){}.getType();
         Type typeAchievement = new TypeToken<ArrayList<Acheievement>>(){}.getType();
 
         JSONArray jsonTheme = jsonResponse.getJSONArray("user");
@@ -251,9 +259,29 @@ public class LoginVM extends AppCompatActivity {
         for (User user : model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
             String jsonFriend = sharedPreferences1.getString("friendslist", null);
-            Gson gsonFriend = new GsonBuilder().create();
-            JSONObject jsonResponseFriend = new JSONObject(jsonFriend);
-            user.setFriends(gsonFriend.fromJson(jsonResponseFriend.getString("friend"), typeFriend));
+
+            char [] charArray = jsonFriend.toCharArray();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < charArray.length; i++){
+                if (Character.isLetter(charArray[i])){
+                    stringBuilder.append(charArray[i]);
+                    if (stringBuilder.toString().equals("friend")){
+                        stringBuilder.setLength(0);
+                        i = i + 4;
+                    }
+
+                    else if (stringBuilder.toString().equals("username")){
+                        stringBuilder.setLength(0);
+                        i = i + 4;
+                        while(Character.isLetter(charArray[i])){
+                            stringBuilder.append(charArray[i]);
+                            i++;
+                        }
+                        user.getFriends().add(model.getUser(stringBuilder.toString()));
+                        stringBuilder.setLength(0);
+                    }
+                }
+            }
         }
 
         for(User user: model.getUsers()){
@@ -381,6 +409,7 @@ public class LoginVM extends AppCompatActivity {
             jsonFriends.put("username", friend.getUserName());
             jsonArray.put(jsonFriends);
         }
+        System.out.println("Skirver ut det sparade jsonObjectet: " + jsonObject.put("friend", jsonArray).toString());
         return jsonObject.put("friend", jsonArray).toString();
     }
 

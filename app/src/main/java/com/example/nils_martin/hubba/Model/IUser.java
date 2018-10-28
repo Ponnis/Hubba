@@ -54,4 +54,6 @@ public interface IUser {
     void initHabit();
 
     void setFriends(ArrayList<IFriend> iFriends);
+
+    void initFriends();
 }
