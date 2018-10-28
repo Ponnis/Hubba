@@ -117,7 +117,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 findGroup(yourGroupsListView.getItemAtPosition(position).toString());
-                Intent intent = new Intent(MenuGroupsVM.this, RemoveFriendVM.class);
+                Intent intent = new Intent(MenuGroupsVM.this, RemoveGroupVM.class);
                 startActivity(intent);
             }
         });
