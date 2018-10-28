@@ -43,6 +43,7 @@ public class Adapter extends ArrayAdapter<String>  {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initVariables(position);
                 mainActivityVM.findHabit(title);
                 mainActivityVM.clicked(v);
             }

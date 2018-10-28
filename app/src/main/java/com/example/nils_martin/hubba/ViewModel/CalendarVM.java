@@ -64,8 +64,6 @@ public class CalendarVM extends Activity implements ThemableObserver {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CalendarVM.this, MainActivityVM.class);
-                startActivity(intent);
                 finish();
             }
         });

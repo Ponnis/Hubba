@@ -52,7 +52,6 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         setContentView(R.layout.habit_view);
         themeHandler.addThemeListener(this);
         setCurrentHabit();
-       // habit = MainActivityVM.openHabit;
         initFindView();
         init(currentHabit);
         update();
