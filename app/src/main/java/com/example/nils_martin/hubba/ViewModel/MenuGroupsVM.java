@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.nils_martin.hubba.Model.Achievement;
@@ -40,6 +41,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
     private ArrayAdapter<String> yourGroupsAdapter;
     private Button addGroupButton;
     private Group openGroup;
+    private ImageButton backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
         updateGroupsListView();
         addGroupOnClick();
         listViewOnClick();
+        addBackOnClick();
     }
 
     /**
@@ -66,6 +69,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
     private void initFindByView() {
         yourGroupsListView = (ListView) findViewById(R.id.yourGroupsListView);
         addGroupButton = (Button) findViewById(R.id.addGroupBtn);
+        backBtn =(ImageButton)findViewById(R.id.backBtn7);
     }
 
     /**
@@ -134,6 +138,14 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
                 setOpenGroup(group);
             }
         }
+    }
+    private void addBackOnClick(){
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private  void setOpenGroup(Group openGroup) {
