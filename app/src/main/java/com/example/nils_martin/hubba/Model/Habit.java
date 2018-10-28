@@ -23,8 +23,9 @@ public class Habit extends Observable implements IHabit {
     private Frequency FREQUENCY;
     private List<Integer> daysToDo = new ArrayList<>();
     private ArrayList<Observer> observers;
-    private Stack<Date> lastDateDoneStack = new Stack<>();
     private Date lastDateDone;
+    private String previewsDayDone = "";
+    private String todayDate = "";
 
     public Habit(String title) {
         this.title = title;
@@ -63,15 +64,14 @@ public class Habit extends Observable implements IHabit {
     public void isDone(){
         this.isDone = true;
         this.streak++;
-        setCurrentDay();
-        lastDateDoneStack.push(lastDateDone);
+        previewsDayDone = todayDate;
+        todayDate = getCurrentDay();
     }
-
 
     public void notDone() {
         this.isDone = false;
         this.streak--;
-        lastDateDoneStack.pop();
+        todayDate = previewsDayDone;
     }
 
     /**
@@ -175,7 +175,7 @@ public class Habit extends Observable implements IHabit {
         return reminderTime;
     }
 
-    private void setCurrentDay() {
+    private String getCurrentDay() {
         Calendar nowCalendar = Calendar.getInstance();
         lastDateDone = new Date();
         lastDateDone.setDate(nowCalendar.get(Calendar.DAY_OF_MONTH));
@@ -184,10 +184,7 @@ public class Habit extends Observable implements IHabit {
         lastDateDone.setHours(0);
         lastDateDone.setMinutes(0);
         lastDateDone.setSeconds(0);
-    }
-
-    public Stack<Date> getLastDateDoneStack() {
-        return lastDateDoneStack;
+        return lastDateDone.toString();
     }
 
     public int getDaysToDoSize() {
@@ -201,5 +198,13 @@ public class Habit extends Observable implements IHabit {
     public void initDaysToDoList() {
         this.daysToDo = new ArrayList<>();
 
+    }
+
+    public String getTodayDate() {
+        return todayDate;
+    }
+
+    public String getPreviewsDayDone() {
+        return previewsDayDone;
     }
 }

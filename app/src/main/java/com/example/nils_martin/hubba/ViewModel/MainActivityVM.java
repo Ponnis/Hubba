@@ -211,8 +211,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     }
 
     private boolean haveYouDoneTheHabitToday(IHabit habit) {
-        if(habit.getLastDateDoneStack().peek() != null &&
-                (habit.getLastDateDoneStack().peek().toString().equals(getTodayDate().toString()))) {
+        if(habit.getTodayDate().equals(getTodayDate().toString())) {
             habit.setDoneTo(true);
             return true;
         }
@@ -414,6 +413,9 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             jsonHabits.put("state", habit.getSTATE().toString());
             jsonHabits.put("frequency", habit.getFREQUENCY());
             jsonHabits.put("daysToDoSize", habit.getDaysToDoSize());
+            jsonHabits.put("previewsDayDone", habit.getPreviewsDayDone());
+            jsonHabits.put("getTodayDate", habit.getTodayDate());
+
 
             JSONArray daysList = new JSONArray();
             jsonHabits.put("daysInteger", daysList);
