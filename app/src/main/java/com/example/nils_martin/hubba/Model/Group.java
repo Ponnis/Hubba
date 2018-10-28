@@ -44,4 +44,9 @@ public class  Group {
     public IHabit getHabit(){
         return this.habit;
     }
+
+
+    public void setUsersInGroup(List<IFriend> iFriendList) {
+        this.usersInGroup = iFriendList;
+    }
 }

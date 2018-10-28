@@ -193,6 +193,10 @@ public class User implements Observer, IFriend, IUser {
     public void initFriends(){
         this.friends = new ArrayList<>();
     }
+
+    public void setGroup(List<Group> groupList) {
+        this.groups = groupList;
+    }
 }
 
 

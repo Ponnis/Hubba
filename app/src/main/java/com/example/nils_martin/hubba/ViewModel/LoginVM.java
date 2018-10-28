@@ -33,6 +33,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LoginVM extends AppCompatActivity {
     private HubbaModel model = HubbaModel.getInstance();
@@ -58,7 +59,7 @@ public class LoginVM extends AppCompatActivity {
         model.getUser("Alex").addFriend(addFriend);
         model.getUser("Alex").addFriend(addFriend);
 
-        IHabit habit = new Habit("I DO STUFF");
+        Habit habit = new Habit("I DO STUFF");
         habit.setHabitTypeState(new GroupHabitType());
         habit.setFREQUENCY(Frequency.DAILY);
         habit.setSTATE(State.MORNING);
@@ -185,6 +186,8 @@ public class LoginVM extends AppCompatActivity {
 
         Type typeHabit = new TypeToken<ArrayList<Habit>>(){}.getType();
         Type typeAchievement = new TypeToken<ArrayList<Acheievement>>(){}.getType();
+        Type typeGroup = new TypeToken<List<Group>>(){}.getType();
+        Type typeGroupHabit = new TypeToken<IHabit>(){}.getType();
 
         JSONArray jsonTheme = jsonResponse.getJSONArray("user");
         for (int a = 0; a < jsonTheme.length(); a++) {
@@ -273,28 +276,7 @@ public class LoginVM extends AppCompatActivity {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
             String jsonFriend = sharedPreferences1.getString("friendslist", null);
 
-            char [] charArray = jsonFriend.toCharArray();
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < charArray.length; i++){
-                if (Character.isLetter(charArray[i])){
-                    stringBuilder.append(charArray[i]);
-                    if (stringBuilder.toString().equals("friend")){
-                        stringBuilder.setLength(0);
-                        i = i + 4;
-                    }
-
-                    else if (stringBuilder.toString().equals("username")){
-                        stringBuilder.setLength(0);
-                        i = i + 4;
-                        while(Character.isLetter(charArray[i])){
-                            stringBuilder.append(charArray[i]);
-                            i++;
-                        }
-                        user.getFriends().add(model.getUser(stringBuilder.toString()));
-                        stringBuilder.setLength(0);
-                    }
-                }
-            }
+            extractString(jsonFriend, "friend", "username", user.getFriends());
         }
 
         for(User user: model.getUsers()){
@@ -305,7 +287,18 @@ public class LoginVM extends AppCompatActivity {
             user.setAchievements(gsonAchievement.fromJson(jsonResponseAchievement.getString("achievement"), typeAchievement));
         }
 
-
+        for (User user: model.getUsers()) {
+            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
+            String jsonGroup = sharedPreferences1.getString("groupslist", null);
+            Gson gsonGroup = new GsonBuilder().create();
+            JSONObject jsonResponseGroup = new JSONObject(jsonGroup);
+            user.setGroup(gsonGroup.fromJson(jsonResponseGroup.getString("group"), typeGroup));
+            for (Group group: user.getGroups()){
+                SharedPreferences sharedPreferences2 = getSharedPreferences(user.getUserName() + group.getGroupName() + "userInGroups", MODE_PRIVATE);
+                String jsonGroupFriends = sharedPreferences2.getString("groupFriendslist", null);
+                extractString(jsonGroupFriends,"groupFriend", "GroupFriendUserName", group.getUsersInGroup());
+            }
+        }
     }
 
     public void save() throws JSONException {
@@ -328,8 +321,6 @@ public class LoginVM extends AppCompatActivity {
             jsonUser.put("achievements", achievementsList);
 
             jsonUser.put("theme", user.getTheme());
-
-            //jsonUser.put("isUsed", user.isUsed());
 
             jsonArray.put(jsonUser);
         }
@@ -393,7 +384,7 @@ public class LoginVM extends AppCompatActivity {
                 editor1.putString("groupFriendslist", groupFriendsToJson(group));
                 editor1.apply();
 
-                SharedPreferences sharedPreferences2 = getSharedPreferences(user.getUserName() + group.getHabit().getTitle() + "groupHabit", MODE_PRIVATE);
+                SharedPreferences sharedPreferences2 = getSharedPreferences(user.getUserName() + "groupHabits", MODE_PRIVATE);
                 SharedPreferences.Editor editor2 = sharedPreferences2.edit();
 
                 editor2.putString("groupHabit", groupHabitToJson(group));
@@ -402,7 +393,6 @@ public class LoginVM extends AppCompatActivity {
                 SharedPreferences sharedPreferences3 = getSharedPreferences(user.getUserName() + group.getHabit().getTitle() + "groupHabitDayToDo", MODE_PRIVATE);
                 SharedPreferences.Editor editor3 = sharedPreferences3.edit();
 
-                System.out.println(daysToDoJson(group.getHabit()));
                 editor3.putString("groupHabitDayToDo", daysToDoJson(group.getHabit()));
                 editor3.apply();
             }
@@ -454,7 +444,6 @@ public class LoginVM extends AppCompatActivity {
             jsonFriends.put("username", friend.getUserName());
             jsonArray.put(jsonFriends);
         }
-        System.out.println("Skirver ut det sparade jsonObjectet: " + jsonObject.put("friend", jsonArray).toString());
         return jsonObject.put("friend", jsonArray).toString();
     }
 
@@ -480,10 +469,9 @@ public class LoginVM extends AppCompatActivity {
             JSONArray usersInGroup = new JSONArray();
             jsonGroup.put("usersInGroup", usersInGroup);
 
-            jsonGroup.put("groupHabit", group.getHabit());
+            jsonGroup.put("theGroupHabit", group.getHabit());
             jsonArray.put(jsonGroup);
         }
-        System.out.println("Groups " + user.getUserName() + " To JSON: " + jsonObject.put("group", jsonArray).toString());
         return jsonObject.put("group", jsonArray).toString();
     }
 
@@ -492,14 +480,14 @@ public class LoginVM extends AppCompatActivity {
         JSONArray jsonArray = new JSONArray();
         for (IFriend iFriend: group.getUsersInGroup()){
             JSONObject jsonGroupFriends = new JSONObject();
-            jsonGroupFriends.put("groupFriend", iFriend.getUserName());
+            jsonGroupFriends.put("GroupFriendUserName", iFriend.getUserName());
             jsonArray.put(jsonGroupFriends);
         }
-        System.out.println("Group Friends " + group.getGroupName() + " to JSOn: " + jsonObject.put("groupFriend", jsonArray).toString());
         return jsonObject.put("groupFriend", jsonArray).toString();
     }
 
     private String groupHabitToJson(Group group) throws JSONException{
+        JSONObject end = new JSONObject();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("title", group.getHabit().getTitle());
         jsonObject.put("getGroupMembersCount", group.getHabit().getGroupMembersDoneCount());
@@ -513,10 +501,45 @@ public class LoginVM extends AppCompatActivity {
 
         JSONArray daysList = new JSONArray();
         jsonObject.put("daysInteger", daysList);
+        end.put("endGroupHabit", jsonObject);
 
-        System.out.println("Group Habit " + group.getGroupName() + " To JSON: " + jsonObject.toString());
         return jsonObject.toString();
 
+    }
+
+    private void extractString(String source, String listName, String target, List<IFriend> list){
+        char [] charArray = source.toCharArray();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < charArray.length; i++){
+            if (Character.isLetter(charArray[i])){
+                stringBuilder.append(charArray[i]);
+
+                if (stringBuilder.toString().equals(listName)){
+                    stringBuilder.setLength(0);
+                }
+
+                else if (stringBuilder.toString().equals(target)){
+                    stringBuilder.setLength(0);
+                    i = i + 3;
+                    if (Character.isLetter(charArray[i])){
+                        while(Character.isLetter(charArray[i])){
+                            stringBuilder.append(charArray[i]);
+                            i++;
+                        }
+                    }
+                    else{
+                        i++;
+                        while(Character.isLetter(charArray[i])){
+                            stringBuilder.append(charArray[i]);
+                            i++;
+                        }
+                    }
+
+                    list.add(model.getUser(stringBuilder.toString()));
+                    stringBuilder.setLength(0);
+                }
+            }
+        }
     }
 
     private ArrayList<Acheievement> setAchivements(){
