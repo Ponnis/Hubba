@@ -17,6 +17,9 @@ import com.example.nils_martin.hubba.R;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * @author Camilla Söderlund
+ */
 public class CalendarVM extends Activity implements ThemableObserver {
 
     private TextView dateText, activityTxtV;

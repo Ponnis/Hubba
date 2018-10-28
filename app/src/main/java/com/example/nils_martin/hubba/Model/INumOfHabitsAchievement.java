@@ -1,6 +1,6 @@
 package com.example.nils_martin.hubba.Model;
 /**
- * @author Nils-Martin Robeling
+ * @author Camilla Söderlund
  * */
 public interface INumOfHabitsAchievement {
 

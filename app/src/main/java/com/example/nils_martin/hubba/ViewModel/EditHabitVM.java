@@ -31,6 +31,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Camilla Söderlund
+ */
 public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
 
     private EditText habitName;

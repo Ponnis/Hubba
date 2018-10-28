@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Li Rönning
+ * @author Li Rönning and Camilla Söderlund
  */
 public class MenuHabitsVM extends AppCompatActivity implements ThemableObserver {
 

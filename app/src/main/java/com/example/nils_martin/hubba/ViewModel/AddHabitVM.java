@@ -39,6 +39,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * @author Camilla Söderlund
+ */
 public class AddHabitVM extends AppCompatActivity implements ThemableObserver{
 
 
