@@ -157,6 +157,14 @@ public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver
     }
 
     @Override
+    protected void onResume() {
+        setTheme(themeHandler.getTheme());
+        super.onResume();
+        themeHandler.addThemeListener(this);
+        updateFriendsListView();
+    }
+
+    @Override
     public void recreateActivity() {
         recreate();
     }
