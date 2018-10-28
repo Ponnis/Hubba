@@ -5,17 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Achievement;
-import com.example.nils_martin.hubba.Model.AchievementFactory;
-import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.Model.Group;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.IHabit;
-
+import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
@@ -23,69 +20,70 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-public class CreateUserVM extends AppCompatActivity  {
+/**
+ * @author Li Rönning
+ */
+public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver {
 
     private HubbaModel model = HubbaModel.getInstance();
-    private EditText newUsername;
-    private EditText newEmail;
-    private EditText newPassword;
-    private ImageButton backButton;
-    private Button createNewUser;
+    private ThemeHandler themeHandler = new ThemeHandler();
 
-     protected void onCreate(Bundle savedInstanceState) {
+    private Button yesButton;
+    private Button noButton;
+    private TextView groupTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setTheme(themeHandler.getTheme());
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_user);
-        initViews();
-        initOnClickListeners();
+        setContentView(R.layout.remove_group);
+        themeHandler.addThemeListener(this);
+        init();
     }
 
-    private void initViews() {
-        newUsername = findViewById(R.id.txtNewUsername);
-        newPassword = findViewById(R.id.txtNewPassword);
-        newEmail = findViewById(R.id.txtNewEmail);
-        createNewUser = findViewById(R.id.btnCreateNewUser);
-        backButton = findViewById(R.id.backBtn4);
+    private void init() {
+        initFindByView();
+        initOnClickListener();
+        initTextView();
     }
 
-    private void initOnClickListeners() {
-         backButton.setOnClickListener(v -> onBackPressed());
-        createNewUser.setOnClickListener((View v) -> {
-            if(!newUsername.getText().toString().isEmpty() && !newEmail.getText().toString().isEmpty()
-                    && !newPassword.getText().toString().isEmpty()){
-                addUser();
+    private void initFindByView() {
+        yesButton = findViewById(R.id.yesGroupBtn);
+        noButton = findViewById(R.id.noGroupBtn);
+        groupTextView = findViewById(R.id.groupTextView);
+    }
+
+    private void initOnClickListener() {
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO remove group when save works
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
-    /**
-     * Creates new user based on the input parameters
-     * */
-    private void addUser(){
-        User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(),
-                 setAchivements());
-        model.addUser(user);
-        finish();
+
+    private void initTextView(){groupTextView.setText(getIntent().getStringExtra("GROUP"));}
+
+    @Override
+    public void recreateActivity() {
+        recreate();
     }
 
-
-    private ArrayList<Achievement> setAchivements(){
-        ArrayList<Achievement> startAchivements = new ArrayList<>();
-
-        setHabitAchivements(startAchivements);
-        setStreakAchivements(startAchivements);
-        return startAchivements;
-    }
-    private void setHabitAchivements(ArrayList<Achievement> startAchievements){
-        startAchievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIVE HABITS",5));
-        startAchievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED TEN HABITS",10));
-        startAchievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIFTEEN HABITS",15));
-
-    }
-    private void setStreakAchivements(ArrayList<Achievement> startAchievements){
-        startAchievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIVE",5));
-        startAchievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF TEN",10));
-        startAchievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIFTEEN",15));
+    @Override
+    protected void onPause() {
+        try {
+            save();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        super.onPause();
     }
 
     public void save() throws JSONException {
@@ -190,8 +188,6 @@ public class CreateUserVM extends AppCompatActivity  {
             jsonHabits.put("state", habit.getSTATE().toString());
             jsonHabits.put("frequency", habit.getFREQUENCY());
             jsonHabits.put("daysToDoSize", habit.getDaysToDoSize());
-            jsonHabits.put("previewsDayDone", habit.getPreviewsDayDone());
-            jsonHabits.put("getTodayDate", habit.getTodayDate());
 
             JSONArray daysList = new JSONArray();
             jsonHabits.put("daysInteger", daysList);
@@ -262,5 +258,4 @@ public class CreateUserVM extends AppCompatActivity  {
         }
         return jsonObject.put("groupFriend", jsonArray).toString();
     }
-
 }
