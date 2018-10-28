@@ -161,7 +161,8 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     @Override
     protected void onStop() {
         int size = user.getHabits().size();
-        setCreatedHabit(user.getHabits().get(size-1));
+        if (size!=0){
+        setCreatedHabit(user.getHabits().get(size-1));}
         super.onStop();
         createNewGroup();
         finish();
