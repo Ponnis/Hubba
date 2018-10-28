@@ -39,7 +39,6 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     private String friendNames;
     private List<String> friendsAsString = new ArrayList<>();
     private Button createNewGroupHabit;
-    private ImageButton backButton;
     private ThemeHandler themeHandler = new ThemeHandler();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +161,7 @@ public class CreateGroupVM extends AppCompatActivity implements ThemableObserver
     @Override
     protected void onStop() {
         int size = user.getHabits().size();
-        setCreatedHabit(user.getHabits().get(size));
+        setCreatedHabit(user.getHabits().get(size-1));
         super.onStop();
         createNewGroup();
         finish();
