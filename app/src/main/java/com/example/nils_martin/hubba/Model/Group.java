@@ -22,7 +22,6 @@ public class Group {
         return this.groupName;
     }
 
-
     /**
      * Checks with all the groupmembers if the habit is done, sets habit to done if true.
      */
@@ -32,7 +31,16 @@ public class Group {
         }
     }
 
-    private List<IFriend> getUsersInGroup() {
+    public List<IFriend> getUsersInGroup() {
         return this.usersInGroup;
+    }
+
+    public IHabit getHabit(){
+        return this.habit;
+    }
+
+
+    public void setUsersInGroup(List<IFriend> iFriendList) {
+        this.usersInGroup = iFriendList;
     }
 }

@@ -53,8 +53,8 @@ public class MyAchievementsVM extends AppCompatActivity implements ThemableObser
     private void initRecyclerView() {
         try {
             achievements = model.getCurrentUser().getAchievements();
-            AchivementAdapter achivementAdapter = new AchivementAdapter(achievements);
-            rvAchivements.setAdapter(achivementAdapter);
+            AchievementAdapter achievementAdapter = new AchievementAdapter(achievements);
+            rvAchivements.setAdapter(achievementAdapter);
             rvAchivements.setLayoutManager(new LinearLayoutManager(this));
         }catch (NullPointerException e){
             youHaveAchievedNothing.setText(R.string.youAchievedNothing);

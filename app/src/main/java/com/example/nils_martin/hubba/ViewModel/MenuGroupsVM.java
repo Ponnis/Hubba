@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -38,6 +39,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
     private ListView yourGroupsListView;
     private ArrayAdapter<String> yourGroupsAdapter;
     private Button addGroupButton;
+    private Group openGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
         initFindByView();
         updateGroupsListView();
         addGroupOnClick();
+        listViewOnClick();
     }
 
     /**
@@ -69,7 +72,9 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
      * Gets the list of groups from the current user in HubbaModel.
      */
     private void getGroupsList() {
-        groups = model.getCurrentUser().getGroups();
+        if (model.getCurrentUser().getGroups() != null) {
+            groups = model.getCurrentUser().getGroups();
+        }
     }
 
     /**
@@ -101,6 +106,38 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
                 R.layout.menu_list_item,
                 groupStrings);
         yourGroupsListView.setAdapter(yourGroupsAdapter);
+    }
+
+    /**
+     * Gets the string from the item that is clicked and then finds a group with a name that
+     * matches the item. This group is then opened on a new page.
+     */
+    private void listViewOnClick () {
+        yourGroupsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                findGroup(yourGroupsListView.getItemAtPosition(position).toString());
+                Intent intent = new Intent(MenuGroupsVM.this, RemoveGroupVM.class);
+                intent.putExtra("GROUP", openGroup.getGroupName());
+                startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * Finds the group with the name corresponding to the string in the groups list
+     * @param string is the string of a groups name
+     */
+    private void findGroup(String string) {
+        for(Group group: groups) {
+            if(group.getGroupName().equals(string)) {
+                setOpenGroup(group);
+            }
+        }
+    }
+
+    private  void setOpenGroup(Group openGroup) {
+        this.openGroup = openGroup;
     }
 
     public void recreateActivity () {
@@ -148,8 +185,6 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
 
             jsonUser.put("theme", user.getTheme());
 
-            //jsonUser.put("isUsed", user.isUsed());
-
             jsonArray.put(jsonUser);
         }
 
@@ -196,6 +231,26 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
             editor1.apply();
         }
 
+        for (User user: model.getUsers()){
+            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
+            SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+            editor1.putString("groupslist", groupsToJson(user));
+            editor1.apply();
+        }
+
+        for (User user: model.getUsers()){
+            for (Group group: user.getGroups()){
+                SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + group.getGroupName() + "userInGroups", MODE_PRIVATE);
+                SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+
+                editor1.putString("groupFriendslist", groupFriendsToJson(group));
+                editor1.apply();
+            }
+        }
+
+
+
     }
 
     private String habitsToJson(User user) throws JSONException {
@@ -208,7 +263,6 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
             jsonHabits.put("streak", habit.getStreak());
             jsonHabits.put("isDone", habit.getIsDone());
             jsonHabits.put("reminderOn", habit.isReminderOn());
-            //jsonHabits.put("habitTypeState", habit.getHabitTypeState().toString());
             jsonHabits.put("state", habit.getSTATE().toString());
             jsonHabits.put("frequency", habit.getFREQUENCY());
             jsonHabits.put("daysToDoSize", habit.getDaysToDoSize());
@@ -256,5 +310,32 @@ public class MenuGroupsVM extends AppCompatActivity implements ThemableObserver 
             jsonArray.put(jsonAchievement);
         }
         return jsonObject.put("achievement", jsonArray).toString();
+    }
+
+    private String groupsToJson(User user) throws JSONException{
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (Group group: model.getUser(user.getUserName()).getGroups()){
+            JSONObject jsonGroup = new JSONObject();
+            jsonGroup.put("groupName", group.getGroupName());
+
+            JSONArray usersInGroup = new JSONArray();
+            jsonGroup.put("usersInGroup", usersInGroup);
+
+            jsonGroup.put("theGroupHabit", group.getHabit());
+            jsonArray.put(jsonGroup);
+        }
+        return jsonObject.put("group", jsonArray).toString();
+    }
+
+    private String groupFriendsToJson(Group group) throws JSONException{
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (IFriend iFriend: group.getUsersInGroup()){
+            JSONObject jsonGroupFriends = new JSONObject();
+            jsonGroupFriends.put("GroupFriendUserName", iFriend.getUserName());
+            jsonArray.put(jsonGroupFriends);
+        }
+        return jsonObject.put("groupFriend", jsonArray).toString();
     }
 }

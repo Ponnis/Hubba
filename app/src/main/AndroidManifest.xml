@@ -43,6 +43,7 @@
         <activity android:name=".ViewModel.EditHabitVM"/>
         <activity android:name=".ViewModel.AddFriendVM"/>
         <activity android:name=".ViewModel.RemoveFriendVM"/>
+        <activity android:name=".ViewModel.RemoveGroupVM"/>
     </application>
 
 
