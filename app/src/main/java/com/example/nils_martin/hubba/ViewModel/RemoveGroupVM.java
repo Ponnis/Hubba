@@ -74,6 +74,7 @@ public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver
         for (Group group : model.getCurrentUser().getGroups()){
             if(group.getGroupName().equals(getIntent().getStringExtra("GROUP"))){
                 model.getCurrentUser().getGroups().remove(group);
+                break;
             }
         }
     }

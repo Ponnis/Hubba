@@ -89,7 +89,7 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
      * If they are no it gets the user added from HubbaModel.
      */
     private void addFriendToCurrentUser() {
-        if (!model.getUsers().isEmpty() || !(model.getCurrentUser().getUserName().equals(friendsUserName.getText().toString()))) {
+        if (!model.getUsers().isEmpty() && !(model.getCurrentUser().getUserName().equals(friendsUserName.getText().toString()))) {
             User user = model.getUser(friendsUserName.getText().toString());
             model.getCurrentUser().addFriend(user);
         }

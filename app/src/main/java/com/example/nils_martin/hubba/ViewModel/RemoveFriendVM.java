@@ -79,6 +79,7 @@ public class RemoveFriendVM extends AppCompatActivity implements ThemableObserve
         for (IFriend friend : model.getCurrentUser().getFriends()){
             if(friend.getUserName().equals(getIntent().getStringExtra("FRIEND"))){
                 model.getCurrentUser().getFriends().remove(friend);
+                break;
             }
         }
 
