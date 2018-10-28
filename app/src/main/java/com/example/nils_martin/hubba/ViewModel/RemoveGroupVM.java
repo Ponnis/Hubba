@@ -44,6 +44,7 @@ public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver
     private void init() {
         initFindByView();
         initOnClickListener();
+        initTextView();
     }
 
     private void initFindByView() {
@@ -68,6 +69,7 @@ public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver
         });
     }
 
+    private void initTextView(){groupTextView.setText(getIntent().getStringExtra("GROUP"));}
 
     @Override
     public void recreateActivity() {
