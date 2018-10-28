@@ -37,6 +37,7 @@ public class Adapter extends ArrayAdapter<String>  {
         View view;
         view = layoutInflater.inflate(R.layout.habit_list_item, parent, false);
 
+        title = getItem(position);
         initView(view);
         initVariables(position);
 
@@ -68,7 +69,6 @@ public class Adapter extends ArrayAdapter<String>  {
     }
 
     private void initVariables(int position) {
-        title = getItem(position);
         IHabit currentHabit = mainActivityVM.getHabit(title);
         Integer streak = currentHabit.getStreak();
         textView.setText(title);
