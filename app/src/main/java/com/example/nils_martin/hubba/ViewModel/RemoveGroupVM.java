@@ -58,6 +58,7 @@ public class RemoveGroupVM extends AppCompatActivity implements ThemableObserver
             @Override
             public void onClick(View v) {
                 removeGroup();
+                finish();
             }
         });
 
