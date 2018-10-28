@@ -5,7 +5,6 @@ public enum State {
         MORNING,
         MIDDAY,
         EVENING,
-        NIGHT,
-        DONE
+        NIGHT
 
 }

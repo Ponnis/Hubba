@@ -192,9 +192,6 @@ public class LoginVM extends AppCompatActivity {
                 } else if ("NIGHT".equals(string)) {
                     user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setSTATE(State.NIGHT);
 
-                } else if ("DONE".equals(string)) {
-                    user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setSTATE(State.DONE);
-
                 }
             }
 
