@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.nils_martin.hubba.Model.Acheievement;
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IFriend;
@@ -311,7 +311,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     private String achievementsToJson (User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (Acheievement achievement: model.getUser(user.getUserName()).getAcheievements()){
+        for (Achievement achievement: model.getUser(user.getUserName()).getAchievements()){
             JSONObject jsonAchievement = new JSONObject();
             jsonAchievement.put("title", achievement.getTitle());
             jsonAchievement.put("isAcheived", achievement.getAchieved());

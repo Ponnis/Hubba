@@ -5,11 +5,11 @@ package com.example.nils_martin.hubba.Model;
  *
  */
 
-public class StreakAcheievement extends Acheievement implements IStreakAchievement {
+public class StreakAchievement extends Achievement implements IStreakAchievement {
 
     private AchievementType achievementType;
 
-    StreakAcheievement(String title, int targetnmbr) {
+    StreakAchievement(String title, int targetnmbr) {
         super(title,targetnmbr);
         achievementType = AchievementType.StreakAchievement;
 

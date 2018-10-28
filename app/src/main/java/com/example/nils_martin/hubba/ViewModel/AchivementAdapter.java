@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nils_martin.hubba.Model.Acheievement;
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.R;
 
@@ -21,9 +21,9 @@ import java.util.List;
  */
 
 public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.ViewHolder> {
-    private List<Acheievement> achivements;
+    private List<Achievement> achivements;
 
-    public AchivementAdapter(List<Acheievement> achivements){
+    public AchivementAdapter(List<Achievement> achivements){
         this.achivements = achivements;
     }
     @NonNull
@@ -38,14 +38,14 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AchivementAdapter.ViewHolder viewHolder, int position) {
-        Acheievement acheievement = achivements.get(position);
+        Achievement achievement = achivements.get(position);
 
         TextView achivementTitle = viewHolder.achivementTitle;
         ImageView achivementPicture = viewHolder.achivementPicture;
         try {
-            if (acheievement.getsAchieved()) {
-                achivementPicture.setImageResource(getImage(acheievement));
-                achivementTitle.setText(acheievement.getTitle());
+            if (achievement.getsAchieved()) {
+                achivementPicture.setImageResource(getImage(achievement));
+                achivementTitle.setText(achievement.getTitle());
             } else {
                 achivementPicture.setImageResource(R.drawable.achivement_locked);
                 achivementTitle.setText(R.string.lockedAchievement);
@@ -65,8 +65,8 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
         return achivements.size();
     }
     // Choses picture depening on Achivement type
-    public int getImage(Acheievement acheievement) {
-       AchievementType achievementType =  acheievement.getAchievementType();
+    public int getImage(Achievement achievement) {
+       AchievementType achievementType =  achievement.getAchievementType();
        if (achievementType == AchievementType.NumOHabitsAchievement){
            return R.drawable.num_of_habits;
        }

@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import com.example.nils_martin.hubba.Model.Acheievement;
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.IHabit;
@@ -248,7 +248,7 @@ public class SettingsVM extends AppCompatActivity implements ThemableObserver {
     private String achievementsToJson (User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (Acheievement achievement: model.getUser(user.getUserName()).getAcheievements()){
+        for (Achievement achievement: model.getUser(user.getUserName()).getAchievements()){
             JSONObject jsonAchievement = new JSONObject();
             jsonAchievement.put("title", achievement.getTitle());
             jsonAchievement.put("isAcheived", achievement.getAchieved());

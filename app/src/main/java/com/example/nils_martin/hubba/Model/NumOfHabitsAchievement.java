@@ -6,10 +6,10 @@ import java.util.List;
  *
  */
 
-public class NumOfHabitsAcheievement extends Acheievement {
+public class NumOfHabitsAchievement extends Achievement {
     private static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
 
-    NumOfHabitsAcheievement(String title, int targetNmbr){
+    NumOfHabitsAchievement(String title, int targetNmbr){
         super(title, targetNmbr);
     }
 
