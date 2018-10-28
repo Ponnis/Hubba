@@ -20,18 +20,18 @@ import java.util.List;
  * A custom RecyclerViewAdapter which contains custom ViewHolder.
  */
 
-public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.ViewHolder> {
+public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.ViewHolder> {
     private List<Achievement> achivements;
 
 
-    public AchivementAdapter(List<Achievement> achivements) {
+    public AchievementAdapter(List<Achievement> achivements) {
 
         this.achivements = achivements;
     }
 
     @NonNull
     @Override
-    public AchivementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AchievementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -40,7 +40,7 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AchivementAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull AchievementAdapter.ViewHolder viewHolder, int position) {
         Achievement achievement = achivements.get(position);
 
         TextView achivementTitle = viewHolder.achivementTitle;
@@ -54,7 +54,7 @@ public class AchivementAdapter extends RecyclerView.Adapter<AchivementAdapter.Vi
                 achivementTitle.setText(R.string.lockedAchievement);
             }
         } catch (NullPointerException e) {
-            System.out.println("Nullpointerexception at AchivementAdapter when trying to set Imageview");
+            System.out.println("Nullpointerexception at AchievementAdapter when trying to set Imageview");
             System.out.println(e.toString());
             achivementPicture.setImageResource(R.drawable.achivement_locked);
         }
