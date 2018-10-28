@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Achievement;
+import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IFriend;
@@ -51,7 +52,6 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         setContentView(R.layout.habit_view);
         themeHandler.addThemeListener(this);
         setCurrentHabit();
-       // habit = MainActivityVM.openHabit;
         initFindView();
         init(currentHabit);
         update();
@@ -85,14 +85,24 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
     /**
      * set text to habit title and states.
-     * @param habit
+     * @param habit the habit
      */
     private void init(IHabit habit){
         habitTitleTextView.setText(habit.getTitle());
         timeOfDayTextView.setText(toLowerCase(habit.getSTATE().toString()));
-        frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()) + ": " + weekdays());
+        setFrequencyTextView(habit);
         setReminderTime();
         streakDaysTextView.setText(String.valueOf(habit.getStreak()) + " days");
+    }
+
+    private void setFrequencyTextView(IHabit habit){
+        if(habit.getFREQUENCY().equals(Frequency.DAILY)){
+            frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()));
+        }else if(habit.getFREQUENCY().equals(Frequency.WEEKLY)){
+            frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()) + ": " + weekdays());
+        }else{
+            frequencyTextView.setText(toLowerCase(habit.getFREQUENCY().toString()) + " on the " + habit.getDaysToDo().get(0));
+        }
     }
 
     private void update(){
@@ -122,7 +132,7 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
     }
 
     private String weekdays(){
-        String[] days = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
+        String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         StringBuilder stringBuilder = new StringBuilder();
         List<Integer> list = currentHabit.getDaysToDo();
         String prefix = "";
@@ -136,8 +146,8 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
 
     /**
      * Turn string ENUM to lowercase
-     * @param string
-     * @return
+     * @param string the string
+     * @return the string in lowercase
      */
     private String toLowerCase(String string){
         String temp = string;
@@ -147,6 +157,9 @@ public class HabitVM extends AppCompatActivity implements ThemableObserver {
         return temp;
     }
 
+    /**
+     * set the reminder text view to rigth time
+     */
     private void setReminderTime(){
         List<String> list = new ArrayList<>();
         if(currentHabit.isReminderOn()){
