@@ -22,17 +22,14 @@ public class Group {
         return this.groupName;
     }
 
+
     /**
      * Checks with all the groupmembers if the habit is done, sets habit to done if true.
      */
-
-
-    private void isHabitComplete() {
-        if (habit.getGroupMembersDoneCount() == usersInGroup.size()) {
-
-            habit.setDone();
+    private void isHabitComplete(){
+        if(habit.getGroupMembersDoneCount()==usersInGroup.size()){
+            habit.setGroupDone();
         }
-
     }
 
     private List<IFriend> getUsersInGroup() {

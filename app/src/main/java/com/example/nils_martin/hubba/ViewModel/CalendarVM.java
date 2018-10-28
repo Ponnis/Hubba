@@ -66,6 +66,7 @@ public class CalendarVM extends Activity implements ThemableObserver {
             public void onClick(View v) {
                 Intent intent = new Intent(CalendarVM.this, MainActivityVM.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

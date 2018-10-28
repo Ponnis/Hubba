@@ -30,7 +30,7 @@ public class AchievementTest {
         model.getCurrentUser().addHabit(new Habit("Fiska",days));
         List<IHabit> habits = model.getCurrentUser().getHabits();
         for (IHabit i: habits) {
-            i.setDone();
+            i.setGroupDone();
         }
 
         Achievement streak = AchievementFactory.getAchievement(AchievementType.StreakAchievement, "Streak Test", 1);

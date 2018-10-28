@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ImageButton menuButton;
     protected static IHabit openHabit = new Habit("");
     private ThemeHandler themeHandler = new ThemeHandler();
+    private Calendar nowCalendar = Calendar.getInstance();
 
     private int listItemHeight = 130;
     private int dividerHeight = 40;
@@ -154,7 +156,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             IHabit habit = habitIterator.next();
             habit.setDaysToDoSize(habit.getDaysToDo().size());
             if(checkIfEventIsToday(habit)) {
-                if (habit.getIsDone()) {
+                if (habit.getIsDone() && haveYouDoneTheHabitToday(habit)) {
                     habitDoneString.add(habit.getTitle());
                 }
                 else {
@@ -206,6 +208,32 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             }
         }
         return false;
+    }
+
+    private boolean haveYouDoneTheHabitToday(IHabit habit) {
+        if(habit.getLastDateDoneStack().peek() != null &&
+                (habit.getLastDateDoneStack().peek().toString().equals(getTodayDate().toString()))) {
+            habit.setDoneTo(true);
+            return true;
+        }
+        else {
+            habit.setDoneTo(false);
+            return false;
+        }
+    }
+
+    private Date getTodayDate() {
+        Date today = new Date();
+        nowCalendar.set(Calendar.HOUR, 0);
+        nowCalendar.set(Calendar.MINUTE, 0);
+        nowCalendar.set(Calendar.SECOND, 0);
+        today.setYear(nowCalendar.get(Calendar.YEAR));
+        today.setMonth(nowCalendar.get(Calendar.MONTH));
+        today.setDate(nowCalendar.get(Calendar.DAY_OF_MONTH));
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        return today;
     }
 
     /**
