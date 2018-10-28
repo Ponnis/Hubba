@@ -23,7 +23,7 @@ public class HabitTest {
     @Test
     public void testSetDone() {
         IHabit habit = new Habit("test");
-        habit.setDone();
+        habit.setGroupDone();
         assertTrue(habit.getIsDone());
         assertTrue(habit.getStreak() == 1);
     }

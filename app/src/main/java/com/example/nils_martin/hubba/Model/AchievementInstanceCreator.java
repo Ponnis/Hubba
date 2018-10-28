@@ -4,9 +4,9 @@ import com.google.gson.InstanceCreator;
 
 import java.lang.reflect.Type;
 
-public class AchievementInstanceCreator implements InstanceCreator<Acheievement> {
-    public Acheievement createInstance(Type type) {
-        return new Acheievement("title", 0) {
+public class AchievementInstanceCreator implements InstanceCreator<Achievement> {
+    public Achievement createInstance(Type type) {
+        return new Achievement("title", 0) {
             @Override
             public Boolean assessAchievement() {
                 return null;

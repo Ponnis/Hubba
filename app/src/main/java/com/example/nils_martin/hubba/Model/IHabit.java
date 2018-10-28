@@ -1,16 +1,19 @@
 package com.example.nils_martin.hubba.Model;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Stack;
+
 /**
  * @author Nils-Martin Robeling
- * */
+ */
 public interface IHabit {
 
     void setHabitTypeState(IHabitTypeState habitTypeState);
 
     IHabitTypeState getHabitTypeState();
 
-    void setDone();
+    void setGroupDone();
 
     void isDone();
 
@@ -21,6 +24,8 @@ public interface IHabit {
     void upStreak(Habit habit);
 
     Boolean getIsDone();
+
+    void setDoneTo(boolean b);
 
     void upGroupMembersDoneCount();
 
@@ -42,9 +47,9 @@ public interface IHabit {
 
     void setSTATE(State state);
 
-    void setFREQUENCY (Frequency FREQUENCY);
+    void setFREQUENCY(Frequency FREQUENCY);
 
-    State getSTATE ();
+    State getSTATE();
 
     Frequency getFREQUENCY();
 
@@ -61,4 +66,8 @@ public interface IHabit {
     void setDaysToDoSize(int size);
 
     void initDaysToDoList();
+
+    String getTodayDate();
+
+    String getPreviewsDayDone();
 }

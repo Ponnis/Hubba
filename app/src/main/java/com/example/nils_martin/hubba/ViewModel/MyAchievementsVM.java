@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.nils_martin.hubba.Model.Acheievement;
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHubbaModel;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class MyAchievementsVM extends AppCompatActivity implements ThemableObserver {
     ThemeHandler themeHandler = new ThemeHandler();
-    List<Acheievement> acheievements;
+    List<Achievement> achievements;
     IHubbaModel model = HubbaModel.getInstance();
 
     private RecyclerView rvAchivements;
@@ -52,9 +52,9 @@ public class MyAchievementsVM extends AppCompatActivity implements ThemableObser
      */
     private void initRecyclerView() {
         try {
-            acheievements = model.getCurrentUser().getAcheievements();
-            AchivementAdapter achivementAdapter = new AchivementAdapter(acheievements);
-            rvAchivements.setAdapter(achivementAdapter);
+            achievements = model.getCurrentUser().getAchievements();
+            AchievementAdapter achievementAdapter = new AchievementAdapter(achievements);
+            rvAchivements.setAdapter(achievementAdapter);
             rvAchivements.setLayoutManager(new LinearLayoutManager(this));
         }catch (NullPointerException e){
             youHaveAchievedNothing.setText(R.string.youAchievedNothing);

@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ImageButton;
 
-import com.example.nils_martin.hubba.Model.Acheievement;
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.Frequency;
 import com.example.nils_martin.hubba.Model.Group;
 import com.example.nils_martin.hubba.Model.Habit;
@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -58,6 +59,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private ImageButton menuButton;
     protected static IHabit openHabit = new Habit("");
     private ThemeHandler themeHandler = new ThemeHandler();
+    private Calendar nowCalendar = Calendar.getInstance();
 
     private int listItemHeight = 130;
     private int dividerHeight = 40;
@@ -155,7 +157,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             IHabit habit = habitIterator.next();
             habit.setDaysToDoSize(habit.getDaysToDo().size());
             if(checkIfEventIsToday(habit)) {
-                if (habit.getIsDone()) {
+                if (habit.getIsDone() && haveYouDoneTheHabitToday(habit)) {
                     habitDoneString.add(habit.getTitle());
                 }
                 else {
@@ -207,6 +209,31 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             }
         }
         return false;
+    }
+
+    private boolean haveYouDoneTheHabitToday(IHabit habit) {
+        if(habit.getTodayDate().equals(getTodayDate().toString())) {
+            habit.setDoneTo(true);
+            return true;
+        }
+        else {
+            habit.setDoneTo(false);
+            return false;
+        }
+    }
+
+    private Date getTodayDate() {
+        Date today = new Date();
+        nowCalendar.set(Calendar.HOUR, 0);
+        nowCalendar.set(Calendar.MINUTE, 0);
+        nowCalendar.set(Calendar.SECOND, 0);
+        today.setYear(nowCalendar.get(Calendar.YEAR));
+        today.setMonth(nowCalendar.get(Calendar.MONTH));
+        today.setDate(nowCalendar.get(Calendar.DAY_OF_MONTH));
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        return today;
     }
 
     /**
@@ -404,6 +431,9 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
             jsonHabits.put("state", habit.getSTATE().toString());
             jsonHabits.put("frequency", habit.getFREQUENCY());
             jsonHabits.put("daysToDoSize", habit.getDaysToDoSize());
+            jsonHabits.put("previewsDayDone", habit.getPreviewsDayDone());
+            jsonHabits.put("getTodayDate", habit.getTodayDate());
+
 
             JSONArray daysList = new JSONArray();
             jsonHabits.put("daysInteger", daysList);
@@ -439,7 +469,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     private String achievementsToJson (User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (Acheievement achievement: model.getUser(user.getUserName()).getAcheievements()){
+        for (Achievement achievement: model.getUser(user.getUserName()).getAchievements()){
             JSONObject jsonAchievement = new JSONObject();
             jsonAchievement.put("title", achievement.getTitle());
             jsonAchievement.put("isAcheived", achievement.getAchieved());

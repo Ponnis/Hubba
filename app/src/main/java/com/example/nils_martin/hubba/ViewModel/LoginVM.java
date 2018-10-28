@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.nils_martin.hubba.Model.Acheievement;
+import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.AchievementFactory;
 import com.example.nils_martin.hubba.Model.AchievementInstanceCreator;
 import com.example.nils_martin.hubba.Model.AchievementType;
@@ -180,10 +180,10 @@ public class LoginVM extends AppCompatActivity {
         JSONObject jsonResponse = new JSONObject(json);
         model.setUsers(gson.fromJson(jsonResponse.getString("user"), typeUser));
 
-        Type typeHabit = new TypeToken<ArrayList<Habit>>(){}.getType();
-        Type typeAchievement = new TypeToken<ArrayList<Acheievement>>(){}.getType();
+        Type typeHabit = new TypeToken<ArrayList<Habit>>() {
+        }.getType();
+        Type typeAchievement = new TypeToken<ArrayList<Achievement>>(){}.getType();
         Type typeGroup = new TypeToken<List<Group>>(){}.getType();
-        Type typeGroupHabit = new TypeToken<IHabit>(){}.getType();
 
         JSONArray jsonTheme = jsonResponse.getJSONArray("user");
         for (int a = 0; a < jsonTheme.length(); a++) {
@@ -278,7 +278,7 @@ public class LoginVM extends AppCompatActivity {
         for(User user: model.getUsers()){
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "achievements", MODE_PRIVATE);
             String jsonAchievement = sharedPreferences1.getString("achievementslist",null);
-            Gson gsonAchievement = new GsonBuilder().registerTypeAdapter(Acheievement.class, new AchievementInstanceCreator()).create();
+            Gson gsonAchievement = new GsonBuilder().registerTypeAdapter(Achievement.class, new AchievementInstanceCreator()).create();
             JSONObject jsonResponseAchievement = new JSONObject(jsonAchievement);
             user.setAchievements(gsonAchievement.fromJson(jsonResponseAchievement.getString("achievement"), typeAchievement));
         }
@@ -411,6 +411,8 @@ public class LoginVM extends AppCompatActivity {
             jsonHabits.put("state", habit.getSTATE().toString());
             jsonHabits.put("frequency", habit.getFREQUENCY());
             jsonHabits.put("daysToDoSize", habit.getDaysToDoSize());
+            jsonHabits.put("previewsDayDone", habit.getPreviewsDayDone());
+            jsonHabits.put("getTodayDate", habit.getTodayDate());
 
             JSONArray daysList = new JSONArray();
             jsonHabits.put("daysInteger", daysList);
@@ -446,7 +448,7 @@ public class LoginVM extends AppCompatActivity {
     private String achievementsToJson (User user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-        for (Acheievement achievement: model.getUser(user.getUserName()).getAcheievements()){
+        for (Achievement achievement: model.getUser(user.getUserName()).getAchievements()){
             JSONObject jsonAchievement = new JSONObject();
             jsonAchievement.put("title", achievement.getTitle());
             jsonAchievement.put("isAcheived", achievement.getAchieved());
@@ -538,24 +540,23 @@ public class LoginVM extends AppCompatActivity {
         }
     }
 
-    private ArrayList<Acheievement> setAchivements(){
-        ArrayList<Acheievement> startAchivements = new ArrayList<>();
 
+    private ArrayList<Achievement> setAchivements(){
+        ArrayList<Achievement> startAchivements = new ArrayList<>();
         setHabitAchivements(startAchivements);
         setStreakAchivements(startAchivements);
         return startAchivements;
     }
 
-    private void setHabitAchivements(ArrayList<Acheievement> startAcheievements){
-        startAcheievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIVE HABITS",5));
-        startAcheievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED TEN HABITS",10));
-        startAcheievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIFTEEN HABITS",15));
+    private void setHabitAchivements(ArrayList<Achievement> startAchievements){
+        startAchievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIVE HABITS",5));
+        startAchievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED TEN HABITS",10));
+        startAchievements.add(AchievementFactory.getAchievement(AchievementType.NumOHabitsAchievement, "YOU'VE CREATED FIFTEEN HABITS",15));
 
     }
-
-    private void setStreakAchivements(ArrayList<Acheievement> startAcheievements){
-        startAcheievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIVE",5));
-        startAcheievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF TEN",10));
-        startAcheievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIFTEEN",15));
+    private void setStreakAchivements(ArrayList<Achievement> startAchievements){
+        startAchievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIVE",5));
+        startAchievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF TEN",10));
+        startAchievements.add(AchievementFactory.getAchievement(AchievementType.StreakAchievement, "YOU GOTTEN A STREAK OF FIFTEEN",15));
     }
 }

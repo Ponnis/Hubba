@@ -1,10 +1,11 @@
 package com.example.nils_martin.hubba.Model;
 
 import java.util.List;
+
 /**
  * @author Nils-Martin Robeling
- * */
-public class  Group {
+ */
+public class Group {
 
     private String groupName;
     private List<IFriend> usersInGroup;
@@ -21,20 +22,13 @@ public class  Group {
         return this.groupName;
     }
 
-
-
-
     /**
      * Checks with all the groupmembers if the habit is done, sets habit to done if true.
      */
-
-
-    private void isHabitComplete() {
-        if (habit.getGroupMembersDoneCount() == usersInGroup.size()) {
-
-            habit.setDone();
+    private void isHabitComplete(){
+        if(habit.getGroupMembersDoneCount()==usersInGroup.size()){
+            habit.setGroupDone();
         }
-
     }
 
     public List<IFriend> getUsersInGroup() {
