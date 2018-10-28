@@ -9,8 +9,7 @@ import java.util.ArrayList;
  */
 
 public abstract class Achievement {
-
-    IHubbaModel model = HubbaModel.getInstance();
+    protected IHubbaModel model = HubbaModel.getInstance();
 
 
     //private User user;
