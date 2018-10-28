@@ -5,7 +5,7 @@ public class SingleHabitType implements HabitTypeState {
     public void updateHabit(Habit habit) {
         //TODO make checkSquare for habit to set done
         /*if(.isChecked){
-          habit.setDone(habit);
+          habit.setGroupDone(habit);
         }*/
     }
     @Override

@@ -21,7 +21,7 @@ public class  Group {
 
     private void isHabitComplete(){
         if(habit.getGroupMembersDoneCount()==usersInGroup.size()){
-            habit.setDone();
+            habit.setGroupDone();
         }
     }
 

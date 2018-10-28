@@ -7,8 +7,6 @@ import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.IHubbaModel;
-import com.example.nils_martin.hubba.Model.NumOfHabitsAchievement;
-import com.example.nils_martin.hubba.Model.StreakAchievement;
 import com.example.nils_martin.hubba.Model.User;
 
 import org.junit.Test;
@@ -32,7 +30,7 @@ public class AchievementTest {
         model.getCurrentUser().addHabit(new Habit("Fiska",days));
         List<IHabit> habits = model.getCurrentUser().getHabits();
         for (IHabit i: habits) {
-            i.setDone();
+            i.setGroupDone();
         }
 
         Achievement streak = AchievementFactory.getAchievement(AchievementType.StreakAchievement, "Streak Test", 1);

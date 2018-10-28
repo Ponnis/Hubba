@@ -1,9 +1,12 @@
 package com.example.nils_martin.hubba.Model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Stack;
 
 public class Habit extends Observable implements IHabit {
 
@@ -19,6 +22,8 @@ public class Habit extends Observable implements IHabit {
     private Frequency FREQUENCY;
     private List<Integer> daysToDo = new ArrayList<>();
     private ArrayList<Observer> observers;
+    private Stack<Date> lastDateDoneStack = new Stack<>();
+    private Date lastDateDone;
 
     public Habit(String title){
         this.title = title;
@@ -38,22 +43,33 @@ public class Habit extends Observable implements IHabit {
     public void setHabitTypeState(HabitTypeState habitTypeState){
         this.habitTypeState = habitTypeState;
     }
+
     public HabitTypeState getHabitTypeState(){
         return this.habitTypeState;
     }
 
-    public void setDone(){
+    public void setGroupDone(){
         this.isDone = true;
         upStreak(this);
     }
 
+    public void setDoneTo(boolean b){
+        this.isDone=b;
+    }
+
+    public Boolean getIsDone(){return isDone; }
+
     public void isDone(){
         this.isDone = true;
         this.streak++;
+        setCurrentDay();
+        lastDateDoneStack.push(lastDateDone);
     }
+
     public void notDone(){
         this.isDone = false;
         this.streak--;
+        lastDateDoneStack.pop();
     }
 
     //TODO make two different events?
@@ -74,8 +90,7 @@ public class Habit extends Observable implements IHabit {
             habit.streak++;
         }
     }
-    public Boolean getIsDone(){return isDone;
-    }
+
     public void upGroupMembersDoneCount(){
         groupMembersDoneCount++;
     }
@@ -119,8 +134,7 @@ public class Habit extends Observable implements IHabit {
     public void setFREQUENCY (Frequency FREQUENCY){
         this.FREQUENCY = FREQUENCY;
     }
-//testest
-    //test
+
     /**
      * Method for seeing what Frequency the object is set to
      * @return Returns the Frequency of the Habit
@@ -143,5 +157,20 @@ public class Habit extends Observable implements IHabit {
 
     public List<Integer> getReminderTime() {
         return reminderTime;
+    }
+
+    private void setCurrentDay() {
+        Calendar nowCalendar = Calendar.getInstance();
+        lastDateDone = new Date();
+        lastDateDone.setDate(nowCalendar.get(Calendar.DAY_OF_MONTH));
+        lastDateDone.setMonth(nowCalendar.get(Calendar.MONTH));
+        lastDateDone.setYear(nowCalendar.get(Calendar.YEAR));
+        lastDateDone.setHours(0);
+        lastDateDone.setMinutes(0);
+        lastDateDone.setSeconds(0);
+    }
+
+    public Stack<Date> getLastDateDoneStack() {
+        return lastDateDoneStack;
     }
 }

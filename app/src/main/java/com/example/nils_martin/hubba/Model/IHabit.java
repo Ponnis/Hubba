@@ -1,6 +1,8 @@
 package com.example.nils_martin.hubba.Model;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Stack;
 
 public interface IHabit {
 
@@ -8,7 +10,7 @@ public interface IHabit {
 
     HabitTypeState getHabitTypeState();
 
-    void setDone();
+    void setGroupDone();
 
     void isDone();
 
@@ -19,6 +21,8 @@ public interface IHabit {
     void upStreak(Habit habit);
 
     Boolean getIsDone();
+
+    void setDoneTo(boolean b);
 
     void upGroupMembersDoneCount();
 
@@ -53,5 +57,7 @@ public interface IHabit {
     List<Integer> getDaysToDo();
 
     List<Integer> getReminderTime();
+
+    Stack<Date> getLastDateDoneStack();
 
 }
