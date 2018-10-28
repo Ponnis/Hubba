@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.AchievementType;
+import com.example.nils_martin.hubba.Model.HubbaModel;
+import com.example.nils_martin.hubba.Model.IHubbaModel;
 import com.example.nils_martin.hubba.R;
 
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.ViewHolder> {
     private List<Achievement> achivements;
+    private IHubbaModel model = HubbaModel.getInstance();
 
 
     public AchievementAdapter(List<Achievement> achivements) {
@@ -46,7 +49,7 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
         TextView achivementTitle = viewHolder.achivementTitle;
         ImageView achivementPicture = viewHolder.achivementPicture;
         try {
-            if (achievement.getsAchieved()) {
+            if (achievement.getsAchieved(model.getCurrentUser().getHabits())) {
                 achivementPicture.setImageResource(getImage(achievement));
                 achivementTitle.setText(achievement.getTitle());
             } else {
@@ -88,8 +91,8 @@ public class AchievementAdapter extends RecyclerView.Adapter<AchievementAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            achivementTitle = (TextView) itemView.findViewById(R.id.achievementTitleText);
-            achivementPicture = (ImageView) itemView.findViewById(R.id.AchivementShownImage);
+            achivementTitle = itemView.findViewById(R.id.achievementTitleText);
+            achivementPicture = itemView.findViewById(R.id.AchivementShownImage);
         }
 
     }

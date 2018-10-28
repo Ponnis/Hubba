@@ -66,7 +66,7 @@ public class User implements Observer, IFriend, IUser {
 
     public void checkAchievements() {
         for (Achievement i : achievements) {
-            i.assessAchievement();
+            i.assessAchievement(habits);
         }
     }
 

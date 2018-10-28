@@ -1,5 +1,7 @@
 package com.example.nils_martin.hubba.Model;
 
+import java.util.ArrayList;
+
 /**
  * @author Johannes Gustavsson & Nils-Martin Robeling
  */
@@ -24,10 +26,10 @@ public class StreakAchievement extends Achievement implements IStreakAchievement
      * @return If a habit streak i equal or higher then targetnmbr it returns true, else false.
      */
     @Override
-    public Boolean assessAchievement() {
+    public Boolean assessAchievement(ArrayList<IHabit> habits) {
         Boolean isAchived = false;
         try {
-            for (IHabit habit : model.getCurrentUser().getHabits()) {
+            for (IHabit habit : habits) {
                 if (targetNmbr <= habit.getStreak()) {
                     this.setAchieved(true);
                     isAchived = true;
