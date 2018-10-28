@@ -211,8 +211,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
     }
 
     private boolean haveYouDoneTheHabitToday(IHabit habit) {
-        if(habit.getLastDateDoneStack().peek() != null &&
-                (habit.getLastDateDoneStack().peek().toString().equals(getTodayDate().toString()))) {
+        if(habit.getTodayDate().equals(getTodayDate().toString())) {
             habit.setDoneTo(true);
             return true;
         }

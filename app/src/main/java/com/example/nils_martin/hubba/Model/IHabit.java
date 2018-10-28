@@ -61,11 +61,13 @@ public interface IHabit {
 
     List<Integer> getReminderTime();
 
-    Stack<Date> getLastDateDoneStack();
-
     int getDaysToDoSize();
 
     void setDaysToDoSize(int size);
 
     void initDaysToDoList();
+
+    String getTodayDate();
+
+    String getPreviewsDayDone();
 }
