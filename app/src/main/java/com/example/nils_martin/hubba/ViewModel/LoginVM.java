@@ -24,6 +24,8 @@ import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.IService;
+import com.example.nils_martin.hubba.Services.Service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -37,6 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginVM extends AppCompatActivity {
+    IService service = new Service();
+
     private HubbaModel model = HubbaModel.getInstance();
     private EditText Username;
     private EditText Password;
@@ -105,6 +109,11 @@ public class LoginVM extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        try {
+            service.save(this.getApplicationContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         super.onPause();
     }
 

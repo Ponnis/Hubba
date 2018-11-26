@@ -1,5 +1,6 @@
 package com.example.nils_martin.hubba.Services;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
@@ -18,7 +19,9 @@ public class Service extends AppCompatActivity implements IService{
 
     HubbaModel model = HubbaModel.getInstance();
 
-    public void save() throws JSONException {
+    public void save(Context ctx) throws JSONException {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences("shared preferences", MODE_PRIVATE);
+
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         for (IUser user : model.getUsers()) {
@@ -44,7 +47,7 @@ public class Service extends AppCompatActivity implements IService{
 
         jsonObject.put("user", jsonArray);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        //SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("userlist", jsonObject.toString());
