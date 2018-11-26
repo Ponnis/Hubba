@@ -14,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Service extends AppCompatActivity {
+public class Service extends AppCompatActivity implements IService{
 
     HubbaModel model = HubbaModel.getInstance();
 
