@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public interface IHubbaModel {
 
 
-    User getUser(String userName);
+    IUser getUser(String userName);
 
-    ArrayList<User> getUsers();
+    ArrayList<IUser> getUsers();
 
-    User getCurrentUser();
+    IUser getCurrentUser();
 
-    void setCurrentUser(User user);
+    void setCurrentUser(IUser user);
 
-    void setUsers(ArrayList<User> users);
+    void setUsers(ArrayList<IUser> users);
 
     Themes getTheme();
 
@@ -24,5 +24,5 @@ public interface IHubbaModel {
 
     void addThemeListener(ThemableObserver observer);
 
-    void addUser(User user);
+    void addUser(IUser user);
 }

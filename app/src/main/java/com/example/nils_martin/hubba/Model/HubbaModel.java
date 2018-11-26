@@ -5,10 +5,11 @@ import java.util.ArrayList;
 /**
  * @author Nils-Martin Robeling, Li Rönning
  */
+
 public class HubbaModel implements IHubbaModel {
     private static HubbaModel instance = null;
-    private ArrayList<User> users;
-    private User currentUser;
+    private ArrayList<IUser> users;
+    private IUser currentUser;
 
     public static HubbaModel getInstance() {
         if (instance == null) {
@@ -24,9 +25,9 @@ public class HubbaModel implements IHubbaModel {
     /**
      * Returns a user based on a string Parameter for the users name
      */
-    public User getUser(String userName) {
+    public IUser getUser(String userName) {
         int index = 0;
-        for (User user : users) {
+        for (IUser user : users) {
             if (user.getUserName().equals(userName)) {
                 index = users.indexOf(user);
             }
@@ -34,19 +35,19 @@ public class HubbaModel implements IHubbaModel {
         return users.get(index);
     }
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<IUser> getUsers() {
         return users;
     }
 
-    public User getCurrentUser() {
+    public IUser getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(User user) {
+    public void setCurrentUser(IUser user) {
         currentUser = user;
     }
 
-    public void setUsers(ArrayList<User> users) {
+    public void setUsers(ArrayList<IUser> users) {
         this.users = users;
     }
 
@@ -63,7 +64,7 @@ public class HubbaModel implements IHubbaModel {
         currentUser.addThemeObserver(observer);
     }
 
-    public void addUser(User user) {
+    public void addUser(IUser user) {
         this.users.add(user);
     }
 

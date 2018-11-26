@@ -1,6 +1,7 @@
 package com.example.nils_martin.hubba.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Johannes Gustavsson & Nils-Marting Robeling
@@ -26,7 +27,7 @@ public abstract class Achievement {
         isAchieved = achieved;
     }
 
-    abstract public Boolean assessAchievement(ArrayList<IHabit> habits);
+    abstract public Boolean assessAchievement(List<IHabit> habits);
 
     /**
      *Calls on method assessAchievement

@@ -17,7 +17,6 @@ public interface IUser {
     // Adds the ThemableObserver to the observer list themeObservers.
     void addThemeObserver(ThemableObserver observer);
 
-
     void addHabit(IHabit habit);
 
     void removeHabit(IHabit habit);
@@ -38,13 +37,13 @@ public interface IUser {
 
     String getImagePath();
 
-    ArrayList getHabits();
+    ArrayList<IHabit> getHabits();
 
-     void addAchivement(Achievement achievement);
+    void addAchivement(Achievement achievement);
 
-     List getAchievements();
+    List getAchievements();
 
-
+    List<Group> getGroups();
 
     // Adds another user to the list of friends.
     void addFriend(IFriend friend);
@@ -59,4 +58,17 @@ public interface IUser {
     void setFriends(ArrayList<IFriend> iFriends);
 
     void initFriends();
+
+    void initThemableObserver();
+
+    void checkAchievements();
+
+    void setAchievements(ArrayList<Achievement> achievements);
+
+    void setHabits(ArrayList<IHabit> habitArrayList);
+
+    IHabit getHabit(String s);
+
+    void setGroup(List<Group> groupList);
+
 }

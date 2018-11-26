@@ -13,8 +13,8 @@ public class User implements Observer, IFriend, IUser {
     private String imagePath;
     private List<IFriend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
-    private ArrayList<Achievement> achievements;
-    private ArrayList<ThemableObserver> themeObservers;
+    private List<Achievement> achievements;
+    private List<ThemableObserver> themeObservers;
     //User Settings
     private boolean allowNotifications;
     private boolean soundOn;
@@ -47,7 +47,7 @@ public class User implements Observer, IFriend, IUser {
     }
 
     // Call recreateActivity on all that's in the Arrayist themeObservers.
-    private void notifyThemeObservers(ArrayList<ThemableObserver> themeObservers) {
+    private void notifyThemeObservers(List<ThemableObserver> themeObservers) {
         for (ThemableObserver theme : themeObservers) {
             theme.recreateActivity();
         }
@@ -132,12 +132,10 @@ public class User implements Observer, IFriend, IUser {
         return this.habits.get(index);
     }
 
-
     @Override
     public void addAchivement(Achievement achievement) {
         achievements.add(achievement);
     }
-
 
     /**
      * Finds the friend to remove in friends list and then removes the friend.
@@ -159,7 +157,6 @@ public class User implements Observer, IFriend, IUser {
         friends.add(friend);
 
     }
-
 
     private void checkHabitDone() {
 
@@ -186,6 +183,7 @@ public class User implements Observer, IFriend, IUser {
     public void update(Observable o, Object arg) {
 
     }
+
     public void setFriends(ArrayList<IFriend> iFriends){
         this.friends = iFriends;
     }

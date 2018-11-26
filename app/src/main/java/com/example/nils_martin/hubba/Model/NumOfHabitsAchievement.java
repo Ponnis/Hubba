@@ -8,18 +8,13 @@ import java.util.List;
  */
 
 public class NumOfHabitsAchievement extends Achievement {
+
     private static AchievementType achievementType = AchievementType.NumOHabitsAchievement;
-
-
-
 
     NumOfHabitsAchievement(String title, int targetNmbr){
 
         super(title, targetNmbr);
     }
-
-
-
 
     /**
      * Checks how many habits there is in current users Habit List and if there is equal or more then targetNmbr. 7
@@ -28,7 +23,7 @@ public class NumOfHabitsAchievement extends Achievement {
      * @return returns true if the size of List<Ihabit> is larger then targetnmbr else returns false.
      */
     @Override
-    public Boolean assessAchievement(ArrayList<IHabit> habits) {
+    public Boolean assessAchievement(List<IHabit> habits) {
         Boolean isAchived = false;
         try {
             if (habits.size() >= targetNmbr) {
@@ -40,6 +35,7 @@ public class NumOfHabitsAchievement extends Achievement {
         }
         return isAchived;
     }
+
     @Override
     public AchievementType getAchievementType() {
         return achievementType;
