@@ -1,5 +1,6 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -52,8 +53,27 @@ public class LoginVM extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+
+
+
+
+
+        ArrayList<IUser> userss = new ArrayList<>();
+        userss.add(new User("1","","", setAchivements()));
+        userss.add(new User("2","","", setAchivements()));
+        userss.add(new User("3","","", setAchivements()));
+        model.setUsers(userss);
         try {
-            load();
+            service.save(this.getApplicationContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(model.getUsers().size());
+        model.getUsers().clear();
+        
+        try {
+            load(this.getApplicationContext());
+            System.out.println(model.getUsers().size());
         } catch (JSONException e) {
             initFirstUse();
             e.printStackTrace();
@@ -62,7 +82,6 @@ public class LoginVM extends AppCompatActivity {
             initFirstUse();
             v.printStackTrace();
         }
-
 
         for (int i = 0, usersSize = model.getUsers().size(); i < usersSize; i++) {
             IUser user = model.getUsers().get(i);
@@ -146,8 +165,8 @@ public class LoginVM extends AppCompatActivity {
         model.getUser("admin").setAchievements(setAchivements());
     }
 
-    public void load() throws JSONException, NullPointerException {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+    public void load(Context ctx) throws JSONException, NullPointerException {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences("shared preferences", MODE_PRIVATE);
         String json = sharedPreferences.getString("userlist", null);
         Gson gson = new GsonBuilder().create();
         Type typeUser = new TypeToken<ArrayList<User>>() {
@@ -155,7 +174,7 @@ public class LoginVM extends AppCompatActivity {
         JSONObject jsonResponse = new JSONObject(json);
         model.setUsers(gson.fromJson(jsonResponse.getString("user"), typeUser));
 
-        Type typeHabit = new TypeToken<ArrayList<Habit>>() {
+        /*Type typeHabit = new TypeToken<ArrayList<Habit>>() {
         }.getType();
         Type typeGroup = new TypeToken<List<Group>>(){}.getType();
 
@@ -257,7 +276,7 @@ public class LoginVM extends AppCompatActivity {
                 String jsonGroupFriends = sharedPreferences2.getString("groupFriendslist", null);
                 extractString(jsonGroupFriends,"groupFriend", "GroupFriendUserName", group.getUsersInGroup());
             }
-        }
+        }*/
     }
 
     private void extractString(String source, String listName, String target, List<IFriend> list){

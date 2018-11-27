@@ -52,9 +52,10 @@ public class Service extends AppCompatActivity implements IService{
 
         editor.putString("userlist", jsonObject.toString());
         editor.apply();
-
+        /*
         for (IUser user : model.getUsers()) {
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
+            // SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
+            SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
             editor1.putString("habitslist", habitsToJson((User) user));
@@ -98,7 +99,7 @@ public class Service extends AppCompatActivity implements IService{
             }
         }
 
-
+        */
 
     }
 
