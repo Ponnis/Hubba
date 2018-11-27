@@ -32,6 +32,10 @@ public class Habit extends Observable implements IHabit {
         this.streak = 0;
         this.isDone = false;
         this.reminderOn = false;
+        //
+        this.STATE = State.MORNING;
+        this.FREQUENCY = Frequency.DAILY;
+        this.daysToDo.add(21);
     }
 
     public Habit(String title, List<Integer> days) {

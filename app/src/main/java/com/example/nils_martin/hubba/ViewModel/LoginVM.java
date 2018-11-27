@@ -62,7 +62,10 @@ public class LoginVM extends AppCompatActivity {
         userss.add(new User("1","","", setAchivements()));
         userss.add(new User("2","","", setAchivements()));
         userss.add(new User("3","","", setAchivements()));
+        Habit habit = new Habit("drink water");
+        userss.get(0).addHabit(habit);
         model.setUsers(userss);
+        System.out.println(model.getUsers().get(0).getHabit("drink water").getTitle());
         try {
             service.save(this.getApplicationContext());
         } catch (JSONException e) {
@@ -70,10 +73,11 @@ public class LoginVM extends AppCompatActivity {
         }
         System.out.println(model.getUsers().size());
         model.getUsers().clear();
-        
+
         try {
             load(this.getApplicationContext());
             System.out.println(model.getUsers().size());
+            System.out.println(model.getUsers().get(0).getHabit("drink water").getTitle() + "efter load");
         } catch (JSONException e) {
             initFirstUse();
             e.printStackTrace();
@@ -174,7 +178,7 @@ public class LoginVM extends AppCompatActivity {
         JSONObject jsonResponse = new JSONObject(json);
         model.setUsers(gson.fromJson(jsonResponse.getString("user"), typeUser));
 
-        /*Type typeHabit = new TypeToken<ArrayList<Habit>>() {
+        Type typeHabit = new TypeToken<ArrayList<Habit>>() {
         }.getType();
         Type typeGroup = new TypeToken<List<Group>>(){}.getType();
 
@@ -236,7 +240,7 @@ public class LoginVM extends AppCompatActivity {
 
         for (IUser user : model.getUsers()) {
             for (IHabit habit : user.getHabits()) {
-                SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
+                SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
                 String jsonDaysToDo = sharedPreferences1.getString("dayToIntList", null);
 
                 JSONObject jsonResponseDaysToDo = new JSONObject(jsonDaysToDo);
@@ -276,7 +280,7 @@ public class LoginVM extends AppCompatActivity {
                 String jsonGroupFriends = sharedPreferences2.getString("groupFriendslist", null);
                 extractString(jsonGroupFriends,"groupFriend", "GroupFriendUserName", group.getUsersInGroup());
             }
-        }*/
+        }
     }
 
     private void extractString(String source, String listName, String target, List<IFriend> list){

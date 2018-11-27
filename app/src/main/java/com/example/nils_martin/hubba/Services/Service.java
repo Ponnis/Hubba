@@ -22,6 +22,7 @@ public class Service extends AppCompatActivity implements IService{
     public void save(Context ctx) throws JSONException {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences("shared preferences", MODE_PRIVATE);
 
+
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         for (IUser user : model.getUsers()) {
@@ -52,7 +53,7 @@ public class Service extends AppCompatActivity implements IService{
 
         editor.putString("userlist", jsonObject.toString());
         editor.apply();
-        /*
+
         for (IUser user : model.getUsers()) {
             // SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
             SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
@@ -61,7 +62,7 @@ public class Service extends AppCompatActivity implements IService{
             editor1.putString("habitslist", habitsToJson((User) user));
             editor1.apply();
         }
-
+        /*
         for (IUser user : model.getUsers()) {
             SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
