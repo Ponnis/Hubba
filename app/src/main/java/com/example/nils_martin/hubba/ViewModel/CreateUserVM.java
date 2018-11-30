@@ -18,6 +18,7 @@ import com.example.nils_martin.hubba.Model.IHabit;
 
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 public class CreateUserVM extends AppCompatActivity  {
 
+    private Service service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private EditText newUsername;
     private EditText newEmail;
@@ -65,6 +67,11 @@ public class CreateUserVM extends AppCompatActivity  {
         User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(),
                  setAchivements());
         model.addUser(user);
+        try {
+            service.save(this.getApplicationContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         finish();
     }
 

@@ -2,6 +2,7 @@ package com.example.nils_martin.hubba.Services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.nils_martin.hubba.Model.Group;
@@ -15,9 +16,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Service extends AppCompatActivity implements IService{
 
+    private static Service service = null;
     HubbaModel model = HubbaModel.getInstance();
+
+    public Service(){
+
+    }
+
+    public static Service getInstance(){
+        if(service == null){
+            service = new Service();
+            return service;
+        } else {
+            return service;
+        }
+    }
 
     public void save(Context ctx) throws JSONException {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -62,9 +79,9 @@ public class Service extends AppCompatActivity implements IService{
             editor1.putString("habitslist", habitsToJson((User) user));
             editor1.apply();
         }
-        /*
+
         for (IUser user : model.getUsers()) {
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
+            SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
             editor1.putString("friendslist", friendsToJson((User) user));
@@ -74,7 +91,7 @@ public class Service extends AppCompatActivity implements IService{
 
         for (IUser user : model.getUsers()) {
             for (IHabit habit : user.getHabits()) {
-                SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
+                SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
                 editor1.putString("dayToIntList", daysToDoJson(habit));
@@ -83,7 +100,7 @@ public class Service extends AppCompatActivity implements IService{
         }
 
         for (IUser user: model.getUsers()){
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
+            SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
             editor1.putString("groupslist", groupsToJson((User) user));
@@ -92,7 +109,7 @@ public class Service extends AppCompatActivity implements IService{
 
         for (IUser user: model.getUsers()){
             for (Group group: user.getGroups()){
-                SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + group.getGroupName() + "userInGroups", MODE_PRIVATE);
+                SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + group.getGroupName() + "userInGroups", MODE_PRIVATE);
                 SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
                 editor1.putString("groupFriendslist", groupFriendsToJson(group));
@@ -100,7 +117,7 @@ public class Service extends AppCompatActivity implements IService{
             }
         }
 
-        */
+
 
     }
 

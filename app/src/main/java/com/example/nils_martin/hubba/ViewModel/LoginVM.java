@@ -1,9 +1,11 @@
 package com.example.nils_martin.hubba.ViewModel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -39,8 +41,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginVM extends AppCompatActivity {
-    IService service = new Service();
+public class LoginVM extends FragmentActivity {
+    IService service = Service.getInstance();
 
     private HubbaModel model = HubbaModel.getInstance();
     private EditText Username;
@@ -58,26 +60,29 @@ public class LoginVM extends AppCompatActivity {
 
 
 
-        ArrayList<IUser> userss = new ArrayList<>();
-        userss.add(new User("1","","", setAchivements()));
-        userss.add(new User("2","","", setAchivements()));
-        userss.add(new User("3","","", setAchivements()));
-        Habit habit = new Habit("drink water");
-        userss.get(0).addHabit(habit);
-        model.setUsers(userss);
-        System.out.println(model.getUsers().get(0).getHabit("drink water").getTitle());
+        //ArrayList<IUser> userss = new ArrayList<>();
+        //userss.add(new User("1","","", setAchivements()));
+        //userss.add(new User("2","","", setAchivements()));
+        //userss.add(new User("3","","", setAchivements()));
+        //Habit habit = new Habit("drink water");
+        //userss.get(0).addHabit(habit);
+        //model.setUsers(userss);
+
+        System.out.println(model.getUsers().size() + " innan save");
+
         try {
             service.save(this.getApplicationContext());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(model.getUsers().size());
+
+        System.out.println(model.getUsers().size() + " efter save");
         model.getUsers().clear();
+        System.out.println(model.getUsers().size() + " efter clear");
 
         try {
             load(this.getApplicationContext());
-            System.out.println(model.getUsers().size());
-            System.out.println(model.getUsers().get(0).getHabit("drink water").getTitle() + "efter load");
+            System.out.println(model.getUsers().size() + " efter load");
         } catch (JSONException e) {
             initFirstUse();
             e.printStackTrace();
@@ -113,6 +118,9 @@ public class LoginVM extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for (IUser user : model.getUsers()) {
+                    System.out.println(user.getUserName());
+                }
                 checkLoginAcceptance();
             }
         });
@@ -138,6 +146,32 @@ public class LoginVM extends AppCompatActivity {
             e.printStackTrace();
         }
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        try {
+            service.save(this.getApplicationContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        try {
+            load(this.getApplicationContext());
+            System.out.println(model.getUsers().size() + " efter load");
+        } catch (JSONException e) {
+            initFirstUse();
+            e.printStackTrace();
+
+        } catch (NullPointerException v){
+            initFirstUse();
+            v.printStackTrace();
+        }
+        super.onResume();
     }
 
     private void newUserButton() {
@@ -171,6 +205,7 @@ public class LoginVM extends AppCompatActivity {
 
     public void load(Context ctx) throws JSONException, NullPointerException {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences("shared preferences", MODE_PRIVATE);
+
         String json = sharedPreferences.getString("userlist", null);
         Gson gson = new GsonBuilder().create();
         Type typeUser = new TypeToken<ArrayList<User>>() {
