@@ -20,6 +20,7 @@ import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.IService;
 import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
@@ -39,7 +40,7 @@ public class SettingsVM extends AppCompatActivity implements ThemableObserver {
     private ImageButton backButton;
 
     private boolean isUserInteracting;
-    private Service service = Service.getInstance();
+    private IService service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     ThemeHandler themeHandler = new ThemeHandler();
 

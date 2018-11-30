@@ -65,7 +65,6 @@ public class NotificationReceiver extends BroadcastReceiver {
                 notificationManager.createNotificationChannel(channel);
             }
 
-            System.out.println(intent.getStringExtra("HabitNamn"));
             notificationManager.notify(notification.hashCode(), notification);
             notificationID ++;
         }

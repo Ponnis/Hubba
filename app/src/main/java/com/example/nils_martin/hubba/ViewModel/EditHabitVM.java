@@ -23,6 +23,7 @@ import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.IService;
 import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
@@ -37,12 +38,12 @@ import java.util.List;
  */
 public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
 
-    private Service service = Service.getInstance();
+    private IService service = Service.getInstance();
 
     private EditText habitName;
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
     private IHabit currentHabit;
-    CheckBox mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, saturdayCheckbox, sundayCheckbox;
+    private CheckBox mondayCheckbox, tuesdayCheckbox, wednesdayCheckbox, thursdayCheckbox, fridayCheckbox, saturdayCheckbox, sundayCheckbox;
     private TextView numberOfDaysTextView, colonTextView, timeTextView, monthTextView, errorMsgTextView;
     private Spinner numberOfDaysSpinner, hourSpinner, minSpinner, monthSpinner;
     private Switch remainderSwitch;

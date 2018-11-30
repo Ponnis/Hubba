@@ -18,6 +18,7 @@ import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.IService;
 import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
@@ -32,7 +33,7 @@ import java.util.List;
  */
 public class CreateGroupVM extends AppCompatActivity implements ThemableObserver {
 
-    private Service service = Service.getInstance();
+    private IService service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private IUser user;
     private List<IFriend> friends;

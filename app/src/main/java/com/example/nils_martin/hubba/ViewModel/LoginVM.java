@@ -43,7 +43,7 @@ import java.util.List;
 
 public class LoginVM extends FragmentActivity {
 
-    Service service = Service.getInstance();
+    private IService service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private EditText Username;
     private EditText Password;
@@ -55,30 +55,11 @@ public class LoginVM extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-
-
-
-
-
-        //ArrayList<IUser> userss = new ArrayList<>();
-        //userss.add(new User("1","","", setAchivements()));
-        //userss.add(new User("2","","", setAchivements()));
-        //userss.add(new User("3","","", setAchivements()));
-        //Habit habit = new Habit("drink water");
-        //userss.get(0).addHabit(habit);
-        //model.setUsers(userss);
-
-        System.out.println(model.getUsers().size() + " efter save");
-        model.getUsers().clear();
-        System.out.println(model.getUsers().size() + " efter clear");
-
         try {
             service.load(this.getApplicationContext());
-            System.out.println(model.getUsers().size() + " efter load");
         } catch (JSONException e) {
             initFirstUse();
             e.printStackTrace();
-
         } catch (NullPointerException v){
             initFirstUse();
             v.printStackTrace();
@@ -110,9 +91,6 @@ public class LoginVM extends FragmentActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (IUser user : model.getUsers()) {
-                    System.out.println(user.getUserName());
-                }
                 checkLoginAcceptance();
             }
         });
@@ -145,7 +123,6 @@ public class LoginVM extends FragmentActivity {
     protected void onResume() {
         try {
             service.load(this.getApplicationContext());
-            System.out.println(model.getUsers().size() + " efter load");
         } catch (JSONException e) {
             initFirstUse();
             e.printStackTrace();

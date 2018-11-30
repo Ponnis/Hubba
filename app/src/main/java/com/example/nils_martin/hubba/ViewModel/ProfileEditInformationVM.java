@@ -18,6 +18,7 @@ import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.IService;
 import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
@@ -26,7 +27,7 @@ import org.json.JSONObject;
 
 public class ProfileEditInformationVM extends AppCompatActivity implements ThemableObserver{
 
-    private Service service = Service.getInstance();
+    private IService service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private ThemeHandler themehandler = new ThemeHandler();
     private ThemeHandler themeHandler = new ThemeHandler();

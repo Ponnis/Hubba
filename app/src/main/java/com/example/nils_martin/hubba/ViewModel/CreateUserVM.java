@@ -18,6 +18,7 @@ import com.example.nils_martin.hubba.Model.IHabit;
 
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.IService;
 import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 
 public class CreateUserVM extends AppCompatActivity  {
 
-    private Service service = Service.getInstance();
+    private IService service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private EditText newUsername;
     private EditText newEmail;

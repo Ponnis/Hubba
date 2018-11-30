@@ -8,4 +8,8 @@ public interface IService {
 
     void save(Context context) throws JSONException;
 
+    void load (Context context) throws JSONException, NullPointerException;
+
+
+
 }

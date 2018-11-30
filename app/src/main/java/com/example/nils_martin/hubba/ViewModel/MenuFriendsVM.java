@@ -19,6 +19,7 @@ import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.IService;
 import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
@@ -33,7 +34,7 @@ import java.util.List;
  */
 public class MenuFriendsVM extends AppCompatActivity implements ThemableObserver {
 
-    private Service service = Service.getInstance();
+    private IService service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private ThemeHandler themeHandler = new ThemeHandler();
 
