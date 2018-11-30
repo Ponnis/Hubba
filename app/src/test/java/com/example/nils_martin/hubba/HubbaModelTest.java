@@ -2,6 +2,7 @@ package com.example.nils_martin.hubba;
 
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHubbaModel;
+import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.Model.User;
 
@@ -16,8 +17,8 @@ import static org.junit.Assert.assertNotNull;
 
 public class HubbaModelTest {
 
-    User user = new User("Sven","sven@sven.se", "123456789", new ArrayList<>() );
-    ArrayList<User> users = new ArrayList<>();
+    IUser user = new User("Sven","sven@sven.se", "123456789", new ArrayList<>() );
+    ArrayList<IUser> users = new ArrayList<>();
 
     @Test
     public void testGetInstance(){
