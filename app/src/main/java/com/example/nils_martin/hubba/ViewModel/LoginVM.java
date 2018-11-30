@@ -68,14 +68,6 @@ public class LoginVM extends FragmentActivity {
         //userss.get(0).addHabit(habit);
         //model.setUsers(userss);
 
-        System.out.println(model.getUsers().size() + " innan save");
-
-        try {
-            service.save(this.getApplicationContext());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         System.out.println(model.getUsers().size() + " efter save");
         model.getUsers().clear();
         System.out.println(model.getUsers().size() + " efter clear");

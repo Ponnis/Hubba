@@ -79,6 +79,8 @@ public class Service extends AppCompatActivity implements IService{
         //SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        editor. remove("userlist");
+        editor.apply();
         editor.putString("userlist", jsonObject.toString());
         editor.apply();
 

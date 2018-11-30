@@ -93,6 +93,7 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
 
     @Override
     protected void onPause() {
+        System.out.println("onPause: Main ActivityVM");
         try {
             service.save(this.getApplicationContext());
         } catch (JSONException e) {
@@ -101,6 +102,11 @@ public class MainActivityVM extends AppCompatActivity implements ThemableObserve
         super.onPause();
     }
 
+    @Override
+    protected void onDestroy() {
+        System.out.println("onDestroy: MainActivityVM");
+        super.onDestroy();
+    }
 
     /**
      * Instantiates the different views and buttons on the MainPage.
