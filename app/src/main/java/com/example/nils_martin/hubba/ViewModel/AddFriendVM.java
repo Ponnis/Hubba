@@ -18,6 +18,7 @@ import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
 
+    private Service service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private ThemeHandler themeHandler = new ThemeHandler();
 
@@ -97,6 +99,11 @@ public class AddFriendVM extends AppCompatActivity implements ThemableObserver {
 
     @Override
     protected void onPause() {
+        try {
+            service.save(this.getApplicationContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         super.onPause();
     }
 

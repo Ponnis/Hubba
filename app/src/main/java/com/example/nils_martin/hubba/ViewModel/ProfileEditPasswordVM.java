@@ -16,6 +16,7 @@ import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 public class ProfileEditPasswordVM extends AppCompatActivity implements ThemableObserver {
 
+    private Service service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private ThemeHandler themeHandler = new ThemeHandler();
     private HubbaModel hubbaModel = HubbaModel.getInstance();
@@ -93,6 +95,11 @@ public class ProfileEditPasswordVM extends AppCompatActivity implements Themable
 
     @Override
     protected void onPause() {
+        try {
+            service.save(this.getApplicationContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         super.onPause();
     }
 

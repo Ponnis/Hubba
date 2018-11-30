@@ -23,6 +23,7 @@ import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
+import com.example.nils_martin.hubba.Services.Service;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +36,8 @@ import java.util.List;
  * @author Camilla Söderlund
  */
 public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
+
+    private Service service = Service.getInstance();
 
     private EditText habitName;
     private Button save, cancel, morning, midday, evening, night, daily, weekly, monthly;
@@ -411,6 +414,11 @@ public class EditHabitVM extends AppCompatActivity implements ThemableObserver {
 
     @Override
     protected void onPause() {
+        try {
+            service.save(this.getApplicationContext());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         super.onPause();
     }
 
