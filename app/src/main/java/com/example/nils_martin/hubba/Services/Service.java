@@ -131,7 +131,7 @@ public class Service extends AppCompatActivity implements IService{
         }
 
 
-
+        System.out.println("saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaave");
     }
 
     private String habitsToJson(User user) throws JSONException {
@@ -321,6 +321,7 @@ public class Service extends AppCompatActivity implements IService{
                 extractString(jsonGroupFriends,"groupFriend", "GroupFriendUserName", group.getUsersInGroup());
             }
         }
+        System.out.println("loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooad");
     }
 
     private void extractString(String source, String listName, String target, List<IFriend> list){
