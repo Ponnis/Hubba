@@ -19,9 +19,16 @@ public class ThemeHandler {
      * @return R.style.ThemeName where ThemeName is depending on what is the Active theme in User.
      */
     public int getTheme(){
-        Themes activeTheme = model.getTheme();
+        Themes activeTheme;
+        if(model.getTheme() != null) {
+             activeTheme = model.getTheme();
+        } else {
+            model.setTheme(Themes.STANDARD);
+        }
+
+        activeTheme = model.getTheme();
         int returntheme = 0;
-        switch (activeTheme){
+        switch (activeTheme) {
             case ELITE:
                 returntheme = R.style.Elite;
                 break;
