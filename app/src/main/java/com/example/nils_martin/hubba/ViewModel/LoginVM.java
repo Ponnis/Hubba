@@ -42,8 +42,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginVM extends FragmentActivity {
-    IService service = Service.getInstance();
 
+    Service service = Service.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private EditText Username;
     private EditText Password;
@@ -81,7 +81,7 @@ public class LoginVM extends FragmentActivity {
         System.out.println(model.getUsers().size() + " efter clear");
 
         try {
-            load(this.getApplicationContext());
+            service.load(this.getApplicationContext());
             System.out.println(model.getUsers().size() + " efter load");
         } catch (JSONException e) {
             initFirstUse();
@@ -127,16 +127,7 @@ public class LoginVM extends FragmentActivity {
 
     }
 
-    private void initList(IUser user) {
-        user.initThemableObserver();
-        user.initHabit();
-        user.initFriends();
-        if (user.getHabits().size() != 0) {
-            for (IHabit habit : user.getHabits()) {
-                habit.initDaysToDoList();
-            }
-        }
-    }
+
 
     @Override
     protected void onPause() {
@@ -161,7 +152,7 @@ public class LoginVM extends FragmentActivity {
     @Override
     protected void onResume() {
         try {
-            load(this.getApplicationContext());
+            service.load(this.getApplicationContext());
             System.out.println(model.getUsers().size() + " efter load");
         } catch (JSONException e) {
             initFirstUse();
@@ -201,156 +192,6 @@ public class LoginVM extends FragmentActivity {
         model.setUsers(new ArrayList<>());
         model.getUsers().add(new User("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
         model.getUser("admin").setAchievements(setAchivements());
-    }
-
-    public void load(Context ctx) throws JSONException, NullPointerException {
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences("shared preferences", MODE_PRIVATE);
-
-        String json = sharedPreferences.getString("userlist", null);
-        Gson gson = new GsonBuilder().create();
-        Type typeUser = new TypeToken<ArrayList<User>>() {
-        }.getType();
-        JSONObject jsonResponse = new JSONObject(json);
-        model.setUsers(gson.fromJson(jsonResponse.getString("user"), typeUser));
-
-        Type typeHabit = new TypeToken<ArrayList<Habit>>() {
-        }.getType();
-        Type typeGroup = new TypeToken<List<Group>>(){}.getType();
-
-        JSONArray jsonTheme = jsonResponse.getJSONArray("user");
-        for (int a = 0; a < jsonTheme.length(); a++) {
-            String theme = jsonTheme.getJSONObject(a).get("theme").toString();
-            initList(model.getUser(jsonTheme.getJSONObject(a).get("userName").toString()));
-            if ("STANDARD".equals(theme)) {
-                model.getUser(jsonTheme.getJSONObject(a).get("userName").toString()).setTheme(Themes.STANDARD);
-
-            } else if ("PINKFLUFFY".equals(theme)) {
-                model.getUser(jsonTheme.getJSONObject(a).get("userName").toString()).setTheme(Themes.PINKFLUFFY);
-
-            } else if ("ELITE".equals(theme)) {
-                model.getUser(jsonTheme.getJSONObject(a).get("userName").toString()).setTheme(Themes.ELITE);
-            }
-        }
-
-
-        for (IUser user : model.getUsers()) {
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
-            String jsonHabit = sharedPreferences1.getString("habitslist", null);
-            Gson gsonHabit = new GsonBuilder().create();
-            JSONObject jsonResponseHabit = new JSONObject(jsonHabit);
-            user.setHabits(gsonHabit.fromJson(jsonResponseHabit.getString("habit"), typeHabit));
-
-            JSONArray jsonArray = jsonResponseHabit.getJSONArray("habit");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                String string = jsonArray.getJSONObject(i).get("state").toString();
-                if ("MORNING".equals(string)) {
-                    user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setSTATE(State.MORNING);
-
-                } else if ("MIDDAY".equals(string)) {
-                    user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setSTATE(State.MIDDAY);
-
-                } else if ("EVENING".equals(string)) {
-                    user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setSTATE(State.EVENING);
-
-                } else if ("NIGHT".equals(string)) {
-                    user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setSTATE(State.NIGHT);
-
-                }
-            }
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                String string = jsonArray.getJSONObject(i).get("frequency").toString();
-                if ("DAILY".equals(string)) {
-                    user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setFREQUENCY(Frequency.DAILY);
-
-                } else if ("WEEKLY".equals(string)) {
-                    user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setFREQUENCY(Frequency.WEEKLY);
-
-                } else if ("MONTHLY".equals(string)) {
-                    user.getHabit(jsonArray.getJSONObject(i).get("title").toString()).setFREQUENCY(Frequency.MONTHLY);
-
-                }
-            }
-        }
-
-        for (IUser user : model.getUsers()) {
-            for (IHabit habit : user.getHabits()) {
-                SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + habit.getTitle() + "daysToInts", MODE_PRIVATE);
-                String jsonDaysToDo = sharedPreferences1.getString("dayToIntList", null);
-
-                JSONObject jsonResponseDaysToDo = new JSONObject(jsonDaysToDo);
-                JSONArray jsonArray = new JSONArray();
-                jsonArray.put(jsonResponseDaysToDo);
-                habit.initDaysToDoList();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    char[] c = jsonArray.get(i).toString().toCharArray();
-                    for (int j = 0; j < c.length; j++) {
-                        String temp = Character.toString(c[j]);
-                        if (Character.isDigit(c[j])) {
-                            int a = Integer.parseInt(temp);
-                            if (a > 0 && a < 32) {
-                                habit.getDaysToDo().add(a);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        for (IUser user : model.getUsers()) {
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
-            String jsonFriend = sharedPreferences1.getString("friendslist", null);
-
-            extractString(jsonFriend, "friend", "username", user.getFriends());
-        }
-
-        for (IUser user: model.getUsers()) {
-            SharedPreferences sharedPreferences1 = getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
-            String jsonGroup = sharedPreferences1.getString("groupslist", null);
-            Gson gsonGroup = new GsonBuilder().create();
-            JSONObject jsonResponseGroup = new JSONObject(jsonGroup);
-            user.setGroup(gsonGroup.fromJson(jsonResponseGroup.getString("group"), typeGroup));
-            for (Group group: user.getGroups()){
-                SharedPreferences sharedPreferences2 = getSharedPreferences(user.getUserName() + group.getGroupName() + "userInGroups", MODE_PRIVATE);
-                String jsonGroupFriends = sharedPreferences2.getString("groupFriendslist", null);
-                extractString(jsonGroupFriends,"groupFriend", "GroupFriendUserName", group.getUsersInGroup());
-            }
-        }
-    }
-
-    private void extractString(String source, String listName, String target, List<IFriend> list){
-        char [] charArray = source.toCharArray();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < charArray.length; i++){
-            if (Character.isLetter(charArray[i])){
-                stringBuilder.append(charArray[i]);
-
-                if (stringBuilder.toString().equals(listName)){
-                    stringBuilder.setLength(0);
-                }
-
-                else if (stringBuilder.toString().equals(target)){
-                    stringBuilder.setLength(0);
-                    i = i + 3;
-                    if (Character.isLetter(charArray[i])){
-                        while(Character.isLetter(charArray[i])){
-                            stringBuilder.append(charArray[i]);
-                            i++;
-                        }
-                    }
-                    else{
-                        i++;
-                        while(Character.isLetter(charArray[i])){
-                            stringBuilder.append(charArray[i]);
-                            i++;
-                        }
-                    }
-
-                    list.add((IFriend) model.getUser(stringBuilder.toString()));
-                    stringBuilder.setLength(0);
-                }
-            }
-        }
     }
 
     private ArrayList<Achievement> setAchivements(){
