@@ -48,8 +48,10 @@ public class User implements Observer, IFriend, IUser {
 
     // Call recreateActivity on all that's in the Arrayist themeObservers.
     private void notifyThemeObservers(List<ThemableObserver> themeObservers) {
-        for (ThemableObserver theme : themeObservers) {
-            theme.recreateActivity();
+        if(themeObservers != null) {
+            for (ThemableObserver theme : themeObservers) {
+                theme.recreateActivity();
+            }
         }
     }
 
