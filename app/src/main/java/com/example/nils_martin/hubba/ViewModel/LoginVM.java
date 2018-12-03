@@ -123,13 +123,10 @@ public class LoginVM extends FragmentActivity {
     protected void onResume() {
         try {
             service.load(this.getApplicationContext());
-        } catch (JSONException e) {
+        } catch (JSONException|NullPointerException e) {
             initFirstUse();
             e.printStackTrace();
 
-        } catch (NullPointerException v){
-            initFirstUse();
-            v.printStackTrace();
         }
         super.onResume();
     }
