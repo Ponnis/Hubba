@@ -31,7 +31,7 @@ public class PersistantDataHandler extends AppCompatActivity implements IPersist
     private static IPersistantDataHandler service = null;
     HubbaModel model = HubbaModel.getInstance();
 
-    public PersistantDataHandler(){
+    private PersistantDataHandler(){
 
     }
 
