@@ -56,7 +56,7 @@ public class User implements Observer, IFriend, IUser {
 
     // Adds the ThemableObserver to the observer list themeObservers.
     public void addThemeObserver(ThemableObserver observer) {
-        if (themeObservers == null) {
+        if(themeObservers == null){
             themeObservers = new ArrayList<>();
         }
         themeObservers.add(observer);
