@@ -14,7 +14,7 @@ public class User implements Observer, IFriend, IUser {
     private List<IFriend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
     private List<Achievement> achievements;
-    private List<ThemableObserver> themeObservers;
+    private List<ThemableObserver> themeObservers = new ArrayList<>();
     //User Settings
     private boolean allowNotifications;
     private boolean soundOn;
