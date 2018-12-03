@@ -14,7 +14,7 @@ public class User implements Observer, IFriend, IUser {
     private List<IFriend> friends = new ArrayList<>();
     private ArrayList<IHabit> habits = new ArrayList<>();
     private List<Achievement> achievements;
-    private List<ThemableObserver> themeObservers = new ArrayList<>();
+    private List<ThemableObserver> themeObservers;
     //User Settings
     private boolean allowNotifications;
     private boolean soundOn;
@@ -26,7 +26,6 @@ public class User implements Observer, IFriend, IUser {
         this.email = email;
         this.password = password;
         this.ActiveTheme = Themes.STANDARD;
-        this.themeObservers = new ArrayList<>();
         this.achievements = achivements;
     }
 
@@ -57,6 +56,9 @@ public class User implements Observer, IFriend, IUser {
 
     // Adds the ThemableObserver to the observer list themeObservers.
     public void addThemeObserver(ThemableObserver observer) {
+        if (themeObservers == null) {
+            themeObservers = new ArrayList<>();
+        }
         themeObservers.add(observer);
     }
 
