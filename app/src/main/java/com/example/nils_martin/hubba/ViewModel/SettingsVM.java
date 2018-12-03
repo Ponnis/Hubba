@@ -1,7 +1,6 @@
 package com.example.nils_martin.hubba.ViewModel;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,21 +10,14 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import com.example.nils_martin.hubba.Model.Group;
-import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.HubbaModel;
-import com.example.nils_martin.hubba.Model.IFriend;
-import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
 import com.example.nils_martin.hubba.Model.Themes;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
-import com.example.nils_martin.hubba.Services.IService;
-import com.example.nils_martin.hubba.Services.Service;
+import com.example.nils_martin.hubba.Services.IPersistantDataHandler;
+import com.example.nils_martin.hubba.Services.PersistantDataHandler;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * @author Li Rönning
@@ -40,7 +32,7 @@ public class SettingsVM extends AppCompatActivity implements ThemableObserver {
     private ImageButton backButton;
 
     private boolean isUserInteracting;
-    private IService service = Service.getInstance();
+    private IPersistantDataHandler service = PersistantDataHandler.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     ThemeHandler themeHandler = new ThemeHandler();
 
