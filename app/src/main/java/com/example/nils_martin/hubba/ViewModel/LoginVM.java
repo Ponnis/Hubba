@@ -1,49 +1,29 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.AchievementFactory;
-import com.example.nils_martin.hubba.Model.AchievementInstanceCreator;
 import com.example.nils_martin.hubba.Model.AchievementType;
-import com.example.nils_martin.hubba.Model.Frequency;
-import com.example.nils_martin.hubba.Model.Group;
-import com.example.nils_martin.hubba.Model.GroupHabitType;
-import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
-import com.example.nils_martin.hubba.Model.IFriend;
-import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.IUser;
-import com.example.nils_martin.hubba.Model.State;
-import com.example.nils_martin.hubba.Model.Themes;
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
-import com.example.nils_martin.hubba.Services.IService;
-import com.example.nils_martin.hubba.Services.Service;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.example.nils_martin.hubba.Services.IPersistantDataHandler;
+import com.example.nils_martin.hubba.Services.PersistantDataHandler;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoginVM extends FragmentActivity {
 
-    private IService service = Service.getInstance();
+    private IPersistantDataHandler service = PersistantDataHandler.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private EditText Username;
     private EditText Password;
@@ -123,13 +103,10 @@ public class LoginVM extends FragmentActivity {
     protected void onResume() {
         try {
             service.load(this.getApplicationContext());
-        } catch (JSONException e) {
+        } catch (JSONException|NullPointerException e) {
             initFirstUse();
             e.printStackTrace();
 
-        } catch (NullPointerException v){
-            initFirstUse();
-            v.printStackTrace();
         }
         super.onResume();
     }

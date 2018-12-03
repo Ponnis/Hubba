@@ -2,7 +2,6 @@ package com.example.nils_martin.hubba.Services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.nils_martin.hubba.Model.Frequency;
@@ -27,20 +26,18 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
+public class PersistantDataHandler extends AppCompatActivity implements IPersistantDataHandler {
 
-public class Service extends AppCompatActivity implements IService{
-
-    private static IService service = null;
+    private static IPersistantDataHandler service = null;
     HubbaModel model = HubbaModel.getInstance();
 
-    public Service(){
+    public PersistantDataHandler(){
 
     }
 
-    public static IService getInstance(){
+    public static IPersistantDataHandler getInstance(){
         if(service == null){
-            service = new Service();
+            service = new PersistantDataHandler();
             return service;
         } else {
             return service;

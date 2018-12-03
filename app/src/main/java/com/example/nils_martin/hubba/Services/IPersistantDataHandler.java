@@ -4,7 +4,7 @@ import android.content.Context;
 
 import org.json.JSONException;
 
-public interface IService {
+public interface IPersistantDataHandler {
 
     void save(Context context) throws JSONException;
 

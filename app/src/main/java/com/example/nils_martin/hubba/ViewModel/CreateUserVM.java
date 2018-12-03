@@ -1,6 +1,5 @@
 package com.example.nils_martin.hubba.ViewModel;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,25 +10,20 @@ import android.widget.ImageButton;
 import com.example.nils_martin.hubba.Model.Achievement;
 import com.example.nils_martin.hubba.Model.AchievementFactory;
 import com.example.nils_martin.hubba.Model.AchievementType;
-import com.example.nils_martin.hubba.Model.Group;
 import com.example.nils_martin.hubba.Model.HubbaModel;
-import com.example.nils_martin.hubba.Model.IFriend;
-import com.example.nils_martin.hubba.Model.IHabit;
 
 import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
-import com.example.nils_martin.hubba.Services.IService;
-import com.example.nils_martin.hubba.Services.Service;
+import com.example.nils_martin.hubba.Services.IPersistantDataHandler;
+import com.example.nils_martin.hubba.Services.PersistantDataHandler;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class CreateUserVM extends AppCompatActivity  {
 
-    private IService service = Service.getInstance();
+    private IPersistantDataHandler service = PersistantDataHandler.getInstance();
     private HubbaModel model = HubbaModel.getInstance();
     private EditText newUsername;
     private EditText newEmail;
