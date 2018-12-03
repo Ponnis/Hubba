@@ -1,8 +1,10 @@
 package com.example.nils_martin.hubba;
 
+import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.Habit;
-import com.example.nils_martin.hubba.Model.User;
+import com.example.nils_martin.hubba.Model.IHubbaModel;
+import com.example.nils_martin.hubba.Model.IUser;
 
 import org.junit.Test;
 
@@ -12,14 +14,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class UserTest {
-
-    IFriend friend = new User("IFriend", "friend@friend.com", "friendly1234", new ArrayList<>());
-    User user = new User("Åke", "Åke@gmail.com","Ninja1337", new ArrayList<>());
+    IHubbaModel hubbaModel = HubbaModel.getInstance();
+    IFriend friend =  hubbaModel.getNewFriend("IFriend", "friend@friend.com", "friendly1234", new ArrayList<>());
+    IUser user = hubbaModel.getNewUser("Åke", "Åke@gmail.com","Ninja1337", new ArrayList<>());
     Habit habit = new Habit("Drink Water");
 
     @Test
     public void testCreateUser(){
-        User user = new User("Åke", "Åke@gmail.com","Ninja1337", new ArrayList<>());
+        IUser user = hubbaModel.getNewUser("Åke", "Åke@gmail.com","Ninja1337", new ArrayList<>());
         assertNotNull(user);
     }
 

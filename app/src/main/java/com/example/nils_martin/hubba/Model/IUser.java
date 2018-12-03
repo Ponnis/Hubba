@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IUser {
 
-
+    User CreateUser(String name, String email, String password, ArrayList achievements);
     // Takes an ENUM from Themes and set
     void setTheme(Themes theme);
 

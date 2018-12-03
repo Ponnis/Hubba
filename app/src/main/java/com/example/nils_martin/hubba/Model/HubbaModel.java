@@ -10,6 +10,7 @@ public class HubbaModel implements IHubbaModel {
     private static HubbaModel instance = null;
     private ArrayList<IUser> users;
     private IUser currentUser;
+    private UserFactory uerFactory = new UserFactory();
 
     public static HubbaModel getInstance() {
         if (instance == null) {
@@ -33,6 +34,16 @@ public class HubbaModel implements IHubbaModel {
             }
         }
         return users.get(index);
+    }
+
+    @Override
+    public IUser getNewUser(String name, String email, String password, ArrayList achievements) {
+        return uerFactory.getNewUser(name,email,password,achievements);
+    }
+
+    @Override
+    public IFriend getNewFriend(String name, String email, String password, ArrayList achievements) {
+        return uerFactory.getNewFriend(name,email,password,achievements);
     }
 
     public ArrayList<IUser> getUsers() {

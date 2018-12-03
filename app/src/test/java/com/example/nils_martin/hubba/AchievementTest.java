@@ -7,7 +7,6 @@ import com.example.nils_martin.hubba.Model.Habit;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.IHubbaModel;
-import com.example.nils_martin.hubba.Model.User;
 
 import org.junit.Test;
 
@@ -22,7 +21,7 @@ public class AchievementTest {
     @Test
     public void testStreakAchievement(){
         IHubbaModel model = HubbaModel.getInstance();
-        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
+        model.setCurrentUser(model.getNewUser("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
         List<Integer> days =  new ArrayList<Integer>();
         days.add(1);
         days.add(2);
@@ -39,7 +38,7 @@ public class AchievementTest {
     @Test
     public void testStreakAchievementFalse(){
         IHubbaModel model = HubbaModel.getInstance();
-        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
+        model.setCurrentUser(model.getNewUser("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
         List<Integer> days =  new ArrayList<Integer>();
         days.add(1);
         days.add(2);
@@ -53,7 +52,7 @@ public class AchievementTest {
     @Test
     public void testNumOfHabitsAchievement(){
         IHubbaModel model = HubbaModel.getInstance();
-        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
+        model.setCurrentUser(model.getNewUser("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
         List<Integer> days =  new ArrayList<Integer>();
         days.add(1);
         days.add(2);
@@ -66,7 +65,7 @@ public class AchievementTest {
     @Test
     public void testNumOfHabitsAchievementFalse(){
         IHubbaModel model = HubbaModel.getInstance();
-        model.setCurrentUser(new User("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
+        model.setCurrentUser(model.getNewUser("Erik", "Fisk@gmail.com","0000", new ArrayList<>()));
         List<Integer> days =  new ArrayList<Integer>();
         days.add(1);
         days.add(2);

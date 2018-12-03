@@ -12,7 +12,7 @@ import com.example.nils_martin.hubba.Model.AchievementFactory;
 import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 
-import com.example.nils_martin.hubba.Model.User;
+import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.Services.IPersistantDataHandler;
 import com.example.nils_martin.hubba.Services.PersistantDataHandler;
@@ -59,7 +59,8 @@ public class CreateUserVM extends AppCompatActivity  {
      * Creates new user based on the input parameters
      * */
     private void addUser(){
-        User user = new User(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(),
+        IUser temp = model.getCurrentUser();
+        IUser user = temp.CreateUser(newUsername.getText().toString(), newEmail.getText().toString(), newPassword.getText().toString(),
                  setAchivements());
         model.addUser(user);
         try {

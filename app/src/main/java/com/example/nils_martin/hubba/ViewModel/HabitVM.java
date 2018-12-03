@@ -17,7 +17,6 @@ import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IFriend;
 import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.ThemableObserver;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 
 import org.json.JSONArray;

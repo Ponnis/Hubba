@@ -13,7 +13,6 @@ import com.example.nils_martin.hubba.Model.IHabit;
 import com.example.nils_martin.hubba.Model.IUser;
 import com.example.nils_martin.hubba.Model.State;
 import com.example.nils_martin.hubba.Model.Themes;
-import com.example.nils_martin.hubba.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -86,7 +85,7 @@ public class PersistantDataHandler extends AppCompatActivity implements IPersist
             SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + "habits", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
-            editor1.putString("habitslist", habitsToJson((User) user));
+            editor1.putString("habitslist", habitsToJson((IUser) user));
             editor1.apply();
         }
 
@@ -94,7 +93,7 @@ public class PersistantDataHandler extends AppCompatActivity implements IPersist
             SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + "friends", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
-            editor1.putString("friendslist", friendsToJson((User) user));
+            editor1.putString("friendslist", friendsToJson((IUser) user));
             editor1.apply();
         }
 
@@ -113,7 +112,7 @@ public class PersistantDataHandler extends AppCompatActivity implements IPersist
             SharedPreferences sharedPreferences1 = ctx.getSharedPreferences(user.getUserName() + "groups", MODE_PRIVATE);
             SharedPreferences.Editor editor1 = sharedPreferences1.edit();
 
-            editor1.putString("groupslist", groupsToJson((User) user));
+            editor1.putString("groupslist", groupsToJson((IUser) user));
             editor1.apply();
         }
 
@@ -130,7 +129,7 @@ public class PersistantDataHandler extends AppCompatActivity implements IPersist
 
     }
 
-    private String habitsToJson(User user) throws JSONException {
+    private String habitsToJson(IUser user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         for (IHabit habit : model.getUser(user.getUserName()).getHabits()) {
@@ -166,7 +165,7 @@ public class PersistantDataHandler extends AppCompatActivity implements IPersist
         return jsonObject.put("daysToInt", jsonArray).toString();
     }
 
-    private String friendsToJson(User user) throws JSONException {
+    private String friendsToJson(IUser user) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         for (IFriend friend : model.getUser(user.getUserName()).getFriends()) {
@@ -177,7 +176,7 @@ public class PersistantDataHandler extends AppCompatActivity implements IPersist
         return jsonObject.put("friend", jsonArray).toString();
     }
 
-    private String groupsToJson(User user) throws JSONException{
+    private String groupsToJson(IUser user) throws JSONException{
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         for (Group group: model.getUser(user.getUserName()).getGroups()){
@@ -209,7 +208,7 @@ public class PersistantDataHandler extends AppCompatActivity implements IPersist
 
         String json = sharedPreferences.getString("userlist", null);
         Gson gson = new GsonBuilder().create();
-        Type typeUser = new TypeToken<ArrayList<User>>() {
+        Type typeUser = new TypeToken<ArrayList<IUser>>() {
         }.getType();
         JSONObject jsonResponse = new JSONObject(json);
         model.setUsers(gson.fromJson(jsonResponse.getString("user"), typeUser));

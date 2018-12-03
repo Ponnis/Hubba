@@ -6,6 +6,8 @@ public interface IHubbaModel {
 
 
     IUser getUser(String userName);
+    IUser getNewUser(String name, String email, String password, ArrayList achievements);
+    IFriend getNewFriend(String name, String email, String password, ArrayList achievements);
 
     ArrayList<IUser> getUsers();
 

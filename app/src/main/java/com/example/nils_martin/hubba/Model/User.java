@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class User implements Observer, IFriend, IUser {
+ class User implements Observer, IFriend, IUser {
 
     private String userName;
     private String email;
@@ -29,7 +29,12 @@ public class User implements Observer, IFriend, IUser {
         this.achievements = achivements;
     }
 
-    // Takes an ENUM from Themes and set
+     @Override
+     public User CreateUser(String name,String email, String password, ArrayList achievements ) {
+         return new User(name,email,password,achievements);
+     }
+
+     // Takes an ENUM from Themes and set
     public void setTheme(Themes theme) {
         this.ActiveTheme = theme;
         notifyThemeObservers(themeObservers);

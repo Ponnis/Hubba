@@ -12,7 +12,6 @@ import com.example.nils_martin.hubba.Model.AchievementFactory;
 import com.example.nils_martin.hubba.Model.AchievementType;
 import com.example.nils_martin.hubba.Model.HubbaModel;
 import com.example.nils_martin.hubba.Model.IUser;
-import com.example.nils_martin.hubba.Model.User;
 import com.example.nils_martin.hubba.R;
 import com.example.nils_martin.hubba.Services.IPersistantDataHandler;
 import com.example.nils_martin.hubba.Services.PersistantDataHandler;
@@ -51,7 +50,7 @@ public class LoginVM extends FragmentActivity {
                 break;
             }
             if (i == usersSize - 1) {
-                model.getUsers().add(new User("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
+                model.getUsers().add(user.CreateUser("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
                 model.getUser("admin").setAchievements(setAchivements());
             }
         }
@@ -136,7 +135,8 @@ public class LoginVM extends FragmentActivity {
 
     private void initFirstUse(){
         model.setUsers(new ArrayList<>());
-        model.getUsers().add(new User("admin", "testemail@gmail.com", "1234", new ArrayList<>()));
+        IUser userToBeAdded = model.getNewUser("admin", "testemail@gmail.com", "1234", new ArrayList<>());
+        model.getUsers().add(userToBeAdded);
         model.getUser("admin").setAchievements(setAchivements());
     }
 
